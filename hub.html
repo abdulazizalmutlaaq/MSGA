@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSGA Investment — بوابة المستندات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #10375C;
+  --navy-2: #1A4A72;
+  --navy-3: #0D2E4D;
+  --orange: #FF7E2A;
+  --orange-2: #E56A18;
+  --gold: #F2C523;
+  --ink: #1E1E1E;
+  --ink-2: #3A3A3A;
+  --ink-3: #666;
+  --ink-4: #999;
+  --bg: #F0F2F5;
+  --paper: #FFFFFF;
+  --line: #E0E4EA;
+  --mono: "IBM Plex Mono", monospace;
+  --ar: "IBM Plex Sans Arabic", "Tajawal", system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--ar);
+  background: var(--bg);
+  color: var(--ink);
+  direction: rtl;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ── Hero ── */
+.hero {
+  background: var(--navy);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; right: 0; left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--orange) 0%, var(--gold) 100%);
+}
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 32px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+.hero-logo {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.hero-logo img {
+  height: 52px;
+  width: auto;
+  filter: brightness(0) invert(1);
+}
+.hero-logo-sep {
+  width: 1px;
+  height: 40px;
+  background: rgba(255,255,255,0.2);
+}
+.hero-titles h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+.hero-titles .sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  margin-top: 4px;
+  font-weight: 400;
+}
+.hero-badge {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 14px 20px;
+  text-align: center;
+  min-width: 130px;
+  flex-shrink: 0;
+}
+.hero-badge .num {
+  font-family: var(--mono);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--orange);
+  line-height: 1;
+}
+.hero-badge .lbl {
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  margin-top: 5px;
+  letter-spacing: 0.06em;
+}
+
+/* ── Search ── */
+.search-wrap {
+  background: var(--navy-3);
+  padding: 16px 32px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.search-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 10px 16px;
+  max-width: 480px;
+}
+.search-box svg {
+  width: 18px; height: 18px;
+  stroke: rgba(255,255,255,0.4);
+  fill: none;
+  stroke-width: 2;
+  flex-shrink: 0;
+}
+.search-box input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: var(--ar);
+  font-size: 13.5px;
+  direction: rtl;
+}
+.search-box input::placeholder { color: rgba(255,255,255,0.35); }
+
+/* ── Main content ── */
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 32px 80px;
+}
+
+/* ── Quick nav pills ── */
+.quick-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+.quick-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.quick-nav a:hover {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+.quick-nav a .dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+
+/* ── Section ── */
+.section {
+  margin-bottom: 44px;
+}
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--line);
+}
+.section-icon {
+  width: 38px; height: 38px;
+  border-radius: 9px;
+  background: var(--navy);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.section-icon svg {
+  width: 20px; height: 20px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 1.8;
+}
+.section-head h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+}
+.section-head .en {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  color: var(--ink-4);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  direction: ltr;
+}
+.section-count {
+  margin-inline-start: auto;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--orange);
+  background: #FFF4EC;
+  border-radius: 12px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+/* ── Cards grid ── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px 20px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.18s;
+  position: relative;
+  overflow: hidden;
+}
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0; right: 0;
+  width: 3px;
+  height: 100%;
+  background: transparent;
+  transition: background 0.18s;
+}
+.card:hover {
+  border-color: var(--navy);
+  box-shadow: 0 4px 20px rgba(16,55,92,0.1);
+  transform: translateY(-1px);
+}
+.card:hover::after {
+  background: var(--orange);
+}
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.card-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  background: #EEF2F7;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.card-icon svg {
+  width: 18px; height: 18px;
+  stroke: var(--navy);
+  fill: none;
+  stroke-width: 1.8;
+}
+.card-badge {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.badge-interactive { background: #E8F5E9; color: #2E7D32; }
+.badge-pdf        { background: #FFF3E0; color: #E65100; }
+.badge-report     { background: #E3F2FD; color: #1565C0; }
+.badge-policy     { background: #F3E5F5; color: #6A1B9A; }
+
+.card-title {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.4;
+}
+.card-desc {
+  font-size: 12px;
+  color: var(--ink-3);
+  line-height: 1.6;
+  flex: 1;
+}
+.card-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+.card-footer .arrow {
+  margin-inline-start: auto;
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  background: var(--navy);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.card-footer .arrow svg {
+  width: 14px; height: 14px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 2;
+}
+.card-tag {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  color: var(--ink-4);
+  letter-spacing: 0.08em;
+}
+
+/* ── Footer ── */
+.page-foot {
+  background: var(--navy-3);
+  padding: 24px 32px;
+  text-align: center;
+}
+.page-foot-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.page-foot .brand {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+}
+.page-foot .copy {
+  font-size: 11.5px;
+  color: rgba(255,255,255,0.3);
+}
+.page-foot .date {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(255,255,255,0.25);
+  direction: ltr;
+}
+
+/* hidden class for search filtering */
+.card.hidden { display: none; }
+.section.empty-section .cards { display: none; }
+.section.empty-section .section-head::after {
+  content: "لا توجد نتائج في هذا القسم";
+  font-size: 12px;
+  color: var(--ink-4);
+  margin-inline-start: 8px;
+}
+
+@media (max-width: 640px) {
+  .hero-inner { flex-direction: column; align-items: flex-start; }
+  .hero-badge { display: none; }
+  .main { padding: 24px 16px 60px; }
+  .cards { grid-template-columns: 1fr; }
+  .quick-nav { gap: 6px; }
+  .page-foot-inner { flex-direction: column; gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-logo">
+      <img src="assets/msga-logo.png" alt="MSGA Investment"/>
+      <div class="hero-logo-sep"></div>
+      <div class="hero-titles">
+        <h1>بوابة المستندات والأدوات</h1>
+        <div class="sub">MSGA Investment · Document Hub</div>
+      </div>
+    </div>
+    <div class="hero-badge">
+      <div class="num" id="docCount">—</div>
+      <div class="lbl">مستند / أداة</div>
+    </div>
+  </div>
+  <!-- Search -->
+  <div class="search-wrap">
+    <div class="search-inner">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" placeholder="ابحث عن مستند أو أداة..." autocomplete="off"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Main ── -->
+<div class="main">
+
+  <!-- Quick nav -->
+  <nav class="quick-nav" id="quickNav">
+    <a href="#meetings"><span class="dot"></span>إدارة الاجتماعات</a>
+    <a href="#org"><span class="dot"></span>الهيكل التنظيمي</a>
+    <a href="#hr"><span class="dot"></span>لوائح الموارد البشرية</a>
+    <a href="#salary"><span class="dot"></span>السياسات المالية</a>
+    <a href="#reports"><span class="dot"></span>التقارير</a>
+    <a href="#gov"><span class="dot"></span>المنصات الحكومية</a>
+    <a href="#osh"><span class="dot"></span>السلامة المهنية</a>
+    <a href="#legal"><span class="dot"></span>الوثائق القانونية</a>
+  </nav>
+
+  <!-- ─── Section 1: إدارة الاجتماعات ─── -->
+  <div class="section" id="meetings">
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+      </div>
+      <div>
+        <h2>إدارة الاجتماعات</h2>
+        <div class="en">MEETING MANAGEMENT</div>
+      </div>
+      <div class="section-count" data-section="meetings">2 مستندات</div>
+    </div>
+    <div class="cards">
+
+      <a class="card" href="index.html" data-title="محضر الاجتماع التفاعلي" data-tags="meetings اجتماع محضر تفاعلي">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
+          </div>
+          <span class="card-badge badge-interactive">تطبيق تفاعلي</span>
+        </div>
+        <div class="card-title">محضر اجتماع — التطبيق التفاعلي</div>
+        <div class="card-desc">محضر أسبوعي لمتابعة أعمال الإدارات الست · قابل للتعبئة والطباعة · يحفظ البيانات تلقائيًا</div>
+        <div class="card-footer">
+          <span class="card-tag">4 صفحات · A4</span>
+          <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="card" href="mom-msga-style.html" data-title="محضر اجتماع MSGA Report Style" data-tags="meetings اجتماع محضر تقرير">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
+          </div>
+          <span class="card-badge badge-report">MSGA Style</span>
+        </div>
+        <div class="card-title">محضر اجتماع — MSGA Report Style</div>
+        <div class="card-desc">نسخة المحضر بنمط التقارير الرسمية (كحلي + برتقالي) مع الترويسة والتذييل الرسمي</div>
+        <div class="card-footer">
+          <span class="card-tag">MSGA Report · A4</span>
+          <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ─── Section 2: الهيكل التنظيمي ─── -->
+  <div class="section" id="org">
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="4" rx="1"/><rect x="2" y="18" width="6" height="4" rx="1"/><rect x="9" y="18" width="6" height="4" rx="1"/><rect x="16" y="18" width="6" height="4" rx="1"/><path d="M12 6v4M12 10H5v8M12 10h7v8M12 10v8"/></svg>
+      </div>
+      <div>
+        <h2>الهيكل التنظيمي</h2>
+        <div class="en">ORGANIZATIONAL STRUCTURE</div>
+      </div>
+      <div class="section-count" data-section="org">1 مستند</div>
+    </div>
+    <div class="cards">
+
+      <a class="card" href="org-chart-msga.html" data-title="الهيكل الإداري MSGA" data-tags="org هيكل إداري تنظيمي">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="4" rx="1"/><rect x="2" y="18" width="6" height="4" rx="1"/><rect x="9" y="18" width="6" height="4" rx="1"/><rect x="16" y="18" width="6" height="4" rx="1"/><path d="M12 6v4M12 10H5v8M12 10h7v8M12 10v8"/></svg>
+          </div>
+          <span class="card-badge badge-report">MSGA Style</span>
+        </div>
+        <div class="card-title">الهيكل الإداري لشركة مسقا للاستثمار</div>
+        <div class="card-desc">الهيكل التنظيمي الكامل مع الأسماء والمسميات الوظيفية · يدعم التصدير كـ PDF</div>
+        <div class="card-footer">
+          <span class="card-tag">Landscape · Interactive</span>
+          <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ─── Section 3: لوائح الموارد البشرية ─── -->
+  <div class="section" id="hr">
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.7-5.5 6-5.5s6 2.5 6 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M21 19c0-2.5-2-4.5-4.5-4.5"/></svg>
+      </div>
+      <div>
+        <h2>لوائح الموارد البشرية</h2>
+        <div class="en">HR POLICIES & PROCEDURES</div>
+      </div>
+      <div class="section-count" data-section="hr">4 مستندات</div>
+    </div>
+    <div class="cards">
+
+      <a class="card" href="attendance-policy.html" data-title="سياسة الحضور والانصراف" data-tags="hr حضور انصراف سياسة موارد بشرية">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </div>
+          <span class="card-badge badge-policy">لائحة</span>
+        </div>
+        <div class="card-title">سياسة الحضور والانصراف</div>
+        <div class="card-desc">لائحة تنظيمية لساعات العمل والحضور والغياب وإجراءات التأخير والانصراف</div>
+        <div class="card-footer">
+          <span class="card-tag">HR Policy · A4</span>
+          <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="card" href="job-description-matrix.html" data-title="الوصف الوظيفي ومصفوفة الصلاحيات" data-tags="hr وصف وظيفي صلاحيات مصفوفة">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
+          </div>
+          <span class="card-badge badge-policy">لائحة</span>
+        </div>
+        <div class="card-title">الوصف الوظيفي ومصفوفة الصلاحيات</div>
+        <div class="card-desc">لائحة شاملة للمهام الوظيفية ومصفوفة الصلاحيات لجميع المستويات الإدارية</div>
+        <div class="card-footer">
+          <span class="card-tag">HR Policy · A4</span>
+          <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="card" href="certifications-policy.html" data-title="الشهادات الاحترافية والمهنية" data-tags="hr شهادات احترافية مهنية تطوير">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M9 13l-2 8 5-3 5 3-2-8"/></svg>
+          </div>
+          <span class="card-badge badge-policy">لائحة</span>
+        </div>
+        <div class="card-title">لائحة الشهادات الاحترافية والمهنية</div>
+        <div class="card-desc">سياسة دعم الموظفين في الحصول على الشهادات الاحترافية وشروط الالتزام</div>
+        <div class="card-footer">
+          <span class="card-tag">HR Policy · A4</span>
+          <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="card" href="cooperative-training.html" data-title="التدريب التعاوني" data-tags="hr تدريب تعاوني جامعات طلاب">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <span class="card-badge badge-policy">لائحة</span>
+        </div>
+        <div class="card-title">لائحة التدريب التعاوني</div>
+        <div class="card-desc">لائحة التدريب التعاوني مع الجامعات وآليات استقطاب المتدربين للإدارات</div>
+        <div class="card-footer">
+          <span class="card-tag">HR Policy · A4</span>
+          <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ─── Section 4: السياسات المالية ─── -->
+  <div class="section" id="salary">
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M12 12v4M10 14h4"/></svg>
+      </div>
+      <div>
+        <h2>السياسات المالية</h2>
+        <div class="en">FINANCIAL POLICIES</div>
+      </div>
+      <div class="section-count" data-section="salary">3 مستندات</div>
+    </div>
+    <div class="cards">
+
+      <a class="card" href="Salary Structure Policy (MSGA Report Style).html" data-title="هيكل الرواتب MSGA Report Style" data-tags="salary رواتب هيكل مالية">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M12 12v4M10 14h4"/></svg>
+          </div>
+          <span class="card-badge badge-report">MSGA Style</span>
+        </div>
+        <div class="card-title">سياسة هيكل الرواتب — MSGA Style</div>
+        <div class="card-desc">سياسة هيكل الرواتب والبدلات بنمط التقارير الرسمية لشركة مسقا للاستثمار</div>
+        <div class="card-footer">
+          <span class="card-tag">Salary Policy · A4</span>
+          <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="card" href="Salary Structure Policy.html" data-title="سياسة هيكل الرواتب" data-tags="salary رواتب هيكل بدلات">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M12 12v4M10 14h4"/></svg>
+          </div>
+          <span class="card-badge badge-pdf">PDF Style</span>
+        </div>
+        <div class="card-title">سياسة هيكل الرواتب والبدلات</div>
+        <div class="card-desc">الوثيقة التفصيلية لهيكل الرواتب والمكافآت والبدلات بجداول واضحة</div>
+        <div class="card-footer">
+          <span class="card-tag">Salary Policy · A4</span>
+          <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="card" href="Salary Increase Policy.html" data-title="سياسة زيادات الرواتب" data-tags="salary زيادات رواتب مكافآت">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <span class="card-badge badge-policy">سياسة</span>
+        </div>
+        <div class="card-title">سياسة زيادات الرواتب</div>
+        <div class="card-desc">معايير وإجراءات مراجعة الرواتب السنوية وزيادات الأداء وشروط الاستحقاق</div>
+        <div class="card-footer">
+          <span class="card-tag">Salary Policy · A4</span>
+          <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ─── Section 5: التقارير ─── -->
+  <div class="section" id="reports">
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+      </div>
+      <div>
+        <h2>التقارير</h2>
+        <div class="en">REPORTS & ANALYSIS</div>
+      </div>
+      <div class="section-count" data-section="reports">2 مستندات</div>
+    </div>
+    <div class="cards">
+
+      <a class="card" href="financial-report-fund.html" data-title="التقرير المالي للصندوق" data-tags="reports تقرير مالي صندوق استثمار جدوى">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+          </div>
+          <span class="card-badge badge-report">MSGA Style</span>
+        </div>
+        <div class="card-title">التقرير المالي للصندوق</div>
+        <div class="card-desc">دراسة الجدوى الاستثمارية لصندوق مسقا · مؤشرات IRR وROE وتوزيع الاستخدامات والمصادر</div>
+        <div class="card-footer">
+          <span class="card-tag">Financial Report · Landscape</span>
+          <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="card" href="kpi-targets.html" data-title="مستهدفات مؤشرات الأداء KPI" data-tags="reports kpi أداء مستهدفات">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <span class="card-badge badge-report">KPI</span>
+        </div>
+        <div class="card-title">مستهدفات مؤشرات الأداء KPI</div>
+        <div class="card-desc">لوحة مستهدفات الأداء الرئيسية للإدارات · نسب الإنجاز ومؤشرات المتابعة</div>
+        <div class="card-footer">
+          <span class="card-tag">KPI Report · A4</span>
+          <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ─── Section 6: المنصات الحكومية ─── -->
+  <div class="section" id="gov">
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div>
+        <h2>المنصات الحكومية</h2>
+        <div class="en">GOVERNMENT PLATFORMS</div>
+      </div>
+      <div class="section-count" data-section="gov">2 مستندات</div>
+    </div>
+    <div class="cards">
+
+      <a class="card" href="gov-platforms-guide.html" data-title="دليل استخدام المنصات الحكومية" data-tags="gov حكومي منصات دليل gosi zatca أبشر">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <span class="card-badge badge-report">MSGA Style</span>
+        </div>
+        <div class="card-title">دليل استخدام المنصات الحكومية</div>
+        <div class="card-desc">خطوات تفصيلية مع لقطات الشاشة لجميع المنصات · GOSI · ZATCA · أبشر أعمال · بلدي</div>
+        <div class="card-footer">
+          <span class="card-tag">Gov Guide · Multi-page</span>
+          <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>
+
+      <a class="card" href="gov-platforms-procedures.html" data-title="دليل إجراءات المنصات الحكومية" data-tags="gov حكومي إجراءات منصات دليل">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <span class="card-badge badge-pdf">دليل</span>
+        </div>
+        <div class="card-title">دليل إجراءات المنصات الحكومية</div>
+        <div class="card-desc">دليل الإجراءات الشاملة للمنصات الحكومية المستخدمة في شركة مسقا للاستثمار</div>
+        <div class="card-footer">
+          <span class="card-tag">Gov Procedures · A4</span>
+          <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ─── Section 7: السلامة والصحة المهنية ─── -->
+  <div class="section" id="osh">
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div>
+        <h2>السلامة والصحة المهنية</h2>
+        <div class="en">OCCUPATIONAL SAFETY & HEALTH</div>
+      </div>
+      <div class="section-count" data-section="osh">1 مستند</div>
+    </div>
+    <div class="cards">
+
+      <a class="card" href="osh-safety-policy.html" data-title="لائحة السلامة والصحة المهنية" data-tags="osh سلامة صحة مهنية لائحة">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <span class="card-badge badge-pdf">ورق رسمي</span>
+        </div>
+        <div class="card-title">لائحة إدارة السلامة والصحة المهنية</div>
+        <div class="card-desc">دليل السلامة والصحة المهنية على الورق الرسمي لشركة مسقا · اسم المدير التنفيذي + الختم</div>
+        <div class="card-footer">
+          <span class="card-tag">OSH Policy · Official</span>
+          <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ─── Section 8: الوثائق القانونية ─── -->
+  <div class="section" id="legal">
+    <div class="section-head">
+      <div class="section-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22V4M4.93 10.93l14.14 0M4 15h16M8 19l4-15 4 15"/></svg>
+      </div>
+      <div>
+        <h2>الوثائق القانونية</h2>
+        <div class="en">LEGAL DOCUMENTS</div>
+      </div>
+      <div class="section-count" data-section="legal">1 مستند</div>
+    </div>
+    <div class="cards">
+
+      <a class="card" href="maintenance-contract-1227.html" data-title="عقد الصيانة 1227 مختوم" data-tags="legal عقد صيانة مختوم قانوني">
+        <div class="card-top">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>
+          </div>
+          <span class="card-badge badge-pdf">مختوم</span>
+        </div>
+        <div class="card-title">عقد صيانة رقم 1227 — مختوم</div>
+        <div class="card-desc">عقد الصيانة المختوم بختم شركة مسقا للاستثمار مع الطرف الأول</div>
+        <div class="card-footer">
+          <span class="card-tag">Legal · Stamped</span>
+          <div class="arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Footer ── -->
+<div class="page-foot">
+  <div class="page-foot-inner">
+    <div class="brand">MSGA Investment · مسقا للاستثمار</div>
+    <div class="copy">جميع المستندات سرية وللاستخدام الداخلي فقط</div>
+    <div class="date" id="footDate"></div>
+  </div>
+</div>
+
+<script>
+// Count total docs
+const cards = document.querySelectorAll('.card');
+document.getElementById('docCount').textContent = cards.length;
+
+// Footer date
+const d = new Date();
+document.getElementById('footDate').textContent =
+  d.getFullYear() + '/' + String(d.getMonth()+1).padStart(2,'0') + '/' + String(d.getDate()).padStart(2,'0');
+
+// Search
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', function() {
+  const q = this.value.trim().toLowerCase();
+  cards.forEach(card => {
+    const title = (card.dataset.title || '').toLowerCase();
+    const tags  = (card.dataset.tags  || '').toLowerCase();
+    const match = !q || title.includes(q) || tags.includes(q);
+    card.classList.toggle('hidden', !match);
+  });
+
+  // Hide empty sections
+  document.querySelectorAll('.section').forEach(sec => {
+    const visibleCards = sec.querySelectorAll('.card:not(.hidden)');
+    sec.classList.toggle('empty-section', visibleCards.length === 0 && q.length > 0);
+  });
+});
+</script>
+
+</body>
+</html>

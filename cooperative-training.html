@@ -1,0 +1,1099 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSGA — لائحة التدريب التعاوني لطلاب الجامعات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* MSGA — Salary Structure Policy · "MSGA REPORT" HOUSE STYLE
+   Matches the April-2026 commercial-sector report exactly:
+   navy full-bleed cover + top orange hairline · white content pages ·
+   lavender rounded section bars with orange circle number + orange right accent ·
+   grey table header with orange underline · colored status pills · rounded cards.
+   Self-contained — does NOT depend on sample-base.css. */
+:root {
+  --navy:#1F3A57; --navy-2:#16304B; --navy-3:#102539; --navy-deep:#0D2034;
+  --navy-card:#27425E; --navy-line:#33506C;
+  --orange:#E5811F; --orange-2:#C96B12; --orange-soft:#FBEEDD;
+  --ink:#1E2B38; --ink-2:#41505F; --ink-3:#76828F; --ink-4:#A7B0BA;
+  --paper:#FFFFFF; --paper-2:#F7F8FB; --lav:#EEF0F7; --lav-2:#F4F5FA;
+  --line:#E5E8EE; --line-2:#EEF0F4;
+  --th:#F4F5F8;
+  --ok:#2F8559; --ok-bg:#E6F4EC; --ok-bd:#CBE8D6;
+  --prog:#2B5180; --prog-bg:#E9EFF7; --prog-bd:#D2DEEE;
+  --hold:#B0831F; --hold-bg:#FAF2DA; --hold-bd:#ECDBA9;
+  --red:#B0432C; --red-bg:#F8E9E4; --red-bd:#ECCDC2;
+  --l1:#BBC6D2; --l2:#9DACBC; --l3:#7E91A6; --l4:#5F7790; --l5:#46617C; --l6:#2F4D69; --l7:#E5811F;
+  --ar:"Tajawal", system-ui, sans-serif;
+  --ar-head:"Tajawal", system-ui, sans-serif;
+  --latin:"Saira", "Tajawal", system-ui, sans-serif;
+  --page-w:210mm; --page-h:297mm; --mx:15mm; --my:14mm;
+}
+* { box-sizing:border-box; }
+html, body { margin:0; padding:0; background:#DDE2E8; font-family:var(--ar); color:var(--ink); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+body { direction:rtl; }
+.stage { min-height:100vh; padding:30px 16px 90px; display:flex; flex-direction:column; align-items:center; gap:28px; }
+.page { width:var(--page-w); height:var(--page-h); background:var(--paper); position:relative; overflow:hidden; box-shadow:0 1px 2px rgba(20,30,45,.05), 0 16px 44px rgba(20,30,45,.14); page-break-after:always; break-after:page; display:flex; flex-direction:column; }
+.page:last-of-type { page-break-after:auto; }
+.watermark { position:absolute; inset:0; pointer-events:none; z-index:0; }
+.page-inner { position:relative; z-index:1; flex:1; display:flex; flex-direction:column; padding:var(--my) var(--mx) 0; }
+
+/* numbers latin font */
+.latin, .doc-meta, .foot, .lcode, .scale-num, .vchip, .kpi .val, .ti-num, .cnum, .nb, .sec-no, .head .eyebrow, .cap .ref, .prose .lead, .cover-top .brandline, .hero .kicker, .classline, .kpi .label, .toc-head, .cover-meta .k, .dept2-head .code, .dept2-head .cnt { font-family:var(--latin); }
+
+/* ─── Content header ─── */
+.head { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px; padding-bottom:11px; margin-bottom:6px; border-bottom:2px solid var(--orange); }
+.head .logo { height:34px; width:auto; display:block; }
+.head .titles { display:flex; flex-direction:column; gap:1px; }
+.head .eyebrow { font-size:8.5px; font-weight:600; letter-spacing:0.18em; color:var(--orange-2); text-transform:uppercase; direction:ltr; }
+.head .doctitle { font-family:var(--ar-head); font-size:13.5px; font-weight:700; color:var(--navy); }
+.head .doc-meta { text-align:left; direction:ltr; font-size:9px; font-weight:500; color:var(--ink-3); line-height:1.65; letter-spacing:0.03em; }
+.head .doc-meta div { white-space:nowrap; }
+.head .doc-meta b { color:var(--navy); font-weight:700; letter-spacing:0.08em; }
+
+/* ─── Footer ─── */
+.foot { position:absolute; bottom:8mm; inset-inline:var(--mx); display:flex; align-items:center; justify-content:space-between; font-size:8.5px; font-weight:500; color:var(--ink-3); letter-spacing:0.08em; text-transform:uppercase; border-top:1px solid var(--line); padding-top:7px; z-index:2; direction:ltr; }
+.foot .brand-mark { display:flex; align-items:center; gap:7px; }
+.foot .brand-mark::before { content:""; width:5px; height:5px; background:var(--orange); border-radius:50%; }
+.foot .pagenum b { color:var(--navy); font-weight:700; }
+
+/* ─── Section bar (signature element) ─── */
+.sec-head { position:relative; display:flex; align-items:center; gap:11px; flex-direction:row-reverse; justify-content:flex-start; background:var(--lav); border-radius:9px; padding:9px 16px 9px 14px; margin:16px 0 11px; overflow:hidden; }
+.sec-head.first { margin-top:4px; }
+.sec-head::after { content:""; position:absolute; top:0; bottom:0; right:0; width:5px; background:var(--orange); }
+.sec-head .sec-no { width:24px; height:24px; border-radius:50%; background:var(--orange); color:#fff; display:grid; place-items:center; font-size:11px; font-weight:700; flex-shrink:0; }
+.sec-head h2 { margin:0; font-family:var(--ar-head); font-size:16px; font-weight:700; color:var(--navy); flex:1; }
+.sec-head .en { font-size:9px; font-weight:600; color:var(--ink-3); letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap; direction:ltr; }
+
+/* caption */
+.cap { display:flex; align-items:center; gap:11px; margin:2px 2px 8px; }
+.cap .lbl { font-size:10px; font-weight:500; color:var(--ink-3); white-space:nowrap; }
+.cap .dots { flex:1; height:1px; background:var(--line); }
+.cap .ref { font-size:9px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange-2); white-space:nowrap; direction:ltr; }
+
+/* prose */
+.prose { padding:2px 14px 2px 0; margin-top:4px; border-inline-start:3px solid var(--orange); }
+.prose.alt { border-inline-start-color:var(--navy); }
+.prose .lead { font-size:9px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--orange-2); margin-bottom:5px; direction:ltr; text-align:start; }
+.prose.alt .lead { color:var(--navy); }
+.prose p { margin:0; font-size:11.5px; color:var(--ink-2); line-height:1.85; text-wrap:pretty; }
+.prose p + p { margin-top:7px; }
+
+/* numbered list */
+.nlist { display:grid; grid-template-columns:1fr; margin-top:6px; }
+.nlist.two { grid-template-columns:1fr 1fr; column-gap:22px; }
+.nitem { display:grid; grid-template-columns:24px 1fr; align-items:start; gap:10px; padding:7px 0; border-bottom:1px solid var(--line-2); }
+.nitem .nb { font-size:11px; font-weight:700; color:#fff; background:var(--navy); width:20px; height:20px; border-radius:6px; display:grid; place-items:center; line-height:1; }
+.nitem.alt .nb { background:var(--orange); }
+.nitem .nt { font-size:11px; line-height:1.6; color:var(--ink-2); padding-top:2px; text-wrap:pretty; }
+
+/* chips */
+.chips { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:4px; }
+.chip-tag { display:flex; align-items:center; gap:9px; border:1px solid var(--line); background:var(--paper-2); border-radius:8px; padding:9px 12px; font-size:10.5px; color:var(--ink-2); min-height:36px; }
+.chip-tag .cnum { font-size:10px; font-weight:700; color:#fff; background:var(--navy); width:18px; height:18px; border-radius:5px; display:grid; place-items:center; flex-shrink:0; }
+
+/* note */
+.note { margin-top:10px; padding:11px 14px; background:var(--orange-soft); border-radius:8px; border-inline-start:3px solid var(--orange); font-size:10.5px; color:#7A5417; line-height:1.7; display:flex; gap:10px; align-items:flex-start; text-wrap:pretty; }
+.note .x { font-weight:700; font-size:13px; color:var(--orange-2); line-height:1.3; }
+.note.alt { background:var(--lav); border-inline-start-color:var(--navy); color:var(--ink-2); }
+.note.alt .x { color:var(--navy); }
+
+/* ─── tables ─── */
+.ptable { margin-top:6px; border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.pt-head { display:grid; background:var(--th); border-bottom:2px solid var(--orange); font-family:var(--ar-head); font-size:10px; font-weight:700; color:var(--navy); }
+.pt-head > div { padding:8px 12px; }
+.pt-head > div.center { text-align:center; }
+.pt-row { display:grid; border-bottom:1px solid var(--line-2); font-size:11px; min-height:34px; align-items:stretch; background:var(--paper); }
+.pt-row:last-child { border-bottom:none; }
+.pt-row:nth-child(even) { background:var(--lav-2); }
+.pt-row > div { padding:8px 12px; display:flex; align-items:center; }
+.pt-row .center { justify-content:center; }
+.pt-row .strong { font-weight:700; color:var(--navy); }
+.pt-row .muted { color:var(--ink-3); font-size:10px; }
+.lcode { font-size:10px; color:var(--ink-3); direction:ltr; }
+.cols-level { grid-template-columns:120px 150px 1fr; }
+.cols-scale { grid-template-columns:128px 60px 1fr 1fr 1fr; }
+.cols-grade { grid-template-columns:170px 1fr; }
+.cols-rate  { grid-template-columns:1fr 190px; }
+.cols-auth  { grid-template-columns:220px 1fr; }
+
+/* level badge */
+.lvl-badge { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:500; color:var(--ink); }
+.lvl-badge .ln { font-size:9.5px; font-weight:700; color:#fff; width:19px; height:19px; border-radius:50%; display:grid; place-items:center; flex-shrink:0; }
+.lvl-mini { font-size:9px; font-weight:700; color:#fff; width:17px; height:17px; border-radius:50%; display:grid; place-items:center; flex-shrink:0; }
+.lvl-1{background:var(--l1)} .lvl-2{background:var(--l2)} .lvl-3{background:var(--l3)} .lvl-4{background:var(--l4)} .lvl-5{background:var(--l5)} .lvl-6{background:var(--l6)} .lvl-7{background:var(--l7)}
+
+/* salary numbers */
+.scale-num { font-size:12px; direction:ltr; font-weight:500; color:var(--ink-2); }
+.scale-num.mid { color:var(--orange-2); font-weight:700; }
+.scale-num.hi { color:var(--navy); font-weight:700; }
+
+/* status-style pill (for grades / values) */
+.pill { display:inline-flex; align-items:center; gap:7px; font-family:var(--ar-head); font-size:11px; font-weight:700; padding:4px 11px; border-radius:999px; border:1px solid transparent; white-space:nowrap; }
+.pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.pill.ok   { color:var(--ok);   background:var(--ok-bg);   border-color:var(--ok-bd); }
+.pill.prog { color:var(--prog); background:var(--prog-bg); border-color:var(--prog-bd); }
+.pill.hold { color:var(--hold); background:var(--hold-bg); border-color:var(--hold-bd); }
+.pill.red  { color:var(--red);  background:var(--red-bg);  border-color:var(--red-bd); }
+.pill.plain{ color:var(--ink-3); background:var(--paper-2); border-color:var(--line); }
+
+.vchip { font-size:13px; font-weight:700; direction:ltr; white-space:nowrap; }
+.vchip.pos{color:var(--ok)} .vchip.warn{color:var(--hold)} .vchip.none{color:var(--ink-4)} .vchip.nav{color:var(--navy)}
+.vchip.ar{direction:rtl; font-family:var(--ar-head); font-size:11.5px}
+
+/* rating -> use pill look */
+.rating { display:inline-flex; align-items:center; gap:7px; font-family:var(--ar-head); font-size:11px; font-weight:700; padding:4px 12px; border-radius:999px; border:1px solid; }
+.rating::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.rating.r-excep { color:var(--ok);   background:var(--ok-bg);   border-color:var(--ok-bd); }
+.rating.r-exc   { color:var(--prog); background:var(--prog-bg); border-color:var(--prog-bd); }
+.rating.r-vg    { color:var(--hold); background:var(--hold-bg); border-color:var(--hold-bd); }
+.rating.r-good  { color:var(--orange-2); background:var(--orange-soft); border-color:#EFD9B6; }
+.rating.r-below { color:var(--red);  background:var(--red-bg);  border-color:var(--red-bd); }
+.grade-desc { font-size:10.5px; color:var(--ink-3); line-height:1.6; text-wrap:pretty; }
+
+/* band chart */
+.bandchart { margin-top:8px; padding:11px 14px; border:1px solid var(--line); border-radius:9px; background:var(--paper-2); }
+.bc-head { display:flex; justify-content:space-between; align-items:baseline; font-size:9px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3); margin-bottom:11px; }
+.bc-head .axis { direction:ltr; color:var(--orange-2); font-family:var(--latin); }
+.bc-row { display:grid; grid-template-columns:92px 1fr; align-items:center; gap:13px; margin-bottom:7px; }
+.bc-row:last-child { margin-bottom:0; }
+.bc-row .bc-label { font-size:10px; font-weight:500; color:var(--ink-2); text-align:start; }
+.bc-track { position:relative; height:14px; direction:ltr; }
+.bc-track .grid-line { position:absolute; top:-4px; bottom:-4px; width:1px; background:var(--line); }
+.bc-bar { position:absolute; top:4px; height:7px; border-radius:4px; display:flex; align-items:center; }
+.bc-bar.lvl-1{background:var(--l1);color:var(--l1)} .bc-bar.lvl-2{background:var(--l2);color:var(--l2)} .bc-bar.lvl-3{background:var(--l3);color:var(--l3)} .bc-bar.lvl-4{background:var(--l4);color:var(--l4)} .bc-bar.lvl-5{background:var(--l5);color:var(--l5)} .bc-bar.lvl-6{background:var(--l6);color:var(--l6)} .bc-bar.lvl-7{background:var(--l7);color:var(--l7)}
+.bc-bar .mid-dot { position:absolute; width:9px; height:9px; border-radius:50%; background:var(--paper); box-shadow:0 0 0 2px currentColor; transform:translateX(-50%); }
+.bc-axis-labels { display:flex; justify-content:space-between; direction:ltr; font-family:var(--latin); font-size:9px; font-weight:600; color:var(--ink-4); margin:6px 0 0; padding-inline-start:105px; }
+
+/* department cards */
+.depttitles { display:grid; grid-template-columns:1fr 1fr; gap:13px; margin-top:6px; }
+.dept2 { border:1px solid var(--line); border-radius:9px; background:var(--paper); display:flex; flex-direction:column; break-inside:avoid; overflow:hidden; }
+.dept2-head { display:grid; grid-template-columns:1fr auto; align-items:center; gap:8px; padding:8px 13px; background:var(--th); border-bottom:2px solid var(--orange); }
+.dept2-head .dn { font-family:var(--ar-head); font-size:12px; font-weight:700; color:var(--navy); }
+.dept2-head .meta { display:flex; align-items:center; gap:8px; }
+.dept2-head .code { font-size:9px; font-weight:700; letter-spacing:0.08em; color:var(--orange-2); direction:ltr; }
+.dept2-head .cnt { font-size:9px; color:var(--ink-3); direction:ltr; }
+.dt-row { display:grid; grid-template-columns:20px 88px 1fr; align-items:center; gap:9px; padding:6px 13px; border-bottom:1px solid var(--line-2); font-size:10.5px; min-height:30px; }
+.dt-row:last-child { border-bottom:none; }
+.dt-row .dt-lvl { font-size:9px; color:var(--ink-3); }
+.dt-row .dt-title { font-weight:500; color:var(--ink); }
+
+/* steps */
+.steps { display:grid; margin-top:6px; border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.step { display:grid; grid-template-columns:42px 1fr; border-bottom:1px solid var(--line-2); align-items:stretch; }
+.step:last-child { border-bottom:none; }
+.step:nth-child(even) { background:var(--lav-2); }
+.step .snum { background:var(--navy); color:#fff; display:grid; place-items:center; font-size:13px; font-weight:700; }
+.step .stext { padding:10px 13px; font-size:11px; line-height:1.6; color:var(--ink-2); display:flex; align-items:center; text-wrap:pretty; }
+
+/* annual cycle */
+.cycle { margin-top:6px; padding:16px 10px 6px; }
+.cycle-track { display:grid; grid-template-columns:repeat(4,1fr); position:relative; direction:rtl; }
+.cycle-track::before { content:""; position:absolute; top:16px; inset-inline:12%; height:2px; background:var(--line); z-index:0; }
+.cycle-node { display:flex; flex-direction:column; align-items:center; gap:8px; position:relative; z-index:1; text-align:center; padding:0 8px; }
+.cycle-node .dot { width:32px; height:32px; border-radius:50%; background:var(--paper); color:var(--navy); display:grid; place-items:center; font-family:var(--latin); font-size:13px; font-weight:700; border:2px solid var(--navy); }
+.cycle-node.accent .dot { background:var(--orange); color:#fff; border-color:var(--orange); }
+.cycle-node .period { font-family:var(--ar-head); font-size:11.5px; font-weight:700; color:var(--orange-2); }
+.cycle-node .clabel { font-size:11px; font-weight:700; color:var(--navy); line-height:1.35; }
+.cycle-node .cdesc { font-size:9.5px; color:var(--ink-3); line-height:1.5; max-width:140px; }
+
+/* sign-off */
+.signoff-triple { margin-top:12px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.signoff-triple .sign { padding:13px; border:1px solid var(--line); border-radius:9px; background:var(--paper-2); display:flex; flex-direction:column; gap:5px; min-height:92px; }
+.signoff-triple .sign .label { font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange-2); direction:ltr; text-align:start; }
+.signoff-triple .sign .nm { font-size:11.5px; font-weight:700; color:var(--ink); min-height:16px; }
+.signoff-triple .sign .role { font-size:10px; color:var(--ink-3); }
+.signoff-triple .sign .sig-line { margin-top:auto; border-bottom:1px dashed var(--ink-4); height:24px; }
+.signoff-triple .sign .sig-cap { font-size:8.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-4); direction:ltr; text-align:start; }
+
+/* doc control */
+.docctrl { margin-top:14px; background:var(--navy); border-radius:9px; padding:14px 18px; display:grid; grid-template-columns:1fr auto; align-items:center; gap:16px; color:#fff; }
+.docctrl .eyebrow { font-size:9px; letter-spacing:0.16em; color:#F0B978; text-transform:uppercase; margin-bottom:4px; direction:ltr; text-align:start; }
+.docctrl .val { font-family:var(--ar-head); font-size:13px; font-weight:700; color:#fff; }
+.docctrl .right { font-size:9.5px; color:#AEBCCC; letter-spacing:0.1em; text-transform:uppercase; text-align:left; direction:ltr; }
+
+/* ═══════ COVER (navy full-bleed) ═══════ */
+.page.cover { background:var(--navy); }
+.page.cover::before { content:""; position:absolute; top:0; inset-inline:0; height:5px; background:var(--orange); z-index:3; }
+.page.cover .watermark::after { content:""; position:absolute; inset:0; background:url("assets/msga-logo.png") no-repeat center 60%; background-size:62% auto; opacity:.04; filter:brightness(0) invert(1); }
+.cover-inner { padding:0 !important; }
+.cover-top { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px; padding:13mm var(--mx) 0; }
+.cover-top .co { font-family:var(--ar-head); font-size:12px; font-weight:700; color:#fff; }
+.cover-top .brandline { font-size:9.5px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--orange); text-align:left; direction:ltr; }
+.cover-hero { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 var(--mx); text-align:center; }
+.cover-hero .logo-w { height:64px; width:auto; filter:brightness(0) invert(1); margin-bottom:30px; }
+.cover-hero h1 { margin:0; font-family:var(--ar-head); font-size:50px; font-weight:800; line-height:1.12; color:#fff; letter-spacing:-0.01em; }
+.cover-hero .subtitle { margin-top:14px; font-size:13px; font-weight:500; color:var(--orange); letter-spacing:0.02em; }
+.cover-hero .period-pill { margin-top:20px; border:1.5px solid rgba(255,255,255,.4); border-radius:999px; padding:8px 24px; font-size:12px; font-weight:600; color:#fff; direction:ltr; white-space:nowrap; letter-spacing:0.04em; }
+.cover-desc { margin:20px auto 0; max-width:74%; font-size:12px; color:#C5D0DC; line-height:1.85; text-wrap:pretty; }
+.cover-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:13px; margin:0 var(--mx) 8mm; }
+.cover-cards.four { grid-template-columns:repeat(4,1fr); }
+.ccard { background:var(--navy-card); border:1px solid var(--navy-line); border-radius:10px; padding:13px 15px; text-align:center; display:flex; flex-direction:column; gap:5px; }
+.ccard .k { font-size:9px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange); direction:ltr; }
+.ccard .v { font-family:var(--ar-head); font-size:14px; font-weight:700; color:#fff; }
+.ccard .v.num { font-family:var(--latin); font-size:26px; line-height:1; direction:ltr; }
+.ccard .s { font-size:9px; color:#9FB0C0; }
+
+/* cover TOC strip */
+.cover-toc { margin:0 var(--mx) 7mm; padding-top:14px; border-top:1px solid var(--navy-line); }
+.cover-toc .th { font-size:9px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#8FA2B4; margin-bottom:9px; direction:ltr; }
+.cover-toc .tg { display:grid; grid-template-columns:repeat(4,1fr); gap:5px 18px; }
+.cover-toc .ti { display:grid; grid-template-columns:20px 1fr; gap:8px; align-items:baseline; font-size:9.5px; color:#C5D0DC; padding:3px 0; }
+.cover-toc .ti .n { font-family:var(--latin); font-size:9.5px; font-weight:700; color:var(--orange); }
+
+/* toolbar */
+.toolbar { position:fixed; top:16px; inset-inline-start:16px; z-index:100; background:var(--navy); color:#fff; display:flex; align-items:center; gap:4px; padding:7px 8px; border-radius:8px; box-shadow:0 10px 30px rgba(20,30,45,.25); font-size:11px; direction:ltr; }
+.toolbar .brand { font-family:var(--ar-head); padding:4px 12px 4px 6px; display:flex; align-items:center; gap:9px; border-inline-end:1px solid rgba(255,255,255,.18); font-weight:700; letter-spacing:0.06em; text-transform:uppercase; }
+.toolbar .brand::before { content:""; width:7px; height:7px; background:var(--orange); border-radius:50%; }
+.toolbar button { background:transparent; color:#fff; border:none; font:inherit; padding:6px 12px; cursor:pointer; letter-spacing:0.04em; text-transform:uppercase; font-weight:600; border-radius:5px; }
+.toolbar button:hover { background:rgba(255,255,255,.12); }
+
+/* page 3 packs 14 table rows + band chart — tighten to clear footer */
+.stage .page:nth-of-type(3) .pt-row { min-height:31px; }
+.stage .page:nth-of-type(3) .pt-row > div { padding-top:6px; padding-bottom:6px; }
+.stage .page:nth-of-type(3) .bandchart { margin-top:6px; padding:10px 14px; }
+.stage .page:nth-of-type(3) .bc-row { margin-bottom:5px; }
+
+@page { size:A4 portrait; margin:0; }
+@media print { html,body{background:#fff} .stage{padding:0;gap:0} .page{box-shadow:none;margin:0} .toolbar{display:none!important} }
+
+</style>
+<style>
+/* MSGA — Cooperative Training Regulation · EXTRA components
+   Layers on top of report.css (reuses its :root color vars + type). */
+
+/* article sec-no may be 2 digits up to 29 — keep circle tidy */
+.sec-head .sec-no { font-variant-numeric:tabular-nums; }
+
+/* ─── definition list (Article 3) ─── */
+.deflist { margin-top:6px; border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.defrow { display:grid; grid-template-columns:168px 1fr; border-bottom:1px solid var(--line-2); min-height:34px; }
+.defrow:last-child { border-bottom:none; }
+.defrow:nth-child(even) { background:var(--lav-2); }
+.defrow .dterm { display:flex; align-items:center; gap:9px; padding:9px 13px; background:var(--th); border-inline-end:1px solid var(--line); font-family:var(--ar-head); font-size:11px; font-weight:700; color:var(--navy); }
+.defrow .dterm::before { content:""; width:5px; height:5px; border-radius:50%; background:var(--orange); flex-shrink:0; }
+.defrow:nth-child(even) .dterm { background:#EEF0F4; }
+.defrow .ddef { padding:9px 14px; font-size:10.8px; line-height:1.65; color:var(--ink-2); display:flex; align-items:center; text-wrap:pretty; }
+
+/* ─── schedule stat cards (Article 9) ─── */
+.statrow { display:grid; grid-template-columns:repeat(3,1fr); gap:11px; margin-top:4px; }
+.statcard { border:1px solid var(--line); border-radius:10px; background:var(--paper-2); padding:13px 15px; text-align:center; display:flex; flex-direction:column; gap:5px; position:relative; overflow:hidden; }
+.statcard::before { content:""; position:absolute; top:0; inset-inline:0; height:3px; background:var(--orange); }
+.statcard .k { font-size:10px; font-weight:700; color:var(--ink-3); }
+.statcard .v { font-family:var(--ar-head); font-size:16px; font-weight:800; color:var(--navy); direction:ltr; }
+.statcard .s { font-size:9.5px; color:var(--ink-4); }
+
+/* ─── big figure block (Article 12 — stipend) ─── */
+.bigfig { display:grid; grid-template-columns:auto 1fr; align-items:center; gap:18px; margin-top:4px; padding:16px 20px; border:1px solid var(--line); border-radius:10px; background:linear-gradient(90deg, var(--orange-soft), var(--paper-2)); border-inline-start:4px solid var(--orange); }
+.bigfig .fig { display:flex; align-items:baseline; gap:8px; direction:ltr; }
+.bigfig .fig .n { font-family:var(--latin); font-size:46px; font-weight:700; line-height:0.9; color:var(--navy); letter-spacing:-0.02em; }
+.bigfig .fig .u { font-family:var(--ar-head); font-size:14px; font-weight:700; color:var(--orange-2); }
+.bigfig .lab { font-size:11.5px; line-height:1.7; color:var(--ink-2); text-wrap:pretty; }
+.bigfig .lab b { color:var(--navy); font-weight:700; }
+
+/* ─── dual responsibility columns (Article 13) ─── */
+.dual { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:6px; }
+.dual .col { border:1px solid var(--line); border-radius:9px; overflow:hidden; display:flex; flex-direction:column; }
+.dual .col-head { display:flex; align-items:center; gap:9px; padding:9px 13px; background:var(--th); border-bottom:2px solid var(--orange); }
+.dual .col-head .ic { width:22px; height:22px; border-radius:6px; background:var(--navy); color:#fff; display:grid; place-items:center; font-size:11px; font-weight:700; flex-shrink:0; font-family:var(--latin); }
+.dual .col-head .nm { font-family:var(--ar-head); font-size:11.5px; font-weight:700; color:var(--navy); }
+.dual .col .row { display:grid; grid-template-columns:18px 1fr; gap:9px; padding:7px 13px; border-bottom:1px solid var(--line-2); font-size:10.5px; line-height:1.55; color:var(--ink-2); align-items:start; }
+.dual .col .row:last-child { border-bottom:none; }
+.dual .col .row .b { font-family:var(--latin); font-size:9.5px; font-weight:700; color:var(--orange-2); padding-top:1px; }
+
+/* ─── 4-up sign-off (Article 29) ─── */
+.signoff-quad { margin-top:12px; display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.signoff-quad .sign { padding:13px; border:1px solid var(--line); border-radius:9px; background:var(--paper-2); display:flex; flex-direction:column; gap:5px; min-height:118px; }
+.signoff-quad .sign .label { font-size:8.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange-2); direction:ltr; text-align:start; font-family:var(--latin); }
+.signoff-quad .sign .role { font-size:10px; font-weight:700; color:var(--navy); line-height:1.4; text-wrap:pretty; }
+.signoff-quad .sign .nm { font-size:11px; font-weight:700; color:var(--ink); min-height:15px; }
+.signoff-quad .sign .sig-line { margin-top:auto; border-bottom:1px dashed var(--ink-4); height:22px; }
+.signoff-quad .sign .sig-cap { font-size:8px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-4); direction:ltr; text-align:start; font-family:var(--latin); }
+
+/* compact note variant for short closers */
+.note.tight { margin-top:8px; padding:9px 13px; }
+
+/* cover: scale TOC to fit 29 entries in 3 cols */
+.cover-toc.dense .tg { grid-template-columns:repeat(3,1fr); gap:4px 16px; }
+.cover-toc.dense .ti { font-size:9px; padding:2.5px 0; }
+.cover-toc.dense .ti .n { font-size:9px; }
+
+/* ─── two-column capacity tables (Article 7 — full department list) ─── */
+.cap2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px; align-items:start; }
+.cap2 .ptable { margin-top:0; }
+.cap2 .cols-rate { grid-template-columns:1fr 120px; }
+.cap2 .pt-row { min-height:33px; }
+.cap2 .pt-row > div, .cap2 .pt-head > div { padding-top:6px; padding-bottom:6px; }
+
+/* two-up nlist with tighter rows for long article lists */
+.nlist.compact .nitem { padding:5.5px 0; }
+.nlist.compact .nitem .nt { font-size:10.5px; line-height:1.5; }
+
+/* ─── department ↔ certificate matrix (Article 4-b) ─── */
+.deptmtx { display:grid; grid-template-columns:1fr 1fr; gap:9px 13px; margin-top:6px; }
+.dmx { border:1px solid var(--line); border-radius:9px; overflow:hidden; background:var(--paper); display:flex; flex-direction:column; break-inside:avoid; }
+.dmx-head { display:flex; align-items:center; gap:9px; padding:7px 12px; background:var(--th); border-bottom:2px solid var(--orange); }
+.dmx-head .ix { width:20px; height:20px; border-radius:50%; background:var(--navy); color:#fff; font-family:var(--latin); font-size:10px; font-weight:700; display:grid; place-items:center; flex-shrink:0; }
+.dmx-head .nm { font-family:var(--ar-head); font-size:11.5px; font-weight:700; color:var(--navy); flex:1; }
+.dmx-head .en { font-size:8px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3); direction:ltr; white-space:nowrap; }
+.dmx-certs { display:flex; flex-wrap:wrap; gap:5px; padding:8px 12px; }
+.dmx-certs .ct { font-family:var(--latin); font-size:9.5px; font-weight:600; color:var(--ink-2); background:var(--paper-2); border:1px solid var(--line); border-radius:5px; padding:3px 8px; unicode-bidi:plaintext; }
+.dmx-certs .ct::before { content:""; display:inline-block; width:4px; height:4px; border-radius:50%; background:var(--orange); margin-inline-end:6px; vertical-align:middle; }
+
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel">
+/* MSGA — Cooperative Training Regulation · CONTENT DATA
+   Exposed as window.TRAIN (read by training-report.jsx). Edit text here. */
+window.TRAIN = {
+  meta: {
+    docId: "REG-HR-COOP-2026-01",
+    title: "لائحة التدريب التعاوني لطلاب الجامعات",
+    subtitle: "تنظيم إجراءات قبول وتدريب طلاب الجامعات ضمن برنامج التدريب التعاوني، وتنظيم العلاقة بين الشركة والمتدرب والجامعة — شركة مسقا للاستثمار.",
+    version: "01",
+    effective: "…… / …… / 2026م",
+    approval: "…… / …… / 2026م",
+    review: "2027م",
+    owner: "إدارة الموارد البشرية",
+    scope: "طلاب الجامعات — التدريب التعاوني",
+    approver: "الرئيس التنفيذي / رئيس مجلس الإدارة",
+    classification: "داخلي — سري",
+  },
+
+  /* M1 */
+  purpose: "تهدف هذه اللائحة إلى تنظيم إجراءات قبول وتدريب طلاب الجامعات ضمن برنامج التدريب التعاوني في شركة مسقا للاستثمار، بما يضمن تحقيق الاستفادة العملية للمتدرب، وتنظيم العلاقة بين الشركة والمتدرب والجامعة، ورفع جودة مخرجات التدريب بما يتوافق مع احتياجات الشركة ومتطلبات الجهة التعليمية.",
+
+  /* M2 */
+  scope: "تطبق هذه اللائحة على جميع طلاب الجامعات السعوديين المقبولين في برنامج التدريب التعاوني لدى شركة مسقا للاستثمار، وذلك في الإدارات والأقسام التي تحددها الشركة حسب الاحتياج والطاقة الاستيعابية.",
+
+  /* M3 */
+  defsIntro: "لأغراض هذه اللائحة، يقصد بالكلمات والعبارات التالية المعاني الموضحة أمام كل منها:",
+  defs: [
+    { t: "الشركة", d: "شركة مسقا للاستثمار." },
+    { t: "المتدرب", d: "الطالب الجامعي السعودي المقبول للتدريب التعاوني لدى الشركة." },
+    { t: "الجامعة", d: "الجهة التعليمية التي يتبع لها المتدرب، والتي يصدر منها خطاب التدريب التعاوني." },
+    { t: "التدريب التعاوني", d: "برنامج تدريبي عملي يهدف إلى تمكين الطالب من تطبيق المعرفة الأكاديمية في بيئة العمل." },
+    { t: "المشرف المباشر", d: "مدير أو مسؤول القسم الذي يتدرب فيه المتدرب، والمسؤول عن توجيهه وتقييمه." },
+    { t: "إدارة الموارد البشرية", d: "الجهة المسؤولة عن تنظيم إجراءات القبول والمباشرة والمتابعة وحفظ ملفات المتدربين." },
+    { t: "اتفاقية التدريب", d: "الوثيقة التي تنظم العلاقة بين الشركة والمتدرب خلال فترة التدريب، ولا تعد عقد عمل." },
+  ],
+
+  /* M4 */
+  acceptCond: [
+    "أن يكون المتقدم سعودي الجنسية.",
+    "أن يكون التدريب متطلبًا جامعيًا بموجب خطاب رسمي صادر من الجامعة.",
+    "أن يكون تخصص الطالب مناسبًا لطبيعة الأعمال المتاحة لدى الشركة.",
+    "أن يقدم الطالب المستندات المطلوبة قبل بدء التدريب.",
+    "أن يجتاز أي مقابلة أو تقييم أولي تحدده الشركة.",
+    "أن تتوفر لدى القسم المعني طاقة استيعابية ومهام تدريبية مناسبة.",
+    "أن يلتزم المتدرب بتوقيع اتفاقية التدريب وتعهد عدم الإفصاح قبل المباشرة.",
+    "ألا يترتب على قبول المتدرب أي التزام وظيفي على الشركة بعد انتهاء التدريب.",
+  ],
+
+  /* M5 */
+  docsReq: [
+    "خطاب تدريب رسمي من الجامعة يوضح مدة التدريب ومتطلباته.",
+    "صورة من الهوية الوطنية.",
+    "السيرة الذاتية.",
+    "بيانات التواصل الخاصة بالطالب.",
+    "السجل الأكاديمي، إن طلبته الشركة.",
+    "أي نماذج أو مستندات تطلبها الجامعة لاستكمال التدريب.",
+    "توقيع اتفاقية التدريب التعاوني.",
+    "توقيع تعهد عدم الإفصاح وسرية المعلومات.",
+  ],
+
+  /* M6 */
+  deptsList: [
+    "الإدارة المالية",
+    "إدارة التسويق",
+    "إدارة الموارد البشرية",
+    "الإدارة القانونية",
+    "إدارة المراجعة الداخلية",
+    "إدارة المشاريع",
+    "إدارة المبيعات",
+    "إدارة تطوير الأعمال",
+    "إدارة الأملاك والتشغيل",
+    "إدارة المشتريات والعقود",
+    "إدارة تقنية المعلومات",
+    "إدارة الاستثمار والتطوير العقاري",
+  ],
+  deptsNote: "يجوز لإدارة الموارد البشرية إضافة أو إيقاف أي قسم تدريبي بناءً على احتياج الشركة والطاقة الاستيعابية.",
+
+  /* M7 */
+  capacity: [
+    { dept: "الإدارة المالية", max: "متدربان", num: "02" },
+    { dept: "إدارة التسويق", max: "متدربان", num: "02" },
+    { dept: "إدارة الموارد البشرية", max: "متدربان", num: "02" },
+    { dept: "الإدارة القانونية", max: "متدرب واحد", num: "01" },
+    { dept: "إدارة المراجعة الداخلية", max: "متدرب واحد", num: "01" },
+    { dept: "إدارة المشاريع", max: "خمسة متدربين", num: "05" },
+    { dept: "إدارة المبيعات", max: "ثلاثة متدربين", num: "03" },
+    { dept: "إدارة تطوير الأعمال", max: "متدربان", num: "02" },
+    { dept: "إدارة الأملاك والتشغيل", max: "متدربان", num: "02" },
+    { dept: "إدارة المشتريات والعقود", max: "متدرب واحد", num: "01" },
+    { dept: "إدارة تقنية المعلومات", max: "متدربان", num: "02" },
+    { dept: "إدارة الاستثمار والتطوير العقاري", max: "متدرب واحد", num: "01" },
+  ],
+  capacityNote: "يجوز تعديل العدد بالزيادة أو النقصان بموافقة إدارة الموارد البشرية والإدارة المعنية، وفقًا لمصلحة العمل ومدى توفر مشرفين ومهام تدريبية مناسبة.",
+
+  /* M8 */
+  duration: [
+    "تكون مدة التدريب حسب خطاب الجامعة المعتمد، ولا يجوز للمتدرب مباشرة التدريب قبل صدور موافقة الشركة واستكمال جميع المتطلبات والمستندات اللازمة.",
+    "وفي حال رغبة الجامعة أو المتدرب في تمديد فترة التدريب، فيجب الحصول على موافقة خطية مسبقة من الشركة، ويخضع التمديد لتقدير إدارة الموارد البشرية والإدارة المعنية.",
+  ],
+
+  /* M9 */
+  scheduleStats: [
+    { k: "أيام التدريب", v: "الأحد – الخميس", s: "خمسة أيام أسبوعيًا" },
+    { k: "ساعات التدريب", v: "8:00 ص – 4:00 م", s: "ثماني ساعات يوميًا" },
+    { k: "الإجازة الأسبوعية", v: "الجمعة – السبت", s: "يومان" },
+  ],
+  scheduleRules: [
+    "يلتزم المتدرب بأيام وساعات التدريب المعتمدة لدى الشركة.",
+    "يلتزم المتدرب بالحضور والانصراف في المواعيد المحددة.",
+    "لا يسمح للمتدرب بالانصراف قبل نهاية وقت التدريب إلا بموافقة المشرف المباشر وإدارة الموارد البشرية.",
+  ],
+
+  /* M10 */
+  attendance: [
+    "يلتزم المتدرب بالتوقيع اليومي في سجل الحضور والانصراف المعتمد من الشركة.",
+    "يعد سجل الحضور والانصراف المرجع الأساسي لإثبات حضور المتدرب وانصرافه.",
+    "في حال نسيان التوقيع أو وجود ملاحظة على الحضور، يجب على المتدرب إبلاغ المشرف المباشر وإدارة الموارد البشرية في نفس اليوم.",
+    "يتم حفظ سجل الحضور والانصراف ضمن ملف المتدرب.",
+    "يحق للشركة تزويد الجامعة بسجل الحضور والانصراف عند الطلب أو عند وجود ملاحظات تستدعي ذلك.",
+  ],
+
+  /* M11 */
+  absence: [
+    "يجب على المتدرب الالتزام بالحضور طوال فترة التدريب.",
+    "في حال الغياب، يجب إبلاغ المشرف المباشر وإدارة الموارد البشرية قبل بداية وقت التدريب متى ما أمكن ذلك.",
+    "يجب تقديم عذر مقبول في حال الغياب.",
+    "يحق للشركة توثيق الغياب أو التأخير ضمن ملف المتدرب.",
+    "في حال تكرار الغياب أو التأخير دون عذر مقبول، يحق للشركة إشعار الجامعة بذلك.",
+    "يحق للشركة إنهاء تدريب المتدرب في حال الانقطاع أو عدم الالتزام بالحضور والانصراف.",
+    "يتم احتساب المكافأة التدريبية بناءً على مباشرة المتدرب والتزامه بالحضور، ويجوز للشركة حسم أيام الغياب غير المبرر من المكافأة الشهرية.",
+  ],
+
+  /* M12 */
+  stipendAmount: "1,000",
+  stipendRules: [
+    "تصرف المكافأة للمتدرب المقبول رسميًا بعد مباشرته التدريب.",
+    "تصرف المكافأة عن مدة التدريب الفعلية.",
+    "لا تعد المكافأة أجرًا وظيفيًا، ولا يترتب عليها أي علاقة عمل بين المتدرب والشركة.",
+    "يجوز حسم أيام الغياب غير المبرر من المكافأة.",
+    "لا يستحق المتدرب أي مزايا أو بدلات أخرى ما لم توافق الشركة على ذلك كتابيًا.",
+    "يتم صرف المكافأة وفق الإجراءات المالية المعتمدة لدى الشركة.",
+  ],
+
+  /* M13 */
+  superviseIntro: "يكون الإشراف على المتدرب مشتركًا بين إدارة الموارد البشرية والمدير المباشر للقسم الذي يتدرب فيه المتدرب.",
+  hrDuties: [
+    "استقبال طلبات التدريب وفرزها.",
+    "التنسيق مع الإدارات المعنية.",
+    "إصدار الموافقات وخطابات القبول.",
+    "حفظ ملف المتدرب.",
+    "متابعة الحضور والانصراف.",
+    "متابعة التقييم النهائي.",
+    "إصدار شهادة إتمام التدريب بعد استكمال المتطلبات.",
+  ],
+  supDuties: [
+    "تعريف المتدرب بالقسم وطبيعة العمل.",
+    "إعداد أو اعتماد خطة التدريب.",
+    "تكليف المتدرب بمهام مناسبة لتخصصه ومستواه.",
+    "متابعة أداء المتدرب وتوجيهه.",
+    "رفع الملاحظات لإدارة الموارد البشرية عند الحاجة.",
+    "تعبئة نموذج تقييم المتدرب في نهاية فترة التدريب.",
+  ],
+
+  /* M14 */
+  planItems: [
+    "تعريف المتدرب بسياسات وإجراءات القسم.",
+    "توضيح المهام التي سيتم تدريبه عليها.",
+    "تحديد المهارات المستهدفة من التدريب.",
+    "تحديد آلية المتابعة والتقييم.",
+    "توجيه المتدرب للمخرجات أو التقارير المطلوبة منه.",
+    "مراعاة ألا يكلف المتدرب بمهام لا تتناسب مع غرض التدريب أو قدراته.",
+  ],
+
+  /* M15 */
+  rights: [
+    "الحصول على بيئة تدريب مناسبة وآمنة.",
+    "التعرف على طبيعة العمل في القسم المحدد له.",
+    "الحصول على التوجيه والإرشاد من المشرف المباشر.",
+    "ممارسة مهام تدريبية مناسبة لتخصصه.",
+    "الحصول على مكافأة تدريبية شهرية وفق هذه اللائحة.",
+    "الحصول على تقييم نهائي عند انتهاء التدريب.",
+    "الحصول على شهادة إتمام التدريب بعد استكمال متطلبات التدريب وتسليم العهد إن وجدت.",
+    "التعامل معه باحترام ومهنية من قبل جميع منسوبي الشركة.",
+  ],
+
+  /* M16 */
+  obligations: [
+    "الالتزام بأنظمة وتعليمات الشركة.",
+    "الالتزام بأيام وساعات التدريب المحددة.",
+    "التوقيع اليومي في سجل الحضور والانصراف.",
+    "تنفيذ المهام التدريبية المكلف بها من المشرف المباشر.",
+    "المحافظة على سرية معلومات الشركة.",
+    "عدم تصوير أو نسخ أو مشاركة أي مستندات أو بيانات تخص الشركة دون إذن مسبق.",
+    "المحافظة على ممتلكات وأدوات الشركة.",
+    "الالتزام بالسلوك المهني واللباقة في التعامل مع الموظفين والعملاء.",
+    "عدم استخدام البريد الإلكتروني أو الأنظمة أو المستندات الخاصة بالشركة إلا للأغراض التدريبية المصرح بها.",
+    "عدم تمثيل الشركة أمام أي طرف خارجي إلا بتفويض رسمي.",
+    "إبلاغ المشرف المباشر وإدارة الموارد البشرية عند وجود أي عائق يؤثر على التدريب.",
+    "تسليم أي عهد أو مستندات أو أدوات عند انتهاء التدريب.",
+  ],
+
+  /* M17 */
+  confidential: [
+    "يلتزم المتدرب بتوقيع تعهد عدم الإفصاح وسرية المعلومات قبل مباشرة التدريب.",
+    "تشمل المعلومات السرية جميع البيانات والمستندات والمعلومات المالية والإدارية والفنية والتجارية ومعلومات العملاء والمشاريع والموظفين وأي معلومات داخلية تخص الشركة.",
+    "يمنع على المتدرب الإفصاح عن أي معلومات يطلع عليها أثناء فترة التدريب أو بعدها.",
+    "يمنع تصوير أو نسخ أو إرسال أو نشر أي مستندات أو بيانات تخص الشركة دون موافقة مسبقة.",
+    "في حال مخالفة المتدرب لهذا الالتزام، يحق للشركة إنهاء التدريب وإشعار الجامعة واتخاذ الإجراءات المناسبة لحفظ حقوقها.",
+  ],
+
+  /* M18 */
+  assets: [
+    "يلتزم المتدرب باستخدام أنظمة وممتلكات الشركة للأغراض التدريبية فقط.",
+    "لا يجوز للمتدرب استخدام أجهزة أو حسابات أو صلاحيات الشركة لأغراض شخصية.",
+    "لا يجوز للمتدرب تحميل أو نقل أو حفظ أي ملفات تخص الشركة على أجهزة شخصية دون موافقة.",
+    "يلتزم المتدرب بإعادة جميع العهد والأدوات عند انتهاء التدريب.",
+    "يتحمل المتدرب مسؤولية أي تلف أو فقد ناتج عن سوء استخدام أو إهمال متعمد.",
+  ],
+
+  /* M19 */
+  safety: [
+    "يلتزم المتدرب بتعليمات السلامة والصحة المهنية المعتمدة لدى الشركة.",
+    "يجب على المتدرب اتباع تعليمات المشرف المباشر عند زيارة المواقع أو المشاريع.",
+    "لا يجوز للمتدرب دخول أي موقع أو منطقة عمل إلا بإذن من المشرف المباشر.",
+    "يجب على المتدرب استخدام أدوات السلامة متى ما تطلبت طبيعة العمل ذلك.",
+    "يجب إبلاغ المشرف المباشر وإدارة الموارد البشرية فورًا عند حدوث أي إصابة أو حادث أو ملاحظة تتعلق بالسلامة.",
+  ],
+
+  /* M20 */
+  conduct: [
+    "يلتزم المتدرب بالمظهر اللائق والزي المناسب لبيئة العمل.",
+    "يجب على المتدرب الالتزام بالسلوك المهني واحترام جميع منسوبي الشركة والعملاء والزوار.",
+    "يمنع استخدام الألفاظ أو التصرفات غير اللائقة داخل بيئة العمل.",
+    "يلتزم المتدرب بالمحافظة على صورة الشركة وعدم الإساءة لها بأي وسيلة.",
+    "يحق للشركة توجيه المتدرب في حال وجود ملاحظات تتعلق بالمظهر أو السلوك.",
+  ],
+
+  /* M21 */
+  evalIntro: "يتم تقييم المتدرب في نهاية فترة التدريب من قبل المشرف المباشر، بالتنسيق مع إدارة الموارد البشرية، ويشمل التقييم المعايير التالية:",
+  evalCriteria: [
+    "الالتزام بالحضور والانصراف.",
+    "الانضباط والالتزام بالتعليمات.",
+    "جودة تنفيذ المهام التدريبية.",
+    "سرعة التعلم واكتساب المهارات.",
+    "التعاون مع فريق العمل.",
+    "تحمل المسؤولية.",
+    "مهارات التواصل.",
+    "المحافظة على سرية المعلومات.",
+    "المبادرة والرغبة في التعلم.",
+    "السلوك العام داخل بيئة العمل.",
+  ],
+  evalNote: "يتم اعتماد التقييم النهائي من المشرف المباشر وإدارة الموارد البشرية، ثم تزويد الجامعة به عند الحاجة.",
+
+  /* M22 */
+  reports: [
+    "يلتزم المتدرب بتقديم أي تقارير أو نماذج تطلبها الجامعة خلال فترة التدريب.",
+    "يتم التنسيق مع المشرف المباشر قبل إدراج أي معلومات تخص الشركة في تقرير التدريب.",
+    "يجب ألا يتضمن تقرير المتدرب أي معلومات سرية أو بيانات غير مصرح بمشاركتها.",
+    "تعتمد الشركة النماذج المطلوبة من الجامعة بعد مراجعتها والتأكد من صحة المعلومات.",
+    "لإدارة الموارد البشرية الحق في رفض اعتماد أي تقرير يتضمن معلومات غير صحيحة أو غير مصرح بها.",
+  ],
+
+  /* M23 */
+  termination: [
+    "انتهاء مدة التدريب المحددة في خطاب الجامعة.",
+    "طلب الجامعة إنهاء التدريب.",
+    "طلب المتدرب إنهاء التدريب بعد موافقة الجامعة والشركة.",
+    "عدم التزام المتدرب بالحضور والانصراف.",
+    "تكرار الغياب أو التأخير دون عذر مقبول.",
+    "مخالفة المتدرب لأنظمة وتعليمات الشركة.",
+    "إفشاء معلومات سرية أو إساءة استخدام مستندات أو أدوات الشركة.",
+    "عدم مناسبة المتدرب لبيئة العمل أو عدم التزامه بسلوك مهني مقبول.",
+    "وجود أسباب تشغيلية لدى الشركة تستدعي إنهاء التدريب.",
+  ],
+  terminationNote: "في جميع الأحوال، تقوم إدارة الموارد البشرية بتوثيق سبب الإنهاء وإشعار الجامعة عند الحاجة.",
+
+  /* M24 */
+  certReq: [
+    "انتهاء مدة التدريب المعتمدة.",
+    "الالتزام بالحضور والانصراف.",
+    "استكمال التقييم النهائي.",
+    "تسليم جميع العهد أو المستندات أو الأدوات إن وجدت.",
+    "توقيع نموذج إخلاء الطرف.",
+    "عدم وجود ملاحظات جوهرية تمنع إصدار الشهادة.",
+  ],
+  certNote: "تتضمن الشهادة اسم المتدرب، اسم الجامعة، التخصص، القسم التدريبي، مدة التدريب، وتاريخ بداية ونهاية التدريب.",
+
+  /* M25 */
+  clearance: [
+    "تسليم العهد إن وجدت.",
+    "إعادة أي بطاقات أو أدوات أو مستندات تخص الشركة.",
+    "إلغاء أو إيقاف أي صلاحيات منحت له خلال فترة التدريب.",
+    "توقيع إقرار المحافظة على سرية المعلومات بعد انتهاء التدريب.",
+    "اعتماد إخلاء الطرف من المشرف المباشر وإدارة الموارد البشرية.",
+  ],
+
+  /* M26 */
+  relationship: [
+    "لا تعد فترة التدريب عقد عمل أو علاقة وظيفية بين الشركة والمتدرب.",
+    "لا يترتب على قبول المتدرب أي التزام على الشركة بتوظيفه بعد انتهاء التدريب.",
+    "لا يحق للمتدرب المطالبة بأي مزايا أو حقوق وظيفية خلاف ما ورد في هذه اللائحة أو اتفاقية التدريب.",
+    "يجوز للشركة النظر في توظيف المتدرب مستقبلًا متى ما توفر شاغر مناسب واجتاز إجراءات التوظيف المعتمدة.",
+  ],
+
+  /* M27 */
+  files: [
+    "خطاب الجامعة.",
+    "صورة الهوية الوطنية.",
+    "السيرة الذاتية.",
+    "اتفاقية التدريب.",
+    "تعهد عدم الإفصاح.",
+    "سجل الحضور والانصراف.",
+    "خطة التدريب.",
+    "التقييم النهائي.",
+    "شهادة إتمام التدريب.",
+    "نموذج إخلاء الطرف.",
+    "أي مراسلات أو ملاحظات تخص المتدرب.",
+  ],
+
+  /* M28 */
+  general: [
+    "لإدارة الموارد البشرية صلاحية تفسير وتطبيق هذه اللائحة.",
+    "يجوز تعديل هذه اللائحة متى ما دعت الحاجة، بعد اعتماد صاحب الصلاحية.",
+    "تطبق هذه اللائحة من تاريخ اعتمادها.",
+    "أي حالة لم يرد بشأنها نص في هذه اللائحة يتم التعامل معها وفق أنظمة الشركة والأنظمة ذات العلاقة.",
+    "تعد هذه اللائحة مرجعًا داخليًا لتنظيم التدريب التعاوني داخل شركة مسقا للاستثمار.",
+  ],
+
+  /* M29 */
+  approvalText: "تم اعتماد هذه اللائحة للعمل بموجبها داخل شركة مسقا للاستثمار اعتبارًا من تاريخ الاعتماد المبين أعلاه.",
+  signatures: [
+    { label: "// PREPARED", who: "", role: "إعداد — إدارة الموارد البشرية" },
+    { label: "// REVIEWED", who: "", role: "مراجعة — الإدارة المعنية / القانونية" },
+    { label: "// APPROVED", who: "", role: "اعتماد — الرئيس التنفيذي" },
+    { label: "// APPROVED", who: "محمد علي الصقري", role: "اعتماد — رئيس مجلس الإدارة" },
+  ],
+
+  /* Table of contents — 29 articles */
+  toc: [
+    "الهدف من اللائحة", "نطاق التطبيق", "التعاريف", "شروط قبول المتدربين",
+    "المستندات المطلوبة", "الإدارات المشمولة بالتدريب", "الطاقة الاستيعابية", "مدة التدريب",
+    "أيام وساعات التدريب", "آلية الحضور والانصراف", "الغياب والتأخير", "المكافأة التدريبية",
+    "الإشراف على المتدرب", "خطة التدريب", "حقوق المتدرب", "التزامات المتدرب",
+    "سرية المعلومات وعدم الإفصاح", "استخدام أنظمة وممتلكات الشركة", "السلامة والصحة المهنية", "الزي والسلوك المهني",
+    "تقييم المتدرب", "التقارير والمتطلبات الجامعية", "إنهاء التدريب", "شهادة إتمام التدريب",
+    "إخلاء الطرف", "العلاقة بين الشركة والمتدرب", "حفظ الملفات والسجلات", "أحكام عامة", "الاعتماد",
+  ],
+};
+
+</script>
+<script type="text/babel">
+/* MSGA — Cooperative Training Regulation · MSGA REPORT HOUSE STYLE renderer
+   Reads window.TRAIN. 16 pages (cover + 15). Navy/orange brand.
+   Reuses report.css components; extras in training-extra.css. */
+const T = window.TRAIN;
+const TOTAL = 16;
+const pad = (n) => String(n).padStart(2, "0");
+
+/* ── shared chrome (mirrors structure-report) ── */
+function Header({ page }) {
+  const m = T.meta;
+  return (
+    <div className="head">
+      <img className="logo" src="assets/msga-logo.png" alt="MSGA"/>
+      <div className="titles">
+        <div className="eyebrow">MSGA Investment · HR Regulation</div>
+        <div className="doctitle">{m.title}</div>
+      </div>
+      <div className="doc-meta">
+        <div><b>DOC</b> {m.docId}</div>
+        <div><b>VER</b> {m.version}</div>
+        <div><b>PAGE</b> {pad(page)} / {pad(TOTAL)}</div>
+      </div>
+    </div>
+  );
+}
+function Footer({ page }) {
+  return (
+    <div className="foot">
+      <div className="brand-mark">شركة مسقا للاستثمار · داخلي وسري</div>
+      <div>{T.meta.docId} · v{T.meta.version}</div>
+      <div className="pagenum"><b>{pad(page)}</b> / {pad(TOTAL)}</div>
+    </div>
+  );
+}
+function Page({ label, page, children }) {
+  return (
+    <div className="page" data-screen-label={label}>
+      <div className="watermark"></div>
+      <div className="page-inner">
+        <Header page={page}/>
+        {children}
+        <Footer page={page}/>
+      </div>
+    </div>
+  );
+}
+function Sec({ no, label, en, first }) {
+  return (
+    <div className={`sec-head ${first ? "first" : ""}`}>
+      <div className="sec-no">{no}</div>
+      <h2>{label}</h2>
+      <div className="en">{en}</div>
+    </div>
+  );
+}
+function Cap({ lbl, tag }) {
+  return <div className="cap"><span className="lbl">{lbl}</span><div className="dots"></div><span className="ref">{tag}</span></div>;
+}
+function Prose({ lead, alt, children }) {
+  return <div className={`prose ${alt ? "alt" : ""}`}>{lead && <div className="lead">{lead}</div>}{children}</div>;
+}
+function NList({ items, two, alt, compact, start = 1 }) {
+  return (
+    <div className={`nlist ${two ? "two" : ""} ${compact ? "compact" : ""}`}>
+      {items.map((t, i) => (
+        <div className={`nitem ${alt ? "alt" : ""}`} key={i}><div className="nb">{start + i}</div><div className="nt">{t}</div></div>
+      ))}
+    </div>
+  );
+}
+function Note({ children, alt, tight }) {
+  return <div className={`note ${alt ? "alt" : ""} ${tight ? "tight" : ""}`}><span className="x">i</span><span>{children}</span></div>;
+}
+
+/* ── COVER ── */
+function PageCover() {
+  const m = T.meta;
+  return (
+    <div className="page cover" data-screen-label="01 الغلاف">
+      <div className="watermark"></div>
+      <div className="page-inner cover-inner">
+        <div className="cover-top">
+          <span className="co">شركة مسقا للاستثمار</span>
+          <div></div>
+          <span className="brandline">HR Regulation · 2026</span>
+        </div>
+
+        <div className="cover-hero">
+          <img className="logo-w" src="assets/msga-logo.png" alt="MSGA"/>
+          <h1>لائحة التدريب<br/>التعاوني</h1>
+          <div className="subtitle">لطلاب الجامعات — برنامج التدريب التعاوني</div>
+          <div className="period-pill">{m.docId}</div>
+          <div className="cover-desc">{m.subtitle}</div>
+        </div>
+
+        <div className="cover-cards four">
+          <div className="ccard"><div className="k">Articles</div><div className="v num">29</div><div className="s">مادة نظامية</div></div>
+          <div className="ccard"><div className="k">Departments</div><div className="v num">03</div><div className="s">إدارات مشمولة</div></div>
+          <div className="ccard"><div className="k">Stipend</div><div className="v">1,000</div><div className="s">ر.س / شهري</div></div>
+          <div className="ccard"><div className="k">Edition</div><div className="v">v{m.version}</div><div className="s">الإصدار الأول</div></div>
+        </div>
+
+        <div className="cover-toc dense">
+          <div className="th">Contents — فهرس المواد</div>
+          <div className="tg">
+            {T.toc.map((t, i) => <div className="ti" key={i}><span className="n">{pad(i + 1)}</span><span>{t}</span></div>)}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── P2 · Purpose · Scope · Definitions ── */
+function Page2() {
+  return (
+    <Page label="02 الهدف · النطاق · التعاريف" page={2}>
+      <Sec no="01" label="الهدف من اللائحة" en="Purpose" first/>
+      <Prose lead="Purpose"><p>{T.purpose}</p></Prose>
+      <Sec no="02" label="نطاق التطبيق" en="Scope"/>
+      <Prose lead="Scope" alt><p>{T.scope}</p></Prose>
+      <Sec no="03" label="التعاريف" en="Definitions"/>
+      <Cap lbl={T.defsIntro} tag="07 Terms"/>
+      <div className="deflist">
+        {T.defs.map((d, i) => (
+          <div className="defrow" key={i}><div className="dterm">{d.t}</div><div className="ddef">{d.d}</div></div>
+        ))}
+      </div>
+    </Page>
+  );
+}
+
+/* ── P3 · Conditions · Documents ── */
+function Page3() {
+  return (
+    <Page label="03 شروط القبول والمستندات" page={3}>
+      <Sec no="04" label="شروط قبول المتدربين" en="Admission" first/>
+      <Cap lbl="يشترط لقبول الطالب في البرنامج ما يلي" tag="08 Conditions"/>
+      <NList items={T.acceptCond} two alt/>
+      <Sec no="05" label="المستندات المطلوبة" en="Documents"/>
+      <Cap lbl="على الطالب تقديم المستندات التالية قبل الاعتماد" tag="08 Items"/>
+      <NList items={T.docsReq} two/>
+    </Page>
+  );
+}
+
+/* ── P4 · Departments · Capacity · Duration ── */
+function Page4() {
+  return (
+    <Page label="04 الإدارات · الطاقة · المدة" page={4}>
+      <Sec no="06" label="الإدارات المشمولة بالتدريب" en="Host Departments" first/>
+      <Cap lbl="يكون التدريب التعاوني في الإدارات التالية حسب الاحتياج" tag="03 Depts"/>
+      <div className="chips">
+        {T.deptsList.map((d, i) => <div className="chip-tag" key={i}><span className="cnum">{pad(i + 1)}</span>{d}</div>)}
+      </div>
+      <Note tight>{T.deptsNote}</Note>
+      <Sec no="07" label="الطاقة الاستيعابية للمتدربين" en="Capacity"/>
+      <Cap lbl="الحد الأقصى لعدد المتدربين في الفترة الواحدة" tag="Per Cycle"/>
+      <div className="cap2">
+        {[T.capacity.slice(0, Math.ceil(T.capacity.length / 2)), T.capacity.slice(Math.ceil(T.capacity.length / 2))].map((half, hi) => (
+          <div className="ptable" key={hi}>
+            <div className="pt-head cols-rate"><div>القسم التدريبي</div><div className="center">الحد الأقصى</div></div>
+            {half.map((r, i) => (
+              <div className="pt-row cols-rate" key={i}>
+                <div><span className="lvl-mini lvl-6">{r.num}</span><span className="strong" style={{ marginInlineStart: 8 }}>{r.dept}</span></div>
+                <div className="center"><span className="vchip ar nav">{r.max}</span></div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      <Note alt tight>{T.capacityNote}</Note>
+      <Sec no="08" label="مدة التدريب" en="Duration"/>
+      <Prose lead="Term">{T.duration.map((p, i) => <p key={i}>{p}</p>)}</Prose>
+    </Page>
+  );
+}
+
+/* ── P5 · Schedule · Attendance ── */
+function Page5() {
+  return (
+    <Page label="05 الدوام والحضور" page={5}>
+      <Sec no="09" label="أيام وساعات التدريب" en="Schedule" first/>
+      <Cap lbl="أوقات التدريب المعتمدة لدى الشركة" tag="Sun–Thu · 8–4"/>
+      <div className="statrow">
+        {T.scheduleStats.map((s, i) => (
+          <div className="statcard" key={i}><div className="k">{s.k}</div><div className="v">{s.v}</div><div className="s">{s.s}</div></div>
+        ))}
+      </div>
+      <Cap lbl="ضوابط الالتزام بالدوام" tag="03 Rules"/>
+      <NList items={T.scheduleRules}/>
+      <Sec no="10" label="آلية الحضور والانصراف" en="Attendance"/>
+      <Cap lbl="تنظيم سجل الحضور والانصراف" tag="05 Rules"/>
+      <NList items={T.attendance} two/>
+    </Page>
+  );
+}
+
+/* ── P6 · Absence · Stipend ── */
+function Page6() {
+  return (
+    <Page label="06 الغياب والمكافأة" page={6}>
+      <Sec no="11" label="الغياب والتأخير" en="Absence & Lateness" first/>
+      <Cap lbl="ضوابط الالتزام بالحضور والتعامل مع الغياب" tag="07 Rules"/>
+      <NList items={T.absence} two/>
+      <Sec no="12" label="المكافأة التدريبية" en="Training Stipend"/>
+      <div className="bigfig">
+        <div className="fig"><span className="n">{T.stipendAmount}</span><span className="u">ر.س</span></div>
+        <div className="lab">تصرف الشركة للمتدرب <b>مكافأة تدريبية شهرية</b> قدرها ألف ريال سعودي عن مدة التدريب الفعلية، ولا تعد أجرًا وظيفيًا ولا تنشئ علاقة عمل.</div>
+      </div>
+      <Cap lbl="ضوابط صرف المكافأة التدريبية" tag="06 Rules"/>
+      <NList items={T.stipendRules} two compact/>
+    </Page>
+  );
+}
+
+/* ── P7 · Supervision ── */
+function Page7() {
+  return (
+    <Page label="07 الإشراف على المتدرب" page={7}>
+      <Sec no="13" label="الإشراف على المتدرب" en="Supervision" first/>
+      <Prose lead="Joint Oversight"><p>{T.superviseIntro}</p></Prose>
+      <Cap lbl="توزيع مسؤوليات الإشراف" tag="HR · Direct Supervisor"/>
+      <div className="dual">
+        <div className="col">
+          <div className="col-head"><span className="ic">HR</span><span className="nm">إدارة الموارد البشرية</span></div>
+          {T.hrDuties.map((d, i) => <div className="row" key={i}><span className="b">{pad(i + 1)}</span><span>{d}</span></div>)}
+        </div>
+        <div className="col">
+          <div className="col-head"><span className="ic">SV</span><span className="nm">المشرف المباشر</span></div>
+          {T.supDuties.map((d, i) => <div className="row" key={i}><span className="b">{pad(i + 1)}</span><span>{d}</span></div>)}
+        </div>
+      </div>
+    </Page>
+  );
+}
+
+/* ── P8 · Plan · Rights ── */
+function Page8() {
+  return (
+    <Page label="08 خطة التدريب وحقوق المتدرب" page={8}>
+      <Sec no="14" label="خطة التدريب" en="Training Plan" first/>
+      <Cap lbl="يلتزم القسم المستضيف بإعداد خطة تدريب تشمل" tag="06 Elements"/>
+      <NList items={T.planItems} two alt/>
+      <Sec no="15" label="حقوق المتدرب" en="Trainee Rights"/>
+      <Cap lbl="يحق للمتدرب خلال فترة التدريب ما يلي" tag="08 Rights"/>
+      <NList items={T.rights} two/>
+    </Page>
+  );
+}
+
+/* ── P9 · Obligations ── */
+function Page9() {
+  return (
+    <Page label="09 التزامات المتدرب" page={9}>
+      <Sec no="16" label="التزامات المتدرب" en="Trainee Obligations" first/>
+      <Cap lbl="يلتزم المتدرب خلال فترة التدريب بما يلي" tag="12 Obligations"/>
+      <NList items={T.obligations} two compact alt/>
+    </Page>
+  );
+}
+
+/* ── P10 · Confidentiality · Assets ── */
+function Page10() {
+  return (
+    <Page label="10 السرية واستخدام الممتلكات" page={10}>
+      <Sec no="17" label="سرية المعلومات وعدم الإفصاح" en="Confidentiality" first/>
+      <Cap lbl="التزامات المتدرب تجاه المعلومات السرية" tag="05 Rules"/>
+      <NList items={T.confidential}/>
+      <Sec no="18" label="استخدام أنظمة وممتلكات الشركة" en="Company Assets"/>
+      <Cap lbl="ضوابط استخدام الأنظمة والممتلكات" tag="05 Rules"/>
+      <NList items={T.assets} two/>
+    </Page>
+  );
+}
+
+/* ── P11 · Safety · Conduct ── */
+function Page11() {
+  return (
+    <Page label="11 السلامة والسلوك المهني" page={11}>
+      <Sec no="19" label="السلامة والصحة المهنية" en="Health & Safety" first/>
+      <Cap lbl="التزامات السلامة والصحة المهنية" tag="05 Rules"/>
+      <NList items={T.safety} two alt/>
+      <Sec no="20" label="الزي والسلوك المهني" en="Dress & Conduct"/>
+      <Cap lbl="ضوابط المظهر والسلوك داخل بيئة العمل" tag="05 Rules"/>
+      <NList items={T.conduct} two/>
+    </Page>
+  );
+}
+
+/* ── P12 · Evaluation ── */
+function Page12() {
+  return (
+    <Page label="12 تقييم المتدرب" page={12}>
+      <Sec no="21" label="تقييم المتدرب" en="Trainee Appraisal" first/>
+      <Prose lead="Basis"><p>{T.evalIntro}</p></Prose>
+      <Cap lbl="معايير تقييم المتدرب في نهاية فترة التدريب" tag="10 Criteria"/>
+      <NList items={T.evalCriteria} two alt/>
+      <Note alt>{T.evalNote}</Note>
+    </Page>
+  );
+}
+
+/* ── P13 · Reports · Termination ── */
+function Page13() {
+  return (
+    <Page label="13 التقارير وإنهاء التدريب" page={13}>
+      <Sec no="22" label="التقارير والمتطلبات الجامعية" en="University Reports" first/>
+      <Cap lbl="ضوابط التقارير والنماذج الجامعية" tag="05 Rules"/>
+      <NList items={T.reports} two/>
+      <Sec no="23" label="إنهاء التدريب" en="Termination"/>
+      <Cap lbl="ينتهي التدريب في الحالات التالية" tag="09 Cases"/>
+      <NList items={T.termination} two compact alt/>
+      <Note tight>{T.terminationNote}</Note>
+    </Page>
+  );
+}
+
+/* ── P14 · Certificate · Clearance ── */
+function Page14() {
+  return (
+    <Page label="14 الشهادة وإخلاء الطرف" page={14}>
+      <Sec no="24" label="شهادة إتمام التدريب" en="Completion Certificate" first/>
+      <Cap lbl="تصدر الشهادة بعد استكمال المتطلبات التالية" tag="06 Requirements"/>
+      <NList items={T.certReq} two/>
+      <Note alt tight>{T.certNote}</Note>
+      <Sec no="25" label="إخلاء الطرف" en="Clearance"/>
+      <Cap lbl="إجراءات إخلاء الطرف قبل إصدار الشهادة" tag="05 Steps"/>
+      <NList items={T.clearance}/>
+    </Page>
+  );
+}
+
+/* ── P15 · Relationship · Files ── */
+function Page15() {
+  return (
+    <Page label="15 العلاقة وحفظ الملفات" page={15}>
+      <Sec no="26" label="العلاقة بين الشركة والمتدرب" en="Relationship" first/>
+      <Cap lbl="طبيعة العلاقة خلال فترة التدريب وبعدها" tag="04 Rules"/>
+      <NList items={T.relationship} two alt/>
+      <Sec no="27" label="حفظ الملفات والسجلات" en="Records"/>
+      <Cap lbl="تحفظ إدارة الموارد البشرية ملفًا لكل متدرب يشمل" tag="11 Items"/>
+      <NList items={T.files} two compact/>
+    </Page>
+  );
+}
+
+/* ── P16 · General · Approval ── */
+function Page16() {
+  const m = T.meta;
+  return (
+    <Page label="16 أحكام عامة والاعتماد" page={16}>
+      <Sec no="28" label="أحكام عامة" en="General Provisions" first/>
+      <Cap lbl="الأحكام الختامية لتطبيق اللائحة" tag="05 Provisions"/>
+      <NList items={T.general} two/>
+      <Sec no="29" label="الاعتماد" en="Approval & Sign-off"/>
+      <Prose lead="Effective"><p>{T.approvalText}</p></Prose>
+      <Cap lbl="الاعتمادات والتوقيعات" tag={`Approvals · ${m.docId}`}/>
+      <div className="signoff-quad">
+        {T.signatures.map((s, i) => (
+          <div className="sign" key={i}>
+            <div className="label">{s.label.replace(/^\/\/\s*/, "")}</div>
+            <div className="role">{s.role}</div>
+            <div className="nm">{s.who || "\u00A0"}</div>
+            <div className="sig-line"></div>
+            <div className="sig-cap">Signature / Date</div>
+          </div>
+        ))}
+      </div>
+      <div className="docctrl">
+        <div><div className="eyebrow">Document Control · ضبط الوثيقة</div><div className="val">الإصدار v{m.version} · الجهة المالكة: {m.owner}</div></div>
+        <div className="right">Effective {m.effective}</div>
+      </div>
+    </Page>
+  );
+}
+
+function Toolbar() {
+  return <div className="toolbar"><div className="brand">MSGA · Regulation</div><button onClick={() => window.print()}>Print / PDF</button></div>;
+}
+function App() {
+  return (
+    <>
+      <Toolbar/>
+      <div className="stage">
+        <PageCover/><Page2/><Page3/><Page4/><Page5/><Page6/><Page7/><Page8/>
+        <Page9/><Page10/><Page11/><Page12/><Page13/><Page14/><Page15/><Page16/>
+      </div>
+    </>
+  );
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+
+</script>
+</body>
+</html>

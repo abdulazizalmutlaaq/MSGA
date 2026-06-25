@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>لائحة إدارة السلامة والصحة المهنية — مسقا للاستثمار</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{ --pw:816px; --ph:1056px; --navy:#10375C; }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#DCE1E7;font-family:"Tajawal",system-ui,sans-serif;}
+  .stage{display:flex;flex-direction:column;align-items:center;gap:24px;padding:28px 16px 80px;}
+  .page{position:relative;width:var(--pw);height:var(--ph);background:#fff;overflow:hidden;
+    box-shadow:0 1px 2px rgba(16,30,45,.05),0 14px 40px rgba(16,30,45,.14);
+    page-break-after:always;break-after:page;}
+  .page:last-child{page-break-after:auto;}
+  /* original rendered page */
+  .src{position:absolute;inset:0;width:100%;height:100%;display:block;}
+  /* white masks that erase the original generic header/footer zones */
+  .mask-top{position:absolute;top:0;left:0;width:100%;height:116px;background:#fff;z-index:2;}
+  .mask-bot{position:absolute;bottom:0;left:0;width:100%;height:92px;background:#fff;z-index:2;}
+  /* MSGA official letterhead bands */
+  .lh-head{position:absolute;top:14px;left:48px;width:720px;height:auto;z-index:3;}
+  .lh-foot{position:absolute;bottom:13px;left:58px;width:700px;height:auto;z-index:3;}
+  .hairline{position:absolute;left:48px;width:720px;height:2px;background:var(--navy);opacity:.16;top:112px;z-index:3;}
+  /* page-4 endorsement overlays */
+  .ceo{position:absolute;z-index:4;top:568px;left:0;width:258px;text-align:right;
+    font-size:19px;font-weight:700;color:var(--navy);letter-spacing:.2px;}
+  .stamp{position:absolute;z-index:4;top:636px;left:174px;width:165px;height:auto;
+    transform:rotate(-7deg);opacity:.93;mix-blend-mode:multiply;}
+  /* toolbar */
+  .toolbar{position:fixed;top:16px;inset-inline-start:16px;z-index:100;background:var(--navy);color:#fff;
+    display:flex;align-items:center;gap:6px;padding:7px 8px 7px 14px;border-radius:9px;
+    box-shadow:0 10px 30px rgba(16,30,45,.25);font-size:12px;direction:ltr;}
+  .toolbar b{font-weight:800;letter-spacing:.06em;}
+  .toolbar button{background:#FF7E2A;color:#fff;border:none;font:inherit;font-weight:700;
+    padding:7px 14px;border-radius:6px;cursor:pointer;}
+  .toolbar button:hover{filter:brightness(1.06);}
+  @page{size:Letter portrait;margin:0;}
+  @media print{html,body{background:#fff;}.stage{padding:0;gap:0;}.page{box-shadow:none;}.toolbar{display:none!important;}}
+</style>
+</head>
+<body>
+<div class="toolbar"><b>مسقا</b><button onclick="window.print()">طباعة / حفظ PDF</button></div>
+<div class="stage" id="stage"></div>
+<script>
+  const TOTAL = 13;
+  const stage = document.getElementById('stage');
+  for(let n=1;n<=TOTAL;n++){
+    const num = String(n).padStart(2,'0');
+    const page = document.createElement('section');
+    page.className = 'page';
+    page.setAttribute('data-screen-label', num);
+    page.innerHTML =
+      '<img class="src" src="src-pages/p'+num+'.png" alt="صفحة '+n+'"/>'+
+      '<div class="mask-top"></div>'+
+      '<div class="mask-bot"></div>'+
+      '<img class="lh-head" src="assets/letterhead/header.png" alt="ترويسة مسقا للاستثمار"/>'+
+      '<div class="hairline"></div>'+
+      '<img class="lh-foot" src="assets/letterhead/footer.png" alt="تذييل مسقا للاستثمار"/>';
+    if(n===4){
+      page.insertAdjacentHTML('beforeend',
+        '<div class="ceo">غنام محمد الصقري</div>'+
+        '<img class="stamp" src="assets/msga-stamp.png" alt="ختم شركة مسقا للاستثمار"/>');
+    }
+    stage.appendChild(page);
+  }
+</script>
+</body>
+</html>

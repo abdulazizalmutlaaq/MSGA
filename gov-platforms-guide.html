@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSGA — دليل استخدام المنصات الحكومية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* MSGA — Salary Structure Policy · "MSGA REPORT" HOUSE STYLE
+   Matches the April-2026 commercial-sector report exactly:
+   navy full-bleed cover + top orange hairline · white content pages ·
+   lavender rounded section bars with orange circle number + orange right accent ·
+   grey table header with orange underline · colored status pills · rounded cards.
+   Self-contained — does NOT depend on sample-base.css. */
+:root {
+  --navy:#1F3A57; --navy-2:#16304B; --navy-3:#102539; --navy-deep:#0D2034;
+  --navy-card:#27425E; --navy-line:#33506C;
+  --orange:#E5811F; --orange-2:#C96B12; --orange-soft:#FBEEDD;
+  --ink:#1E2B38; --ink-2:#41505F; --ink-3:#76828F; --ink-4:#A7B0BA;
+  --paper:#FFFFFF; --paper-2:#F7F8FB; --lav:#EEF0F7; --lav-2:#F4F5FA;
+  --line:#E5E8EE; --line-2:#EEF0F4;
+  --th:#F4F5F8;
+  --ok:#2F8559; --ok-bg:#E6F4EC; --ok-bd:#CBE8D6;
+  --prog:#2B5180; --prog-bg:#E9EFF7; --prog-bd:#D2DEEE;
+  --hold:#B0831F; --hold-bg:#FAF2DA; --hold-bd:#ECDBA9;
+  --red:#B0432C; --red-bg:#F8E9E4; --red-bd:#ECCDC2;
+  --l1:#BBC6D2; --l2:#9DACBC; --l3:#7E91A6; --l4:#5F7790; --l5:#46617C; --l6:#2F4D69; --l7:#E5811F;
+  --ar:"Tajawal", system-ui, sans-serif;
+  --ar-head:"Tajawal", system-ui, sans-serif;
+  --latin:"Saira", "Tajawal", system-ui, sans-serif;
+  --page-w:210mm; --page-h:297mm; --mx:15mm; --my:14mm;
+}
+* { box-sizing:border-box; }
+html, body { margin:0; padding:0; background:#DDE2E8; font-family:var(--ar); color:var(--ink); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+body { direction:rtl; }
+.stage { min-height:100vh; padding:30px 16px 90px; display:flex; flex-direction:column; align-items:center; gap:28px; }
+.page { width:var(--page-w); height:var(--page-h); background:var(--paper); position:relative; overflow:hidden; box-shadow:0 1px 2px rgba(20,30,45,.05), 0 16px 44px rgba(20,30,45,.14); page-break-after:always; break-after:page; display:flex; flex-direction:column; }
+.page:last-of-type { page-break-after:auto; }
+.watermark { position:absolute; inset:0; pointer-events:none; z-index:0; }
+.page-inner { position:relative; z-index:1; flex:1; display:flex; flex-direction:column; padding:var(--my) var(--mx) 0; }
+
+/* numbers latin font */
+.latin, .doc-meta, .foot, .lcode, .scale-num, .vchip, .kpi .val, .ti-num, .cnum, .nb, .sec-no, .head .eyebrow, .cap .ref, .prose .lead, .cover-top .brandline, .hero .kicker, .classline, .kpi .label, .toc-head, .cover-meta .k, .dept2-head .code, .dept2-head .cnt { font-family:var(--latin); }
+
+/* ─── Content header ─── */
+.head { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px; padding-bottom:11px; margin-bottom:6px; border-bottom:2px solid var(--orange); }
+.head .logo { height:34px; width:auto; display:block; }
+.head .titles { display:flex; flex-direction:column; gap:1px; }
+.head .eyebrow { font-size:8.5px; font-weight:600; letter-spacing:0.18em; color:var(--orange-2); text-transform:uppercase; direction:ltr; }
+.head .doctitle { font-family:var(--ar-head); font-size:13.5px; font-weight:700; color:var(--navy); }
+.head .doc-meta { text-align:left; direction:ltr; font-size:9px; font-weight:500; color:var(--ink-3); line-height:1.65; letter-spacing:0.03em; }
+.head .doc-meta div { white-space:nowrap; }
+.head .doc-meta b { color:var(--navy); font-weight:700; letter-spacing:0.08em; }
+
+/* ─── Footer ─── */
+.foot { position:absolute; bottom:8mm; inset-inline:var(--mx); display:flex; align-items:center; justify-content:space-between; font-size:8.5px; font-weight:500; color:var(--ink-3); letter-spacing:0.08em; text-transform:uppercase; border-top:1px solid var(--line); padding-top:7px; z-index:2; direction:ltr; }
+.foot .brand-mark { display:flex; align-items:center; gap:7px; }
+.foot .brand-mark::before { content:""; width:5px; height:5px; background:var(--orange); border-radius:50%; }
+.foot .pagenum b { color:var(--navy); font-weight:700; }
+
+/* ─── Section bar (signature element) ─── */
+.sec-head { position:relative; display:flex; align-items:center; gap:11px; flex-direction:row-reverse; justify-content:flex-start; background:var(--lav); border-radius:9px; padding:9px 16px 9px 14px; margin:16px 0 11px; overflow:hidden; }
+.sec-head.first { margin-top:4px; }
+.sec-head::after { content:""; position:absolute; top:0; bottom:0; right:0; width:5px; background:var(--orange); }
+.sec-head .sec-no { width:24px; height:24px; border-radius:50%; background:var(--orange); color:#fff; display:grid; place-items:center; font-size:11px; font-weight:700; flex-shrink:0; }
+.sec-head h2 { margin:0; font-family:var(--ar-head); font-size:16px; font-weight:700; color:var(--navy); flex:1; }
+.sec-head .en { font-size:9px; font-weight:600; color:var(--ink-3); letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap; direction:ltr; }
+
+/* caption */
+.cap { display:flex; align-items:center; gap:11px; margin:2px 2px 8px; }
+.cap .lbl { font-size:10px; font-weight:500; color:var(--ink-3); white-space:nowrap; }
+.cap .dots { flex:1; height:1px; background:var(--line); }
+.cap .ref { font-size:9px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange-2); white-space:nowrap; direction:ltr; }
+
+/* prose */
+.prose { padding:2px 14px 2px 0; margin-top:4px; border-inline-start:3px solid var(--orange); }
+.prose.alt { border-inline-start-color:var(--navy); }
+.prose .lead { font-size:9px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--orange-2); margin-bottom:5px; direction:ltr; text-align:start; }
+.prose.alt .lead { color:var(--navy); }
+.prose p { margin:0; font-size:11.5px; color:var(--ink-2); line-height:1.85; text-wrap:pretty; }
+.prose p + p { margin-top:7px; }
+
+/* numbered list */
+.nlist { display:grid; grid-template-columns:1fr; margin-top:6px; }
+.nlist.two { grid-template-columns:1fr 1fr; column-gap:22px; }
+.nitem { display:grid; grid-template-columns:24px 1fr; align-items:start; gap:10px; padding:7px 0; border-bottom:1px solid var(--line-2); }
+.nitem .nb { font-size:11px; font-weight:700; color:#fff; background:var(--navy); width:20px; height:20px; border-radius:6px; display:grid; place-items:center; line-height:1; }
+.nitem.alt .nb { background:var(--orange); }
+.nitem .nt { font-size:11px; line-height:1.6; color:var(--ink-2); padding-top:2px; text-wrap:pretty; }
+
+/* chips */
+.chips { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:4px; }
+.chip-tag { display:flex; align-items:center; gap:9px; border:1px solid var(--line); background:var(--paper-2); border-radius:8px; padding:9px 12px; font-size:10.5px; color:var(--ink-2); min-height:36px; }
+.chip-tag .cnum { font-size:10px; font-weight:700; color:#fff; background:var(--navy); width:18px; height:18px; border-radius:5px; display:grid; place-items:center; flex-shrink:0; }
+
+/* note */
+.note { margin-top:10px; padding:11px 14px; background:var(--orange-soft); border-radius:8px; border-inline-start:3px solid var(--orange); font-size:10.5px; color:#7A5417; line-height:1.7; display:flex; gap:10px; align-items:flex-start; text-wrap:pretty; }
+.note .x { font-weight:700; font-size:13px; color:var(--orange-2); line-height:1.3; }
+.note.alt { background:var(--lav); border-inline-start-color:var(--navy); color:var(--ink-2); }
+.note.alt .x { color:var(--navy); }
+
+/* ─── tables ─── */
+.ptable { margin-top:6px; border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.pt-head { display:grid; background:var(--th); border-bottom:2px solid var(--orange); font-family:var(--ar-head); font-size:10px; font-weight:700; color:var(--navy); }
+.pt-head > div { padding:8px 12px; }
+.pt-head > div.center { text-align:center; }
+.pt-row { display:grid; border-bottom:1px solid var(--line-2); font-size:11px; min-height:34px; align-items:stretch; background:var(--paper); }
+.pt-row:last-child { border-bottom:none; }
+.pt-row:nth-child(even) { background:var(--lav-2); }
+.pt-row > div { padding:8px 12px; display:flex; align-items:center; }
+.pt-row .center { justify-content:center; }
+.pt-row .strong { font-weight:700; color:var(--navy); }
+.pt-row .muted { color:var(--ink-3); font-size:10px; }
+.lcode { font-size:10px; color:var(--ink-3); direction:ltr; }
+.cols-level { grid-template-columns:120px 150px 1fr; }
+.cols-scale { grid-template-columns:128px 60px 1fr 1fr 1fr; }
+.cols-grade { grid-template-columns:170px 1fr; }
+.cols-rate  { grid-template-columns:1fr 190px; }
+.cols-auth  { grid-template-columns:220px 1fr; }
+
+/* level badge */
+.lvl-badge { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:500; color:var(--ink); }
+.lvl-badge .ln { font-size:9.5px; font-weight:700; color:#fff; width:19px; height:19px; border-radius:50%; display:grid; place-items:center; flex-shrink:0; }
+.lvl-mini { font-size:9px; font-weight:700; color:#fff; width:17px; height:17px; border-radius:50%; display:grid; place-items:center; flex-shrink:0; }
+.lvl-1{background:var(--l1)} .lvl-2{background:var(--l2)} .lvl-3{background:var(--l3)} .lvl-4{background:var(--l4)} .lvl-5{background:var(--l5)} .lvl-6{background:var(--l6)} .lvl-7{background:var(--l7)}
+
+/* salary numbers */
+.scale-num { font-size:12px; direction:ltr; font-weight:500; color:var(--ink-2); }
+.scale-num.mid { color:var(--orange-2); font-weight:700; }
+.scale-num.hi { color:var(--navy); font-weight:700; }
+
+/* status-style pill (for grades / values) */
+.pill { display:inline-flex; align-items:center; gap:7px; font-family:var(--ar-head); font-size:11px; font-weight:700; padding:4px 11px; border-radius:999px; border:1px solid transparent; white-space:nowrap; }
+.pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.pill.ok   { color:var(--ok);   background:var(--ok-bg);   border-color:var(--ok-bd); }
+.pill.prog { color:var(--prog); background:var(--prog-bg); border-color:var(--prog-bd); }
+.pill.hold { color:var(--hold); background:var(--hold-bg); border-color:var(--hold-bd); }
+.pill.red  { color:var(--red);  background:var(--red-bg);  border-color:var(--red-bd); }
+.pill.plain{ color:var(--ink-3); background:var(--paper-2); border-color:var(--line); }
+
+.vchip { font-size:13px; font-weight:700; direction:ltr; white-space:nowrap; }
+.vchip.pos{color:var(--ok)} .vchip.warn{color:var(--hold)} .vchip.none{color:var(--ink-4)} .vchip.nav{color:var(--navy)}
+.vchip.ar{direction:rtl; font-family:var(--ar-head); font-size:11.5px}
+
+/* rating -> use pill look */
+.rating { display:inline-flex; align-items:center; gap:7px; font-family:var(--ar-head); font-size:11px; font-weight:700; padding:4px 12px; border-radius:999px; border:1px solid; }
+.rating::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.rating.r-excep { color:var(--ok);   background:var(--ok-bg);   border-color:var(--ok-bd); }
+.rating.r-exc   { color:var(--prog); background:var(--prog-bg); border-color:var(--prog-bd); }
+.rating.r-vg    { color:var(--hold); background:var(--hold-bg); border-color:var(--hold-bd); }
+.rating.r-good  { color:var(--orange-2); background:var(--orange-soft); border-color:#EFD9B6; }
+.rating.r-below { color:var(--red);  background:var(--red-bg);  border-color:var(--red-bd); }
+.grade-desc { font-size:10.5px; color:var(--ink-3); line-height:1.6; text-wrap:pretty; }
+
+/* band chart */
+.bandchart { margin-top:8px; padding:11px 14px; border:1px solid var(--line); border-radius:9px; background:var(--paper-2); }
+.bc-head { display:flex; justify-content:space-between; align-items:baseline; font-size:9px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3); margin-bottom:11px; }
+.bc-head .axis { direction:ltr; color:var(--orange-2); font-family:var(--latin); }
+.bc-row { display:grid; grid-template-columns:92px 1fr; align-items:center; gap:13px; margin-bottom:7px; }
+.bc-row:last-child { margin-bottom:0; }
+.bc-row .bc-label { font-size:10px; font-weight:500; color:var(--ink-2); text-align:start; }
+.bc-track { position:relative; height:14px; direction:ltr; }
+.bc-track .grid-line { position:absolute; top:-4px; bottom:-4px; width:1px; background:var(--line); }
+.bc-bar { position:absolute; top:4px; height:7px; border-radius:4px; display:flex; align-items:center; }
+.bc-bar.lvl-1{background:var(--l1);color:var(--l1)} .bc-bar.lvl-2{background:var(--l2);color:var(--l2)} .bc-bar.lvl-3{background:var(--l3);color:var(--l3)} .bc-bar.lvl-4{background:var(--l4);color:var(--l4)} .bc-bar.lvl-5{background:var(--l5);color:var(--l5)} .bc-bar.lvl-6{background:var(--l6);color:var(--l6)} .bc-bar.lvl-7{background:var(--l7);color:var(--l7)}
+.bc-bar .mid-dot { position:absolute; width:9px; height:9px; border-radius:50%; background:var(--paper); box-shadow:0 0 0 2px currentColor; transform:translateX(-50%); }
+.bc-axis-labels { display:flex; justify-content:space-between; direction:ltr; font-family:var(--latin); font-size:9px; font-weight:600; color:var(--ink-4); margin:6px 0 0; padding-inline-start:105px; }
+
+/* department cards */
+.depttitles { display:grid; grid-template-columns:1fr 1fr; gap:13px; margin-top:6px; }
+.dept2 { border:1px solid var(--line); border-radius:9px; background:var(--paper); display:flex; flex-direction:column; break-inside:avoid; overflow:hidden; }
+.dept2-head { display:grid; grid-template-columns:1fr auto; align-items:center; gap:8px; padding:8px 13px; background:var(--th); border-bottom:2px solid var(--orange); }
+.dept2-head .dn { font-family:var(--ar-head); font-size:12px; font-weight:700; color:var(--navy); }
+.dept2-head .meta { display:flex; align-items:center; gap:8px; }
+.dept2-head .code { font-size:9px; font-weight:700; letter-spacing:0.08em; color:var(--orange-2); direction:ltr; }
+.dept2-head .cnt { font-size:9px; color:var(--ink-3); direction:ltr; }
+.dt-row { display:grid; grid-template-columns:20px 88px 1fr; align-items:center; gap:9px; padding:6px 13px; border-bottom:1px solid var(--line-2); font-size:10.5px; min-height:30px; }
+.dt-row:last-child { border-bottom:none; }
+.dt-row .dt-lvl { font-size:9px; color:var(--ink-3); }
+.dt-row .dt-title { font-weight:500; color:var(--ink); }
+
+/* steps */
+.steps { display:grid; margin-top:6px; border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.step { display:grid; grid-template-columns:42px 1fr; border-bottom:1px solid var(--line-2); align-items:stretch; }
+.step:last-child { border-bottom:none; }
+.step:nth-child(even) { background:var(--lav-2); }
+.step .snum { background:var(--navy); color:#fff; display:grid; place-items:center; font-size:13px; font-weight:700; }
+.step .stext { padding:10px 13px; font-size:11px; line-height:1.6; color:var(--ink-2); display:flex; align-items:center; text-wrap:pretty; }
+
+/* annual cycle */
+.cycle { margin-top:6px; padding:16px 10px 6px; }
+.cycle-track { display:grid; grid-template-columns:repeat(4,1fr); position:relative; direction:rtl; }
+.cycle-track::before { content:""; position:absolute; top:16px; inset-inline:12%; height:2px; background:var(--line); z-index:0; }
+.cycle-node { display:flex; flex-direction:column; align-items:center; gap:8px; position:relative; z-index:1; text-align:center; padding:0 8px; }
+.cycle-node .dot { width:32px; height:32px; border-radius:50%; background:var(--paper); color:var(--navy); display:grid; place-items:center; font-family:var(--latin); font-size:13px; font-weight:700; border:2px solid var(--navy); }
+.cycle-node.accent .dot { background:var(--orange); color:#fff; border-color:var(--orange); }
+.cycle-node .period { font-family:var(--ar-head); font-size:11.5px; font-weight:700; color:var(--orange-2); }
+.cycle-node .clabel { font-size:11px; font-weight:700; color:var(--navy); line-height:1.35; }
+.cycle-node .cdesc { font-size:9.5px; color:var(--ink-3); line-height:1.5; max-width:140px; }
+
+/* sign-off */
+.signoff-triple { margin-top:12px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.signoff-triple .sign { padding:13px; border:1px solid var(--line); border-radius:9px; background:var(--paper-2); display:flex; flex-direction:column; gap:5px; min-height:92px; }
+.signoff-triple .sign .label { font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange-2); direction:ltr; text-align:start; }
+.signoff-triple .sign .nm { font-size:11.5px; font-weight:700; color:var(--ink); min-height:16px; }
+.signoff-triple .sign .role { font-size:10px; color:var(--ink-3); }
+.signoff-triple .sign .sig-line { margin-top:auto; border-bottom:1px dashed var(--ink-4); height:24px; }
+.signoff-triple .sign .sig-cap { font-size:8.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-4); direction:ltr; text-align:start; }
+
+/* doc control */
+.docctrl { margin-top:14px; background:var(--navy); border-radius:9px; padding:14px 18px; display:grid; grid-template-columns:1fr auto; align-items:center; gap:16px; color:#fff; }
+.docctrl .eyebrow { font-size:9px; letter-spacing:0.16em; color:#F0B978; text-transform:uppercase; margin-bottom:4px; direction:ltr; text-align:start; }
+.docctrl .val { font-family:var(--ar-head); font-size:13px; font-weight:700; color:#fff; }
+.docctrl .right { font-size:9.5px; color:#AEBCCC; letter-spacing:0.1em; text-transform:uppercase; text-align:left; direction:ltr; }
+
+/* ═══════ COVER (navy full-bleed) ═══════ */
+.page.cover { background:var(--navy); }
+.page.cover::before { content:""; position:absolute; top:0; inset-inline:0; height:5px; background:var(--orange); z-index:3; }
+.page.cover .watermark::after { content:""; position:absolute; inset:0; background:url("assets/msga-logo.png") no-repeat center 60%; background-size:62% auto; opacity:.04; filter:brightness(0) invert(1); }
+.cover-inner { padding:0 !important; }
+.cover-top { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px; padding:13mm var(--mx) 0; }
+.cover-top .co { font-family:var(--ar-head); font-size:12px; font-weight:700; color:#fff; }
+.cover-top .brandline { font-size:9.5px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--orange); text-align:left; direction:ltr; }
+.cover-hero { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 var(--mx); text-align:center; }
+.cover-hero .logo-w { height:64px; width:auto; filter:brightness(0) invert(1); margin-bottom:30px; }
+.cover-hero h1 { margin:0; font-family:var(--ar-head); font-size:50px; font-weight:800; line-height:1.12; color:#fff; letter-spacing:-0.01em; }
+.cover-hero .subtitle { margin-top:14px; font-size:13px; font-weight:500; color:var(--orange); letter-spacing:0.02em; }
+.cover-hero .period-pill { margin-top:20px; border:1.5px solid rgba(255,255,255,.4); border-radius:999px; padding:8px 24px; font-size:12px; font-weight:600; color:#fff; direction:ltr; white-space:nowrap; letter-spacing:0.04em; }
+.cover-desc { margin:20px auto 0; max-width:74%; font-size:12px; color:#C5D0DC; line-height:1.85; text-wrap:pretty; }
+.cover-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:13px; margin:0 var(--mx) 8mm; }
+.cover-cards.four { grid-template-columns:repeat(4,1fr); }
+.ccard { background:var(--navy-card); border:1px solid var(--navy-line); border-radius:10px; padding:13px 15px; text-align:center; display:flex; flex-direction:column; gap:5px; }
+.ccard .k { font-size:9px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange); direction:ltr; }
+.ccard .v { font-family:var(--ar-head); font-size:14px; font-weight:700; color:#fff; }
+.ccard .v.num { font-family:var(--latin); font-size:26px; line-height:1; direction:ltr; }
+.ccard .s { font-size:9px; color:#9FB0C0; }
+
+/* cover TOC strip */
+.cover-toc { margin:0 var(--mx) 7mm; padding-top:14px; border-top:1px solid var(--navy-line); }
+.cover-toc .th { font-size:9px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#8FA2B4; margin-bottom:9px; direction:ltr; }
+.cover-toc .tg { display:grid; grid-template-columns:repeat(4,1fr); gap:5px 18px; }
+.cover-toc .ti { display:grid; grid-template-columns:20px 1fr; gap:8px; align-items:baseline; font-size:9.5px; color:#C5D0DC; padding:3px 0; }
+.cover-toc .ti .n { font-family:var(--latin); font-size:9.5px; font-weight:700; color:var(--orange); }
+
+/* toolbar */
+.toolbar { position:fixed; top:16px; inset-inline-start:16px; z-index:100; background:var(--navy); color:#fff; display:flex; align-items:center; gap:4px; padding:7px 8px; border-radius:8px; box-shadow:0 10px 30px rgba(20,30,45,.25); font-size:11px; direction:ltr; }
+.toolbar .brand { font-family:var(--ar-head); padding:4px 12px 4px 6px; display:flex; align-items:center; gap:9px; border-inline-end:1px solid rgba(255,255,255,.18); font-weight:700; letter-spacing:0.06em; text-transform:uppercase; }
+.toolbar .brand::before { content:""; width:7px; height:7px; background:var(--orange); border-radius:50%; }
+.toolbar button { background:transparent; color:#fff; border:none; font:inherit; padding:6px 12px; cursor:pointer; letter-spacing:0.04em; text-transform:uppercase; font-weight:600; border-radius:5px; }
+.toolbar button:hover { background:rgba(255,255,255,.12); }
+
+/* page 3 packs 14 table rows + band chart — tighten to clear footer */
+.stage .page:nth-of-type(3) .pt-row { min-height:31px; }
+.stage .page:nth-of-type(3) .pt-row > div { padding-top:6px; padding-bottom:6px; }
+.stage .page:nth-of-type(3) .bandchart { margin-top:6px; padding:10px 14px; }
+.stage .page:nth-of-type(3) .bc-row { margin-bottom:5px; }
+
+@page { size:A4 portrait; margin:0; }
+@media print { html,body{background:#fff} .stage{padding:0;gap:0} .page{box-shadow:none;margin:0} .toolbar{display:none!important} }
+
+</style>
+<style>
+/* MSGA — دليل المنصات الحكومية · إضافات على report.css
+   عناصر خاصة بصفحة الخدمة: شريط البيانات الوصفية + المتطلبات/المستندات + غلاف المحتويات. */
+
+/* service intro: desc + meta cards */
+.svc-intro { display:grid; grid-template-columns:1fr 230px; gap:14px; align-items:stretch; margin-top:2px; }
+.svc-meta { display:grid; grid-template-rows:repeat(3,1fr); gap:7px; }
+.svc-mcard { border:1px solid var(--line); border-radius:8px; background:var(--paper-2); padding:7px 11px; display:flex; flex-direction:column; gap:2px; justify-content:center; }
+.svc-mcard .k { font-size:8px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange-2); direction:ltr; }
+.svc-mcard .v { font-family:var(--ar-head); font-size:11px; font-weight:700; color:var(--navy); line-height:1.3; }
+
+/* requirements + documents row */
+.reqdocs { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:4px; align-items:start; }
+.rd-card { border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.rd-head { background:var(--th); border-bottom:1.5px solid var(--orange); padding:6px 11px; font-family:var(--ar-head); font-size:10px; font-weight:700; color:var(--navy); display:flex; align-items:center; gap:7px; }
+.rd-head .en { font-size:7.5px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3); direction:ltr; margin-inline-start:auto; }
+.rd-body { padding:6px 11px; }
+.rd-li { display:grid; grid-template-columns:11px 1fr; gap:7px; align-items:start; font-size:10px; color:var(--ink-2); line-height:1.5; padding:2px 0; text-wrap:pretty; }
+.rd-li + .rd-li { border-top:1px solid var(--line-2); }
+.rd-li .dot { width:5px; height:5px; border-radius:50%; background:var(--orange); margin-top:5px; }
+.rd-docs { font-size:10px; color:var(--ink-2); line-height:1.6; text-wrap:pretty; }
+
+/* steps with optional screen sublabel */
+.steps .stext .sub { display:block; font-size:9px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--orange-2); margin-bottom:2px; direction:ltr; }
+
+/* step + pdf link block */
+.steps2 { display:grid; grid-template-columns:1fr 1fr; gap:7px 18px; margin-top:6px; }
+.steps2 .step { display:grid; grid-template-columns:24px 1fr; gap:10px; align-items:start; padding:5px 0; break-inside:avoid; }
+.steps2 .step + .step { border:0; }
+.steps2 .snum { width:24px; height:24px; border-radius:7px; background:var(--navy); color:#fff; display:grid; place-items:center; font-family:var(--latin); font-size:12px; font-weight:700; }
+.steps2 .snum.first { background:var(--orange); }
+.steps2 .stext { font-size:10.5px; line-height:1.5; color:var(--ink-2); text-wrap:pretty; padding-top:2px; }
+
+/* pdf shortcut button */
+.pdf-cta { display:grid; grid-template-columns:42px 1fr auto; align-items:center; gap:13px; margin-top:9px; border:1.5px solid var(--navy); border-radius:11px; background:var(--navy); padding:11px 15px; text-decoration:none; }
+.pdf-cta .pic { width:42px; height:42px; border-radius:9px; background:var(--orange); display:grid; place-items:center; font-family:var(--latin); font-size:10px; font-weight:800; color:#fff; letter-spacing:0.04em; }
+.pdf-cta .ptt { display:flex; flex-direction:column; gap:2px; }
+.pdf-cta .ptt .a { font-family:var(--ar-head); font-size:12px; font-weight:700; color:#fff; }
+.pdf-cta .ptt .b { font-size:9px; color:#c9d4e8; direction:ltr; word-break:break-all; line-height:1.35; }
+.pdf-cta .parrow { font-family:var(--latin); font-size:9px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#fff; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.25); border-radius:7px; padding:7px 12px; white-space:nowrap; }
+
+/* contents grid (platforms) on cover-like page */
+.pf-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:6px; }
+.pf-card { border:1px solid var(--line); border-radius:10px; background:var(--paper); padding:11px 13px; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:11px; }
+.pf-card .pf-no { font-family:var(--latin); font-size:15px; font-weight:700; color:#fff; background:var(--navy); width:30px; height:30px; border-radius:8px; display:grid; place-items:center; }
+.pf-card .pf-tt { display:flex; flex-direction:column; gap:1px; }
+.pf-card .pf-name { font-family:var(--ar-head); font-size:12.5px; font-weight:700; color:var(--navy); }
+.pf-card .pf-auth { font-size:9px; color:var(--ink-3); }
+.pf-card .pf-cnt { font-size:9px; font-weight:700; color:var(--orange-2); white-space:nowrap; direction:ltr; }
+
+/* legend cards */
+.legend3 { display:grid; grid-template-columns:repeat(3,1fr); gap:11px; margin-top:6px; }
+.lg-card { border:1px solid var(--line); border-radius:10px; padding:12px 13px; background:var(--paper-2); }
+.lg-card .lg-ic { width:26px; height:26px; border-radius:7px; display:grid; place-items:center; font-size:13px; font-weight:700; color:#fff; margin-bottom:8px; }
+.lg-card.a .lg-ic { background:var(--orange); }
+.lg-card.b .lg-ic { background:var(--navy); }
+.lg-card.c .lg-ic { background:var(--l4); }
+.lg-card h3 { margin:0 0 4px; font-family:var(--ar-head); font-size:11.5px; font-weight:700; color:var(--navy); }
+.lg-card p { margin:0; font-size:9.5px; color:var(--ink-3); line-height:1.6; text-wrap:pretty; }
+
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel">
+/* MSGA — دليل استخدام المنصات الحكومية · بيانات المحتوى
+   كل خدمة: { ref, name, en, desc, req[], docs, duration, who, steps[], note, err? }
+   المصدر: الأدلة الرسمية للمنصات (GOSI/تسجيل مشترك مستخرج حرفياً من الإصدار 2.1). */
+window.GUIDE = {
+  meta: {
+    title: "دليل استخدام المنصات الحكومية",
+    subtitle: "توثيق خطوة بخطوة لإجراءات الموارد البشرية وخدمات المنشآت على المنصات الحكومية الرسمية، بشرح كل شاشة والمتطلبات والتنبيهات التشغيلية.",
+    docId: "MSGA-GOV-OPS-01",
+    effective: "يونيو 2026",
+    version: "1.0",
+    review: "يونيو 2027",
+  },
+  platforms: [
+    {
+      no: "01", key: "ABSHER", name: "أبشر أعمال", auth: "وزارة الداخلية",
+      desc: "بوابة أبشر أعمال للخدمات الإلكترونية للمنشآت: التفويض الإلكتروني والاستعلامات والخدمات المرتبطة بالهوية الوطنية والمقيمين.",
+      services: [
+        {
+          ref: "ABSHER-AUTH", pdf: "https://www.absher.sa/wps/wcm/connect/business/12497cc5-e023-4eb4-98f2-6962164d1544/book1_Bus-V6.pdf?CACHEID=ROOTWORKSPACE.Z18_GPHIG0G0LOC770ARKN38H328B4-12497cc5-e023-4eb4-98f2-6962164d1544-nv3gwhZ&CONVERT_TO=url&MOD=AJPERES", name: "التفويض الإلكتروني والخدمات", en: "E-Authorization & Services",
+          desc: "تتيح لصاحب المنشأة تفويض أحد منسوبيها لإنجاز الخدمات الحكومية إلكترونياً نيابةً عن المنشأة عبر بوابة أبشر أعمال.",
+          req: ["حساب أبشر أعمال مفعّل للمنشأة", "ارتباط المفوّض بالمنشأة عبر النفاذ الوطني الموحّد", "هوية وطنية/إقامة سارية للمفوَّض"],
+          docs: "لا يلزم إرفاق مستندات في الغالب؛ تُستكمل البيانات إلكترونياً.",
+          duration: "فوري", who: "أصحاب المنشآت / المفوّضون",
+          steps: [
+            "تسجيل الدخول إلى بوابة أبشر أعمال عبر النفاذ الوطني الموحّد بحساب صاحب المنشأة.",
+            "اختيار المنشأة المطلوبة من قائمة المنشآت المرتبطة بالحساب.",
+            "من القائمة الرئيسية الدخول على «خدمات المنشأة» ثم «التفويض الإلكتروني».",
+            "إضافة مفوّض جديد بإدخال رقم هويته وتحديد الخدمات/الصلاحيات الممنوحة له ومدة التفويض.",
+            "تأكيد العملية والمصادقة عبر رمز التحقق (OTP) المرسل للجوال المسجّل.",
+            "استلام إشعار باكتمال التفويض، ويظهر المفوّض ضمن قائمة المفوّضين مع صلاحياته.",
+          ],
+          note: "يتطلّب الدخول تفويضاً ساريّاً عبر النفاذ الوطني الموحّد؛ راجِع صلاحيات المفوّضين دورياً وألغِ المنتهية منها لحماية الحساب.",
+        },
+      ],
+    },
+    {
+      no: "02", key: "GOSI", name: "التأمينات الاجتماعية", auth: "المؤسسة العامة للتأمينات الاجتماعية",
+      desc: "بوابة GOSI أعمال لتسجيل المشتركين وإدارة الاشتراكات الشهرية وبيانات الأجور واستبعاد من تنتهي علاقته العمالية.",
+      services: [
+        {
+          ref: "GOSI-ADD", pdf: "https://cmsgosi.gosi.gov.sa/eServices/Documents/AddcontributorARV2.pdf", name: "تسجيل مشترك", en: "Register a Contributor", src: "الإصدار 2.1 — الدليل الرسمي",
+          desc: "خدمة إلكترونية تتيح لأصحاب العمل تسجيل المشتركين (السعوديين وغير السعوديين) والشركاء دون الحاجة لمراجعة الجهة.",
+          req: ["لتسجيل الشركاء: وجود علاقة عمل فعلية بين الشريك والشركة وأن يكون عمله بصورة رئيسية لدى الشركة داخل المملكة، أو شريك سعودي يعمل خارج المملكة ومقر الشركة الرئيسي داخلها"],
+          docs: "إرفاق صورة العقد والإقامة للمشترك غير السعودي.",
+          duration: "فوري", who: "أصحاب العمل / خدمات المشتركين",
+          steps: [
+            "تسجيل الدخول إلى الحساب في «GOSI أعمال».",
+            "اختيار المنشأة من قائمة الشركة أعلى الصفحة.",
+            "من القائمة الرئيسية: «خدمات المشتركين» ← «تسجيل مشترك»، ثم اختيار فئة المشترك (سعودي / مقيم / الفئات الخاصة / تعليم متميّز / خليجي).",
+            "إدخال رقم الهوية وتاريخ الميلاد والضغط على «تحقق» لاستعادة البيانات الشخصية تلقائياً.",
+            "إكمال بيانات مدة الاشتراك: تاريخ الالتحاق، نوع العمل (دوام كامل / جزئي / عن بُعد)، وهل يعمل خارج المملكة.",
+            "تعبئة بيانات المهن والأجور: الأجر الأساسي + بدل السكن + العمولات + البدلات الأخرى (بالريال السعودي).",
+            "مراجعة الإقرار والموافقة على البنود، إرفاق المستندات المطلوبة (إن وجدت)، ثم «تقديم» وتأكيد التسجيل.",
+          ],
+          note: "يجب تسجيل الموظف خلال المدة النظامية من تاريخ مباشرته لتفادي الغرامات؛ تأكّد من تطابق الأجر مع عقد العمل.",
+          err: "بعد التقديم تصلك رسالة نصية تتضمّن رقم الطلب لمتابعته. عند الاكتمال تظهر رسالة «تم إنهاء إجراءات تسجيل المشترك» مع جدول التفاصيل (مدة الاشتراك / الأجر / المستندات).",
+        },
+        {
+          ref: "GOSI-TRM", pdf: "https://cmsgosi.gosi.gov.sa/eServices/Documents/TerminateengagementARV2.pdf", name: "استبعاد مشترك", en: "Terminate a Contributor",
+          desc: "خدمة تتيح لصاحب العمل استبعاد المشترك (إنهاء مدة اشتراكه) عند انتهاء علاقته العمالية بالمنشأة دون مراجعة الجهة.",
+          req: ["انتهاء العلاقة العمالية فعلياً بين المشترك والمنشأة", "ألا تكون هناك مستحقات أو إجراءات معلّقة تمنع الاستبعاد"],
+          docs: "لا يلزم إرفاق مستندات في الغالب.",
+          duration: "فوري", who: "أصحاب العمل / خدمات المشتركين",
+          steps: [
+            "تسجيل الدخول إلى «GOSI أعمال» واختيار المنشأة.",
+            "من القائمة الرئيسية: «خدمات المشتركين» ← «إدارة الأجور / قائمة المشتركين».",
+            "البحث عن المشترك المطلوب استبعاده واختياره من القائمة.",
+            "اختيار خدمة «استبعاد مشترك» وتحديد تاريخ انتهاء العلاقة العمالية وسبب الاستبعاد.",
+            "مراجعة البيانات والإقرار بصحتها ثم «تقديم» وتأكيد الاستبعاد.",
+            "استلام إشعار باكتمال الاستبعاد وتحديث حالة المشترك في سجل المنشأة.",
+          ],
+          note: "يجب استبعاد المشترك في حينه لتفادي احتساب اشتراكات عن مدة لم يعد فيها على رأس العمل.",
+        },
+      ],
+    },
+    {
+      no: "03", key: "HRSD", name: "وزارة الموارد البشرية", auth: "وزارة الموارد البشرية والتنمية الاجتماعية",
+      desc: "البوابة الإلكترونية للوزارة لخدمات المنشآت: فتح ملف المنشأة، التوطين ونطاقات، والخدمات المقدّمة للعمالة الوافدة.",
+      services: [
+        {
+          ref: "HRSD-EST", pdf: "https://www.hrsd.gov.sa/sites/default/files/2019-01/%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D9%85%D8%B3%D8%AA%D8%AE%D8%AF%D9%85%20%D8%AE%D8%AF%D9%85%D8%A9%20%D9%81%D8%AA%D8%AD%20%D9%85%D9%84%D9%81%20%D9%85%D9%86%D8%B4%D8%A3%D8%A9-%20%D8%A7%D9%84%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A%D8%A9%20_0.pdf", name: "فتح ملف منشأة", en: "Open Establishment File",
+          desc: "خدمة تتيح لصاحب العمل فتح ملف منشأته إلكترونياً لدى الوزارة لتفعيل خدمات سوق العمل والتوطين والخدمات العمالية.",
+          req: ["سجل تجاري ساري المفعول", "حساب على البوابة الإلكترونية للوزارة عبر النفاذ الوطني الموحّد", "ارتباط المنشأة بصاحبها/المفوّض"],
+          docs: "السجل التجاري، وبيانات النشاط والعنوان الوطني للمنشأة.",
+          duration: "فوري إلى يوم عمل", who: "أصحاب المنشآت الجديدة",
+          steps: [
+            "الدخول إلى البوابة الإلكترونية لوزارة الموارد البشرية عبر النفاذ الوطني الموحّد.",
+            "اختيار «خدمات المنشآت» ← «فتح ملف منشأة».",
+            "استدعاء بيانات المنشأة من السجل التجاري والتحقق من صحتها.",
+            "تعبئة بيانات النشاط والعنوان الوطني وبيانات التواصل للمنشأة.",
+            "تحديد المفوّضين وصلاحياتهم على ملف المنشأة.",
+            "مراجعة البيانات والإقرار ثم اعتماد فتح الملف، ويصبح بإمكان المنشأة استخدام خدمات الوزارة.",
+          ],
+          note: "يجب أن يكون السجل التجاري ساري المفعول؛ بعض الخدمات اللاحقة مرتبطة بحالة المنشأة في «نطاقات» ونِسب التوطين.",
+        },
+        {
+          ref: "HRSD-EXP", pdf: "https://www.hrsd.gov.sa/sites/default/files/2024-07/%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D9%82%D8%AF%D9%85%D8%A9%20%D9%84%D9%84%D9%88%D8%A7%D9%81%D8%AF%D9%8A%D9%86.pdf", name: "خدمات العمالة الوافدة", en: "Expat Services",
+          desc: "خدمات تتعلّق بالعمالة الوافدة لدى المنشأة مثل نقل الخدمات والاستقدام والخدمات العمالية ومعالجة الطلبات.",
+          req: ["ملف منشأة مفعّل لدى الوزارة", "التزام المنشأة بنِسب التوطين المطلوبة لنشاطها"],
+          docs: "بحسب الخدمة (عقد العمل، بيانات العامل، المستندات الداعمة).",
+          duration: "يختلف حسب الخدمة", who: "أصحاب المنشآت / مسؤولو الموارد البشرية",
+          steps: [
+            "الدخول إلى بوابة الوزارة واختيار المنشأة.",
+            "فتح «خدمات المنشآت» واختيار الخدمة المطلوبة (نقل خدمات / استقدام / خدمات عمالية).",
+            "تعبئة بيانات الطلب وإرفاق المتطلبات والمستندات الداعمة.",
+            "تقديم الطلب ومتابعة حالته عبر لوحة التحكم.",
+            "سداد الرسوم عند الطلب (إن وُجدت) واعتماد الطلب.",
+            "استلام النتيجة أو الوثيقة إلكترونياً وحفظها في ملف الموظف.",
+          ],
+          note: "تحقّق من حالة المنشأة في «نطاقات» قبل التقديم؛ بعض الخدمات لا تتاح للمنشآت في النطاق الأحمر.",
+        },
+      ],
+    },
+    {
+      no: "04", key: "BALADY", name: "بلدي", auth: "وزارة الشؤون البلدية والقروية والإسكان",
+      desc: "منصة بلدي لإصدار وتجديد الرخص البلدية والتجارية للمنشآت وإدارة بيانات النشاط والموقع الجغرافي.",
+      services: [
+        {
+          ref: "BALADY-LIC", pdf: "https://balady.gov.sa/sites/default/files/service/%D8%AF%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D9%85%D8%B3%D8%AA%D8%AE%D8%AF%D9%85%20%D9%84%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%20%D8%A8%D9%84%D8%AF%D9%8A%20-%20%D8%A7%D9%84%D9%85%D8%B3%D8%AA%D9%81%D9%8A%D8%AF.pdf", name: "إصدار / تجديد رخصة تجارية", en: "Commercial License",
+          desc: "تتيح للمنشأة إصدار رخصة محل أو نشاط تجاري أو تجديدها إلكترونياً وفق اشتراطات الأمانة/البلدية للموقع والنشاط.",
+          req: ["سجل تجاري ساري يشمل النشاط المطلوب", "عقد إيجار موثّق للموقع (شبكة إيجار)", "توافق النشاط مع اشتراطات الموقع البلدية"],
+          docs: "السجل التجاري، عقد الإيجار الموثّق، رخصة الدفاع المدني (للأنشطة التي تتطلّبها)، وثائق الاشتراطات الصحية عند اللزوم.",
+          duration: "فوري إلى عدة أيام (حسب الاشتراطات)", who: "أصحاب المحلات والأنشطة التجارية",
+          steps: [
+            "الدخول إلى منصة بلدي عبر النفاذ الوطني الموحّد واختيار المنشأة.",
+            "اختيار «الرخص التجارية» ← الخدمة المطلوبة (إصدار / تجديد / تعديل).",
+            "تحديد النشاط التجاري وربط الموقع الجغرافي وبيانات العقار.",
+            "تعبئة بيانات النشاط وإرفاق المستندات المطلوبة (الإيجار، الدفاع المدني، الاشتراطات).",
+            "مراجعة الاشتراطات البلدية للموقع والتأكد من استيفائها.",
+            "سداد الرسوم وإصدار الرخصة، ثم تحميلها أو طباعتها.",
+          ],
+          note: "تأكّد من توافق النشاط مع اشتراطات الموقع قبل التقديم؛ عدم استيفاء الاشتراطات يؤخّر الإصدار أو يوقفه.",
+        },
+      ],
+    },
+    {
+      no: "05", key: "ZATCA", name: "هيئة الزكاة والضريبة والجمارك", auth: "هيئة الزكاة والضريبة والجمارك",
+      desc: "بوابة الهيئة لتقديم الإقرارات الزكوية والضريبية، والفوترة الإلكترونية (فاتورة)، وسداد المستحقات إلكترونياً.",
+      services: [
+        {
+          ref: "ZATCA-VAT", pdf: "https://zatca.gov.sa/ar/HelpCenter/guidelines/Documents/ZATCA_App_Guideline.pdf", name: "تقديم إقرار ضريبة القيمة المضافة", en: "VAT Return",
+          desc: "تتيح للمنشأة المسجّلة في ضريبة القيمة المضافة تعبئة إقرارها الدوري وتقديمه وسداد المستحقات إلكترونياً.",
+          req: ["تسجيل سارٍ في ضريبة القيمة المضافة", "حساب على بوابة الهيئة", "بيانات المبيعات والمشتريات للفترة الضريبية"],
+          docs: "سجلات المبيعات والمشتريات وضريبة المخرجات والمدخلات للفترة.",
+          duration: "فوري", who: "المنشآت المسجّلة في القيمة المضافة",
+          steps: [
+            "تسجيل الدخول إلى بوابة الهيئة بحساب المنشأة.",
+            "من «الزكاة والضرائب» اختيار «ضريبة القيمة المضافة» ← «تقديم إقرار».",
+            "اختيار الفترة الضريبية المستحقّة المراد تقديم إقرارها.",
+            "تعبئة قيم المبيعات والمشتريات الخاضعة، ويحتسب النظام صافي الضريبة المستحقة تلقائياً.",
+            "مراجعة الإقرار واعتماده، ثم سداد المبلغ المستحق عبر «سداد» برقم الفاتورة.",
+            "حفظ شهادة/إيصال السداد وتأكيد تقديم الإقرار.",
+          ],
+          note: "التزِم بمواعيد تقديم الإقرارات والسداد المعلنة لتفادي الغرامات والجزاءات على التأخّر.",
+        },
+        {
+          ref: "ZATCA-EINV", pdf: "https://zatca.gov.sa/ar/E-Invoicing/Introduction/Guidelines/Documents/Fatoora_Portal_User_Manual_Arabic.pdf", name: "الفوترة الإلكترونية (فاتورة)", en: "E-Invoicing · Fatoora",
+          desc: "ربط نظام فوترة المنشأة بمنصة «فاتورة» لإصدار وحفظ الفواتير الإلكترونية وفق متطلبات المرحلة الثانية (الربط والتكامل).",
+          req: ["تسجيل سارٍ في القيمة المضافة", "حل فوترة إلكتروني متوافق مع متطلبات الهيئة"],
+          docs: "الشهادة الرقمية (CSID) الناتجة عن عملية التهيئة والربط.",
+          duration: "حسب التكامل التقني", who: "المنشآت الخاضعة للفوترة الإلكترونية",
+          steps: [
+            "تسجيل الدخول إلى بوابة فاتورة (Fatoora) بحساب المنشأة.",
+            "إضافة وحدة الفوترة (Onboarding) وتوليد رمز التفعيل (OTP).",
+            "إدخال رمز التفعيل في حل الفوترة لربطه وإصدار الشهادة الرقمية (CSID).",
+            "ضبط حل الفوترة لإصدار الفواتير بالصيغة المعتمدة (XML/PDF-A3 مع QR).",
+            "اختبار إرسال نموذج فاتورة والتأكد من قبوله من المنصة.",
+            "تشغيل الإصدار الفعلي ومتابعة حالة الفواتير المرسلة على المنصة.",
+          ],
+          note: "تأكّد من توافق حل الفوترة مع المواصفات المنشورة؛ الفواتير غير المتوافقة تُرفض من المنصة.",
+        },
+      ],
+    },
+    {
+      no: "06", key: "BUSINESS", name: "منصة الأعمال", auth: "المركز السعودي للأعمال · وزارة التجارة",
+      desc: "المنصة الموحّدة لخدمات السجل التجاري: حجز الأسماء التجارية وإصدار السجلات وتحديث بيانات الكيان التجاري للمنشأة.",
+      services: [
+        {
+          ref: "BIZ-NAME", pdf: "https://business.sa/media/files/1767c512-727d-4a87-85b8-d7d39a11ec47.pdf", name: "حجز اسم تجاري", en: "Reserve a Trade Name",
+          desc: "تتيح حجز اسم تجاري للمنشأة قبل إصدار السجل التجاري، مع التحقق من توافق الاسم مع ضوابط الأسماء التجارية.",
+          req: ["حساب على منصة الأعمال عبر النفاذ الوطني الموحّد", "توافق الاسم مع ضوابط الأسماء التجارية (عدم التشابه/المخالفة)"],
+          docs: "لا يلزم إرفاق مستندات.",
+          duration: "فوري", who: "روّاد الأعمال / أصحاب المنشآت الجديدة",
+          steps: [
+            "الدخول إلى منصة الأعمال عبر النفاذ الوطني الموحّد.",
+            "اختيار خدمة «حجز اسم تجاري».",
+            "إدخال الاسم التجاري المقترح والتحقق من توافره ومطابقته للضوابط.",
+            "اختيار النشاط/الكيان المرتبط بالاسم (عند الحاجة).",
+            "اعتماد الحجز وسداد الرسوم (إن وُجدت).",
+            "استلام تأكيد حجز الاسم ليُستخدم لاحقاً عند إصدار السجل التجاري.",
+          ],
+          note: "الاسم المحجوز صالح لمدة محددة؛ استكمل إصدار السجل قبل انتهائها وإلا يسقط الحجز.",
+        },
+        {
+          ref: "BIZ-CR", pdf: "https://business.sa/media/files/66557672-e034-4fa6-ad2c-4e3d5cd927bd.pdf", name: "إصدار سجل تجاري لمؤسسة فردية", en: "Issue Commercial Registration",
+          desc: "إصدار سجل تجاري لمؤسسة فردية إلكترونياً اعتماداً على الاسم التجاري المحجوز وبيانات النشاط.",
+          req: ["اسم تجاري محجوز وساري", "أهلية صاحب المؤسسة لمزاولة النشاط", "تحديد النشاط/الأنشطة الاقتصادية"],
+          docs: "تُستكمل البيانات إلكترونياً؛ قد تُطلب موافقات جهات لأنشطة محددة.",
+          duration: "فوري", who: "أصحاب المؤسسات الفردية",
+          steps: [
+            "الدخول إلى منصة الأعمال واختيار «إصدار سجل تجاري لمؤسسة فردية».",
+            "ربط الاسم التجاري المحجوز بالطلب.",
+            "تحديد الأنشطة الاقتصادية ومكان مزاولة النشاط.",
+            "تعبئة بيانات المؤسسة ورأس المال (إن وُجد) وبيانات التواصل.",
+            "مراجعة الإقرار والموافقة على الشروط ثم سداد رسوم الإصدار والاشتراك.",
+            "إصدار السجل التجاري وتحميل الوثيقة، ويصبح بإمكان المنشأة استكمال باقي الخدمات الحكومية.",
+          ],
+          note: "حدّث بيانات السجل التجاري دورياً وجدّده قبل انتهائه لتجنّب إيقاف الخدمات الحكومية المرتبطة به.",
+        },
+      ],
+    },
+    {
+      no: "07", key: "CHAMBER", name: "غرفة الرياض", auth: "غرفة الرياض · بوابة أعمالي",
+      desc: "بوابة الخدمات الإلكترونية لغرفة الرياض: تجديد العضوية وتصديق الوثائق وإصدار الشهادات وخدمات المنشآت الأعضاء.",
+      services: [
+        {
+          ref: "CHAMBER-DOC", pdf: "https://chamber.sa/EServices/Documents/UserGuide2025V1.pdf", name: "تصديق وثيقة / إصدار شهادة", en: "Attestation & Certificates",
+          desc: "تتيح للمنشأة العضو تصديق وثائقها (الخطابات، التواقيع، الفواتير) أو إصدار شهادة عضوية إلكترونياً عبر بوابة أعمالي.",
+          req: ["عضوية سارية في الغرفة", "حساب على بوابة الخدمات الإلكترونية (أعمالي)", "اعتماد التواقيع لدى الغرفة (للتصديق)"],
+          docs: "الوثيقة المراد تصديقها (بصيغة إلكترونية) وبيانات المنشأة.",
+          duration: "فوري إلى يوم عمل", who: "المنشآت الأعضاء في الغرفة",
+          steps: [
+            "تسجيل الدخول إلى بوابة الخدمات الإلكترونية لغرفة الرياض (أعمالي).",
+            "اختيار المنشأة والتأكد من سريان العضوية.",
+            "اختيار الخدمة المطلوبة (تصديق وثيقة / إصدار شهادة عضوية / اعتماد توقيع).",
+            "رفع الوثيقة وتعبئة بيانات الطلب.",
+            "سداد رسوم الخدمة إلكترونياً.",
+            "استلام الوثيقة المصدّقة أو الشهادة إلكترونياً وحفظها.",
+          ],
+          note: "يلزم سريان العضوية قبل طلب أي خدمة؛ جدّد العضوية أولاً إذا كانت منتهية لتفعيل الخدمات.",
+        },
+      ],
+    },
+    {
+      no: "08", key: "MUDAD", name: "مدد · حماية الأجور", auth: "وزارة الموارد البشرية والتنمية الاجتماعية",
+      desc: "منصة مدد لإدارة الرواتب وحماية الأجور (WPS): تجهيز مسير الرواتب الشهري ورفع ملف الأجور ومطابقته لضمان صرف رواتب الموظفين في حينها.",
+      services: [
+        {
+          ref: "MUDAD-WPS", pdf: "https://www.hrsd.gov.sa/sites/default/files/2025-05/dlyl-almstkhdm-mlf-hmayt-alajwr.pdf", name: "رفع ملف حماية الأجور", en: "Wage Protection File Upload",
+          desc: "خدمة تتيح لصاحب العمل تجهيز ملف الأجور بالصيغة المعتمدة ورفعه ومطابقته مع البنك لضمان التزام المنشأة بنظام حماية الأجور.",
+          req: ["تفعيل المنشأة في مدد / نظام حماية الأجور", "حساب بنكي للمنشأة لصرف الرواتب", "تسجيل الموظفين وبياناتهم البنكية (IBAN) في النظام"],
+          docs: "ملف الأجور بالصيغة المعتمدة (SIF) المتوافق مع المواصفات الفنية، وكشف الرواتب الشهري.",
+          duration: "شهري (دوري)", who: "أصحاب العمل / مسؤولو الرواتب",
+          steps: [
+            "تسجيل الدخول إلى منصة مدد عبر النفاذ الوطني الموحّد واختيار المنشأة.",
+            "الدخول على «الرواتب» وإنشاء مسير رواتب الشهر المطلوب.",
+            "مطابقة بيانات الموظفين والأجور وأرقام الآيبان والتأكد من اكتمالها.",
+            "توليد ملف الأجور بالصيغة المعتمدة أو رفعه إن كان مُعدّاً مسبقاً.",
+            "اعتماد الصرف عبر البنك ومتابعة حالة مطابقة الملف.",
+            "مراجعة تقرير الالتزام بحماية الأجور والتأكد من حالة المنشأة.",
+          ],
+          note: "التزِم برفع ملف الأجور ومطابقته خلال المدة النظامية شهرياً لتفادي تعثّر مؤشر حماية الأجور والعقوبات المترتبة على التأخّر.",
+        },
+      ],
+    },
+    {
+      no: "09", key: "TAMM", name: "تم", auth: "بوابة تم · شركة علم",
+      desc: "بوابة تم للتعاملات المرورية وخدمات المركبات للمنشآت والأفراد: تفويض المركبات وإدارة بياناتها وإنجاز الخدمات المرورية إلكترونياً.",
+      services: [
+        {
+          ref: "TAMM-VEH", pdf: "https://tamm.sa/assets/pdf/TAMM-Arabic-User-Guide-V0.4.pdf", name: "خدمات المركبات والتفويض", en: "Vehicle & Authorization Services",
+          desc: "تتيح للمنشأة إدارة مركباتها وإصدار تفويض قيادة أو تسيير مركبة لأحد منسوبيها وإنجاز التعاملات المرورية المرتبطة بها إلكترونياً.",
+          req: ["حساب في بوابة تم عبر النفاذ الوطني الموحّد", "ملكية المركبة أو ارتباطها بالمنشأة", "سريان بيانات المركبة (الاستمارة والتأمين)"],
+          docs: "بيانات المركبة (رقم اللوحة / الرقم التسلسلي) وبيانات المفوَّض إليه.",
+          duration: "فوري", who: "المنشآت ومالكو المركبات",
+          steps: [
+            "تسجيل الدخول إلى بوابة تم عبر النفاذ الوطني الموحّد.",
+            "اختيار «خدمات المركبات» ثم الخدمة المطلوبة (تفويض / استعلام / تعامل مروري).",
+            "تحديد المركبة من قائمة المركبات المرتبطة بالحساب.",
+            "تعبئة بيانات الطلب وبيانات المفوَّض إليه ومدة التفويض (عند التفويض).",
+            "تأكيد العملية والمصادقة عبر رمز التحقق (OTP).",
+            "استلام تأكيد الخدمة أو الوثيقة إلكترونياً وحفظها.",
+          ],
+          note: "تأكّد من سريان الاستمارة والتأمين قبل أي تعامل مروري؛ راجِع التفويضات السارية وألغِ المنتهية منها.",
+        },
+      ],
+    },
+    {
+      no: "10", key: "NWC", name: "الشركة الوطنية للمياه", auth: "الشركة الوطنية للمياه (NWC)",
+      desc: "الفرع الإلكتروني للشركة الوطنية للمياه لخدمات المياه والصرف الصحي: طلب الخدمات وتوثيق العدادات وإدارة الحسابات والفوترة على القراءة الفعلية.",
+      services: [
+        {
+          ref: "NWC-METER", pdf: "https://www.nwc.com.sa/AR/Documents/%D8%AE%D8%B7%D9%88%D8%A7%D8%AA%20%D8%AA%D9%88%D8%AB%D9%8A%D9%82%20%D8%B9%D8%AF%D8%A7%D8%AF%20%D8%A7%D9%84%D9%85%D9%8A%D8%A7%D9%87%20%D8%A7%D9%84%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A.pdf", name: "توثيق عداد المياه", en: "Water Meter Documentation",
+          desc: "تتيح ربط عداد المياه بحساب المنشأة أو العقار وتوثيقه إلكترونياً لإصدار الفواتير اعتماداً على القراءة الفعلية للعداد.",
+          req: ["حساب في الفرع الإلكتروني للشركة الوطنية للمياه", "رقم الحساب / العقار", "رقم العداد ووجوده ظاهراً للتصوير"],
+          docs: "صورة العداد ورقمه التسلسلي، وبيانات العقار والعنوان الوطني.",
+          duration: "فوري إلى يوم عمل", who: "ملاك العقارات والمنشآت",
+          steps: [
+            "تسجيل الدخول إلى الفرع الإلكتروني للشركة الوطنية للمياه.",
+            "اختيار «خدماتي» ثم «توثيق العداد».",
+            "تحديد الحساب / العقار المطلوب توثيق عداده.",
+            "إدخال رقم العداد وإرفاق صورة واضحة له.",
+            "مراجعة البيانات والتأكد من مطابقتها ثم تقديم الطلب.",
+            "استلام إشعار بتوثيق العداد واعتماد القراءة الفعلية في الفوترة.",
+          ],
+          note: "وثّق العداد مبكراً لتفادي الفوترة التقديرية؛ تأكّد من وضوح رقم العداد في الصورة المرفقة لتجنّب رفض الطلب.",
+        },
+      ],
+    },
+    {
+      no: "11", key: "SEC", name: "الشركة السعودية للكهرباء", auth: "الشركة السعودية للكهرباء / السعودية للطاقة",
+      desc: "بوابة الموردين والمقاولين للشركة السعودية للكهرباء عبر نظام SAP Ariba: تسجيل وتأهيل الموردين وإدارة العقود والفوترة والاستعلامات.",
+      services: [
+        {
+          ref: "SEC-VENDOR", pdf: "https://www.se.com.sa/-/media/sec/Our-Partners/Our-Project-Channel/Contractor/New-Registration/Arabic/Supplier_registration_Manual.ashx", name: "تسجيل وتأهيل مورد", en: "Supplier Registration & Qualification",
+          desc: "تتيح للمنشأة التسجيل كمورد أو مقاول لدى الشركة السعودية للكهرباء واستكمال متطلبات التأهيل عبر بوابة SAP Ariba للتعامل والتوريد.",
+          req: ["سجل تجاري ساري للمورد", "شهادات نظامية سارية (الزكاة والضريبة، التأمينات، التوطين)", "دعوة أو تسجيل في بوابة Ariba"],
+          docs: "السجل التجاري، الشهادات النظامية، بيانات الحساب البنكي، ووثائق التأهيل الفني والمالي.",
+          duration: "حسب مراجعة التأهيل", who: "الموردون والمقاولون",
+          steps: [
+            "الدخول إلى بوابة الموردين (SAP Ariba) وإنشاء حساب المورد أو قبول الدعوة.",
+            "تعبئة الملف التعريفي للمنشأة وبياناتها النظامية والتجارية.",
+            "إرفاق السجل التجاري والشهادات النظامية والمستندات المطلوبة.",
+            "استكمال استبيانات التسجيل والتأهيل (الفني / المالي) حسب فئة التوريد.",
+            "تقديم الطلب ومتابعة حالة المراجعة عبر البوابة.",
+            "استلام إشعار اعتماد التسجيل / التأهيل وتفعيل التعامل كمورد معتمد.",
+          ],
+          note: "حافظ على سريان الشهادات النظامية وحدّثها في البوابة؛ انتهاء أي شهادة قد يوقف التأهيل أو يمنع التعامل والتوريد.",
+        },
+      ],
+    },
+    {
+      no: "12", key: "SIMAH", name: "سمة", auth: "الشركة السعودية للمعلومات الائتمانية (سمة)",
+      desc: "الشركة السعودية للمعلومات الائتمانية: الاطلاع على التقارير الائتمانية للمنشآت والاستعلام الائتماني عن المتعاملين وفق نظام المعلومات الائتمانية ولائحته التنفيذية.",
+      services: [
+        {
+          ref: "SIMAH-REPORT", pdf: "https://www.simah.com/SiteAssets/newdesign/common/files/pdf/implementing-regulations-ar.pdf", name: "الاطلاع على التقرير الائتماني", en: "Credit Report Access",
+          desc: "تتيح للمنشأة الاطلاع على تقريرها الائتماني أو إجراء استعلام ائتماني عن المتعاملين معها لدعم قرارات الائتمان والتعامل، وفق الأنظمة واللائحة التنفيذية.",
+          req: ["عضوية / اشتراك في سمة (للأعضاء)", "حساب موثّق للمنشأة", "موافقة صاحب البيانات عند الاستعلام عنه"],
+          docs: "موافقة العميل / المتعامل على الاستعلام الائتماني حيث يلزم ذلك نظاماً.",
+          duration: "فوري", who: "المنشآت الأعضاء / مدراء الائتمان",
+          steps: [
+            "تسجيل الدخول إلى بوابة الأعضاء في سمة بحساب المنشأة الموثّق.",
+            "اختيار خدمة الاستعلام الائتماني المطلوبة (تقرير المنشأة / استعلام عن متعامل).",
+            "إدخال بيانات الجهة المستعلَم عنها والتأكد من وجود الموافقة النظامية.",
+            "تأكيد الطلب وإجراء الاستعلام الائتماني.",
+            "استعراض التقرير الائتماني وبيانات الالتزامات والسجل.",
+            "حفظ التقرير واستخدامه ضمن إجراءات تقييم الائتمان والتعامل.",
+          ],
+          note: "الاستعلام الائتماني يخضع لنظام المعلومات الائتمانية ولائحته التنفيذية؛ يلزم الحصول على موافقة صاحب البيانات قبل الاستعلام عنه وحفظ ما يثبتها.",
+        },
+      ],
+    },
+    {
+      no: "13", key: "NAJIZ", name: "ناجز", auth: "وزارة العدل",
+      desc: "بوابة ناجز للخدمات العدلية الإلكترونية: طلبات التنفيذ والدعاوى والتوثيق والوكالات والخدمات العدلية للمنشآت والإدارات القانونية.",
+      services: [
+        {
+          ref: "NAJIZ-EXEC", pdf: "https://www.moj.gov.sa/Documents/najizmanual.pdf", name: "الخدمات العدلية وطلبات التنفيذ", en: "Judicial & Enforcement Services",
+          desc: "تتيح للمنشأة تقديم طلبات التنفيذ ورفع الدعاوى ومتابعتها وإصدار الوكالات والوثائق العدلية إلكترونياً عبر بوابة ناجز.",
+          req: ["حساب عبر النفاذ الوطني الموحّد", "صفة نظامية للمنشأة أو تفويض ساري للمفوّض", "سند تنفيذي ساري (لطلبات التنفيذ)"],
+          docs: "السند التنفيذي أو المستندات الداعمة للطلب بحسب الخدمة العدلية المطلوبة.",
+          duration: "يختلف حسب الخدمة", who: "المنشآت / الإدارات القانونية",
+          steps: [
+            "تسجيل الدخول إلى بوابة ناجز عبر النفاذ الوطني الموحّد.",
+            "اختيار الخدمة العدلية المطلوبة (التنفيذ / الدعاوى / التوثيق / الوكالات).",
+            "تعبئة بيانات الطلب وإرفاق السند التنفيذي أو المستندات الداعمة.",
+            "مراجعة البيانات والإقرار بصحتها ثم تقديم الطلب.",
+            "متابعة حالة الطلب والإشعارات عبر لوحة التحكم.",
+            "استلام القرار أو الوثيقة العدلية إلكترونياً وحفظها في ملف القضية.",
+          ],
+          note: "تأكّد من اكتمال السند التنفيذي والمستندات قبل التقديم؛ نقص المتطلبات يؤخّر قبول الطلب أو يؤدي إلى رفضه.",
+        },
+      ],
+    },
+  ],
+};
+
+</script>
+<script type="text/babel">
+/* MSGA — دليل استخدام المنصات الحكومية · MSGA REPORT renderer (v2)
+   غلاف + منهجية/محتويات + لكل خدمة: صفحة وصف ثم صفحات خطوات (خطوتان/صفحة) كل خطوة معها مربّع لقطتها.
+   يقرأ window.GUIDE. */
+const G = window.GUIDE;
+const M = G.meta;
+const pad2 = (n) => String(n).padStart(2, "0");
+
+// ── build page list: one overview page per service ──
+const SVCS = [];
+G.platforms.forEach((p) => p.services.forEach((s) => SVCS.push({ p, s })));
+const TOTAL = 2 + SVCS.length + 1; // cover + about + services + closing
+const svcCount = SVCS.length;
+
+function Header({ page, title }) {
+  return (
+    <div className="head">
+      <img className="logo" src="assets/msga-logo.png" alt="MSGA" />
+      <div className="titles">
+        <div className="eyebrow">شركة مسقا للاستثمار · MSGA</div>
+        <div className="doctitle">{title || M.title}</div>
+      </div>
+      <div className="doc-meta">
+        <div><b>DOC</b> {M.docId}</div>
+        <div><b>ISSUE</b> {M.effective} · v{M.version}</div>
+        <div><b>PAGE</b> {pad2(page)} / {pad2(TOTAL)}</div>
+      </div>
+    </div>);
+
+}
+function Footer({ page, label }) {
+  return (
+    <div className="foot">
+      <div className="brand-mark">MSGA · إدارة الموارد البشرية — وثيقة داخلية</div>
+      <div>{label}</div>
+      <div className="pagenum"><b>{pad2(page)}</b> / {pad2(TOTAL)}</div>
+    </div>);
+
+}
+function Page({ page, label, title, children }) {
+  return (
+    <div className="page" data-screen-label={label}>
+      <div className="watermark"></div>
+      <div className="page-inner">
+        <Header page={page} title={title} />
+        {children}
+        <Footer page={page} label={label} />
+      </div>
+    </div>);
+
+}
+function Sec({ no, label, en, first }) {
+  return (
+    <div className={`sec-head ${first ? "first" : ""}`}>
+      <div className="sec-no">{no}</div>
+      <h2>{label}</h2>
+      <div className="en">{en}</div>
+    </div>);
+
+}
+function Cap({ lbl, tag }) {
+  return <div className="cap"><span className="lbl">{lbl}</span><div className="dots"></div><span className="ref">{tag}</span></div>;
+}
+
+/* ── COVER ── */
+function Cover() {
+  return (
+    <div className="page cover" data-screen-label="الغلاف">
+      <div className="watermark"></div>
+      <div className="page-inner cover-inner">
+        <div className="cover-top">
+          <span className="co">شركة مسقا للاستثمار · MSGA</span>
+          <div></div>
+          <span className="brandline">Operations Guide · 2026</span>
+        </div>
+        <div className="cover-hero">
+          <img className="logo-w" src="assets/msga-logo.png" alt="MSGA" />
+          <h1>دليل استخدام<br />المنصات الحكومية</h1>
+          <div className="subtitle">دليل إجراءات تشغيلي — {M.effective}</div>
+          <div className="period-pill">{M.docId}</div>
+          <div className="cover-desc">{M.subtitle}</div>
+        </div>
+        <div className="cover-cards four">
+          <div className="ccard"><div className="k">Platforms</div><div className="v num">{pad2(G.platforms.length)}</div><div className="s">منصات حكومية</div></div>
+          <div className="ccard"><div className="k">Procedures</div><div className="v num">{pad2(svcCount)}</div><div className="s">خدمة موثّقة</div></div>
+          <div className="ccard"><div className="k">Issue</div><div className="v">{M.effective}</div><div className="s">v{M.version} · داخلي</div></div>
+          <div className="ccard"><div className="k">Source</div><div className="v">رسمي</div><div className="s">أدلة المنصات</div></div>
+        </div>
+        <div className="cover-toc">
+          <div className="th">Contents — المنصات المشمولة</div>
+          <div className="tg">
+            {G.platforms.map((p) => <div className="ti" key={p.no}><span className="n">{p.no}</span><span>{p.name}</span></div>)}
+          </div>
+        </div>
+      </div>
+    </div>);
+
+}
+
+/* ── ABOUT + LEGEND + CONTENTS ── */
+function About() {
+  return (
+    <Page page={2} label="عن الدليل والمحتويات" title="عن الدليل · المنهجية">
+      <Sec no="—" label="عن هذا الدليل ومنهجية التوثيق" en="About & Method" first />
+      <div className="prose"><div className="lead">Purpose</div>
+        <p>يوثّق هذا الدليل خطوات تنفيذ الخدمات المتكرّرة على المنصات الحكومية المستخدمة في إدارة الموارد البشرية وشؤون المنشأة، استناداً إلى الأدلة الرسمية للمنصات. لكل خدمة صفحة وصف، تليها صفحات الخطوات حيث تُعرض كل خطوة مع مربّع مخصّص لإدراج لقطة شاشتها الفعلية.</p>
+      </div>
+      <Cap lbl="بنية توثيق كل خدمة" tag="Page Anatomy" />
+      <div className="legend3">
+        <div className="lg-card a"><div className="lg-ic">1</div><h3>خطوات مرقّمة</h3><p>تسلسل تنفيذ الخدمة داخل المنصة مع شرح موجز لكل شاشة وإجراء مطلوب فيها.</p></div>
+        <div className="lg-card b"><div className="lg-ic">i</div><h3>المتطلبات والمستندات</h3><p>الشروط المسبقة والمستندات اللازمة والمدة والفئة المستفيدة من الخدمة.</p></div>
+        <div className="lg-card c"><div className="lg-ic">↗</div><h3>اختصار الملف الرسمي</h3><p>زر يفتح دليل الخدمة الرسمي (PDF) من موقع الجهة مباشرةً للرجوع إليه عند الحاجة.</p></div>
+      </div>
+      <Sec no="—" label="المنصات والخدمات المشمولة" en="Coverage" />
+      <div className="pf-grid">
+        {G.platforms.map((p) =>
+        <div className="pf-card" key={p.no}>
+            <div className="pf-no">{p.no}</div>
+            <div className="pf-tt"><span className="pf-name">{p.name}</span><span className="pf-auth">{p.auth}</span></div>
+            <div className="pf-cnt">{pad2(p.services.length)} خدمة</div>
+          </div>
+        )}
+      </div>
+    </Page>);
+
+}
+
+/* ── SERVICE PAGE (all steps + pdf shortcut) ── */
+function ServicePage({ p, s, page }) {
+  const label = `${p.name} · ${s.name}`;
+  return (
+    <Page page={page} label={label} title={`${p.name} — ${p.auth}`}>
+      <Sec no={p.no} label={`${p.name} · ${s.name}`} en={s.en} first />
+      <div className="svc-intro">
+        <div className="prose"><div className="lead">{s.src ? "Service · " + s.src : "Service Description"}</div><p>{s.desc}</p></div>
+        <div className="svc-meta">
+          <div className="svc-mcard"><span className="k">Duration · المدة</span><span className="v">{s.duration}</span></div>
+          <div className="svc-mcard"><span className="k">Beneficiary · الفئة</span><span className="v">{s.who}</span></div>
+          <div className="svc-mcard"><span className="k">Reference</span><span className="v" style={{ direction: "ltr", textAlign: "start" }}>{s.ref}</span></div>
+        </div>
+      </div>
+      <Cap lbl="المتطلبات والمستندات المطلوبة" tag="Requirements" />
+      <div className="reqdocs">
+        <div className="rd-card">
+          <div className="rd-head">متطلبات الخدمة<span className="en">Prerequisites</span></div>
+          <div className="rd-body">{s.req.map((r, i) => <div className="rd-li" key={i}><span className="dot"></span><span>{r}</span></div>)}</div>
+        </div>
+        <div className="rd-card">
+          <div className="rd-head">المستندات المطلوبة<span className="en">Documents</span></div>
+          <div className="rd-body"><div className="rd-docs">{s.docs}</div></div>
+        </div>
+      </div>
+      <Cap lbl="خطوات تنفيذ الخدمة — شرح كل شاشة" tag={`${pad2(s.steps.length)} Steps`} />
+      <div className="steps2">
+        {s.steps.map((t, i) => <div className="step" key={i}><div className={`snum ${i === 0 ? "first" : ""}`}>{i + 1}</div><div className="stext">{t}</div></div>)}
+      </div>
+      <div className="note"><span className="x">!</span><span>{s.note}</span></div>
+      {s.err && <div className="note alt"><span className="x">i</span><span>{s.err}</span></div>}
+      {s.pdf &&
+      <a className="pdf-cta" href={s.pdf} target="_blank" rel="noopener">
+          <span className="pic">PDF</span>
+          <span className="ptt">
+            <span className="a">فتح دليل الخدمة الرسمي (PDF)</span>
+            <span className="b">{s.pdf.replace(/^https?:\/\//, "").split("/")[0]} — اضغط للانتقال إلى الملف</span>
+          </span>
+          <span className="parrow">فتح الملف ↗</span>
+        </a>
+      }
+    </Page>);
+
+}
+
+/* ── CLOSING ── */
+function Closing({ page }) {
+  return (
+    <Page page={page} label="الاعتماد وضبط الوثيقة" title="الاعتماد · ضبط الوثيقة">
+      <Sec no="—" label="ملاحظات عامة على استخدام الدليل" en="Notes" first />
+      <div className="prose alt"><div className="lead">Maintenance</div>
+        <p>يخضع هذا الدليل للمراجعة الدورية بما يتوافق مع تحديثات واجهات المنصات الحكومية. عند اختلاف أي خطوة عن الواقع تُعتمد واجهة المنصة الرسمية ويُحدَّث الدليل تبعاً لذلك. يوفّر كل خدمة اختصاراً مباشراً لدليلها الرسمي (PDF) للرجوع إليه عند الحاجة.</p>
+      </div>
+      <Cap lbl="الاعتمادات والتوقيعات" tag={`Approvals · ${M.docId}`} />
+      <div className="signoff-triple">
+        <div className="sign"><div className="label">Prepared by</div><div className="nm">&nbsp;</div><div className="role">إعداد · الموارد البشرية</div><div className="sig-line"></div><div className="sig-cap">Signature / Date</div></div>
+        <div className="sign"><div className="label">Reviewed by</div><div className="nm">&nbsp;</div><div className="role">مراجعة · مدير الإدارة</div><div className="sig-line"></div><div className="sig-cap">Signature / Date</div></div>
+        <div className="sign"><div className="label">Approved by</div><div className="nm">&nbsp;</div><div className="role">اعتماد · الإدارة العليا</div><div className="sig-line"></div><div className="sig-cap">Signature / Date</div></div>
+      </div>
+      <div className="docctrl">
+        <div><div className="eyebrow">Document Control · ضبط الوثيقة</div><div className="val">الإصدار v{M.version} · يسري من {M.effective}</div></div>
+        <div className="right">Next Review · {M.review}</div>
+      </div>
+    </Page>);
+
+}
+
+function Toolbar() {
+  return <div className="toolbar"><div className="brand">MSGA · Report Style</div><button onClick={() => window.print()}>Print / PDF</button></div>;
+}
+function App() {
+  let pg = 2;
+  return (
+    <>
+      <Toolbar />
+      <div className="stage">
+        <Cover />
+        <About />
+        {SVCS.map((x, i) => {
+          pg += 1;
+          return <ServicePage key={i} p={x.p} s={x.s} page={pg} />;
+        })}
+        <Closing page={TOTAL} />
+      </div>
+    </>);
+
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

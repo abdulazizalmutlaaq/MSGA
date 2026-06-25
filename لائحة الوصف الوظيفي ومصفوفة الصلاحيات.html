@@ -1,0 +1,2007 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSGA — لائحة الوصف الوظيفي ومصفوفة الصلاحيات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* MSGA — Salary Structure Policy · "MSGA REPORT" HOUSE STYLE
+   Matches the April-2026 commercial-sector report exactly:
+   navy full-bleed cover + top orange hairline · white content pages ·
+   lavender rounded section bars with orange circle number + orange right accent ·
+   grey table header with orange underline · colored status pills · rounded cards.
+   Self-contained — does NOT depend on sample-base.css. */
+:root {
+  --navy:#1F3A57; --navy-2:#16304B; --navy-3:#102539; --navy-deep:#0D2034;
+  --navy-card:#27425E; --navy-line:#33506C;
+  --orange:#E5811F; --orange-2:#C96B12; --orange-soft:#FBEEDD;
+  --ink:#1E2B38; --ink-2:#41505F; --ink-3:#76828F; --ink-4:#A7B0BA;
+  --paper:#FFFFFF; --paper-2:#F7F8FB; --lav:#EEF0F7; --lav-2:#F4F5FA;
+  --line:#E5E8EE; --line-2:#EEF0F4;
+  --th:#F4F5F8;
+  --ok:#2F8559; --ok-bg:#E6F4EC; --ok-bd:#CBE8D6;
+  --prog:#2B5180; --prog-bg:#E9EFF7; --prog-bd:#D2DEEE;
+  --hold:#B0831F; --hold-bg:#FAF2DA; --hold-bd:#ECDBA9;
+  --red:#B0432C; --red-bg:#F8E9E4; --red-bd:#ECCDC2;
+  --l1:#BBC6D2; --l2:#9DACBC; --l3:#7E91A6; --l4:#5F7790; --l5:#46617C; --l6:#2F4D69; --l7:#E5811F;
+  --ar:"Tajawal", system-ui, sans-serif;
+  --ar-head:"Tajawal", system-ui, sans-serif;
+  --latin:"Saira", "Tajawal", system-ui, sans-serif;
+  --page-w:210mm; --page-h:297mm; --mx:15mm; --my:14mm;
+}
+* { box-sizing:border-box; }
+html, body { margin:0; padding:0; background:#DDE2E8; font-family:var(--ar); color:var(--ink); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+body { direction:rtl; }
+.stage { min-height:100vh; padding:30px 16px 90px; display:flex; flex-direction:column; align-items:center; gap:28px; }
+.page { width:var(--page-w); height:var(--page-h); background:var(--paper); position:relative; overflow:hidden; box-shadow:0 1px 2px rgba(20,30,45,.05), 0 16px 44px rgba(20,30,45,.14); page-break-after:always; break-after:page; display:flex; flex-direction:column; }
+.page:last-of-type { page-break-after:auto; }
+.watermark { position:absolute; inset:0; pointer-events:none; z-index:0; }
+.page-inner { position:relative; z-index:1; flex:1; display:flex; flex-direction:column; padding:var(--my) var(--mx) 0; }
+
+/* numbers latin font */
+.latin, .doc-meta, .foot, .lcode, .scale-num, .vchip, .kpi .val, .ti-num, .cnum, .nb, .sec-no, .head .eyebrow, .cap .ref, .prose .lead, .cover-top .brandline, .hero .kicker, .classline, .kpi .label, .toc-head, .cover-meta .k, .dept2-head .code, .dept2-head .cnt { font-family:var(--latin); }
+
+/* ─── Content header ─── */
+.head { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px; padding-bottom:11px; margin-bottom:6px; border-bottom:2px solid var(--orange); }
+.head .logo { height:34px; width:auto; display:block; }
+.head .titles { display:flex; flex-direction:column; gap:1px; }
+.head .eyebrow { font-size:8.5px; font-weight:600; letter-spacing:0.18em; color:var(--orange-2); text-transform:uppercase; direction:ltr; }
+.head .doctitle { font-family:var(--ar-head); font-size:13.5px; font-weight:700; color:var(--navy); }
+.head .doc-meta { text-align:left; direction:ltr; font-size:9px; font-weight:500; color:var(--ink-3); line-height:1.65; letter-spacing:0.03em; }
+.head .doc-meta div { white-space:nowrap; }
+.head .doc-meta b { color:var(--navy); font-weight:700; letter-spacing:0.08em; }
+
+/* ─── Footer ─── */
+.foot { position:absolute; bottom:8mm; inset-inline:var(--mx); display:flex; align-items:center; justify-content:space-between; font-size:8.5px; font-weight:500; color:var(--ink-3); letter-spacing:0.08em; text-transform:uppercase; border-top:1px solid var(--line); padding-top:7px; z-index:2; direction:ltr; }
+.foot .brand-mark { display:flex; align-items:center; gap:7px; }
+.foot .brand-mark::before { content:""; width:5px; height:5px; background:var(--orange); border-radius:50%; }
+.foot .pagenum b { color:var(--navy); font-weight:700; }
+
+/* ─── Section bar (signature element) ─── */
+.sec-head { position:relative; display:flex; align-items:center; gap:11px; flex-direction:row-reverse; justify-content:flex-start; background:var(--lav); border-radius:9px; padding:9px 16px 9px 14px; margin:16px 0 11px; overflow:hidden; }
+.sec-head.first { margin-top:4px; }
+.sec-head::after { content:""; position:absolute; top:0; bottom:0; right:0; width:5px; background:var(--orange); }
+.sec-head .sec-no { width:24px; height:24px; border-radius:50%; background:var(--orange); color:#fff; display:grid; place-items:center; font-size:11px; font-weight:700; flex-shrink:0; }
+.sec-head h2 { margin:0; font-family:var(--ar-head); font-size:16px; font-weight:700; color:var(--navy); flex:1; }
+.sec-head .en { font-size:9px; font-weight:600; color:var(--ink-3); letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap; direction:ltr; }
+
+/* caption */
+.cap { display:flex; align-items:center; gap:11px; margin:2px 2px 8px; }
+.cap .lbl { font-size:10px; font-weight:500; color:var(--ink-3); white-space:nowrap; }
+.cap .dots { flex:1; height:1px; background:var(--line); }
+.cap .ref { font-size:9px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange-2); white-space:nowrap; direction:ltr; }
+
+/* prose */
+.prose { padding:2px 14px 2px 0; margin-top:4px; border-inline-start:3px solid var(--orange); }
+.prose.alt { border-inline-start-color:var(--navy); }
+.prose .lead { font-size:9px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--orange-2); margin-bottom:5px; direction:ltr; text-align:start; }
+.prose.alt .lead { color:var(--navy); }
+.prose p { margin:0; font-size:11.5px; color:var(--ink-2); line-height:1.85; text-wrap:pretty; }
+.prose p + p { margin-top:7px; }
+
+/* numbered list */
+.nlist { display:grid; grid-template-columns:1fr; margin-top:6px; }
+.nlist.two { grid-template-columns:1fr 1fr; column-gap:22px; }
+.nitem { display:grid; grid-template-columns:24px 1fr; align-items:start; gap:10px; padding:7px 0; border-bottom:1px solid var(--line-2); }
+.nitem .nb { font-size:11px; font-weight:700; color:#fff; background:var(--navy); width:20px; height:20px; border-radius:6px; display:grid; place-items:center; line-height:1; }
+.nitem.alt .nb { background:var(--orange); }
+.nitem .nt { font-size:11px; line-height:1.6; color:var(--ink-2); padding-top:2px; text-wrap:pretty; }
+
+/* chips */
+.chips { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:4px; }
+.chip-tag { display:flex; align-items:center; gap:9px; border:1px solid var(--line); background:var(--paper-2); border-radius:8px; padding:9px 12px; font-size:10.5px; color:var(--ink-2); min-height:36px; }
+.chip-tag .cnum { font-size:10px; font-weight:700; color:#fff; background:var(--navy); width:18px; height:18px; border-radius:5px; display:grid; place-items:center; flex-shrink:0; }
+
+/* note */
+.note { margin-top:10px; padding:11px 14px; background:var(--orange-soft); border-radius:8px; border-inline-start:3px solid var(--orange); font-size:10.5px; color:#7A5417; line-height:1.7; display:flex; gap:10px; align-items:flex-start; text-wrap:pretty; }
+.note .x { font-weight:700; font-size:13px; color:var(--orange-2); line-height:1.3; }
+.note.alt { background:var(--lav); border-inline-start-color:var(--navy); color:var(--ink-2); }
+.note.alt .x { color:var(--navy); }
+
+/* ─── tables ─── */
+.ptable { margin-top:6px; border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.pt-head { display:grid; background:var(--th); border-bottom:2px solid var(--orange); font-family:var(--ar-head); font-size:10px; font-weight:700; color:var(--navy); }
+.pt-head > div { padding:8px 12px; }
+.pt-head > div.center { text-align:center; }
+.pt-row { display:grid; border-bottom:1px solid var(--line-2); font-size:11px; min-height:34px; align-items:stretch; background:var(--paper); }
+.pt-row:last-child { border-bottom:none; }
+.pt-row:nth-child(even) { background:var(--lav-2); }
+.pt-row > div { padding:8px 12px; display:flex; align-items:center; }
+.pt-row .center { justify-content:center; }
+.pt-row .strong { font-weight:700; color:var(--navy); }
+.pt-row .muted { color:var(--ink-3); font-size:10px; }
+.lcode { font-size:10px; color:var(--ink-3); direction:ltr; }
+.cols-level { grid-template-columns:120px 150px 1fr; }
+.cols-scale { grid-template-columns:128px 60px 1fr 1fr 1fr; }
+.cols-grade { grid-template-columns:170px 1fr; }
+.cols-rate  { grid-template-columns:1fr 190px; }
+.cols-auth  { grid-template-columns:220px 1fr; }
+
+/* level badge */
+.lvl-badge { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:500; color:var(--ink); }
+.lvl-badge .ln { font-size:9.5px; font-weight:700; color:#fff; width:19px; height:19px; border-radius:50%; display:grid; place-items:center; flex-shrink:0; }
+.lvl-mini { font-size:9px; font-weight:700; color:#fff; width:17px; height:17px; border-radius:50%; display:grid; place-items:center; flex-shrink:0; }
+.lvl-1{background:var(--l1)} .lvl-2{background:var(--l2)} .lvl-3{background:var(--l3)} .lvl-4{background:var(--l4)} .lvl-5{background:var(--l5)} .lvl-6{background:var(--l6)} .lvl-7{background:var(--l7)}
+
+/* salary numbers */
+.scale-num { font-size:12px; direction:ltr; font-weight:500; color:var(--ink-2); }
+.scale-num.mid { color:var(--orange-2); font-weight:700; }
+.scale-num.hi { color:var(--navy); font-weight:700; }
+
+/* status-style pill (for grades / values) */
+.pill { display:inline-flex; align-items:center; gap:7px; font-family:var(--ar-head); font-size:11px; font-weight:700; padding:4px 11px; border-radius:999px; border:1px solid transparent; white-space:nowrap; }
+.pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.pill.ok   { color:var(--ok);   background:var(--ok-bg);   border-color:var(--ok-bd); }
+.pill.prog { color:var(--prog); background:var(--prog-bg); border-color:var(--prog-bd); }
+.pill.hold { color:var(--hold); background:var(--hold-bg); border-color:var(--hold-bd); }
+.pill.red  { color:var(--red);  background:var(--red-bg);  border-color:var(--red-bd); }
+.pill.plain{ color:var(--ink-3); background:var(--paper-2); border-color:var(--line); }
+
+.vchip { font-size:13px; font-weight:700; direction:ltr; white-space:nowrap; }
+.vchip.pos{color:var(--ok)} .vchip.warn{color:var(--hold)} .vchip.none{color:var(--ink-4)} .vchip.nav{color:var(--navy)}
+.vchip.ar{direction:rtl; font-family:var(--ar-head); font-size:11.5px}
+
+/* rating -> use pill look */
+.rating { display:inline-flex; align-items:center; gap:7px; font-family:var(--ar-head); font-size:11px; font-weight:700; padding:4px 12px; border-radius:999px; border:1px solid; }
+.rating::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.rating.r-excep { color:var(--ok);   background:var(--ok-bg);   border-color:var(--ok-bd); }
+.rating.r-exc   { color:var(--prog); background:var(--prog-bg); border-color:var(--prog-bd); }
+.rating.r-vg    { color:var(--hold); background:var(--hold-bg); border-color:var(--hold-bd); }
+.rating.r-good  { color:var(--orange-2); background:var(--orange-soft); border-color:#EFD9B6; }
+.rating.r-below { color:var(--red);  background:var(--red-bg);  border-color:var(--red-bd); }
+.grade-desc { font-size:10.5px; color:var(--ink-3); line-height:1.6; text-wrap:pretty; }
+
+/* band chart */
+.bandchart { margin-top:8px; padding:11px 14px; border:1px solid var(--line); border-radius:9px; background:var(--paper-2); }
+.bc-head { display:flex; justify-content:space-between; align-items:baseline; font-size:9px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3); margin-bottom:11px; }
+.bc-head .axis { direction:ltr; color:var(--orange-2); font-family:var(--latin); }
+.bc-row { display:grid; grid-template-columns:92px 1fr; align-items:center; gap:13px; margin-bottom:7px; }
+.bc-row:last-child { margin-bottom:0; }
+.bc-row .bc-label { font-size:10px; font-weight:500; color:var(--ink-2); text-align:start; }
+.bc-track { position:relative; height:14px; direction:ltr; }
+.bc-track .grid-line { position:absolute; top:-4px; bottom:-4px; width:1px; background:var(--line); }
+.bc-bar { position:absolute; top:4px; height:7px; border-radius:4px; display:flex; align-items:center; }
+.bc-bar.lvl-1{background:var(--l1);color:var(--l1)} .bc-bar.lvl-2{background:var(--l2);color:var(--l2)} .bc-bar.lvl-3{background:var(--l3);color:var(--l3)} .bc-bar.lvl-4{background:var(--l4);color:var(--l4)} .bc-bar.lvl-5{background:var(--l5);color:var(--l5)} .bc-bar.lvl-6{background:var(--l6);color:var(--l6)} .bc-bar.lvl-7{background:var(--l7);color:var(--l7)}
+.bc-bar .mid-dot { position:absolute; width:9px; height:9px; border-radius:50%; background:var(--paper); box-shadow:0 0 0 2px currentColor; transform:translateX(-50%); }
+.bc-axis-labels { display:flex; justify-content:space-between; direction:ltr; font-family:var(--latin); font-size:9px; font-weight:600; color:var(--ink-4); margin:6px 0 0; padding-inline-start:105px; }
+
+/* department cards */
+.depttitles { display:grid; grid-template-columns:1fr 1fr; gap:13px; margin-top:6px; }
+.dept2 { border:1px solid var(--line); border-radius:9px; background:var(--paper); display:flex; flex-direction:column; break-inside:avoid; overflow:hidden; }
+.dept2-head { display:grid; grid-template-columns:1fr auto; align-items:center; gap:8px; padding:8px 13px; background:var(--th); border-bottom:2px solid var(--orange); }
+.dept2-head .dn { font-family:var(--ar-head); font-size:12px; font-weight:700; color:var(--navy); }
+.dept2-head .meta { display:flex; align-items:center; gap:8px; }
+.dept2-head .code { font-size:9px; font-weight:700; letter-spacing:0.08em; color:var(--orange-2); direction:ltr; }
+.dept2-head .cnt { font-size:9px; color:var(--ink-3); direction:ltr; }
+.dt-row { display:grid; grid-template-columns:20px 88px 1fr; align-items:center; gap:9px; padding:6px 13px; border-bottom:1px solid var(--line-2); font-size:10.5px; min-height:30px; }
+.dt-row:last-child { border-bottom:none; }
+.dt-row .dt-lvl { font-size:9px; color:var(--ink-3); }
+.dt-row .dt-title { font-weight:500; color:var(--ink); }
+
+/* steps */
+.steps { display:grid; margin-top:6px; border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.step { display:grid; grid-template-columns:42px 1fr; border-bottom:1px solid var(--line-2); align-items:stretch; }
+.step:last-child { border-bottom:none; }
+.step:nth-child(even) { background:var(--lav-2); }
+.step .snum { background:var(--navy); color:#fff; display:grid; place-items:center; font-size:13px; font-weight:700; }
+.step .stext { padding:10px 13px; font-size:11px; line-height:1.6; color:var(--ink-2); display:flex; align-items:center; text-wrap:pretty; }
+
+/* annual cycle */
+.cycle { margin-top:6px; padding:16px 10px 6px; }
+.cycle-track { display:grid; grid-template-columns:repeat(4,1fr); position:relative; direction:rtl; }
+.cycle-track::before { content:""; position:absolute; top:16px; inset-inline:12%; height:2px; background:var(--line); z-index:0; }
+.cycle-node { display:flex; flex-direction:column; align-items:center; gap:8px; position:relative; z-index:1; text-align:center; padding:0 8px; }
+.cycle-node .dot { width:32px; height:32px; border-radius:50%; background:var(--paper); color:var(--navy); display:grid; place-items:center; font-family:var(--latin); font-size:13px; font-weight:700; border:2px solid var(--navy); }
+.cycle-node.accent .dot { background:var(--orange); color:#fff; border-color:var(--orange); }
+.cycle-node .period { font-family:var(--ar-head); font-size:11.5px; font-weight:700; color:var(--orange-2); }
+.cycle-node .clabel { font-size:11px; font-weight:700; color:var(--navy); line-height:1.35; }
+.cycle-node .cdesc { font-size:9.5px; color:var(--ink-3); line-height:1.5; max-width:140px; }
+
+/* sign-off */
+.signoff-triple { margin-top:12px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.signoff-triple .sign { padding:13px; border:1px solid var(--line); border-radius:9px; background:var(--paper-2); display:flex; flex-direction:column; gap:5px; min-height:92px; }
+.signoff-triple .sign .label { font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange-2); direction:ltr; text-align:start; }
+.signoff-triple .sign .nm { font-size:11.5px; font-weight:700; color:var(--ink); min-height:16px; }
+.signoff-triple .sign .role { font-size:10px; color:var(--ink-3); }
+.signoff-triple .sign .sig-line { margin-top:auto; border-bottom:1px dashed var(--ink-4); height:24px; }
+.signoff-triple .sign .sig-cap { font-size:8.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-4); direction:ltr; text-align:start; }
+
+/* doc control */
+.docctrl { margin-top:14px; background:var(--navy); border-radius:9px; padding:14px 18px; display:grid; grid-template-columns:1fr auto; align-items:center; gap:16px; color:#fff; }
+.docctrl .eyebrow { font-size:9px; letter-spacing:0.16em; color:#F0B978; text-transform:uppercase; margin-bottom:4px; direction:ltr; text-align:start; }
+.docctrl .val { font-family:var(--ar-head); font-size:13px; font-weight:700; color:#fff; }
+.docctrl .right { font-size:9.5px; color:#AEBCCC; letter-spacing:0.1em; text-transform:uppercase; text-align:left; direction:ltr; }
+
+/* ═══════ COVER (navy full-bleed) ═══════ */
+.page.cover { background:var(--navy); }
+.page.cover::before { content:""; position:absolute; top:0; inset-inline:0; height:5px; background:var(--orange); z-index:3; }
+.page.cover .watermark::after { content:""; position:absolute; inset:0; background:url("assets/msga-logo.png") no-repeat center 60%; background-size:62% auto; opacity:.04; filter:brightness(0) invert(1); }
+.cover-inner { padding:0 !important; }
+.cover-top { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px; padding:13mm var(--mx) 0; }
+.cover-top .co { font-family:var(--ar-head); font-size:12px; font-weight:700; color:#fff; }
+.cover-top .brandline { font-size:9.5px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--orange); text-align:left; direction:ltr; }
+.cover-hero { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 var(--mx); text-align:center; }
+.cover-hero .logo-w { height:64px; width:auto; filter:brightness(0) invert(1); margin-bottom:30px; }
+.cover-hero h1 { margin:0; font-family:var(--ar-head); font-size:50px; font-weight:800; line-height:1.12; color:#fff; letter-spacing:-0.01em; }
+.cover-hero .subtitle { margin-top:14px; font-size:13px; font-weight:500; color:var(--orange); letter-spacing:0.02em; }
+.cover-hero .period-pill { margin-top:20px; border:1.5px solid rgba(255,255,255,.4); border-radius:999px; padding:8px 24px; font-size:12px; font-weight:600; color:#fff; direction:ltr; white-space:nowrap; letter-spacing:0.04em; }
+.cover-desc { margin:20px auto 0; max-width:74%; font-size:12px; color:#C5D0DC; line-height:1.85; text-wrap:pretty; }
+.cover-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:13px; margin:0 var(--mx) 8mm; }
+.cover-cards.four { grid-template-columns:repeat(4,1fr); }
+.ccard { background:var(--navy-card); border:1px solid var(--navy-line); border-radius:10px; padding:13px 15px; text-align:center; display:flex; flex-direction:column; gap:5px; }
+.ccard .k { font-size:9px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange); direction:ltr; }
+.ccard .v { font-family:var(--ar-head); font-size:14px; font-weight:700; color:#fff; }
+.ccard .v.num { font-family:var(--latin); font-size:26px; line-height:1; direction:ltr; }
+.ccard .s { font-size:9px; color:#9FB0C0; }
+
+/* cover TOC strip */
+.cover-toc { margin:0 var(--mx) 7mm; padding-top:14px; border-top:1px solid var(--navy-line); }
+.cover-toc .th { font-size:9px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#8FA2B4; margin-bottom:9px; direction:ltr; }
+.cover-toc .tg { display:grid; grid-template-columns:repeat(4,1fr); gap:5px 18px; }
+.cover-toc .ti { display:grid; grid-template-columns:20px 1fr; gap:8px; align-items:baseline; font-size:9.5px; color:#C5D0DC; padding:3px 0; }
+.cover-toc .ti .n { font-family:var(--latin); font-size:9.5px; font-weight:700; color:var(--orange); }
+
+/* toolbar */
+.toolbar { position:fixed; top:16px; inset-inline-start:16px; z-index:100; background:var(--navy); color:#fff; display:flex; align-items:center; gap:4px; padding:7px 8px; border-radius:8px; box-shadow:0 10px 30px rgba(20,30,45,.25); font-size:11px; direction:ltr; }
+.toolbar .brand { font-family:var(--ar-head); padding:4px 12px 4px 6px; display:flex; align-items:center; gap:9px; border-inline-end:1px solid rgba(255,255,255,.18); font-weight:700; letter-spacing:0.06em; text-transform:uppercase; }
+.toolbar .brand::before { content:""; width:7px; height:7px; background:var(--orange); border-radius:50%; }
+.toolbar button { background:transparent; color:#fff; border:none; font:inherit; padding:6px 12px; cursor:pointer; letter-spacing:0.04em; text-transform:uppercase; font-weight:600; border-radius:5px; }
+.toolbar button:hover { background:rgba(255,255,255,.12); }
+
+/* page 3 packs 14 table rows + band chart — tighten to clear footer */
+.stage .page:nth-of-type(3) .pt-row { min-height:31px; }
+.stage .page:nth-of-type(3) .pt-row > div { padding-top:6px; padding-bottom:6px; }
+.stage .page:nth-of-type(3) .bandchart { margin-top:6px; padding:10px 14px; }
+.stage .page:nth-of-type(3) .bc-row { margin-bottom:5px; }
+
+@page { size:A4 portrait; margin:0; }
+@media print { html,body{background:#fff} .stage{padding:0;gap:0} .page{box-shadow:none;margin:0} .toolbar{display:none!important} }
+
+</style>
+<style>
+/* MSGA — Organization Description & Authority Matrix · EXTRA components
+   Layers on top of report.css (reuses its :root color vars + type). */
+
+/* multi-digit section numbers stay tidy */
+.sec-head .sec-no { font-variant-numeric:tabular-nums; }
+
+/* ─── custom table column templates ─── */
+.cols-struct { grid-template-columns:116px 1.25fr 1.3fr 1.45fr; }
+.cols-mx     { grid-template-columns:1.15fr 1.3fr 1.3fr 1.3fr; }
+.cols-lvlmx  { grid-template-columns:128px 1fr 1fr; }
+
+.pt-row.cols-struct > div, .pt-row.cols-mx > div, .pt-row.cols-lvlmx > div { align-items:flex-start; }
+.pt-row.cols-struct, .pt-row.cols-mx, .pt-row.cols-lvlmx { min-height:0; }
+.pt-row .dim { color:var(--ink-3); font-size:10px; }
+.pt-row .fin { font-weight:700; color:var(--orange-2); }
+.pt-row .can  { color:var(--ok); line-height:1.55; }
+.pt-row .cant { color:var(--red); line-height:1.55; }
+.ptable.tight .pt-row > div { padding-top:6px; padding-bottom:6px; }
+.ptable.tight .pt-head > div { padding-top:7px; padding-bottom:7px; }
+.ptable.tight { font-size:10.3px; }
+
+/* ─── role / job-description cards (Article 6) ─── */
+.rolewrap { display:flex; flex-direction:column; gap:6px; margin-top:5px; }
+.role-card { border:1px solid var(--line); border-radius:10px; overflow:hidden; break-inside:avoid; }
+.rc-head { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:11px; padding:5px 13px; background:var(--th); border-bottom:2px solid var(--orange); }
+.rc-no { width:23px; height:23px; border-radius:50%; background:var(--navy); color:#fff; display:grid; place-items:center; font-size:10.5px; font-weight:700; font-family:var(--latin); flex-shrink:0; }
+.rc-title { font-family:var(--ar-head); font-size:12.5px; font-weight:700; color:var(--navy); line-height:1.3; }
+.rc-tag { display:flex; align-items:center; gap:6px; font-size:8.8px; color:var(--ink-3); white-space:nowrap; }
+.rc-tag .lab { letter-spacing:0.1em; text-transform:uppercase; direction:ltr; font-family:var(--latin); color:var(--ink-4); }
+.rc-tag b { color:var(--ink-2); font-weight:600; font-size:9.5px; }
+.rc-body { padding:7px 13px 7px; }
+.rc-desc { font-size:10.2px; line-height:1.45; color:var(--ink-2); padding-inline-start:10px; border-inline-start:3px solid var(--orange); margin-bottom:6px; text-wrap:pretty; }
+.rc-cols { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.rc-cols.three { grid-template-columns:1fr 0.92fr 1.02fr; gap:0; }
+.rc-cols.three > .rc-col { padding-inline-end:13px; }
+.rc-cols.three > .rc-col + .rc-col { padding-inline-start:13px; border-inline-start:1px solid var(--line); }
+.rc-col .rc-lbl { display:flex; align-items:center; gap:6px; font-family:var(--ar-head); font-size:9.5px; font-weight:700; color:var(--orange-2); margin-bottom:5px; }
+.rc-col .rc-lbl::before { content:""; width:5px; height:5px; border-radius:50%; background:var(--orange); flex-shrink:0; }
+.rc-col.auth .rc-lbl { color:var(--navy); }
+.rc-col.auth .rc-lbl::before { background:var(--navy); }
+.rc-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px; }
+.rc-list li { position:relative; padding-inline-start:13px; font-size:9.7px; line-height:1.4; color:var(--ink-2); text-wrap:pretty; }
+.rc-list li::before { content:""; position:absolute; inset-inline-start:2px; top:0.55em; width:4px; height:4px; background:var(--ink-4); transform:rotate(45deg); }
+.rc-col.auth .rc-list li::before { background:var(--orange); }
+
+/* ─── KPI column (مؤشرات الأداء — للربط بالتقييم السنوي) ─── */
+.rc-col.kpi .rc-lbl { color:var(--ink); }
+.rc-col.kpi .rc-lbl::before { background:var(--ink); }
+.rc-col.kpi .rc-lbl .kpi-en { font-family:var(--latin); font-size:7.5px; font-weight:700; letter-spacing:0.12em; color:var(--ink-4); margin-inline-start:auto; }
+.kpi-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:3px; }
+.kpi-list li { display:flex; align-items:flex-start; justify-content:space-between; gap:7px; font-size:9.4px; line-height:1.4; color:var(--ink-2); text-wrap:pretty; }
+.kpi-list .kpi-n { flex:1; }
+.kpi-list .kpi-w { flex-shrink:0; font-family:var(--latin); font-size:8.6px; font-weight:700; font-variant-numeric:tabular-nums; color:var(--navy); background:var(--th); border:1px solid var(--line); border-radius:5px; padding:1px 5px; min-width:26px; text-align:center; }
+.kpi-foot { margin-top:6px; padding-top:5px; border-top:1px dashed var(--ink-4); display:flex; align-items:center; justify-content:space-between; gap:6px; font-size:8.2px; color:var(--ink-3); }
+.kpi-foot b { font-family:var(--latin); font-size:9.5px; font-weight:800; color:var(--orange-2); }
+
+/* cover: 9-entry TOC sits comfortably in 3 cols */
+.cover-toc.od .tg { grid-template-columns:repeat(3,1fr); gap:5px 18px; }
+
+/* ─── 4-up sign-off (Approval) — self-contained (training-extra not loaded here) ─── */
+.signoff-quad { margin-top:12px; display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.signoff-quad .sign { padding:13px; border:1px solid var(--line); border-radius:9px; background:var(--paper-2); display:flex; flex-direction:column; gap:5px; min-height:118px; }
+.signoff-quad .sign .label { font-size:8.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange-2); direction:ltr; text-align:start; font-family:var(--latin); }
+.signoff-quad .sign .role { font-size:10px; font-weight:700; color:var(--navy); line-height:1.4; text-wrap:pretty; }
+.signoff-quad .sign .nm { font-size:11px; font-weight:700; color:var(--ink); min-height:15px; }
+.signoff-quad .sign .sig-line { margin-top:auto; border-bottom:1px dashed var(--ink-4); height:22px; }
+.signoff-quad .sign .sig-cap { font-size:8px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-4); direction:ltr; text-align:start; font-family:var(--latin); }
+
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel">
+/* MSGA — Organization Description & Authority Matrix · DATA (window.OD)
+   Generated from the approved source text. MSGA REPORT HOUSE STYLE. */
+window.OD = {
+ "meta": {
+  "title": "لائحة الوصف الوظيفي ومصفوفة الصلاحيات",
+  "docId": "HR-OD-01",
+  "version": "1.0",
+  "owner": "إدارة الموارد البشرية",
+  "effective": "2026",
+  "review": "2027",
+  "subtitle": "تحدّد هذه اللائحة الوصف الوظيفي والمهام الرئيسية والصلاحيات لكل مسمّى وظيفي في شركة مسقا للاستثمار، وتربط الصلاحيات بالمستوى الوظيفي وفق الهيكل الإداري المعتمد."
+ },
+ "toc": [
+  "الهدف من اللائحة",
+  "نطاق التطبيق",
+  "مستويات الصلاحيات",
+  "قاعدة الصلاحيات العامة",
+  "الهيكل الوظيفي حسب الإدارة",
+  "الوصف الوظيفي والمهام",
+  "مصفوفة الصلاحيات العامة",
+  "الصلاحيات حسب المستوى",
+  "أحكام عامة والاعتماد"
+ ],
+ "purpose1": "تهدف هذه اللائحة إلى تنظيم الأدوار والمسؤوليات والصلاحيات الوظيفية داخل شركة مسقا للاستثمار، وتحديد الوصف الوظيفي والمهام الرئيسية لكل مسمى وظيفي، بما يضمن وضوح المسؤوليات، وسهولة المتابعة، وتحديد مستويات الاعتماد والصلاحيات حسب الهيكل الإداري المعتمد.",
+ "purpose2": "كما تهدف اللائحة إلى منع التداخل أو الازدواجية في المهام، وتوضيح حدود صلاحيات كل وظيفة، وربط الصلاحيات بالمستوى الوظيفي وليس باسم الموظف.",
+ "scopeIntro": "تطبق هذه اللائحة على جميع الوظائف الحالية والمتوقعة في شركة مسقا للاستثمار، وتشمل الإدارات التالية:",
+ "departments": [
+  "الإدارة التنفيذية",
+  "الإدارة المالية",
+  "القطاع التجاري",
+  "إدارة المبيعات",
+  "إدارة التسويق",
+  "إدارة المشاريع",
+  "إدارة المشتريات",
+  "إدارة الموارد البشرية",
+  "إدارة تقنية المعلومات",
+  "الخدمات المساندة",
+  "المراجعة الداخلية",
+  "المستودعات",
+  "السكرتارية التنفيذية",
+  "الشؤون القانونية",
+  "خدمة العملاء",
+  "التطوير العقاري",
+  "العلاقات الحكومية"
+ ],
+ "levels": [
+  [
+   "المدير التنفيذي",
+   "له الصلاحية الكاملة في جميع الأمور الإدارية والمالية والتشغيلية والتعاقدية والتنظيمية، واعتماد القرارات النهائية داخل الشركة"
+  ],
+  [
+   "مدير إدارة / تنفيذي",
+   "إدارة القسم، مراجعة الأعمال، رفع التوصيات، واعتماد الإجراءات التشغيلية داخل نطاق الإدارة حسب الصلاحيات المعتمدة"
+  ],
+  [
+   "مدير",
+   "الإشراف المباشر، توزيع المهام، مراجعة الأعمال، ورفع التوصيات للمدير الأعلى"
+  ],
+  [
+   "أخصائي / مهندس / استشاري",
+   "التنفيذ، الإعداد، المتابعة، رفع التوصيات، إعداد التقارير"
+  ],
+  [
+   "مساعد / عامل / حارس",
+   "تنفيذ المهام التشغيلية حسب التوجيهات دون صلاحية اعتماد"
+  ]
+ ],
+ "levelsIntro": "تعتمد الصلاحيات في الشركة على المستوى الوظيفي، بحيث يكون لكل موظف صلاحيات مرتبطة بمسمّاه الوظيفي. وفي حال تجاوز الإجراء حدود صلاحياته يُرفع إلى المدير المباشر أو صاحب الصلاحية الأعلى.",
+ "generalRules": [
+  "الموظف أو الأخصائي أو المهندس له صلاحية إعداد وتنفيذ ومتابعة الأعمال ضمن نطاق وظيفته.",
+  "لا يحق للأخصائي أو المهندس أو الاستشاري اعتماد أي إجراء مالي أو تعاقدي أو إداري نهائي إلا بتفويض مكتوب.",
+  "أي إجراء يتضمن تكلفة مالية، تعاقد، توظيف، إنهاء خدمات، خصومات، اعتماد مستخلصات، أو التزام على الشركة، يرفع للمدير المباشر ثم للمدير التنفيذي.",
+  "مدير الإدارة يملك صلاحية المراجعة والاعتماد التشغيلي داخل إدارته، ما لم يكن الإجراء يتطلب اعتمادًا نهائيًا من المدير التنفيذي.",
+  "المدير التنفيذي هو صاحب الصلاحية النهائية في جميع الأمور الإدارية والمالية والتشغيلية والتعاقدية والتنظيمية.",
+  "تكون الصلاحيات مرتبطة بالوظيفة وليس باسم الموظف.",
+  "يجوز تفويض بعض الصلاحيات بشكل مؤقت أو جزئي، بشرط أن يكون التفويض مكتوبًا ومحدد المدة ونطاق الصلاحية.",
+  "لا يجوز تجزئة أي طلب أو إجراء مالي أو إداري بهدف تجاوز حدود الصلاحية.",
+  "يتحمل صاحب الصلاحية مسؤولية استخدام الصلاحية الممنوحة له ضمن نطاق العمل الرسمي."
+ ],
+ "structure": [
+  [
+   "الإدارة التنفيذية",
+   "المدير التنفيذي",
+   "رئيس مجلس الإدارة",
+   "صلاحية كاملة واعتماد نهائي"
+  ],
+  [
+   "الإدارة المالية",
+   "مدير الإدارة المالية",
+   "المدير التنفيذي",
+   "إدارة واعتماد مالي تشغيلي ورفع النهائي"
+  ],
+  [
+   "الإدارة المالية",
+   "مدير الحسابات",
+   "مدير الإدارة المالية",
+   "مراجعة واعتماد محاسبي تشغيلي"
+  ],
+  [
+   "الإدارة المالية",
+   "محاسب",
+   "مدير الحسابات",
+   "تنفيذ وإعداد"
+  ],
+  [
+   "الإدارة المالية",
+   "محاسب مشاريع",
+   "مدير الإدارة المالية",
+   "تنفيذ ومتابعة مالية للمشاريع"
+  ],
+  [
+   "القطاع التجاري",
+   "مدير القطاع التجاري",
+   "المدير التنفيذي",
+   "إدارة واعتماد تجاري تشغيلي"
+  ],
+  [
+   "المبيعات",
+   "مديرة المبيعات",
+   "مدير القطاع التجاري",
+   "إدارة ومراجعة مبيعات"
+  ],
+  [
+   "المبيعات",
+   "استشاري تشغيل ومبيعات",
+   "مديرة المبيعات",
+   "تنفيذ ومتابعة وتوصية"
+  ],
+  [
+   "المبيعات",
+   "استشاري مبيعات عقارية",
+   "مديرة المبيعات",
+   "تنفيذ ومتابعة العملاء"
+  ],
+  [
+   "التسويق",
+   "مديرة التسويق",
+   "مدير القطاع التجاري",
+   "إدارة واعتماد تسويقي تشغيلي"
+  ],
+  [
+   "التسويق",
+   "مصمم جرافيك",
+   "مديرة التسويق",
+   "تنفيذ وتصميم"
+  ],
+  [
+   "التسويق",
+   "أخصائي تسويق رقمي",
+   "مديرة التسويق",
+   "تنفيذ ومتابعة الحملات الرقمية"
+  ],
+  [
+   "المشاريع",
+   "مدير المشاريع",
+   "المدير التنفيذي",
+   "إدارة واعتماد تشغيلي للمشاريع"
+  ],
+  [
+   "المشاريع",
+   "مهندس موقع",
+   "مدير المشاريع",
+   "تنفيذ ومتابعة ميدانية"
+  ],
+  [
+   "المشاريع",
+   "منسق مشاريع",
+   "مدير المشاريع",
+   "تنسيق ومتابعة إدارية للمشاريع"
+  ],
+  [
+   "المشاريع",
+   "مراقب جودة",
+   "مدير المشاريع",
+   "متابعة وفحص جودة الأعمال"
+  ],
+  [
+   "المشاريع",
+   "حارس موقع",
+   "مهندس الموقع",
+   "تنفيذ ومراقبة موقع"
+  ],
+  [
+   "المشتريات",
+   "مهندس مشتريات",
+   "المدير التنفيذي",
+   "إعداد ومتابعة مشتريات"
+  ],
+  [
+   "الموارد البشرية",
+   "أخصائي عمليات موارد بشرية",
+   "المدير التنفيذي",
+   "تنفيذ ومتابعة موارد بشرية"
+  ],
+  [
+   "تقنية المعلومات",
+   "أخصائي تقنية معلومات",
+   "المدير التنفيذي",
+   "تنفيذ ودعم تقني"
+  ],
+  [
+   "الخدمات المساندة",
+   "عامل مطبخ / خدمات مساندة",
+   "الموارد البشرية",
+   "تنفيذ خدمات مساندة"
+  ],
+  [
+   "السكرتارية التنفيذية",
+   "سكرتير تنفيذي",
+   "المدير التنفيذي",
+   "تنسيق ومتابعة إدارية"
+  ],
+  [
+   "المراجعة الداخلية",
+   "مراجع داخلي",
+   "المدير التنفيذي / لجنة المراجعة عند اعتمادها",
+   "مراجعة ورقابة ورفع توصيات"
+  ],
+  [
+   "المستودعات",
+   "أمين مستودعات",
+   "مدير المشاريع / المشتريات حسب طبيعة العهدة",
+   "استلام وصرف وتسجيل"
+  ],
+  [
+   "التطوير العقاري",
+   "مدير تطوير عقاري",
+   "المدير التنفيذي",
+   "إدارة وتوصية بفرص التطوير"
+  ],
+  [
+   "التطوير العقاري",
+   "أخصائي تطوير عقاري",
+   "مدير تطوير عقاري",
+   "إعداد ومتابعة دراسات"
+  ],
+  [
+   "الشؤون القانونية",
+   "أخصائي قانوني",
+   "المدير التنفيذي",
+   "مراجعة قانونية ورفع توصيات"
+  ],
+  [
+   "خدمة العملاء",
+   "أخصائي خدمة عملاء",
+   "مدير القطاع التجاري",
+   "متابعة العملاء والشكاوى"
+  ],
+  [
+   "العلاقات الحكومية",
+   "مسؤول علاقات حكومية",
+   "الموارد البشرية / المدير التنفيذي",
+   "تنفيذ ومتابعة منصات حكومية"
+  ]
+ ],
+ "roles": [
+  {
+   "t": "المدير التنفيذي",
+   "desc": "يتولى قيادة الشركة والإشراف العام على جميع الإدارات، ووضع التوجهات الاستراتيجية، واعتماد الخطط والقرارات الرئيسية بما يحقق أهداف الشركة.",
+   "tasks": [
+    "الإشراف العام على أعمال الشركة وإداراتها.",
+    "اعتماد الخطط التشغيلية والمالية.",
+    "اعتماد التوظيف والقرارات الإدارية الرئيسية.",
+    "متابعة أداء الإدارات وتحقيق الأهداف.",
+    "تمثيل الشركة أمام الجهات الخارجية عند الحاجة.",
+    "اعتماد العقود والاتفاقيات والالتزامات الرئيسية.",
+    "اتخاذ القرارات الاستراتيجية المتعلقة بالمشاريع والاستثمار.",
+    "اعتماد اللوائح والسياسات الداخلية.",
+    "اعتماد الهيكل التنظيمي والمسميات الوظيفية.",
+    "اعتماد المصروفات والدفعات والموازنات.",
+    "اعتماد الصلاحيات والتفويضات."
+   ],
+   "auth": [
+    "له الصلاحية الكاملة في جميع الأمور الإدارية والمالية والتشغيلية والتعاقدية والتنظيمية.",
+    "اعتماد التوظيف، العروض الوظيفية، الترقيات، الزيادات، الجزاءات، وإنهاء الخدمات.",
+    "اعتماد العقود والاتفاقيات والمشتريات والدفعات.",
+    "اعتماد الخطط التجارية والتسويقية وخطط المشاريع.",
+    "اعتماد الصلاحيات والتفويضات النهائية.",
+    "اعتماد أي إجراء يترتب عليه التزام مالي أو نظامي على الشركة."
+   ],
+   "reports": "رئيس مجلس الإدارة"
+  },
+  {
+   "t": "مدير الإدارة المالية",
+   "desc": "يتولى إدارة الشؤون المالية للشركة، والإشراف على الحسابات، والتقارير المالية، والتدفقات النقدية، والالتزام المالي.",
+   "tasks": [
+    "إعداد ومراجعة التقارير المالية.",
+    "متابعة الميزانيات والتدفقات النقدية.",
+    "الإشراف على الحسابات والمدفوعات.",
+    "مراجعة الرواتب والمستحقات المالية.",
+    "التنسيق مع المراجعين والمحاسبين الخارجيين.",
+    "متابعة الالتزامات المالية والضريبية.",
+    "رفع التوصيات المالية للإدارة التنفيذية."
+   ],
+   "auth": [
+    "مراجعة واعتماد مالي تشغيلي.",
+    "اعتماد القيود المحاسبية الداخلية.",
+    "مراجعة الدفعات قبل اعتماد المدير التنفيذي.",
+    "مراجعة الرواتب قبل الصرف.",
+    "رفع التوصيات المالية النهائية.",
+    "لا يعتمد أي صرف نهائي إلا بعد موافقة المدير التنفيذي."
+   ],
+   "reports": "المدير التنفيذي"
+  },
+  {
+   "t": "مدير الحسابات",
+   "desc": "يتولى الإشراف على العمليات المحاسبية اليومية، ومراجعة القيود والفواتير والحسابات، والتأكد من دقة التسجيل المالي.",
+   "tasks": [
+    "مراجعة القيود المحاسبية.",
+    "متابعة الفواتير والمصروفات.",
+    "الإشراف على المحاسبين.",
+    "مطابقة الحسابات البنكية.",
+    "إعداد التقارير المحاسبية.",
+    "متابعة العهد والمستحقات.",
+    "رفع التقارير لمدير الإدارة المالية."
+   ],
+   "auth": [
+    "مراجعة أعمال المحاسبين.",
+    "اعتماد القيود المحاسبية التشغيلية.",
+    "رفع طلبات الصرف لمدير الإدارة المالية.",
+    "لا يملك اعتماد الصرف النهائي إلا بتفويض من المدير التنفيذي."
+   ],
+   "reports": "مدير الإدارة المالية"
+  },
+  {
+   "t": "المحاسب",
+   "desc": "يتولى تنفيذ العمليات المحاسبية اليومية، وتسجيل القيود، ومتابعة الفواتير والمصروفات وفق الأنظمة المحاسبية المعتمدة.",
+   "tasks": [
+    "تسجيل القيود اليومية.",
+    "إعداد الفواتير وسندات الصرف والقبض.",
+    "متابعة حسابات الموردين والعملاء.",
+    "حفظ المستندات المالية.",
+    "تجهيز التقارير المحاسبية الأولية.",
+    "مطابقة البيانات المالية حسب التوجيه.",
+    "دعم مدير الحسابات في الأعمال اليومية."
+   ],
+   "auth": [
+    "إعداد وتنفيذ العمليات المحاسبية.",
+    "رفع الفواتير والطلبات للمراجعة.",
+    "لا يملك صلاحية اعتماد صرف أو دفع.",
+    "لا يملك صلاحية تعديل بيانات مالية معتمدة إلا بموافقة مديره."
+   ],
+   "reports": "مدير الحسابات"
+  },
+  {
+   "t": "محاسب مشاريع",
+   "desc": "يتولى متابعة الجوانب المالية المتعلقة بالمشاريع، بما يشمل تكاليف المشاريع، المستخلصات، الفواتير، ومطابقة المصروفات مع الميزانية المعتمدة.",
+   "tasks": [
+    "متابعة تكاليف المشاريع.",
+    "مراجعة فواتير ومصروفات المشاريع.",
+    "متابعة مستخلصات المقاولين.",
+    "إعداد تقارير مالية لكل مشروع.",
+    "التنسيق مع إدارة المشاريع والإدارة المالية.",
+    "متابعة العهد والمشتريات الخاصة بالمشاريع.",
+    "رفع الملاحظات المالية لمدير الإدارة المالية."
+   ],
+   "auth": [
+    "إعداد ومراجعة مالية أولية للمشاريع.",
+    "رفع الملاحظات والتقارير المالية.",
+    "لا يعتمد مستخلصات أو دفعات نهائية.",
+    "الاعتماد النهائي للمدير التنفيذي."
+   ],
+   "reports": "مدير الإدارة المالية"
+  },
+  {
+   "t": "مدير القطاع التجاري",
+   "desc": "يتولى إدارة القطاع التجاري والإشراف على المبيعات والتسويق والتشغيل التجاري، بما يضمن تحقيق مستهدفات الإيرادات والمبيعات.",
+   "tasks": [
+    "وضع الخطط التجارية.",
+    "الإشراف على المبيعات والتسويق.",
+    "متابعة مؤشرات الأداء التجاري.",
+    "مراجعة الخطط التسويقية والمبيعاتية.",
+    "مراجعة تقارير العملاء والمبيعات.",
+    "رفع التقارير للإدارة التنفيذية.",
+    "تطوير الفرص التجارية للشركة."
+   ],
+   "auth": [
+    "اعتماد الخطط التجارية التشغيلية داخل القطاع.",
+    "مراجعة العروض التجارية.",
+    "رفع الخصومات والعقود للمدير التنفيذي.",
+    "الإشراف على فرق المبيعات والتسويق.",
+    "لا يعتمد التزامات نهائية إلا بموافقة المدير التنفيذي."
+   ],
+   "reports": "المدير التنفيذي"
+  },
+  {
+   "t": "مديرة المبيعات",
+   "desc": "تتولى إدارة فريق المبيعات، ومتابعة العملاء، وتحقيق مستهدفات البيع، وتنظيم عمليات البيع والحجوزات.",
+   "tasks": [
+    "متابعة العملاء والفرص البيعية.",
+    "إدارة فريق المبيعات.",
+    "إعداد تقارير المبيعات.",
+    "متابعة الحجوزات والعقود.",
+    "التنسيق مع التسويق لزيادة العملاء المحتملين.",
+    "متابعة تحقيق الأهداف البيعية.",
+    "رفع التوصيات للقطاع التجاري."
+   ],
+   "auth": [
+    "توزيع العملاء على فريق المبيعات.",
+    "مراجعة عروض البيع.",
+    "رفع طلبات الخصم أو العروض الخاصة للاعتماد.",
+    "لا تعتمد خصومات أو عقود نهائية إلا بموافقة المدير التنفيذي."
+   ],
+   "reports": "مدير القطاع التجاري"
+  },
+  {
+   "t": "استشاري تشغيل ومبيعات / استشاري مبيعات عقارية",
+   "desc": "يتولى استقبال العملاء، وشرح المنتجات العقارية، ومتابعة عمليات البيع من بداية التواصل حتى إغلاق الصفقة.",
+   "tasks": [
+    "التواصل مع العملاء المحتملين.",
+    "شرح تفاصيل المشاريع والوحدات.",
+    "متابعة الحجوزات والزيارات.",
+    "إعداد تقارير العملاء اليومية.",
+    "تحديث بيانات العملاء في النظام.",
+    "التنسيق مع الإدارة بخصوص العروض والخصومات.",
+    "المحافظة على تجربة عميل احترافية."
+   ],
+   "auth": [
+    "التواصل مع العملاء وتقديم المعلومات.",
+    "رفع طلبات الحجز أو الخصم للمدير.",
+    "لا يملك اعتماد خصومات أو توقيع عقود.",
+    "لا يلتزم باسم الشركة بأي وعد مالي أو تعاقدي دون اعتماد."
+   ],
+   "reports": "مديرة المبيعات"
+  },
+  {
+   "t": "مديرة التسويق",
+   "desc": "تتولى إدارة الأنشطة التسويقية، والإشراف على الهوية والمحتوى والحملات التسويقية بما يدعم مبيعات الشركة وصورتها العامة.",
+   "tasks": [
+    "إعداد الخطط التسويقية.",
+    "إدارة الحملات الإعلانية.",
+    "مراجعة المحتوى قبل النشر.",
+    "الإشراف على التصاميم والمواد التسويقية.",
+    "متابعة أداء الحملات.",
+    "التنسيق مع المبيعات.",
+    "المحافظة على الهوية البصرية للشركة."
+   ],
+   "auth": [
+    "اعتماد المحتوى التشغيلي.",
+    "مراجعة التصاميم والمنشورات.",
+    "رفع الحملات ذات الميزانية للاعتماد.",
+    "لا تعتمد ميزانيات تسويقية أو حملات مدفوعة إلا بموافقة المدير التنفيذي."
+   ],
+   "reports": "مدير القطاع التجاري"
+  },
+  {
+   "t": "مصمم الجرافيك",
+   "desc": "يتولى إعداد التصاميم والمواد البصرية الخاصة بالشركة والمشاريع، وفق الهوية المعتمدة والتوجيهات التسويقية.",
+   "tasks": [
+    "تصميم المنشورات والإعلانات.",
+    "إعداد العروض والمواد البصرية.",
+    "تعديل التصاميم حسب الملاحظات.",
+    "الالتزام بالهوية البصرية.",
+    "تجهيز الملفات للطباعة أو النشر.",
+    "دعم الحملات التسويقية.",
+    "أرشفة التصاميم والملفات."
+   ],
+   "auth": [
+    "تنفيذ التصاميم حسب الطلب.",
+    "اقتراح أفكار بصرية.",
+    "لا يملك صلاحية النشر النهائي دون موافقة مديرة التسويق.",
+    "لا يعتمد مواد رسمية باسم الشركة منفردًا."
+   ],
+   "reports": "مديرة التسويق"
+  },
+  {
+   "t": "أخصائي تسويق رقمي",
+   "desc": "يتولى إدارة الحملات الرقمية ومتابعة أداء المنصات الإعلانية والحسابات الرقمية بما يدعم أهداف التسويق والمبيعات.",
+   "tasks": [
+    "إدارة الحملات الرقمية.",
+    "متابعة أداء الإعلانات.",
+    "إعداد تقارير الأداء.",
+    "التنسيق مع المصمم وفريق المبيعات.",
+    "متابعة المحتوى الرقمي.",
+    "اقتراح تحسينات للحملات.",
+    "مراقبة تفاعل العملاء على المنصات."
+   ],
+   "auth": [
+    "تنفيذ الحملات حسب الخطة المعتمدة.",
+    "رفع التوصيات التسويقية.",
+    "لا يعتمد ميزانية إعلان أو حملة مدفوعة دون موافقة المدير التنفيذي.",
+    "لا ينشر محتوى رسمي دون موافقة مديرة التسويق."
+   ],
+   "reports": "مديرة التسويق"
+  },
+  {
+   "t": "مدير المشاريع",
+   "desc": "يتولى إدارة مشاريع الشركة، ومتابعة التنفيذ، والإشراف على المهندسين والمقاولين، وضمان إنجاز الأعمال حسب الخطة والجودة المعتمدة.",
+   "tasks": [
+    "إدارة ومتابعة المشاريع.",
+    "الإشراف على مهندسي المواقع.",
+    "متابعة الجداول الزمنية.",
+    "مراجعة تقارير الإنجاز.",
+    "التنسيق مع المقاولين والاستشاريين.",
+    "متابعة جودة التنفيذ.",
+    "رفع التقارير للإدارة التنفيذية."
+   ],
+   "auth": [
+    "توزيع المهام على مهندسي المواقع.",
+    "اعتماد تقارير الإنجاز التشغيلية.",
+    "مراجعة المستخلصات قبل رفعها.",
+    "رفع طلبات التغيير أو الاعتماد المالي للمدير التنفيذي.",
+    "لا يعتمد عقود مقاولين أو دفعات نهائية دون موافقة المدير التنفيذي."
+   ],
+   "reports": "المدير التنفيذي"
+  },
+  {
+   "t": "مهندس موقع",
+   "desc": "يتولى متابعة الأعمال الميدانية في مواقع المشاريع، والتأكد من تنفيذ الأعمال حسب المخططات والمواصفات والتعليمات المعتمدة.",
+   "tasks": [
+    "متابعة الأعمال اليومية بالموقع.",
+    "الإشراف على العمالة والمقاولين.",
+    "رفع تقارير الإنجاز.",
+    "متابعة جودة التنفيذ.",
+    "تسجيل الملاحظات والمخالفات.",
+    "التنسيق مع مدير المشاريع.",
+    "التأكد من تطبيق تعليمات السلامة بالموقع."
+   ],
+   "auth": [
+    "توجيه العمالة داخل الموقع.",
+    "رفع الملاحظات الفنية.",
+    "طلب المواد أو الاحتياجات للموقع.",
+    "لا يعتمد مستخلصات أو أوامر تغيير.",
+    "لا يتعاقد مع موردين أو مقاولين دون موافقة."
+   ],
+   "reports": "مدير المشاريع"
+  },
+  {
+   "t": "منسق مشاريع",
+   "desc": "يتولى تنسيق الأعمال الإدارية والتوثيقية الخاصة بالمشاريع، ومتابعة التقارير والمراسلات بين إدارة المشاريع والإدارات الأخرى.",
+   "tasks": [
+    "تنسيق تقارير المشاريع.",
+    "متابعة المستندات والمخاطبات.",
+    "تحديث جداول المتابعة.",
+    "ترتيب اجتماعات المشاريع.",
+    "متابعة المهام المفتوحة.",
+    "دعم مدير المشاريع في الأعمال الإدارية.",
+    "أرشفة مستندات المشاريع."
+   ],
+   "auth": [
+    "طلب تحديثات من فرق المشاريع.",
+    "إعداد الجداول والتقارير.",
+    "لا يوجه المقاولين فنيًا إلا بتكليف.",
+    "لا يعتمد مستندات فنية أو مالية."
+   ],
+   "reports": "مدير المشاريع"
+  },
+  {
+   "t": "مراقب جودة",
+   "desc": "يتولى متابعة جودة الأعمال المنفذة في المشاريع، والتأكد من مطابقتها للمواصفات والمتطلبات المعتمدة.",
+   "tasks": [
+    "فحص جودة الأعمال بالموقع.",
+    "إعداد تقارير الملاحظات.",
+    "متابعة معالجة العيوب.",
+    "التنسيق مع مهندسي الموقع.",
+    "توثيق نتائج الفحص.",
+    "دعم استلام الأعمال.",
+    "رفع المخالفات الفنية لمدير المشاريع."
+   ],
+   "auth": [
+    "تسجيل ملاحظات الجودة.",
+    "إيقاف قبول الأعمال غير المطابقة ورفعها للمسؤول.",
+    "لا يعتمد الاستلام النهائي منفردًا.",
+    "لا يصدر أوامر تغيير للمقاولين."
+   ],
+   "reports": "مدير المشاريع"
+  },
+  {
+   "t": "حارس موقع",
+   "desc": "يتولى حماية الموقع ومراقبة الدخول والخروج والمحافظة على الممتلكات داخل المشروع.",
+   "tasks": [
+    "مراقبة بوابة الموقع.",
+    "تسجيل دخول وخروج الأشخاص أو المعدات عند الحاجة.",
+    "المحافظة على ممتلكات الموقع.",
+    "الإبلاغ عن أي ملاحظات أو مخالفات.",
+    "منع الدخول غير المصرح به.",
+    "الالتزام بتعليمات مهندس الموقع.",
+    "رفع البلاغات عند وجود حالات طارئة."
+   ],
+   "auth": [
+    "السماح بالدخول حسب التعليمات.",
+    "الإبلاغ عن المخالفات.",
+    "لا يملك صلاحية اعتماد دخول موردين أو مقاولين دون توجيه.",
+    "لا يملك صلاحية تسليم أو استلام مواد إلا بتكليف."
+   ],
+   "reports": "مهندس الموقع"
+  },
+  {
+   "t": "مهندس مشتريات",
+   "desc": "يتولى تنفيذ ومتابعة طلبات الشراء، وجمع عروض الأسعار، والتنسيق مع الموردين حسب احتياجات الإدارات والمشاريع.",
+   "tasks": [
+    "استقبال طلبات الشراء.",
+    "البحث عن الموردين.",
+    "جمع عروض الأسعار.",
+    "إعداد مقارنات العروض.",
+    "متابعة أوامر الشراء.",
+    "التنسيق مع المالية والمشاريع.",
+    "حفظ بيانات الموردين."
+   ],
+   "auth": [
+    "طلب عروض الأسعار.",
+    "إعداد المقارنات والتوصيات.",
+    "التفاوض الأولي مع الموردين.",
+    "لا يملك اعتماد أمر الشراء النهائي.",
+    "لا يوقع عقود أو التزامات مالية دون اعتماد المدير التنفيذي."
+   ],
+   "reports": "المدير التنفيذي"
+  },
+  {
+   "t": "أخصائي عمليات موارد بشرية",
+   "desc": "يتولى تنفيذ عمليات الموارد البشرية اليومية، ومتابعة شؤون الموظفين، والمنصات الحكومية، والحضور والانصراف، والرواتب، والتوظيف.",
+   "tasks": [
+    "متابعة ملفات الموظفين.",
+    "تنفيذ إجراءات التوظيف والمباشرة.",
+    "متابعة الحضور والانصراف.",
+    "إعداد مسيرات الرواتب الأولية.",
+    "متابعة الإجازات والعقود.",
+    "التعامل مع المنصات الحكومية مثل قوى، التأمينات، مقيم، مدد.",
+    "إعداد الخطابات والنماذج الإدارية."
+   ],
+   "auth": [
+    "إعداد وتنفيذ إجراءات الموارد البشرية.",
+    "رفع العروض الوظيفية للاعتماد.",
+    "إعداد مسير الرواتب ورفعه للمراجعة.",
+    "لا يعتمد توظيف أو إنهاء خدمات منفردًا.",
+    "لا يعتمد راتب أو زيادة أو جزاء نهائي دون موافقة المدير التنفيذي."
+   ],
+   "reports": "المدير التنفيذي"
+  },
+  {
+   "t": "أخصائي تقنية معلومات",
+   "desc": "يتولى تقديم الدعم التقني للموظفين، وإدارة الأجهزة والأنظمة والحسابات التقنية، وحماية بيانات الشركة.",
+   "tasks": [
+    "صيانة الأجهزة والبرامج.",
+    "إنشاء ومتابعة حسابات البريد والأنظمة.",
+    "تقديم الدعم الفني للموظفين.",
+    "متابعة الشبكة والطابعات.",
+    "تنفيذ التحديثات الأمنية.",
+    "حماية البيانات والنسخ الاحتياطي.",
+    "رفع الاحتياجات التقنية للإدارة."
+   ],
+   "auth": [
+    "إنشاء وتعديل الصلاحيات التقنية حسب الموافقة.",
+    "تقديم الدعم الفني.",
+    "إيقاف أو تعديل صلاحيات المستخدمين عند وجود توجيه.",
+    "لا يطلع على بيانات سرية أو يعدلها إلا حسب التفويض.",
+    "لا يشتري أجهزة أو برامج دون اعتماد المدير التنفيذي."
+   ],
+   "reports": "المدير التنفيذي"
+  },
+  {
+   "t": "عامل مطبخ / خدمات مساندة",
+   "desc": "يتولى تقديم خدمات الضيافة والنظافة البسيطة داخل مقر الشركة، والمحافظة على ترتيب منطقة الضيافة.",
+   "tasks": [
+    "تقديم الضيافة للموظفين والزوار.",
+    "المحافظة على نظافة منطقة المطبخ.",
+    "تجهيز الاجتماعات عند الحاجة.",
+    "متابعة احتياجات الضيافة.",
+    "الالتزام بتوجيهات المسؤول المباشر.",
+    "المحافظة على أدوات ومستلزمات الضيافة."
+   ],
+   "auth": [
+    "تنفيذ مهام الضيافة.",
+    "طلب الاحتياجات من المسؤول المباشر.",
+    "لا يملك صلاحيات شراء أو اعتماد.",
+    "لا يتعامل مع الزوار إلا حسب التوجيه."
+   ],
+   "reports": "الموارد البشرية"
+  },
+  {
+   "t": "سكرتير تنفيذي",
+   "desc": "يتولى تنظيم أعمال ومواعيد المدير التنفيذي، وإدارة المراسلات والاجتماعات، وتجهيز المحاضر والخطابات والملفات الإدارية.",
+   "tasks": [
+    "تنظيم جدول المدير التنفيذي.",
+    "ترتيب الاجتماعات والمواعيد.",
+    "إعداد محاضر الاجتماعات.",
+    "متابعة المراسلات والخطابات.",
+    "حفظ وأرشفة المستندات.",
+    "التنسيق مع الإدارات لتنفيذ التوجيهات.",
+    "إعداد العروض والتقارير الإدارية."
+   ],
+   "auth": [
+    "تنظيم المواعيد والاجتماعات.",
+    "طلب البيانات من الإدارات لغرض التنسيق.",
+    "متابعة تنفيذ التوجيهات.",
+    "لا يعتمد قرارات نيابة عن المدير التنفيذي إلا بتفويض.",
+    "لا يوقع خطابات أو التزامات رسمية دون اعتماد."
+   ],
+   "reports": "المدير التنفيذي"
+  },
+  {
+   "t": "مراجع داخلي",
+   "desc": "يتولى مراجعة العمليات والإجراءات الداخلية، والتأكد من الالتزام بالسياسات واللوائح، ورفع تقارير مستقلة للإدارة.",
+   "tasks": [
+    "إعداد خطة المراجعة الداخلية.",
+    "مراجعة الإجراءات المالية والإدارية.",
+    "فحص الالتزام بالسياسات.",
+    "تقييم المخاطر والضوابط الداخلية.",
+    "إعداد تقارير المراجعة.",
+    "متابعة تصحيح الملاحظات.",
+    "رفع النتائج للإدارة العليا أو لجنة المراجعة حسب الهيكل."
+   ],
+   "auth": [
+    "طلب المستندات والبيانات لأغراض المراجعة.",
+    "مقابلة الموظفين عند الحاجة.",
+    "رفع الملاحظات والتوصيات.",
+    "لا يتدخل في تنفيذ العمليات اليومية.",
+    "لا يعتمد عمليات مالية أو إدارية محل المراجعة."
+   ],
+   "reports": "المدير التنفيذي / لجنة المراجعة"
+  },
+  {
+   "t": "أمين مستودعات",
+   "desc": "يتولى إدارة وتنظيم المستودعات، واستلام وتسليم المواد، ومتابعة المخزون والعهد الخاصة بالمشاريع.",
+   "tasks": [
+    "استلام المواد وتسجيلها.",
+    "صرف المواد حسب طلب معتمد.",
+    "متابعة المخزون.",
+    "تنظيم المستودع.",
+    "إعداد تقارير الجرد.",
+    "المحافظة على العهد والمواد.",
+    "إبلاغ الإدارة عن النواقص أو التلفيات."
+   ],
+   "auth": [
+    "استلام وصرف المواد بموجب مستند معتمد.",
+    "تحديث سجلات المخزون.",
+    "إيقاف صرف المواد عند عدم وجود اعتماد.",
+    "لا يشتري مواد دون موافقة.",
+    "لا يعتمد طلبات صرف غير معتمدة."
+   ],
+   "reports": "مدير المشاريع / المشتريات"
+  },
+  {
+   "t": "مدير تطوير عقاري",
+   "desc": "يتولى دراسة فرص التطوير العقاري، وتحليل جدوى المشاريع، والتنسيق مع الإدارات والجهات ذات العلاقة لتطوير المشاريع الجديدة.",
+   "tasks": [
+    "دراسة الفرص العقارية.",
+    "إعداد دراسات الجدوى الأولية.",
+    "التنسيق مع المشاريع والمالية.",
+    "متابعة متطلبات التطوير والاعتمادات.",
+    "تحليل السوق والمنافسين.",
+    "رفع توصيات التطوير للإدارة التنفيذية.",
+    "متابعة مراحل إطلاق المشاريع الجديدة."
+   ],
+   "auth": [
+    "دراسة وتحليل الفرص.",
+    "طلب البيانات من الإدارات.",
+    "رفع التوصيات للإدارة التنفيذية.",
+    "لا يعتمد شراء أراضٍ أو إطلاق مشاريع دون موافقة المدير التنفيذي.",
+    "لا يلتزم باسم الشركة في صفقات أو اتفاقيات دون اعتماد."
+   ],
+   "reports": "المدير التنفيذي"
+  },
+  {
+   "t": "أخصائي تطوير عقاري",
+   "desc": "يتولى دعم أعمال التطوير العقاري من خلال جمع البيانات، وإعداد التقارير، ومتابعة المتطلبات والفرص العقارية.",
+   "tasks": [
+    "جمع بيانات السوق.",
+    "إعداد تقارير الفرص العقارية.",
+    "متابعة متطلبات الجهات ذات العلاقة.",
+    "دعم إعداد دراسات الجدوى.",
+    "التنسيق مع الإدارات الداخلية.",
+    "متابعة المستندات الخاصة بالمشاريع الجديدة.",
+    "رفع التوصيات لمدير التطوير العقاري."
+   ],
+   "auth": [
+    "إعداد التقارير والدراسات الأولية.",
+    "التواصل التنسيقي مع الجهات حسب التوجيه.",
+    "لا يملك صلاحية اعتماد أو تفاوض نهائي.",
+    "لا يلتزم ماليًا أو تعاقديًا باسم الشركة."
+   ],
+   "reports": "مدير تطوير عقاري"
+  },
+  {
+   "t": "أخصائي خدمة عملاء",
+   "desc": "يتولى استقبال استفسارات العملاء ومتابعة طلباتهم وشكاواهم، وتحسين تجربة العميل قبل وبعد البيع.",
+   "tasks": [
+    "استقبال استفسارات العملاء.",
+    "متابعة الشكاوى والملاحظات.",
+    "التنسيق مع المبيعات والمشاريع.",
+    "تحديث بيانات العملاء.",
+    "إعداد تقارير رضا العملاء.",
+    "متابعة طلبات ما بعد البيع.",
+    "رفع الحالات الخاصة للإدارة."
+   ],
+   "auth": [
+    "التواصل مع العملاء.",
+    "رفع الطلبات للإدارات المختصة.",
+    "لا يقدم وعودًا مالية أو تعاقدية دون اعتماد.",
+    "لا يعتمد تعويضات أو خصومات."
+   ],
+   "reports": "المدير التنفيذي"
+  },
+  {
+   "t": "أخصائي قانوني",
+   "desc": "يتولى مراجعة العقود والخطابات والمستندات القانونية، والتأكد من سلامتها النظامية وحماية مصالح الشركة.",
+   "tasks": [
+    "مراجعة العقود والاتفاقيات.",
+    "إعداد الملاحظات القانونية.",
+    "متابعة القضايا أو المطالبات عند الحاجة.",
+    "التنسيق مع المستشارين القانونيين.",
+    "مراجعة الخطابات الرسمية.",
+    "حفظ المستندات القانونية.",
+    "رفع التوصيات للإدارة."
+   ],
+   "auth": [
+    "مراجعة وإبداء الرأي القانوني.",
+    "طلب المستندات ذات العلاقة.",
+    "لا يعتمد العقود النهائية منفردًا.",
+    "لا يمثل الشركة أمام الجهات إلا بتفويض."
+   ],
+   "reports": "مدير القطاع التجاري"
+  },
+  {
+   "t": "مسؤول علاقات حكومية",
+   "desc": "يتولى متابعة المعاملات الحكومية والمنصات الرسمية، وضمان إنجاز الإجراءات النظامية الخاصة بالشركة والموظفين.",
+   "tasks": [
+    "متابعة المنصات الحكومية.",
+    "تنفيذ معاملات الإقامات ورخص العمل.",
+    "متابعة التأمينات وقوى ومقيم والبلدي وغيرها.",
+    "التنسيق مع الموارد البشرية.",
+    "حفظ المستندات الحكومية.",
+    "متابعة صلاحيات الوثائق والتراخيص.",
+    "رفع تقارير دورية بالحالة."
+   ],
+   "auth": [
+    "تنفيذ المعاملات الحكومية حسب التوجيه.",
+    "متابعة الطلبات والردود.",
+    "لا يعتمد أي التزام مالي أو نظامي دون موافقة.",
+    "لا يعدل بيانات حساسة إلا بتوجيه معتمد."
+   ],
+   "reports": "الموارد البشرية / المدير التنفيذي"
+  }
+ ],
+ "matrix": [
+  [
+   "طلب توظيف جديد",
+   "الموارد البشرية + مدير الإدارة",
+   "الموارد البشرية / المدير المباشر",
+   "المدير التنفيذي"
+  ],
+  [
+   "إعلان وظيفة",
+   "الموارد البشرية",
+   "مدير الإدارة المعني",
+   "المدير التنفيذي"
+  ],
+  [
+   "فرز السير الذاتية",
+   "الموارد البشرية",
+   "المدير المباشر",
+   "المدير التنفيذي عند الترشيح النهائي"
+  ],
+  [
+   "المقابلات الوظيفية",
+   "الموارد البشرية + المدير المباشر",
+   "مدير الإدارة",
+   "المدير التنفيذي"
+  ],
+  [
+   "العرض الوظيفي",
+   "الموارد البشرية",
+   "المالية عند وجود أثر مالي",
+   "المدير التنفيذي"
+  ],
+  [
+   "مباشرة موظف جديد",
+   "الموارد البشرية",
+   "المدير المباشر",
+   "المدير التنفيذي عند الحاجة"
+  ],
+  [
+   "الإجازات",
+   "الموظف",
+   "المدير المباشر / الموارد البشرية",
+   "المدير التنفيذي للحالات الاستثنائية"
+  ],
+  [
+   "الحضور والانصراف",
+   "الموارد البشرية",
+   "المدير المباشر",
+   "المدير التنفيذي للحالات الاستثنائية"
+  ],
+  [
+   "الإنذارات والمخالفات",
+   "الموارد البشرية",
+   "المدير المباشر",
+   "المدير التنفيذي"
+  ],
+  [
+   "إنهاء الخدمات",
+   "الموارد البشرية",
+   "المدير المباشر / الشؤون القانونية",
+   "المدير التنفيذي"
+  ],
+  [
+   "مسير الرواتب",
+   "الموارد البشرية",
+   "الإدارة المالية",
+   "المدير التنفيذي"
+  ],
+  [
+   "الفواتير",
+   "المحاسب",
+   "مدير الحسابات / الإدارة المالية",
+   "المدير التنفيذي"
+  ],
+  [
+   "الدفعات المالية",
+   "المحاسب / المالية",
+   "مدير الإدارة المالية",
+   "المدير التنفيذي"
+  ],
+  [
+   "العهد والمصروفات",
+   "الموظف المختص",
+   "مدير الإدارة / المالية",
+   "المدير التنفيذي"
+  ],
+  [
+   "طلب شراء",
+   "الإدارة الطالبة",
+   "المشتريات / المالية",
+   "المدير التنفيذي"
+  ],
+  [
+   "مقارنة عروض أسعار",
+   "المشتريات",
+   "الإدارة الطالبة + المالية",
+   "المدير التنفيذي"
+  ],
+  [
+   "أمر شراء",
+   "المشتريات",
+   "المالية",
+   "المدير التنفيذي"
+  ],
+  [
+   "اعتماد مورد",
+   "المشتريات",
+   "المالية / الإدارة الطالبة",
+   "المدير التنفيذي"
+  ],
+  [
+   "عقود الموردين",
+   "المشتريات",
+   "الشؤون القانونية + المالية",
+   "المدير التنفيذي"
+  ],
+  [
+   "تقارير المشاريع",
+   "مهندس الموقع",
+   "مدير المشاريع",
+   "المدير التنفيذي عند الحاجة"
+  ],
+  [
+   "طلب مواد للموقع",
+   "مهندس الموقع",
+   "مدير المشاريع / المشتريات",
+   "المدير التنفيذي حسب القيمة"
+  ],
+  [
+   "مستخلصات المقاولين",
+   "مهندس الموقع",
+   "مدير المشاريع + المالية",
+   "المدير التنفيذي"
+  ],
+  [
+   "أوامر التغيير بالمشاريع",
+   "مدير المشاريع",
+   "المالية / الشؤون القانونية",
+   "المدير التنفيذي"
+  ],
+  [
+   "استلام أعمال ميدانية",
+   "مهندس الموقع",
+   "مدير المشاريع / مراقب الجودة",
+   "المدير التنفيذي عند الحاجة"
+  ],
+  [
+   "عروض البيع",
+   "استشاري المبيعات",
+   "مديرة المبيعات / مدير القطاع التجاري",
+   "المدير التنفيذي عند الحاجة"
+  ],
+  [
+   "الخصومات",
+   "مديرة المبيعات",
+   "مدير القطاع التجاري",
+   "المدير التنفيذي"
+  ],
+  [
+   "عقود البيع",
+   "المبيعات",
+   "الشؤون القانونية / المالية",
+   "المدير التنفيذي أو المفوض رسميًا"
+  ],
+  [
+   "الحملات التسويقية",
+   "التسويق",
+   "مدير القطاع التجاري",
+   "المدير التنفيذي"
+  ],
+  [
+   "النشر في حسابات الشركة",
+   "مصمم الجرافيك / التسويق",
+   "مديرة التسويق",
+   "المدير التنفيذي عند الحاجة"
+  ],
+  [
+   "إنشاء بريد إلكتروني",
+   "تقنية المعلومات",
+   "الموارد البشرية / المدير المباشر",
+   "المدير التنفيذي للحسابات الحساسة"
+  ],
+  [
+   "صلاحيات الأنظمة",
+   "تقنية المعلومات",
+   "مدير الإدارة المعني",
+   "المدير التنفيذي للحسابات الحساسة"
+  ],
+  [
+   "استلام مواد بالمستودع",
+   "أمين المستودع",
+   "مدير المشاريع / المشتريات",
+   "حسب طلب الشراء المعتمد"
+  ],
+  [
+   "صرف مواد من المستودع",
+   "أمين المستودع",
+   "مهندس الموقع / مدير المشاريع",
+   "حسب الطلب المعتمد"
+  ],
+  [
+   "تقارير المراجعة الداخلية",
+   "المراجع الداخلي",
+   "الإدارة العليا / لجنة المراجعة عند وجودها",
+   "المدير التنفيذي / لجنة المراجعة حسب الهيكل"
+  ],
+  [
+   "مراجعة العقود قانونيًا",
+   "الأخصائي القانوني",
+   "الإدارة المعنية",
+   "المدير التنفيذي"
+  ],
+  [
+   "اعتماد اللوائح والسياسات",
+   "الإدارة المختصة",
+   "الموارد البشرية / القانونية / المالية حسب اللائحة",
+   "المدير التنفيذي"
+  ],
+  [
+   "تعديل الهيكل التنظيمي",
+   "الموارد البشرية",
+   "المدير التنفيذي",
+   "المدير التنفيذي / مجلس الإدارة عند الحاجة"
+  ],
+  [
+   "اعتماد المسميات الوظيفية",
+   "الموارد البشرية",
+   "المدير التنفيذي",
+   "المدير التنفيذي"
+  ],
+  [
+   "اعتماد التوصيف الوظيفي",
+   "الموارد البشرية",
+   "مدير الإدارة المعني",
+   "المدير التنفيذي"
+  ]
+ ],
+ "levelMatrix": [
+  [
+   "المدير التنفيذي",
+   "اعتماد جميع القرارات النهائية، العقود، التوظيف، الميزانيات، السياسات، الصلاحيات، التفويضات، والمصروفات",
+   "—"
+  ],
+  [
+   "مدير الإدارة",
+   "إدارة القسم، مراجعة الأعمال، اعتماد الإجراءات التشغيلية داخل نطاق القسم، رفع التوصيات",
+   "اعتماد التزامات مالية كبرى أو عقود نهائية دون موافقة المدير التنفيذي"
+  ],
+  [
+   "المدير",
+   "توزيع المهام، مراجعة أعمال الفريق، اعتماد الإجراءات اليومية، رفع التوصيات",
+   "اعتماد قرارات استراتيجية أو مالية خارج نطاقه"
+  ],
+  [
+   "الأخصائي",
+   "تنفيذ المهام، إعداد التقارير، رفع التوصيات، متابعة الإجراءات",
+   "الاعتماد النهائي، توقيع العقود، الالتزام المالي"
+  ],
+  [
+   "المهندس",
+   "متابعة الموقع، إعداد التقارير، طلب الاحتياجات، رفع الملاحظات",
+   "اعتماد مستخلصات نهائية أو أوامر تغيير أو عقود"
+  ],
+  [
+   "الاستشاري",
+   "التواصل مع العملاء، تقديم العروض المعتمدة، رفع طلبات الحجز",
+   "اعتماد الخصومات أو العقود أو الوعود المالية"
+  ],
+  [
+   "السكرتير التنفيذي",
+   "تنظيم المواعيد، إعداد المحاضر، متابعة التوجيهات، التنسيق بين الإدارات",
+   "إصدار قرارات أو اعتماد خطابات دون تفويض"
+  ],
+  [
+   "المراجع الداخلي",
+   "طلب المستندات، مراجعة الإجراءات، رفع الملاحظات والتوصيات",
+   "تنفيذ أو اعتماد العمليات التي يراجعها"
+  ],
+  [
+   "أمين المستودعات",
+   "استلام وصرف وتسجيل المواد حسب الطلبات المعتمدة",
+   "شراء مواد أو صرف مواد دون اعتماد"
+  ],
+  [
+   "المساعد / العامل / الحارس",
+   "تنفيذ المهام حسب التوجيه",
+   "أي اعتماد مالي أو إداري أو تعاقدي"
+  ]
+ ],
+ "provisions": [
+  "تعتبر هذه اللائحة مرجعًا داخليًا لتنظيم الأدوار والمسؤوليات والصلاحيات.",
+  "لا يجوز لأي موظف تجاوز صلاحياته الوظيفية إلا بموجب تفويض رسمي.",
+  "أي إجراء غير مذكور في مصفوفة الصلاحيات يتم رفعه للمدير المباشر ثم المدير التنفيذي لتحديد صاحب الصلاحية.",
+  "يجوز تحديث هذه اللائحة عند استحداث وظائف جديدة أو تعديل الهيكل التنظيمي.",
+  "تعتمد الأوصاف الوظيفية بناءً على المسمى الوظيفي وليس على اسم الموظف.",
+  "تكون الصلاحيات مرتبطة بالوظيفة، وفي حال انتقال الموظف أو تغيير مسماه يتم تعديل صلاحياته وفقًا للمسمى الجديد.",
+  "لا يجوز ممارسة أي صلاحية خارج نطاق العمل الرسمي أو لتحقيق مصلحة شخصية.",
+  "يجب أن يكون التفويض مكتوبًا ومحددًا من حيث المدة ونطاق الصلاحية.",
+  "لا يترتب على التكليف المؤقت بمهام وظيفة أخرى منح صلاحيات تلك الوظيفة إلا إذا نص قرار التكليف على ذلك.",
+  "تعتمد اللائحة من المدير التنفيذي، وتعمم على الإدارات للعمل بموجبها."
+ ],
+ "approvalText": "تم اعتماد هذه اللائحة للعمل بها داخل شركة مسقا للاستثمار اعتبارًا من تاريخ الاعتماد المدوّن أدناه، وتُعمَّم على جميع الإدارات للعمل بموجبها، وتلغي ما يخالفها من تعليمات سابقة.",
+ "signatures": [
+  {
+   "label": "PREPARED",
+   "role": "إدارة الموارد البشرية",
+   "who": ""
+  },
+  {
+   "label": "REVIEWED",
+   "role": "الشؤون القانونية",
+   "who": ""
+  },
+  {
+   "label": "APPROVED",
+   "role": "المدير التنفيذي",
+   "who": ""
+  },
+  {
+   "label": "NOTED",
+   "role": "رئيس مجلس الإدارة",
+   "who": ""
+  }
+ ]
+};
+
+/* ── KPIs per role (مؤشرات الأداء الرئيسية) — للربط مع التقييم السنوي.
+   ترتيب المصفوفة مطابق لترتيب window.OD.roles. كل مؤشر [الاسم, الوزن %] ومجموع الأوزان = 100%. */
+window.ODK = [
+ [ // 01 المدير التنفيذي
+  ["تحقيق الأهداف الاستراتيجية السنوية", 30],
+  ["نمو الإيرادات وصافي الربح مقابل الموازنة", 30],
+  ["كفاءة الأداء التشغيلي للإدارات", 20],
+  ["الالتزام بالحوكمة والامتثال", 20]
+ ],
+ [ // 02 مدير الإدارة المالية
+  ["دقة التقارير المالية وانضباط مواعيدها", 30],
+  ["إدارة التدفقات النقدية والسيولة", 25],
+  ["الالتزام المالي والضريبي (الزكاة والضريبة)", 25],
+  ["خفض ملاحظات المراجعة المالية", 20]
+ ],
+ [ // 03 مدير الحسابات
+  ["دقة القيود ومطابقة الحسابات البنكية", 30],
+  ["إقفال الحسابات الشهري في موعده", 25],
+  ["خلو الفواتير والمصروفات من الأخطاء", 25],
+  ["تسوية العهد والمستحقات", 20]
+ ],
+ [ // 04 المحاسب
+  ["دقة تسجيل القيود اليومية", 30],
+  ["إنجاز الفواتير والسندات في الوقت", 25],
+  ["مطابقة حسابات الموردين والعملاء", 25],
+  ["اكتمال وحفظ المستندات المالية", 20]
+ ],
+ [ // 05 محاسب مشاريع
+  ["دقة متابعة تكاليف المشاريع مقابل الموازنة", 30],
+  ["مراجعة مستخلصات المقاولين في الموعد", 25],
+  ["إعداد التقارير المالية لكل مشروع", 25],
+  ["ضبط العهد والمشتريات الخاصة بالمشاريع", 20]
+ ],
+ [ // 06 مدير القطاع التجاري
+  ["تحقيق مستهدفات الإيرادات والمبيعات", 35],
+  ["نمو قاعدة العملاء والفرص التجارية", 25],
+  ["كفاءة الخطط التجارية والتسويقية", 20],
+  ["جودة وانتظام تقارير الأداء التجاري", 20]
+ ],
+ [ // 07 مديرة المبيعات
+  ["نسبة تحقيق المستهدف البيعي", 35],
+  ["معدل تحويل العملاء المحتملين", 25],
+  ["متابعة الحجوزات والعقود وإغلاقها", 20],
+  ["دقة وانتظام تقارير المبيعات", 20]
+ ],
+ [ // 08 استشاري تشغيل ومبيعات / مبيعات عقارية
+  ["عدد الصفقات المغلقة شهريًا", 35],
+  ["معدل تحويل الزيارات إلى حجوزات", 25],
+  ["دقة وتحديث بيانات العملاء في النظام", 20],
+  ["رضا العملاء وجودة تجربة البيع", 20]
+ ],
+ [ // 09 مديرة التسويق
+  ["أداء الحملات (عملاء محتملون مؤهلون)", 30],
+  ["العائد على الإنفاق التسويقي (ROI)", 25],
+  ["نمو التفاعل والوصول الرقمي", 25],
+  ["الالتزام بالهوية وجودة المحتوى", 20]
+ ],
+ [ // 10 مصمم الجرافيك
+  ["إنجاز التصاميم في المواعيد", 30],
+  ["جودة التصميم والالتزام بالهوية", 30],
+  ["نسبة التعديلات وإعادة العمل (الأقل أفضل)", 20],
+  ["تنظيم وأرشفة ملفات التصميم", 20]
+ ],
+ [ // 11 أخصائي تسويق رقمي
+  ["أداء الحملات الرقمية (CTR / تكلفة العميل)", 30],
+  ["تحقيق مستهدف العملاء المحتملين", 25],
+  ["نمو المتابعين والتفاعل", 25],
+  ["دقة وانتظام تقارير الأداء", 20]
+ ],
+ [ // 12 مدير المشاريع
+  ["إنجاز المشاريع ضمن الجدول الزمني", 30],
+  ["الالتزام بميزانية المشاريع", 25],
+  ["جودة التنفيذ ومطابقة المواصفات", 25],
+  ["انتظام تقارير الإنجاز والمتابعة", 20]
+ ],
+ [ // 13 مهندس موقع
+  ["نسبة إنجاز الأعمال مقابل الخطة", 30],
+  ["مطابقة الجودة وقلة الملاحظات", 30],
+  ["الالتزام بتعليمات السلامة بالموقع", 20],
+  ["دقة وانتظام تقارير الموقع", 20]
+ ],
+ [ // 14 منسق مشاريع
+  ["دقة وتحديث جداول المتابعة", 30],
+  ["انتظام التقارير والمخاطبات", 25],
+  ["إغلاق المهام المفتوحة في الوقت", 25],
+  ["تنظيم وأرشفة مستندات المشاريع", 20]
+ ],
+ [ // 15 مراقب جودة
+  ["نسبة الأعمال المطابقة من أول فحص", 30],
+  ["سرعة رصد ومعالجة العيوب", 25],
+  ["دقة وتوثيق تقارير الفحص", 25],
+  ["الالتزام بمعايير الجودة المعتمدة", 20]
+ ],
+ [ // 16 حارس موقع
+  ["انتظام تسجيل الدخول والخروج", 30],
+  ["خلو الموقع من الحوادث والمخالفات", 30],
+  ["سرعة الإبلاغ عن المخالفات والطوارئ", 20],
+  ["الالتزام بالتعليمات والمواعيد", 20]
+ ],
+ [ // 17 مهندس مشتريات
+  ["الوفورات في الشراء مقابل الموازنة", 30],
+  ["سرعة إنجاز طلبات الشراء", 25],
+  ["جودة مقارنات العروض والتوصيات", 25],
+  ["دقة بيانات الموردين وأوامر الشراء", 20]
+ ],
+ [ // 18 أخصائي عمليات موارد بشرية
+  ["دقة وانضباط مسير الرواتب", 30],
+  ["إنجاز إجراءات التوظيف والمباشرة في الوقت", 25],
+  ["تحديث المنصات الحكومية (قوى/التأمينات/مقيم)", 25],
+  ["دقة ملفات الموظفين والحضور والانصراف", 20]
+ ],
+ [ // 19 أخصائي تقنية معلومات
+  ["سرعة حل تذاكر الدعم الفني", 30],
+  ["جاهزية الأنظمة والشبكة (نسبة التشغيل)", 30],
+  ["انتظام النسخ الاحتياطي والأمان", 20],
+  ["رضا المستخدمين عن الدعم التقني", 20]
+ ],
+ [ // 20 عامل مطبخ / خدمات مساندة
+  ["جودة وانتظام خدمة الضيافة", 35],
+  ["نظافة وترتيب منطقة الخدمة", 30],
+  ["جاهزية تجهيز الاجتماعات", 20],
+  ["الالتزام بالتوجيهات والمواعيد", 15]
+ ],
+ [ // 21 سكرتير تنفيذي
+  ["دقة تنظيم الجدول والمواعيد", 30],
+  ["إعداد المحاضر والخطابات في الوقت", 25],
+  ["متابعة تنفيذ التوجيهات", 25],
+  ["تنظيم وأرشفة المستندات", 20]
+ ],
+ [ // 22 مراجع داخلي
+  ["تنفيذ خطة المراجعة السنوية", 30],
+  ["جودة وعمق تقارير المراجعة", 25],
+  ["نسبة معالجة الملاحظات والتوصيات", 25],
+  ["الالتزام بمواعيد رفع التقارير", 20]
+ ],
+ [ // 23 أمين مستودعات
+  ["دقة الجرد ومطابقة المخزون", 30],
+  ["ضبط الاستلام والصرف بمستند معتمد", 30],
+  ["تنظيم المستودع وسلامة العهد", 20],
+  ["سرعة تلبية طلبات الصرف", 20]
+ ],
+ [ // 24 مدير تطوير عقاري
+  ["جودة دراسات الجدوى وتحليل الفرص", 30],
+  ["عدد الفرص المعتمدة أو المطورة", 25],
+  ["دقة تحليل السوق والمنافسين", 25],
+  ["الالتزام بمراحل إطلاق المشاريع", 20]
+ ],
+ [ // 25 أخصائي تطوير عقاري
+  ["جودة ودقة تقارير الفرص العقارية", 30],
+  ["اكتمال بيانات السوق والدراسات", 30],
+  ["متابعة متطلبات الجهات في الوقت", 20],
+  ["انتظام رفع التوصيات", 20]
+ ],
+ [ // 26 أخصائي خدمة عملاء
+  ["نسبة رضا العملاء (CSAT)", 30],
+  ["سرعة معالجة وإغلاق الشكاوى", 30],
+  ["دقة تحديث بيانات العملاء", 20],
+  ["متابعة طلبات ما بعد البيع", 20]
+ ],
+ [ // 27 أخصائي قانوني
+  ["إنجاز مراجعة العقود في الوقت", 30],
+  ["جودة الملاحظات القانونية وحماية المصالح", 30],
+  ["متابعة القضايا والمطالبات", 20],
+  ["اكتمال وحفظ المستندات القانونية", 20]
+ ],
+ [ // 28 مسؤول علاقات حكومية
+  ["إنجاز المعاملات الحكومية في مواعيدها", 30],
+  ["خلو الوثائق من الغرامات والانتهاء", 30],
+  ["تحديث المنصات الحكومية", 20],
+  ["انتظام تقارير الحالة", 20]
+ ]
+];
+
+</script>
+<script type="text/babel">
+/* MSGA — Organization Description & Authority Matrix · MSGA REPORT HOUSE STYLE renderer
+   Reads window.OD. 16 pages (cover + 15). Navy/orange brand.
+   Reuses report.css components; extras in od-extra.css. */
+const O = window.OD;
+const TOTAL = 16;
+const pad = (n) => String(n).padStart(2, "0");
+
+/* ── shared chrome ── */
+function Header({ page }) {
+  const m = O.meta;
+  return (
+    <div className="head">
+      <img className="logo" src="assets/msga-logo.png" alt="MSGA"/>
+      <div className="titles">
+        <div className="eyebrow">MSGA Investment · HR Regulation</div>
+        <div className="doctitle">{m.title}</div>
+      </div>
+      <div className="doc-meta">
+        <div><b>DOC</b> {m.docId}</div>
+        <div><b>VER</b> {m.version}</div>
+        <div><b>PAGE</b> {pad(page)} / {pad(TOTAL)}</div>
+      </div>
+    </div>
+  );
+}
+function Footer({ page }) {
+  return (
+    <div className="foot">
+      <div className="brand-mark">شركة مسقا للاستثمار · داخلي وسري</div>
+      <div>{O.meta.docId} · v{O.meta.version}</div>
+      <div className="pagenum"><b>{pad(page)}</b> / {pad(TOTAL)}</div>
+    </div>
+  );
+}
+function Page({ label, page, children }) {
+  return (
+    <div className="page" data-screen-label={label}>
+      <div className="watermark"></div>
+      <div className="page-inner">
+        <Header page={page}/>
+        {children}
+        <Footer page={page}/>
+      </div>
+    </div>
+  );
+}
+function Sec({ no, label, en, first }) {
+  return (
+    <div className={`sec-head ${first ? "first" : ""}`}>
+      <div className="sec-no">{no}</div>
+      <h2>{label}</h2>
+      <div className="en">{en}</div>
+    </div>
+  );
+}
+function Cap({ lbl, tag }) {
+  return <div className="cap"><span className="lbl">{lbl}</span><div className="dots"></div><span className="ref">{tag}</span></div>;
+}
+function Prose({ lead, alt, children }) {
+  return <div className={`prose ${alt ? "alt" : ""}`}>{lead && <div className="lead">{lead}</div>}{children}</div>;
+}
+function NList({ items, two, alt, compact, start = 1 }) {
+  return (
+    <div className={`nlist ${two ? "two" : ""} ${compact ? "compact" : ""}`}>
+      {items.map((t, i) => (
+        <div className={`nitem ${alt ? "alt" : ""}`} key={i}><div className="nb">{start + i}</div><div className="nt">{t}</div></div>
+      ))}
+    </div>
+  );
+}
+function Note({ children, alt, tight }) {
+  return <div className={`note ${alt ? "alt" : ""} ${tight ? "tight" : ""}`}><span className="x">i</span><span>{children}</span></div>;
+}
+function RoleCard({ n, r, kpis }) {
+  return (
+    <div className="role-card">
+      <div className="rc-head">
+        <span className="rc-no">{pad(n)}</span>
+        <span className="rc-title">{r.t}</span>
+        <span className="rc-tag"><span className="lab">Reports to</span><b>{r.reports}</b></span>
+      </div>
+      <div className="rc-body">
+        <div className="rc-desc">{r.desc}</div>
+        <div className="rc-cols three">
+          <div className="rc-col">
+            <div className="rc-lbl">المهام الوظيفية</div>
+            <ul className="rc-list">{r.tasks.map((t, i) => <li key={i}>{t}</li>)}</ul>
+          </div>
+          <div className="rc-col auth">
+            <div className="rc-lbl">الصلاحيات</div>
+            <ul className="rc-list">{r.auth.map((t, i) => <li key={i}>{t}</li>)}</ul>
+          </div>
+          <div className="rc-col kpi">
+            <div className="rc-lbl">مؤشرات الأداء <span className="kpi-en">KPI</span></div>
+            <ul className="kpi-list">{(kpis || []).map((k, i) => (
+              <li key={i}><span className="kpi-n">{k[0]}</span><span className="kpi-w">{k[1]}%</span></li>
+            ))}</ul>
+            <div className="kpi-foot"><span>الوزن الكلي · التقييم السنوي</span><b>100%</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── COVER ── */
+function PageCover() {
+  const m = O.meta;
+  return (
+    <div className="page cover" data-screen-label="01 الغلاف">
+      <div className="watermark"></div>
+      <div className="page-inner cover-inner">
+        <div className="cover-top">
+          <span className="co">شركة مسقا للاستثمار</span>
+          <div></div>
+          <span className="brandline">HR Regulation · 2026</span>
+        </div>
+
+        <div className="cover-hero">
+          <img className="logo-w" src="assets/msga-logo.png" alt="MSGA"/>
+          <h1>لائحة الوصف الوظيفي<br/>ومصفوفة الصلاحيات</h1>
+          <div className="subtitle">تنظيم الأدوار والمسؤوليات والصلاحيات الوظيفية</div>
+          <div className="period-pill">{m.docId}</div>
+          <div className="cover-desc">{m.subtitle}</div>
+        </div>
+
+        <div className="cover-cards four">
+          <div className="ccard"><div className="k">Departments</div><div className="v num">17</div><div className="s">إدارة</div></div>
+          <div className="ccard"><div className="k">Job Roles</div><div className="v num">28</div><div className="s">وصف وظيفي</div></div>
+          <div className="ccard"><div className="k">Matrix</div><div className="v num">39</div><div className="s">إجراء معتمد</div></div>
+          <div className="ccard"><div className="k">Edition</div><div className="v">v{m.version}</div><div className="s">الإصدار الأول</div></div>
+        </div>
+
+        <div className="cover-toc od">
+          <div className="th">Contents — فهرس اللائحة</div>
+          <div className="tg">
+            {O.toc.map((t, i) => <div className="ti" key={i}><span className="n">{pad(i + 1)}</span><span>{t}</span></div>)}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── P2 · Purpose + Scope ── */
+function Page2() {
+  return (
+    <Page label="02 الهدف والنطاق" page={2}>
+      <Sec no="01" label="الهدف من اللائحة" en="Purpose" first/>
+      <Prose lead="Purpose"><p>{O.purpose1}</p><p>{O.purpose2}</p></Prose>
+      <Sec no="02" label="نطاق التطبيق" en="Scope"/>
+      <Cap lbl={O.scopeIntro} tag="17 Departments"/>
+      <div className="chips">
+        {O.departments.map((d, i) => <div className="chip-tag" key={i}><span className="cnum">{pad(i + 1)}</span>{d}</div>)}
+      </div>
+    </Page>
+  );
+}
+
+/* ── P3 · Authority levels + General rules ── */
+function Page3() {
+  return (
+    <Page label="03 مستويات الصلاحيات والقاعدة العامة" page={3}>
+      <Sec no="03" label="مستويات الصلاحيات" en="Authority Levels" first/>
+      <Prose lead="Principle"><p>{O.levelsIntro}</p></Prose>
+      <div className="ptable tight">
+        <div className="pt-head cols-auth"><div>المستوى الوظيفي</div><div>نطاق الصلاحية</div></div>
+        {O.levels.map((l, i) => (
+          <div className="pt-row cols-auth" key={i}><div className="strong">{l[0]}</div><div>{l[1]}</div></div>
+        ))}
+      </div>
+      <Sec no="04" label="قاعدة الصلاحيات العامة" en="General Rules"/>
+      <Cap lbl="القواعد الحاكمة لممارسة الصلاحيات داخل الشركة" tag="09 Rules"/>
+      <NList items={O.generalRules} two compact/>
+    </Page>
+  );
+}
+
+/* ── P4–P5 · Org structure table ── */
+function StructTable({ rows }) {
+  return (
+    <div className="ptable tight">
+      <div className="pt-head cols-struct"><div>الإدارة</div><div>المسمى الوظيفي</div><div>المدير المباشر</div><div>مستوى الصلاحية</div></div>
+      {rows.map((r, i) => (
+        <div className="pt-row cols-struct" key={i}>
+          <div className="dim">{r[0]}</div><div className="strong">{r[1]}</div><div>{r[2]}</div><div>{r[3]}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+function Page4() {
+  return (
+    <Page label="04 الهيكل الوظيفي" page={4}>
+      <Sec no="05" label="الهيكل الوظيفي حسب الإدارة والمسمى" en="Org Structure" first/>
+      <Cap lbl="المسميات الوظيفية والمدير المباشر ومستوى الصلاحية لكل وظيفة" tag="29 Roles · 1 / 2"/>
+      <StructTable rows={O.structure.slice(0, 16)}/>
+    </Page>
+  );
+}
+function Page5() {
+  return (
+    <Page label="05 الهيكل الوظيفي (تابع)" page={5}>
+      <Sec no="05" label="الهيكل الوظيفي حسب الإدارة والمسمى" en="Org Structure · Cont." first/>
+      <Cap lbl="تابع — المشاريع · المساندة · المراجعة · التطوير · القانونية · الحكومية" tag="29 Roles · 2 / 2"/>
+      <StructTable rows={O.structure.slice(16)}/>
+    </Page>
+  );
+}
+
+/* ── P6–P12 · Job descriptions (4 per page) ── */
+function RolesPage({ page, label, from, to, first }) {
+  const slice = O.roles.slice(from, to);
+  const range = `${pad(from + 1)}–${pad(to)} / 28`;
+  return (
+    <Page label={label} page={page}>
+      {first
+        ? <Sec no="06" label="الوصف الوظيفي والمهام الرئيسية" en={`Job Descriptions · ${range}`} first/>
+        : <Sec no="06" label="الوصف الوظيفي والمهام الرئيسية" en={`Cont. · ${range}`} first/>}
+      <div className="rolewrap">
+        {slice.map((r, i) => <RoleCard key={i} n={from + i + 1} r={r} kpis={window.ODK[from + i]}/>)}
+      </div>
+    </Page>
+  );
+}
+
+/* ── P13–P14 · Authority matrix ── */
+function MatrixTable({ rows }) {
+  return (
+    <div className="ptable tight">
+      <div className="pt-head cols-mx"><div>الإجراء</div><div>الإعداد / التنفيذ</div><div>المراجعة</div><div>الاعتماد النهائي</div></div>
+      {rows.map((r, i) => (
+        <div className="pt-row cols-mx" key={i}>
+          <div className="strong">{r[0]}</div><div>{r[1]}</div><div>{r[2]}</div><div className="fin">{r[3]}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+function Page13() {
+  return (
+    <Page label="13 مصفوفة الصلاحيات العامة" page={13}>
+      <Sec no="07" label="مصفوفة الصلاحيات العامة" en="Authority Matrix" first/>
+      <Cap lbl="مسؤولية الإعداد والمراجعة والاعتماد النهائي لكل إجراء" tag="39 Actions · 1 / 2"/>
+      <MatrixTable rows={O.matrix.slice(0, 20)}/>
+    </Page>
+  );
+}
+function Page14() {
+  return (
+    <Page label="14 مصفوفة الصلاحيات (تابع)" page={14}>
+      <Sec no="07" label="مصفوفة الصلاحيات العامة" en="Authority Matrix · Cont." first/>
+      <Cap lbl="تابع — مسؤولية الإعداد والمراجعة والاعتماد النهائي لكل إجراء" tag="39 Actions · 2 / 2"/>
+      <MatrixTable rows={O.matrix.slice(20)}/>
+    </Page>
+  );
+}
+
+/* ── P15 · Authority by level ── */
+function Page15() {
+  return (
+    <Page label="15 الصلاحيات حسب المستوى الوظيفي" page={15}>
+      <Sec no="08" label="مصفوفة الصلاحيات حسب المستوى الوظيفي" en="Authority by Level" first/>
+      <Cap lbl="ما يستطيع وما لا يستطيع كل مستوى وظيفي اعتماده" tag="10 Levels"/>
+      <div className="ptable tight">
+        <div className="pt-head cols-lvlmx"><div>المستوى</div><div>يستطيع</div><div>لا يستطيع</div></div>
+        {O.levelMatrix.map((r, i) => (
+          <div className="pt-row cols-lvlmx" key={i}>
+            <div className="strong">{r[0]}</div><div className="can">{r[1]}</div><div className="cant">{r[2]}</div>
+          </div>
+        ))}
+      </div>
+    </Page>
+  );
+}
+
+/* ── P16 · General provisions + Approval ── */
+function Page16() {
+  const m = O.meta;
+  return (
+    <Page label="16 أحكام عامة والاعتماد" page={16}>
+      <Sec no="09" label="أحكام عامة" en="General Provisions" first/>
+      <Cap lbl="الأحكام الختامية لتطبيق اللائحة" tag="10 Provisions"/>
+      <NList items={O.provisions} two compact/>
+      <Sec no="10" label="الاعتماد" en="Approval & Sign-off"/>
+      <Prose lead="Effective"><p>{O.approvalText}</p></Prose>
+      <Cap lbl="الاعتمادات والتوقيعات" tag={`Approvals · ${m.docId}`}/>
+      <div className="signoff-quad">
+        {O.signatures.map((s, i) => (
+          <div className="sign" key={i}>
+            <div className="label">{s.label}</div>
+            <div className="role">{s.role}</div>
+            <div className="nm">{s.who || "\u00A0"}</div>
+            <div className="sig-line"></div>
+            <div className="sig-cap">Signature / Date</div>
+          </div>
+        ))}
+      </div>
+      <div className="docctrl">
+        <div><div className="eyebrow">Document Control · ضبط الوثيقة</div><div className="val">الإصدار v{m.version} · الجهة المالكة: {m.owner}</div></div>
+        <div className="right">Effective {m.effective} · Review {m.review}</div>
+      </div>
+    </Page>
+  );
+}
+
+function Toolbar() {
+  return <div className="toolbar"><div className="brand">MSGA · Regulation</div><button onClick={() => window.print()}>Print / PDF</button></div>;
+}
+function App() {
+  return (
+    <>
+      <Toolbar/>
+      <div className="stage">
+        <PageCover/>
+        <Page2/><Page3/><Page4/><Page5/>
+        <RolesPage page={6}  label="06 الوصف الوظيفي والمهام" from={0}  to={4}  first/>
+        <RolesPage page={7}  label="07 الوصف الوظيفي (تابع)" from={4}  to={8}/>
+        <RolesPage page={8}  label="08 الوصف الوظيفي (تابع)" from={8}  to={12}/>
+        <RolesPage page={9}  label="09 الوصف الوظيفي (تابع)" from={12} to={16}/>
+        <RolesPage page={10} label="10 الوصف الوظيفي (تابع)" from={16} to={20}/>
+        <RolesPage page={11} label="11 الوصف الوظيفي (تابع)" from={20} to={24}/>
+        <RolesPage page={12} label="12 الوصف الوظيفي (تابع)" from={24} to={28}/>
+        <Page13/><Page14/><Page15/><Page16/>
+      </div>
+    </>
+  );
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+
+</script>
+</body>
+</html>

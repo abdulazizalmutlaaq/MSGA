@@ -997,20 +997,29 @@ function App() {
       setMeetings(snap.docs.map(d=>({id:d.id,...d.data()})));
     }, err=>{
       console.error(err);
+      if(err.code==="failed-precondition") {
+        alert("يلزم إنشاء فهرس في Firestore. افتح Console للحصول على رابط الإنشاء.");
+      } else if(err.code==="permission-denied") {
+        alert("Firebase غير مُهيَّأ بشكل صحيح. تأكد من تفعيل Firestore في Test Mode.");
+      }
     });
   },[user]);
 
   const createNew = async() => {
     const blank = BLANK();
-    const ref = await db.collection("meetings").add({
-      data: blank,
-      status: "draft",
-      createdBy: user.uid,
-      createdByEmail: user.email,
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
-      submittedAt: null,
-    });
-    setCurrentDoc({id:ref.id, data:blank, status:"draft", createdBy:user.uid, createdByEmail:user.email});
+    try {
+      const ref = await db.collection("meetings").add({
+        data: blank,
+        status: "draft",
+        createdBy: user.uid,
+        createdByEmail: user.email,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+        submittedAt: null,
+      });
+      setCurrentDoc({id:ref.id, data:blank, status:"draft", createdBy:user.uid, createdByEmail:user.email});
+    } catch(err) {
+      alert("خطأ في إنشاء المحضر:\n" + err.message + "\n\nتأكد من تفعيل Firestore في Firebase Console بوضع Test Mode.");
+    }
   };
 
   if(user===undefined) return <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",background:"var(--navy)",color:"#fff",fontFamily:"var(--mono)"}}>جاري التحميل...</div>;

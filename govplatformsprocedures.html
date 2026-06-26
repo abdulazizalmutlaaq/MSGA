@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<script src="guard.js"></script>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSGA — دليل إجراءات العمل على المنصات الحكومية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* MSGA — دليل إجراءات العمل على المنصات الحكومية
+   Deck house style: navy full-bleed dividers + orange hairline · white procedure pages ·
+   lavender section bars · orange step chips · note bars · image-slot screenshot placeholders.
+   1920×1080 slides, RTL. */
+:root {
+  --navy:#1F3A57; --navy-2:#16304B; --navy-3:#102539; --navy-deep:#0D2034;
+  --navy-card:#27425E; --navy-line:#33506C;
+  --orange:#E5811F; --orange-2:#C96B12; --orange-soft:#FBEEDD; --orange-glow:#F0B978;
+  --ink:#1E2B38; --ink-2:#41505F; --ink-3:#76828F; --ink-4:#A7B0BA;
+  --paper:#FFFFFF; --paper-2:#F7F8FB; --lav:#EEF0F7; --lav-2:#F4F5FA;
+  --line:#E5E8EE; --line-2:#EEF0F4;
+  --th:#F4F5F8;
+  --ok:#2F8559; --ok-bg:#E6F4EC; --ok-bd:#CBE8D6;
+  --hold:#B0831F; --hold-bg:#FAF2DA; --hold-bd:#ECDBA9;
+  --ar:"Tajawal", system-ui, sans-serif;
+  --latin:"Saira", "Tajawal", system-ui, sans-serif;
+}
+* { box-sizing:border-box; }
+html, body { margin:0; padding:0; background:#0B1722; }
+deck-stage:not(:defined){ visibility:hidden; }
+deck-stage { display:block; }
+
+section { font-family:var(--ar); color:var(--ink); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; direction:rtl; background:var(--paper); overflow:hidden; }
+.latin { font-family:var(--latin); direction:ltr; font-variant-numeric:tabular-nums; }
+
+/* inner pad wrapper fills the 1920×1080 slide */
+.pad { width:100%; height:100%; padding:74px 96px 70px; display:flex; flex-direction:column; position:relative; }
+
+/* ───────────────────────── shared content header ───────────────────────── */
+.head { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:30px; padding-bottom:22px; border-bottom:3px solid var(--orange); }
+.head .logo { height:62px; width:auto; display:block; }
+.head .titles { display:flex; flex-direction:column; gap:3px; }
+.head .eyebrow { font-size:18px; font-weight:600; letter-spacing:0.2em; color:var(--orange-2); text-transform:uppercase; direction:ltr; }
+.head .doctitle { font-size:27px; font-weight:700; color:var(--navy); }
+.head .meta { text-align:left; direction:ltr; font-size:16px; font-weight:500; color:var(--ink-3); line-height:1.7; letter-spacing:0.03em; }
+.head .meta b { color:var(--navy); font-weight:700; letter-spacing:0.06em; }
+
+/* footer */
+.foot { position:absolute; left:96px; right:96px; bottom:30px; display:flex; align-items:center; justify-content:space-between; font-size:16px; font-weight:500; color:var(--ink-3); letter-spacing:0.08em; text-transform:uppercase; border-top:1px solid var(--line); padding-top:14px; direction:ltr; }
+.foot .brand-mark { display:flex; align-items:center; gap:11px; }
+.foot .brand-mark::before { content:""; width:8px; height:8px; background:var(--orange); border-radius:50%; }
+.foot .pagenum b { color:var(--navy); font-weight:700; }
+
+/* ───────────────────────── COVER ───────────────────────── */
+.cover { background:var(--navy); color:#fff; }
+.cover::before { content:""; position:absolute; top:0; left:0; right:0; height:8px; background:var(--orange); z-index:3; }
+.cover .wm { position:absolute; inset:0; pointer-events:none; }
+.cover .wm::after { content:""; position:absolute; inset:0; background:url("assets/msga-logo.png") no-repeat right -120px center; background-size:auto 130%; opacity:.05; filter:brightness(0) invert(1); }
+.cover .pad { padding:80px 110px 70px; }
+.cover-top { display:flex; align-items:center; justify-content:space-between; }
+.cover-top .co { font-size:25px; font-weight:700; color:#fff; }
+.cover-top .brandline { font-size:18px; font-weight:600; letter-spacing:0.22em; text-transform:uppercase; color:var(--orange); direction:ltr; }
+.cover-hero { flex:1; display:flex; flex-direction:column; justify-content:center; }
+.cover-hero .logo-w { height:88px; width:auto; filter:brightness(0) invert(1); margin-bottom:46px; align-self:flex-start; }
+.cover-hero .kicker { font-size:18px; font-weight:600; letter-spacing:0.18em; color:var(--orange-glow); text-transform:uppercase; direction:rtl; margin-bottom:20px; }
+.cover-hero h1 { margin:0; font-size:84px; font-weight:800; line-height:1.1; color:#fff; letter-spacing:-0.01em; max-width:1300px; }
+.cover-hero .subtitle { margin-top:26px; font-size:26px; font-weight:500; color:#C5D0DC; max-width:1100px; line-height:1.5; }
+.cover-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:22px; margin-top:8px; }
+.ccard { background:var(--navy-card); border:1px solid var(--navy-line); border-radius:16px; padding:24px 28px; display:flex; flex-direction:column; gap:8px; }
+.ccard .k { font-size:18px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange-glow); direction:ltr; }
+.ccard .v { font-size:24px; font-weight:700; color:#fff; }
+.ccard .v .num { font-family:var(--latin); font-size:46px; line-height:.9; direction:ltr; margin-inline-end:6px; }
+.cover-foot { display:flex; align-items:center; justify-content:space-between; margin-top:40px; padding-top:24px; border-top:1px solid var(--navy-line); direction:ltr; font-size:17px; color:#8FA2B4; letter-spacing:0.08em; text-transform:uppercase; }
+.cover-foot b { color:#fff; font-weight:700; }
+.cls-pill { border:1.5px solid rgba(255,255,255,.32); border-radius:999px; padding:9px 22px; font-size:14px; font-weight:600; color:#fff; letter-spacing:0.1em; text-transform:uppercase; }
+
+/* ───────────────────────── ABOUT / LEGEND ───────────────────────── */
+.about-body { flex:1; display:flex; flex-direction:column; padding-top:42px; }
+.lead-row { display:grid; grid-template-columns:1.15fr 1fr; gap:54px; align-items:start; }
+.lead-block .lbl { font-size:17px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--orange-2); direction:ltr; margin-bottom:14px; }
+.lead-block h2 { margin:0 0 18px; font-size:40px; font-weight:800; color:var(--navy); line-height:1.2; }
+.lead-block p { margin:0; font-size:22px; line-height:1.85; color:var(--ink-2); text-wrap:pretty; }
+.lead-block p + p { margin-top:16px; }
+.scope-card { background:var(--lav); border-radius:18px; padding:34px 36px; }
+.scope-card .sc-h { font-size:17px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--navy); direction:ltr; margin-bottom:20px; }
+.scope-card .sc-row { display:flex; align-items:center; justify-content:space-between; padding:13px 0; border-bottom:1px solid #DEE2EE; font-size:21px; color:var(--ink-2); }
+.scope-card .sc-row:last-child { border-bottom:none; }
+.scope-card .sc-row b { font-family:var(--latin); font-size:28px; font-weight:700; color:var(--orange-2); }
+
+.legend { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:48px; }
+.lcard { border:1px solid var(--line); border-radius:16px; padding:28px 30px; background:var(--paper-2); display:flex; flex-direction:column; gap:14px; }
+.lcard .lc-ic { width:54px; height:54px; border-radius:13px; display:grid; place-items:center; flex-shrink:0; }
+.lcard.s1 .lc-ic { background:var(--navy); color:#fff; font-family:var(--latin); font-size:26px; font-weight:700; }
+.lcard.s2 .lc-ic { background:var(--orange-soft); color:var(--orange-2); font-size:30px; font-weight:800; }
+.lcard.s3 .lc-ic { background:var(--lav); color:var(--navy); }
+.lcard h3 { margin:0; font-size:23px; font-weight:700; color:var(--navy); }
+.lcard p { margin:0; font-size:18px; line-height:1.65; color:var(--ink-3); text-wrap:pretty; }
+.lc-ic svg { width:26px; height:26px; }
+
+/* ───────────────────────── INDEX ───────────────────────── */
+.idx-body { flex:1; display:flex; flex-direction:column; padding-top:40px; }
+.idx-grid { flex:1; display:grid; grid-template-columns:repeat(5,1fr); grid-auto-rows:1fr; gap:22px; }
+.icard { border:1px solid var(--line); border-radius:16px; padding:26px 26px; background:var(--paper); display:flex; flex-direction:column; position:relative; overflow:hidden; }
+.icard::after { content:""; position:absolute; top:0; right:0; bottom:0; width:5px; background:var(--orange); opacity:0; transition:opacity .2s; }
+.icard .inum { font-family:var(--latin); font-size:22px; font-weight:700; color:var(--orange-2); margin-bottom:14px; }
+.icard .iname { font-size:25px; font-weight:700; color:var(--navy); line-height:1.25; }
+.icard .iauth { font-size:16px; color:var(--ink-3); margin-top:7px; line-height:1.5; flex:1; }
+.icard .icount { margin-top:16px; display:inline-flex; align-items:center; gap:8px; font-size:17px; font-weight:600; color:var(--ink-2); }
+.icard .icount .dot { width:7px; height:7px; border-radius:50%; background:var(--orange); }
+
+/* ───────────────────────── ENTITY DIVIDER ───────────────────────── */
+.divider { background:var(--navy); color:#fff; }
+.divider::before { content:""; position:absolute; top:0; left:0; right:0; height:8px; background:var(--orange); z-index:3; }
+.divider .wm { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+.divider .wm::after { content:""; position:absolute; top:50%; left:-140px; transform:translateY(-50%); width:620px; height:620px; background:url("assets/msga-logo.png") no-repeat center; background-size:contain; opacity:.04; filter:brightness(0) invert(1); }
+.divider .wm .ghost { display:none; }
+.divider .pad { padding:96px 110px 90px; justify-content:space-between; }
+.dv-top { display:flex; align-items:center; gap:18px; direction:ltr; }
+.dv-top .sec-tag { font-size:18px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--orange-glow); }
+.dv-top .rule { flex:1; height:1px; background:var(--navy-line); }
+.dv-top .pages { font-family:var(--latin); font-size:17px; color:#8FA2B4; letter-spacing:0.06em; }
+.dv-mid { display:flex; flex-direction:column; }
+.dv-mid .dnum { font-family:var(--latin); font-size:30px; font-weight:700; color:var(--orange); direction:ltr; margin-bottom:18px; }
+.dv-mid h1 { margin:0; font-size:88px; font-weight:800; line-height:1.05; color:#fff; }
+.dv-mid .auth { margin-top:18px; font-size:24px; font-weight:500; color:var(--orange-glow); }
+.dv-mid .desc { margin-top:22px; font-size:23px; line-height:1.8; color:#C5D0DC; max-width:1050px; text-wrap:pretty; }
+.dv-procs { display:flex; flex-wrap:wrap; gap:14px; margin-top:8px; }
+.dv-chip { display:flex; align-items:center; gap:13px; background:var(--navy-card); border:1px solid var(--navy-line); border-radius:13px; padding:15px 22px; font-size:20px; font-weight:600; color:#E7EEF5; }
+.dv-chip .cn { font-family:var(--latin); font-size:16px; font-weight:700; color:var(--orange); }
+
+/* ───────────────────────── PROCEDURE SLIDE ───────────────────────── */
+.proc .pad { padding-bottom:64px; }
+.p-head { display:grid; grid-template-columns:1fr auto; align-items:flex-end; gap:30px; padding-bottom:22px; border-bottom:3px solid var(--orange); }
+.p-crumb { display:flex; align-items:center; gap:12px; font-size:18px; font-weight:600; color:var(--ink-3); margin-bottom:12px; }
+.p-crumb .ent { color:var(--orange-2); font-weight:700; }
+.p-crumb .sep { color:var(--ink-4); }
+.p-head h2 { margin:0; font-size:46px; font-weight:800; color:var(--navy); line-height:1.1; }
+.p-head .p-meta { text-align:left; direction:ltr; }
+.p-head .p-meta .ref { font-family:var(--latin); font-size:16px; font-weight:600; letter-spacing:0.1em; color:var(--orange-2); text-transform:uppercase; }
+.p-head .p-meta .ct { font-size:17px; color:var(--ink-3); margin-top:6px; font-weight:500; }
+.p-head .p-meta .ct b { color:var(--navy); font-family:var(--latin); font-size:20px; font-weight:700; }
+
+.proc-grid { flex:1; display:grid; grid-template-columns:1fr 0.92fr; gap:56px; padding-top:34px; min-height:0; }
+.p-steps { display:flex; flex-direction:column; gap:0; }
+.p-step { display:grid; grid-template-columns:60px 1fr; gap:22px; padding:19px 0; border-bottom:1px solid var(--line-2); align-items:start; }
+.p-step:first-child { padding-top:4px; }
+.p-step:last-child { border-bottom:none; }
+.p-step .sn { width:54px; height:54px; border-radius:14px; background:var(--navy); color:#fff; display:grid; place-items:center; font-family:var(--latin); font-size:24px; font-weight:700; flex-shrink:0; }
+.p-step:nth-child(1) .sn { background:var(--orange); }
+.p-step .st { padding-top:2px; }
+.p-step .st .t { font-size:25px; font-weight:700; color:var(--navy); line-height:1.3; }
+.p-step .st .d { font-size:19px; color:var(--ink-2); line-height:1.55; margin-top:5px; text-wrap:pretty; }
+
+/* screenshot side */
+.p-shot { display:flex; flex-direction:column; }
+.p-shot .shot-cap { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+.p-shot .shot-cap .lbl { font-size:17px; font-weight:600; color:var(--ink-3); white-space:nowrap; }
+.p-shot .shot-cap .dots { flex:1; height:1px; background:var(--line); }
+.p-shot .shot-cap .rf { font-family:var(--latin); font-size:16px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange-2); }
+.p-shot image-slot { flex:1; width:100%; border:2px dashed #C8D0DB; border-radius:18px; background:
+    repeating-linear-gradient(135deg, #F4F6F9 0 14px, #EEF1F6 14px 28px); min-height:0; }
+.note { margin-top:26px; padding:22px 28px; background:var(--orange-soft); border-radius:14px; border-inline-start:5px solid var(--orange); display:flex; gap:18px; align-items:flex-start; }
+.note .x { font-weight:800; font-size:26px; color:var(--orange-2); line-height:1.15; flex-shrink:0; }
+.note .nt { font-size:20px; color:#7A5417; line-height:1.6; text-wrap:pretty; }
+.note .nt b { color:var(--orange-2); font-weight:700; }
+
+/* ───────────────────────── CLOSING ───────────────────────── */
+.closing { background:var(--navy); color:#fff; }
+.closing::before { content:""; position:absolute; top:0; left:0; right:0; height:8px; background:var(--orange); z-index:3; }
+.closing .pad { padding:96px 110px; justify-content:center; align-items:center; text-align:center; }
+.closing .logo-w { height:96px; filter:brightness(0) invert(1); margin-bottom:50px; }
+.closing h1 { margin:0; font-size:60px; font-weight:800; color:#fff; }
+.closing p { margin:24px auto 0; font-size:24px; color:#C5D0DC; max-width:920px; line-height:1.7; }
+.signrow { display:grid; grid-template-columns:repeat(3,260px); gap:34px; margin-top:64px; }
+.signbox { display:flex; flex-direction:column; gap:8px; text-align:start; }
+.signbox .role { font-size:16px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange-glow); direction:ltr; }
+.signbox .line { margin-top:14px; border-bottom:1.5px dashed var(--navy-line); height:46px; }
+.signbox .cap { font-size:15px; letter-spacing:0.1em; text-transform:uppercase; color:#8FA2B4; direction:ltr; }
+.closing .cfoot { margin-top:66px; font-size:17px; color:#8FA2B4; letter-spacing:0.14em; text-transform:uppercase; direction:ltr; }
+.closing .cfoot b { color:#fff; font-weight:700; }
+
+/* ───────────────────────── entrance animation ───────────────────────── */
+@media (prefers-reduced-motion:no-preference){
+  [data-deck-active] .anim { animation:fadeUp .55s cubic-bezier(.2,.7,.3,1) both; }
+  [data-deck-active] .anim2 { animation:fadeUp .55s cubic-bezier(.2,.7,.3,1) .08s both; }
+  [data-deck-active] .anim3 { animation:fadeUp .55s cubic-bezier(.2,.7,.3,1) .16s both; }
+  [data-deck-active] .p-step { animation:fadeUp .5s cubic-bezier(.2,.7,.3,1) both; }
+  [data-deck-active] .p-step:nth-child(1){animation-delay:.05s}
+  [data-deck-active] .p-step:nth-child(2){animation-delay:.11s}
+  [data-deck-active] .p-step:nth-child(3){animation-delay:.17s}
+  [data-deck-active] .p-step:nth-child(4){animation-delay:.23s}
+  [data-deck-active] .p-step:nth-child(5){animation-delay:.29s}
+  [data-deck-active] .p-step:nth-child(6){animation-delay:.35s}
+}
+@keyframes fadeUp { from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:none} }
+
+@media print { html,body{background:#fff} }
+
+</style>
+</head>
+<body>
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="#1F3A57"/><rect x="0" y="0" width="100" height="4" fill="#E5811F"/><rect x="30" y="34" width="40" height="6" rx="2" fill="#E5811F"/><rect x="30" y="46" width="40" height="4" rx="2" fill="#ffffff" opacity=".85"/><rect x="30" y="54" width="28" height="4" rx="2" fill="#ffffff" opacity=".55"/></svg>
+</template>
+<deck-stage width="1920" height="1080">
+<section class="cover" data-label="Cover" data-screen-label="Cover">
+  <div class="wm"></div>
+  <div class="pad">
+    <div class="cover-top">
+      <span class="co">مجموعة مسقاة للاستشارات · MSGA</span>
+      <span class="brandline">GOVERNMENT PLATFORMS · OPERATIONS GUIDE</span>
+    </div>
+    <div class="cover-hero">
+      <img class="logo-w" src="assets/msga-logo.png" alt="MSGA"/>
+      <div class="kicker anim">دليل إجراءات تشغيلي معتمد</div>
+      <h1 class="anim2">دليل إجراءات العمل على<br/>المنصات الحكومية</h1>
+      <div class="subtitle anim3">توثيق خطوة بخطوة لإجراءات الموارد البشرية على منصات قوى ومقيم ومدد والتأمينات الاجتماعية والجهات الحكومية ذات العلاقة.</div>
+    </div>
+    <div class="cover-cards anim3">
+      <div class="ccard"><span class="k">Government Entities</span><span class="v"><span class="num latin">10</span>جهات حكومية</span></div>
+      <div class="ccard"><span class="k">Documented Procedures</span><span class="v"><span class="num latin">14</span>إجراءً موثّقًا</span></div>
+      <div class="ccard"><span class="k">Issue</span><span class="v">يونيو 2026 · v1.0</span></div>
+      <div class="ccard"><span class="k">Classification</span><span class="v">وثيقة داخلية</span></div>
+    </div>
+    <div class="cover-foot">
+      <span>MSGA · HUMAN RESOURCES OPERATIONS</span>
+      <span class="cls-pill">معتمد للاستخدام الداخلي</span>
+    </div>
+  </div>
+</section>
+<section data-label="عن الدليل" data-screen-label="About">
+  <div class="pad">
+    <div class="head">
+      <img class="logo" src="assets/msga-logo.png" alt="MSGA"/>
+      <div class="titles"><span class="eyebrow">About this guide</span><span class="doctitle">عن هذا الدليل · منهجية التوثيق</span></div>
+      <div class="meta"><div><b>REF</b> MSGA-GOV-OPS</div><div><b>ISSUE</b> 2026-06 · v1.0</div></div>
+    </div>
+    <div class="about-body">
+      <div class="lead-row">
+        <div class="lead-block anim">
+          <div class="lbl">Purpose</div>
+          <h2>توثيق موحّد لخطوات العمل</h2>
+          <p>يوثّق هذا الدليل خطوات تنفيذ الإجراءات المتكرّرة على المنصات الحكومية المستخدمة في إدارة الموارد البشرية، بهدف توحيد طريقة العمل وتقليل الأخطاء وتسريع تأهيل الموظفين الجدد.</p>
+          <p>كل إجراء معروض في صفحة مستقلة تتضمّن خطوات مرقّمة، ووصفًا موجزًا لكل خطوة، وتنبيهًا تشغيليًا، ومساحة مخصّصة لإدراج لقطة الشاشة الفعلية من المنصة.</p>
+        </div>
+        <div class="scope-card anim2">
+          <div class="sc-h">Coverage</div>
+          <div class="sc-row"><span>الجهات الحكومية</span><b class="latin">10</b></div>
+          <div class="sc-row"><span>الإجراءات الموثّقة</span><b class="latin">14</b></div>
+          <div class="sc-row"><span>خدمات منصة قوى</span><b class="latin">05</b></div>
+          <div class="sc-row"><span>متوسط الخطوات لكل إجراء</span><b class="latin">05</b></div>
+        </div>
+      </div>
+      <div class="legend">
+        <div class="lcard s1 anim"><div class="lc-ic">1</div><h3>خطوة مرقّمة</h3><p>تسلسل تنفيذ الإجراء داخل المنصة؛ الخطوة الأولى مميّزة باللون البرتقالي.</p></div>
+        <div class="lcard s2 anim2"><div class="lc-ic">!</div><h3>تنبيه تشغيلي</h3><p>ملاحظة مهمة أو شرط نظامي يجب الانتباه له قبل أو أثناء تنفيذ الإجراء.</p></div>
+        <div class="lcard s3 anim3"><div class="lc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="m3 17 5-4 4 3 3-2 6 5"/></svg></div><h3>لقطة الشاشة</h3><p>مساحة مخصّصة لإدراج صورة الشاشة الفعلية من المنصة بسحبها وإفلاتها.</p></div>
+      </div>
+    </div>
+    <div class="foot"><span class="brand-mark">MSGA · إدارة الموارد البشرية</span><span class="lbl">منهجية التوثيق</span><span class="pagenum latin">دليل إجراءات المنصات الحكومية</span></div>
+  </div>
+</section>
+<section data-label="المحتويات" data-screen-label="Index">
+  <div class="pad">
+    <div class="head">
+      <img class="logo" src="assets/msga-logo.png" alt="MSGA"/>
+      <div class="titles"><span class="eyebrow">Contents</span><span class="doctitle">المحتويات · الجهات الحكومية المشمولة</span></div>
+      <div class="meta"><div><b>10</b> ENTITIES</div><div><b>14</b> PROCEDURES</div></div>
+    </div>
+    <div class="idx-body">
+      <div class="idx-grid anim">
+      <div class="icard"><div class="inum latin">01</div><div class="iname">قوى</div><div class="iauth">وزارة الموارد البشرية والتنمية الاجتماعية</div><div class="icount"><span class="dot"></span>5 إجراءات</div></div>
+      <div class="icard"><div class="inum latin">02</div><div class="iname">التأمينات الاجتماعية</div><div class="iauth">المؤسسة العامة للتأمينات الاجتماعية</div><div class="icount"><span class="dot"></span>1 إجراء</div></div>
+      <div class="icard"><div class="inum latin">03</div><div class="iname">مقيم</div><div class="iauth">المديرية العامة للجوازات</div><div class="icount"><span class="dot"></span>1 إجراء</div></div>
+      <div class="icard"><div class="inum latin">04</div><div class="iname">مدد</div><div class="iauth">وزارة الموارد البشرية والتنمية الاجتماعية</div><div class="icount"><span class="dot"></span>1 إجراء</div></div>
+      <div class="icard"><div class="inum latin">05</div><div class="iname">أبشر أعمال</div><div class="iauth">وزارة الداخلية</div><div class="icount"><span class="dot"></span>1 إجراء</div></div>
+      <div class="icard"><div class="inum latin">06</div><div class="iname">بلدي</div><div class="iauth">وزارة الشؤون البلدية والقروية والإسكان</div><div class="icount"><span class="dot"></span>1 إجراء</div></div>
+      <div class="icard"><div class="inum latin">07</div><div class="iname">وزارة الموارد البشرية</div><div class="iauth">وزارة الموارد البشرية والتنمية الاجتماعية</div><div class="icount"><span class="dot"></span>1 إجراء</div></div>
+      <div class="icard"><div class="inum latin">08</div><div class="iname">منصة الأعمال</div><div class="iauth">المركز السعودي للأعمال</div><div class="icount"><span class="dot"></span>1 إجراء</div></div>
+      <div class="icard"><div class="inum latin">09</div><div class="iname">هيئة الزكاة والضريبة والجمارك</div><div class="iauth">هيئة الزكاة والضريبة والجمارك</div><div class="icount"><span class="dot"></span>1 إجراء</div></div>
+      <div class="icard"><div class="inum latin">10</div><div class="iname">مجلس الضمان الصحي</div><div class="iauth">مجلس الضمان الصحي</div><div class="icount"><span class="dot"></span>1 إجراء</div></div>
+      </div>
+    </div>
+    <div class="foot"><span class="brand-mark">MSGA · إدارة الموارد البشرية</span><span class="lbl">المحتويات</span><span class="pagenum latin">دليل إجراءات المنصات الحكومية</span></div>
+  </div>
+</section>
+<section class="divider" data-label="قوى" data-screen-label="Divider 01">
+  <div class="wm"><span class="ghost latin">01</span></div>
+  <div class="pad">
+    <div class="dv-top"><span class="sec-tag">QIWA</span><span class="rule"></span><span class="pages">SECTION 01 / 10</span></div>
+    <div class="dv-mid">
+      <div class="dnum latin anim">القسم 01</div>
+      <h1 class="anim">قوى</h1>
+      <div class="auth anim2">وزارة الموارد البشرية والتنمية الاجتماعية</div>
+      <div class="desc anim2">منصة قوى الموحّدة لخدمات سوق العمل وإدارة شؤون الموظفين والعقود ورخص العمل ونقل الخدمات وصلاحيات المنشأة.</div>
+    </div>
+    <div class="dv-procs anim3">
+        <span class="dv-chip"><span class="cn">01.1</span>إدارة الموظفين</span>
+        <span class="dv-chip"><span class="cn">01.2</span>إدارة العقود</span>
+        <span class="dv-chip"><span class="cn">01.3</span>رخص العمل</span>
+        <span class="dv-chip"><span class="cn">01.4</span>نقل الموظفين</span>
+        <span class="dv-chip"><span class="cn">01.5</span>الاشتراكات والصلاحيات</span>
+    </div>
+  </div>
+</section>
+<section class="proc" data-label="قوى — إدارة الموظفين" data-screen-label="QIWA-EMP">
+  <div class="pad">
+    <div class="p-head">
+      <div class="p-head-l">
+        <div class="p-crumb"><span class="ent">قوى</span><span class="sep">›</span><span>إدارة الموظفين</span></div>
+        <h2>إدارة الموظفين</h2>
+      </div>
+      <div class="p-meta"><div class="ref">QIWA-EMP</div><div class="ct">عدد الخطوات <b>5</b></div></div>
+    </div>
+    <div class="proc-grid">
+      <div class="p-steps anim">
+        <div class="p-step"><div class="sn">1</div><div class="st"><div class="t">تسجيل الدخول للمنشأة</div><div class="d">الدخول عبر النفاذ الوطني الموحّد بحساب المفوّض</div></div></div>
+        <div class="p-step"><div class="sn">2</div><div class="st"><div class="t">فتح خدمة إدارة الموظفين</div><div class="d">من القائمة الرئيسية للمنشأة في قوى</div></div></div>
+        <div class="p-step"><div class="sn">3</div><div class="st"><div class="t">استعراض قائمة الموظفين</div><div class="d">عرض المسجّلين وحالة كل موظف ونوع التوطين</div></div></div>
+        <div class="p-step"><div class="sn">4</div><div class="st"><div class="t">إضافة أو تحديث موظف</div><div class="d">إدخال بيانات موظف جديد أو تعديل القائم منها</div></div></div>
+        <div class="p-step"><div class="sn">5</div><div class="st"><div class="t">حفظ واعتماد التغييرات</div><div class="d">مراجعة البيانات قبل الاعتماد النهائي</div></div></div>
+      </div>
+      <div class="p-shot anim2">
+        <div class="shot-cap"><span class="lbl">لقطة شاشة — إدارة الموظفين</span><span class="dots"></span><span class="rf">QIWA-EMP</span></div>
+        <image-slot id="shot-qiwa-emp" placeholder="أفلت لقطة شاشة المنصة هنا" fit="cover"></image-slot>
+        <div class="note"><span class="x">!</span><span class="nt">تأكّد من تطابق بيانات الموظف مع <b>التأمينات الاجتماعية</b> قبل الحفظ لتفادي رفض السجل.</span></div>
+      </div>
+    </div>
+    <div class="foot"><span class="brand-mark">MSGA · إدارة الموارد البشرية</span><span class="lbl">قوى · إدارة الموظفين</span><span class="pagenum latin">دليل إجراءات المنصات الحكومية</span></div>
+  </div>
+</section>
+<section class="proc" data-label="قوى — إدارة العقود" data-screen-label="QIWA-CTR">
+  <div class="pad">
+    <div class="p-head">
+      <div class="p-head-l">
+        <div class="p-crumb"><span class="ent">قوى</span><span class="sep">›</span><span>إدارة العقود</span></div>
+        <h2>إدارة العقود</h2>
+      </div>
+      <div class="p-meta"><div class="ref">QIWA-CTR</div><div class="ct">عدد الخطوات <b>5</b></div></div>
+    </div>
+    <div class="proc-grid">
+      <div class="p-steps anim">
+        <div class="p-step"><div class="sn">1</div><div class="st"><div class="t">فتح خدمة العقود</div><div class="d">الدخول لخدمة «العقود» ضمن لوحة المنشأة</div></div></div>
+        <div class="p-step"><div class="sn">2</div><div class="st"><div class="t">إنشاء عقد عمل موحّد</div><div class="d">اختيار الموظف وتعبئة بنود العقد</div></div></div>
+        <div class="p-step"><div class="sn">3</div><div class="st"><div class="t">تحديد بنود العقد</div><div class="d">الأجر ومدة العقد والمسمّى الوظيفي وساعات العمل</div></div></div>
+        <div class="p-step"><div class="sn">4</div><div class="st"><div class="t">إرسال العقد للموظف</div><div class="d">للموافقة والتوثيق الإلكتروني من طرفه</div></div></div>
+        <div class="p-step"><div class="sn">5</div><div class="st"><div class="t">متابعة حالة العقد</div><div class="d">بانتظار / موثّق / مرفوض ومعالجة كل حالة</div></div></div>
+      </div>
+      <div class="p-shot anim2">
+        <div class="shot-cap"><span class="lbl">لقطة شاشة — إدارة العقود</span><span class="dots"></span><span class="rf">QIWA-CTR</span></div>
+        <image-slot id="shot-qiwa-ctr" placeholder="أفلت لقطة شاشة المنصة هنا" fit="cover"></image-slot>
+        <div class="note"><span class="x">!</span><span class="nt">العقد يصبح <b>ساريًا</b> بعد توثيق الطرفين إلكترونيًا فقط؛ تابِع العقود المعلّقة دوريًا.</span></div>
+      </div>
+    </div>
+    <div class="foot"><span class="brand-mark">MSGA · إدارة الموارد البشرية</span><span class="lbl">قوى · إدارة العقود</span><span class="pagenum latin">دليل إجراءات المنصات الحكومية</span></div>
+  </div>
+</section>
+<section class="proc" data-label="قوى — رخص العمل" data-screen-label="QIWA-WP">
+  <div class="pad">
+    <div class="p-head">
+      <div class="p-head-l">
+        <div class="p-crumb"><span class="ent">قوى</span><span class="sep">›</span><span>رخص العمل</span></div>
+        <h2>إصدار وتجديد رخص العمل</h2>
+      </div>
+      <div class="p-meta"><div class="ref">QIWA-WP</div><div class="ct">عدد الخطوات <b>5</b></div></div>
+    </div>
+    <div class="proc-grid">
+      <div class="p-steps anim">
+        <div class="p-step"><div class="sn">1</div><div class="st"><div class="t">فتح خدمة رخص العمل</div><div class="d">الدخول للخدمة من قائمة خدمات المنشأة</div></div></div>
+        <div class="p-step"><div class="sn">2</div><div class="st"><div class="t">اختيار الموظف</div><div class="d">تحديد الموظف الوافد المراد إصدار أو تجديد رخصته</div></div></div>
+        <div class="p-step"><div class="sn">3</div><div class="st"><div class="t">سداد المقابل المالي والرسوم</div><div class="d">إصدار فاتورة سداد وإتمام الدفع</div></div></div>
+        <div class="p-step"><div class="sn">4</div><div class="st"><div class="t">إصدار الرخصة</div><div class="d">تأكيد العملية وتفعيل سريان الرخصة</div></div></div>
+        <div class="p-step"><div class="sn">5</div><div class="st"><div class="t">حفظ أو طباعة الرخصة</div><div class="d">الاحتفاظ بنسخة في ملف الموظف</div></div></div>
+      </div>
+      <div class="p-shot anim2">
+        <div class="shot-cap"><span class="lbl">لقطة شاشة — رخص العمل</span><span class="dots"></span><span class="rf">QIWA-WP</span></div>
+        <image-slot id="shot-qiwa-wp" placeholder="أفلت لقطة شاشة المنصة هنا" fit="cover"></image-slot>
+        <div class="note"><span class="x">!</span><span class="nt">لا يمكن الإصدار قبل اكتمال سداد <b>المقابل المالي</b> واشتراكات التأمينات المستحقّة.</span></div>
+      </div>
+    </div>
+    <div class="foot"><span class="brand-mark">MSGA · إدارة الموارد البشرية</span><span class="lbl">قوى · رخص العمل</span><span class="pagenum latin">دليل إجراءات المنصات الحكومية</span></div>
+  </div>
+</section>
+<section class="proc" data-label="قوى — نقل الموظفين" data-screen-label="QIWA-TRF">
+  <div class="pad">
+    <div class="p-head">
+      <div class="p-head-l">
+        <div class="p-crumb"><span class="ent">قوى</span><span class="sep">›</span><span>نقل الموظفين</span></div>
+        <h2>نقل خدمات الموظفين</h2>
+      </div>
+      <div class="p-meta"><div class="ref">QIWA-TRF</div><div class="ct">عدد الخطوات <b>5</b></div></div>
+    </div>
+    <div class="proc-grid">
+      <div class="p-steps anim">
+        <div class="p-step"><div class="sn">1</div><div class="st"><div class="t">فتح خدمة نقل الخدمات</div><div class="d">الدخول للخدمة وبدء طلب نقل جديد</div></div></div>
+        <div class="p-step"><div class="sn">2</div><div class="st"><div class="t">رفع طلب النقل</div><div class="d">إدخال بيانات الموظف المراد نقله من منشأة أخرى</div></div></div>
+        <div class="p-step"><div class="sn">3</div><div class="st"><div class="t">تحديد العقد والأجر</div><div class="d">تثبيت تفاصيل العقد الجديد والمسمّى الوظيفي</div></div></div>
+        <div class="p-step"><div class="sn">4</div><div class="st"><div class="t">انتظار الموافقات</div><div class="d">موافقة الموظف وصاحب العمل السابق حسب الحالة</div></div></div>
+        <div class="p-step"><div class="sn">5</div><div class="st"><div class="t">سداد الرسوم والاعتماد</div><div class="d">إتمام الدفع واعتماد النقل نهائيًا</div></div></div>
+      </div>
+      <div class="p-shot anim2">
+        <div class="shot-cap"><span class="lbl">لقطة شاشة — نقل الموظفين</span><span class="dots"></span><span class="rf">QIWA-TRF</span></div>
+        <image-slot id="shot-qiwa-trf" placeholder="أفلت لقطة شاشة المنصة هنا" fit="cover"></image-slot>
+        <div class="note"><span class="x">!</span><span class="nt">بعض حالات النقل <b>لا تتطلّب موافقة</b> صاحب العمل الحالي وفق ضوابط الوزارة المعلنة.</span></div>
+      </div>
+    </div>
+    <div class="foot"><span class="brand-mark">MSGA · إدارة الموارد البشرية</span><span class="lbl">قوى · نقل الموظفين</span><span class="pagenum latin">دليل إجراءات المنصات الحكومية</span></div>
+  </div>
+</section>
+<section class="proc" data-label="قوى — الاشتراكات والصلاحيات" data-screen-label="QIWA-PRM">
+  <div class="pad">
+    <div class="p-head">
+      <div class="p-head-l">
+        <div class="p-crumb"><span class="ent">قوى</span><span class="sep">›</span><span>الاشتراكات والصلاحيات</span></div>
+        <h2>الاشتراكات وإدارة الصلاحيات</h2>
+      </div>
+      <div class="p-meta"><div class="ref">QIWA-PRM</div><div class="ct">عدد الخطوات <b>5</b></div></div>
+    </div>
+    <div class="proc-grid">
+      <div class="p-steps anim">
+        <div class="p-step"><div class="sn">1</div><div class="st"><div class="t">الدخول لإعدادات المنشأة</div><div class="d">فتح إعدادات الحساب في منصة قوى</div></div></div>
+        <div class="p-step"><div class="sn">2</div><div class="st"><div class="t">اختيار باقة الاشتراك</div><div class="d">تحديد الباقة المناسبة وتجديدها عند الانتهاء</div></div></div>
+        <div class="p-step"><div class="sn">3</div><div class="st"><div class="t">إضافة المستخدمين</div><div class="d">إضافة مفوّضين للحساب بأرقام هوياتهم</div></div></div>
+        <div class="p-step"><div class="sn">4</div><div class="st"><div class="t">تحديد الصلاحيات</div><div class="d">منح كل مستخدم صلاحيات حسب دوره الوظيفي</div></div></div>
+        <div class="p-step"><div class="sn">5</div><div class="st"><div class="t">الحفظ والمراجعة الدورية</div><div class="d">اعتماد الصلاحيات ومراجعتها بشكل منتظم</div></div></div>
+      </div>
+      <div class="p-shot anim2">
+        <div class="shot-cap"><span class="lbl">لقطة شاشة — الاشتراكات والصلاحيات</span><span class="dots"></span><span class="rf">QIWA-PRM</span></div>
+        <image-slot id="shot-qiwa-prm" placeholder="أفلت لقطة شاشة المنصة هنا" fit="cover"></image-slot>
+        <div class="note"><span class="x">!</span><span class="nt">راجِع صلاحيات المستخدمين عند <b>تغيّر المهام</b> أو انتهاء التفويض لضمان أمن الحساب.</span></div>
+      </div>
+    </div>
+    <div class="foot"><span class="brand-mark">MSGA · إدارة الموارد البشرية</span><span class="lbl">قوى · الاشتراكات والصلاحيات</span><span class="pagenum latin">دليل إجراءات المنصات الحكومية</span></div>
+  </div>
+</section>
+<section class="divider" data-label="التأمينات الاجتماعية" data-screen-label="Divider 02">
+  <div class="wm"><span class="ghost latin">02</span></div>
+  <div class="pad">
+    <div class="dv-top"><span class="sec-tag">GOSI</span><span class="rule"></span><span class="pages">SECTION 02 / 10</span></div>
+    <div class="dv-mid">
+      <div class="dnum latin anim">القسم 02</div>
+      <h1 class="anim">التأمينات الاجتماعية</h1>
+      <div class="auth anim2">المؤسسة العامة للتأمينات الاجتماعية</div>
+      <div class="desc anim2">بوابة التأمينات الاجتماعية لتسجيل المشتركين وإدارة الاشتراكات الشهرية وبيانات الأجور للموظفين.</div>
+    </div>
+    <div class="dv-procs anim3">
+        <span class="dv-chip"><span class="cn">02.1</span>تسجيل المشتركين</span>
+    </div>
+  </div>
+</section>
+<section class="proc" data-label="التأمينات الاجتماعية — تسجيل المشتركين" data-screen-label="GOSI-REG">
+  <div class="pad">
+    <div class="p-head">
+      <div class="p-head-l">
+        <div class="p-crumb"><span class="ent">التأمينات الاجتماعية</span><span class="sep">›</span><span>تسجيل المشتركين</span></div>
+        <h2>تسجيل وتحديث المشتركين</h2>
+      </div>
+      <div class="p-meta"><div class="ref">GOSI-REG</div><div class="ct">عدد الخطوات <b>5</b></div></div>
+    </div>
+    <div class="proc-grid">
+      <div class="p-steps anim">
+        <div class="p-step"><div class="sn">1</div><div class="st"><div class="t">الدخول لبوابة التأمينات</div><div class="d">تسجيل الدخول بحساب المنشأة</div></div></div>
+        <div class="p-step"><div class="sn">2</div><div class="st"><div class="t">فتح خدمة تسجيل المشتركين</div><div class="d">اختيار الخدمة من قائمة خدمات المنشأة</div></div></div>
+        <div class="p-step"><div class="sn">3</div><div class="st"><div class="t">إضافة مشترك جديد</div><div class="d">إدخال رقم الهوية/الإقامة والأجر الشهري</div></div></div>
+        <div class="p-step"><div class="sn">4</div><div class="st"><div class="t">تحديد بيانات الاشتراك</div><div class="d">تاريخ الالتحاق ونوع الاشتراك والفرع</div></div></div>
+        <div class="p-step"><div class="sn">5</div><div class="st"><div class="t">اعتماد التسجيل</div><div class="d">حفظ السجل ومتابعة الفاتورة الشهرية</div></div></div>
+      </div>
+      <div class="p-shot anim2">
+        <div class="shot-cap"><span class="lbl">لقطة شاشة — تسجيل المشتركين</span><span class="dots"></span><span class="rf">GOSI-REG</span></div>
+        <image-slot id="shot-gosi-reg" placeholder="أفلت لقطة شاشة المنصة هنا" fit="cover"></image-slot>
+        <div class="note"><span class="x">!</span><span class="nt">يجب تسجيل الموظف خلال <b>المدة النظامية</b> من تاريخ مباشرته لتفادي الغرامات.</span></div>
+      </div>
+    </div>
+    <div class="foot"><span class="brand-mark">MSGA · إدارة الموارد البشرية</span><span class="lbl">التأمينات الاجتماعية · تسجيل المشتركين</span><span class="pagenum latin">دليل إجراءات المنصات الحكومية</span></div>
+  </div>
+</section>
+<section class="divider" data-label="مقيم" data-screen-label="Divider 03">
+  <div class="wm"><span class="ghost latin">03</span></div>
+  <div class="pad">
+    <div class="dv-top"><span class="sec-tag">MUQEEM</span><span class="rule"></span><span class="pages">SECTION 03 / 10</span></div>
+    <div class="dv-mid">
+      <div class="dnum latin anim">القسم 03</div>
+      <h1 class="anim">مقيم</h1>
+      <div class="auth anim2">المديرية العامة للجوازات</div>
+      <div class="desc anim2">بوابة مقيم لإدارة خدمات الجوازات للوافدين: إصدار وتجديد الإقامة وتأشيرات الخروج والعودة والنقل.</div>
+    </div>
+    <div class="dv-procs anim3">
+        <span class="dv-chip"><span class="cn">03.1</span>خدمات الإقامة</span>
+    </div>
+  </div>
+</section>
+<section class="proc" data-label="مقيم — خدمات الإقامة" data-screen-label="MUQ-IQ">
+  <div class="pad">
+    <div class="p-head">
+      <div class="p-head-l">
+        <div class="p-crumb"><span class="ent">مقيم</span><span class="sep">›</span><span>خدمات الإقامة</span></div>
+        <h2>إصدار وتجديد الإقامة وخدمات الجوازات</h2>
+      </div>
+      <div class="p-meta"><div class="ref">MUQ-IQ</div><div class="ct">عدد الخطوات <b>5</b></div></div>
+    </div>
+    <div class="proc-grid">
+      <div class="p-steps anim">
+        <div class="p-step"><div class="sn">1</div><div class="st"><div class="t">الدخول لبوابة مقيم</div><div class="d">تسجيل الدخول بحساب المنشأة</div></div></div>
+        <div class="p-step"><div class="sn">2</div><div class="st"><div class="t">اختيار الخدمة</div><div class="d">إصدار إقامة / تجديد / خروج وعودة</div></div></div>
+        <div class="p-step"><div class="sn">3</div><div class="st"><div class="t">تحديد الموظف الوافد</div><div class="d">إدخال بيانات الموظف المطلوبة للخدمة</div></div></div>
+        <div class="p-step"><div class="sn">4</div><div class="st"><div class="t">سداد الرسوم</div><div class="d">إصدار فاتورة سداد وإتمام الدفع</div></div></div>
+        <div class="p-step"><div class="sn">5</div><div class="st"><div class="t">تأكيد العملية</div><div class="d">اعتماد الطلب وطباعة الإشعار</div></div></div>
+      </div>
+      <div class="p-shot anim2">
+        <div class="shot-cap"><span class="lbl">لقطة شاشة — خدمات الإقامة</span><span class="dots"></span><span class="rf">MUQ-IQ</span></div>
+        <image-slot id="shot-muq-iq" placeholder="أفلت لقطة شاشة المنصة هنا" fit="cover"></image-slot>
+        <div class="note"><span class="x">!</span><span class="nt">تأكّد من <b>صلاحية جواز السفر</b> ومدّة بقائه قبل تقديم أي طلب لتفادي الرفض.</span></div>
+      </div>
+    </div>
+    <div class="foot"><span class="brand-mark">MSGA · إدارة الموارد البشرية</span><span class="lbl">مقيم · خدمات الإقامة</span><span class="pagenum latin">دليل إجراءات المنصات الحكومية</span></div>
+  </div>
+</section>
+<section class="divider" data-label="مدد" data-screen-label="Divider 04">
+  <div class="wm"><span class="ghost latin">04</span></div>
+  <div class="pad">
+    <div class="dv-top"><span class="sec-tag">MUDAD</span><span class="rule"></span><span class="pages">SECTION 04 / 10</span></div>
+    <div class="dv-mid">
+      <div class="dnum latin anim">القسم 04</div>
+      <h1 class="anim">مدد</h1>
+      <div class="auth anim2">وزارة الموارد البشرية والتنمية الاجتماعية</div>
+      <div class="desc anim2">منصة مدد لإدارة الرواتب وحماية الأجور: ربط الحساب البنكي وتجهيز مسير الرواتب وصرفه ومطابقته.</div>
+    </div>
+    <div class="dv-procs anim3">
+        <span class="dv-chip"><span class="cn">04.1</span>حماية الأجور</span>
+    </div>
+  </div>
+</section>
+<section class="proc" data-label="مدد — حماية الأجور" data-screen-label="MUDAD-WPS">
+  <div class="pad">
+    <div class="p-head">
+      <div class="p-head-l">
+        <div class="p-crumb"><span class="ent">مدد</span><span class="sep">›</span><span>حماية الأجور</span></div>
+        <h2>رفع مسير الرواتب وحماية الأجور</h2>
+      </div>
+      <div class="p-meta"><div class="ref">MUDAD-WPS</div><div class="ct">عدد الخطوات <b>5</b></div></div>
+    </div>
+    <div class="proc-grid">
+      <div class="p-steps anim">
+        <div class="p-step"><div class="sn">1</div><div class="st"><div class="t">الدخول لمنصة مدد</div><div class="d">تسجيل الدخول بحساب المنشأة</div></div></div>
+        <div class="p-step"><div class="sn">2</div><div class="st"><div class="t">ربط الحساب البنكي</div><div class="d">تفعيل حساب المنشأة البنكي للصرف</div></div></div>
+        <div class="p-step"><div class="sn">3</div><div class="st"><div class="t">تجهيز مسير الرواتب</div><div class="d">إعداد مسير الرواتب الشهري واعتماده</div></div></div>
+        <div class="p-step"><div class="sn">4</div><div class="st"><div class="t">تنفيذ صرف الرواتب</div><div class="d">تنفيذ الصرف للموظفين عبر المنصة</div></div></div>
+        <div class="p-step"><div class="sn">5</div><div class="st"><div class="t">متابعة مطابقة الأجور</div><div class="d">مراجعة حالة الالتزام في نظام حماية الأجور</div></div></div>
+      </div>
+      <div class="p-shot anim2">
+        <div class="shot-cap"><span class="lbl">لقطة شاشة — حماية الأجور</span><span class="dots"></span><span class="rf">MUDAD-WPS</span></div>
+        <image-slot id="shot-mudad-wps" placeholder="أفلت لقطة شاشة المنصة هنا" fit="cover"></image-slot>
+        <div class="note"><span class="x">!</span><span class="nt">يجب رفع مسير الرواتب <b>شهريًا</b> وفي موعده لتفادي مخالفات حماية الأجور.</span></div>
+      </div>
+    </div>
+    <div class="foot"><span class="brand-mark">MSGA · إدارة الموارد البشرية</span><span class="lbl">مدد · حماية الأجور</span><span class="pagenum latin">دليل إجراءات المنصات الحكومية</span></div>
+  </div>
+</section>
+<section class="divider" data-label="أبشر أعمال" data-screen-label="Divider 05">
+  <div class="wm"><span class="ghost latin">05</span></div>
+  <div class="pad">
+    <div class="dv-top"><span class="sec-tag">ABSHER</span><span class="rule"></span><span class="pages">SECTION 05 / 10</span></div>
+    <div class="dv-mid">
+      <div class="dnum latin anim">القسم 05</div>
+      <h1 class="anim">أبشر أعمال</h1>
+      <div class="auth anim2">وزارة الداخلية</div>
+      <div class="desc anim2">بوابة أبشر أعمال للخدمات الإلكترونية للمنشآت: التفويض والاستعلامات والخدمات المرتبطة بالهوية الوطنية.</div>
+    </div>
+    <div class="dv-procs anim3">
+        <span class="dv-chip"><span class="cn">05.1</span>الخدمات الإلكترونية</span>
+    </div>
+  </div>
+</section>
+<section class="proc" data-label="أبشر أعمال — الخدمات الإلكترونية" data-screen-label="ABSHER-ES">
+  <div class="pad">
+    <div class="p-head">
+      <div class="p-head-l">
+        <div class="p-crumb"><span class="ent">أبشر أعمال</span><span class="sep">›</span><span>الخدمات الإلكترونية</span></div>
+        <h2>الخدمات الإلكترونية للمنشآت</h2>
+      </div>
+      <div class="p-meta"><div class="ref">ABSHER-ES</div><div class="ct">عدد الخطوات <b>5</b></div></div>
+    </div>
+    <div class="proc-grid">
+      <div class="p-steps anim">
+        <div class="p-step"><div class="sn">1</div><div class="st"><div class="t">الدخول لبوابة أبشر أعمال</div><div class="d">تسجيل الدخول بحساب المنشأة</div></div></div>
+        <div class="p-step"><div class="sn">2</div><div class="st"><div class="t">تفعيل المفوّضين</div><div class="d">ربط هوية المنشأة وتفعيل المستخدمين</div></div></div>
+        <div class="p-step"><div class="sn">3</div><div class="st"><div class="t">اختيار الخدمة</div><div class="d">تفويض / استعلام / خدمات مرتبطة بالمنشأة</div></div></div>
+        <div class="p-step"><div class="sn">4</div><div class="st"><div class="t">تعبئة الطلب والمصادقة</div><div class="d">إدخال البيانات والتأكيد عبر رمز OTP</div></div></div>
+        <div class="p-step"><div class="sn">5</div><div class="st"><div class="t">استلام النتيجة</div><div class="d">استلام الوثيقة أو نتيجة الطلب إلكترونيًا</div></div></div>
+      </div>
+      <div class="p-shot anim2">
+        <div class="shot-cap"><span class="lbl">لقطة شاشة — الخدمات الإلكترونية</span><span class="dots"></span><span class="rf">ABSHER-ES</span></div>
+        <image-slot id="shot-absher-es" placeholder="أفلت لقطة شاشة المنصة هنا" fit="cover"></image-slot>
+        <div class="note"><span class="x">!</span><span class="nt">يتطلّب الدخول <b>تفويضًا ساريًا</b> عبر النفاذ الوطني الموحّد للمستخدم.</span></div>
+      </div>
+    </div>
+    <div class="foot"><span class="brand-mark">MSGA · إدارة الموارد البشرية</span><span class="lbl">أبشر أعمال · الخدمات الإلكترونية</span><span class="pagenum latin">دليل إجراءات المنصات الحكومية</span></div>
+  </div>
+</section>
+<section class="divider" data-label="بلدي" data-screen-label="Divider 06">
+  <div class="wm"><span class="ghost latin">06</span></div>
+  <div class="pad">
+    <div class="dv-top"><span class="sec-tag">BALADY</span><span class="rule"></span><span class="pages">SECTION 06 / 10</span></div>
+    <div class="dv-mid">
+      <div class="dnum latin anim">القسم 06</div>
+      <h1 class="anim">بلدي</h1>
+      <div class="auth anim2">وزارة الشؤون البلدية والقروية والإسكان</div>
+      <div class="desc anim2">منصة بلدي لخدمات التفويض والرخص البلدية والتجارية للمنشآت وإدارة بيانات النشاط والموقع.</div>
+    </div>
+    <div class="dv-procs anim3">
+        <span class="dv-chip"><span class="cn">06.1</span>التفويض والرخص</span>
+    </div>
+  </div>
+</section>
+<section class="proc" data-label="بلدي — التفويض والرخص" data-screen-label="BALADY-LIC">
+  <div class="pad">
+    <div class="p-head">
+      <div class="p-head-l">
+        <div class="p-crumb"><span class="ent">بلدي</span><span class="sep">›</span><span>التفويض والرخص</span></div>
+        <h2>إصدار وتجديد الرخص البلدية</h2>
+      </div>
+      <div class="p-meta"><div class="ref">BALADY-LIC</div><div class="ct">عدد الخطوات <b>5</b></div></div>
+    </div>
+    <div class="proc-grid">
+      <div class="p-steps anim">
+        <div class="p-step"><div class="sn">1</div><div class="st"><div class="t">الدخول لمنصة بلدي</div><div class="d">تسجيل الدخول بحساب المنشأة</div></div></div>
+        <div class="p-step"><div class="sn">2</div><div class="st"><div class="t">اختيار الرخص التجارية</div><div class="d">تحديد الخدمة المطلوبة (إصدار/تجديد/تعديل)</div></div></div>
+        <div class="p-step"><div class="sn">3</div><div class="st"><div class="t">تعبئة بيانات النشاط</div><div class="d">إدخال بيانات النشاط والموقع الجغرافي</div></div></div>
+        <div class="p-step"><div class="sn">4</div><div class="st"><div class="t">إرفاق المستندات</div><div class="d">عقد الإيجار والسجل التجاري والوثائق المطلوبة</div></div></div>
+        <div class="p-step"><div class="sn">5</div><div class="st"><div class="t">سداد الرسوم والإصدار</div><div class="d">إتمام الدفع وإصدار الرخصة</div></div></div>
+      </div>
+      <div class="p-shot anim2">
+        <div class="shot-cap"><span class="lbl">لقطة شاشة — التفويض والرخص</span><span class="dots"></span><span class="rf">BALADY-LIC</span></div>
+        <image-slot id="shot-balady-lic" placeholder="أفلت لقطة شاشة المنصة هنا" fit="cover"></image-slot>
+        <div class="note"><span class="x">!</span><span class="nt">تأكّد من <b>توافق النشاط</b> مع اشتراطات الموقع البلدية قبل التقديم.</span></div>
+      </div>
+    </div>
+    <div class="foot"><span class="brand-mark">MSGA · إدارة الموارد البشرية</span><span class="lbl">بلدي · التفويض والرخص</span><span class="pagenum latin">دليل إجراءات المنصات الحكومية</span></div>
+  </div>
+</section>
+<section class="divider" data-label="وزارة الموارد البشرية" data-screen-label="Divider 07">
+  <div class="wm"><span class="ghost latin">07</span></div>
+  <div class="pad">
+    <div class="dv-top"><span class="sec-tag">HRSD</span><span class="rule"></span><span class="pages">SECTION 07 / 10</span></div>
+    <div class="dv-mid">
+      <div class="dnum latin anim">القسم 07</div>
+      <h1 class="anim">وزارة الموارد البشرية</h1>
+      <div class="auth anim2">وزارة الموارد البشرية والتنمية الاجتماعية</div>
+      <div class="desc anim2">البوابة الإلكترونية للوزارة لخدمات المنشآت: التوطين ونطاقات والخدمات العمالية ومعالجة الشكاوى.</div>
+    </div>
+    <div class="dv-procs anim3">
+        <span class="dv-chip"><span class="cn">07.1</span>الخدمات الإلكترونية</span>
+    </div>
+  </div>
+</section>
+<section class="proc" data-label="وزارة الموارد البشرية — الخدمات الإلكترونية" data-screen-label="HRSD-ES">
+  <div class="pad">
+    <div class="p-head">
+      <div class="p-head-l">
+        <div class="p-crumb"><span class="ent">وزارة الموارد البشرية</span><span class="sep">›</span><span>الخدمات الإلكترونية</span></div>
+        <h2>الخدمات الإلكترونية للمنشآت</h2>
+      </div>
+      <div class="p-meta"><div class="ref">HRSD-ES</div><div class="ct">عدد الخطوات <b>5</b></div></div>
+    </div>
+    <div class="proc-grid">
+      <div class="p-steps anim">
+        <div class="p-step"><div class="sn">1</div><div class="st"><div class="t">الدخول لبوابة الوزارة</div><div class="d">تسجيل الدخول بحساب المنشأة</div></div></div>
+        <div class="p-step"><div class="sn">2</div><div class="st"><div class="t">اختيار خدمات المنشآت</div><div class="d">التوطين / الخدمات العمالية / الشكاوى</div></div></div>
+        <div class="p-step"><div class="sn">3</div><div class="st"><div class="t">تقديم الطلب</div><div class="d">تعبئة البيانات وإرفاق المتطلبات</div></div></div>
+        <div class="p-step"><div class="sn">4</div><div class="st"><div class="t">متابعة حالة الطلب</div><div class="d">تتبّع الطلب عبر لوحة التحكم</div></div></div>
+        <div class="p-step"><div class="sn">5</div><div class="st"><div class="t">استلام الرد</div><div class="d">استلام النتيجة أو الوثيقة إلكترونيًا</div></div></div>
+      </div>
+      <div class="p-shot anim2">
+        <div class="shot-cap"><span class="lbl">لقطة شاشة — الخدمات الإلكترونية</span><span class="dots"></span><span class="rf">HRSD-ES</span></div>
+        <image-slot id="shot-hrsd-es" placeholder="أفلت لقطة شاشة المنصة هنا" fit="cover"></image-slot>
+        <div class="note"><span class="x">!</span><span class="nt">بعض الخدمات مرتبطة بـ<b>نطاقات</b> ونِسب التوطين؛ تحقّق من حالة المنشأة أولًا.</span></div>
+      </div>
+    </div>
+    <div class="foot"><span class="brand-mark">MSGA · إدارة الموارد البشرية</span><span class="lbl">وزارة الموارد البشرية · الخدمات الإلكترونية</span><span class="pagenum latin">دليل إجراءات المنصات الحكومية</span></div>
+  </div>
+</section>
+<section class="divider" data-label="منصة الأعمال" data-screen-label="Divider 08">
+  <div class="wm"><span class="ghost latin">08</span></div>
+  <div class="pad">
+    <div class="dv-top"><span class="sec-tag">BUSINESS</span><span class="rule"></span><span class="pages">SECTION 08 / 10</span></div>
+    <div class="dv-mid">
+      <div class="dnum latin anim">القسم 08</div>
+      <h1 class="anim">منصة الأعمال</h1>
+      <div class="auth anim2">المركز السعودي للأعمال</div>
+      <div class="desc anim2">منصة الأعمال الموحّدة لخدمات السجل التجاري وبيانات الكيان التجاري للمنشأة وتحديثها.</div>
+    </div>
+    <div class="dv-procs anim3">
+        <span class="dv-chip"><span class="cn">08.1</span>الخدمات الإلكترونية</span>
+    </div>
+  </div>
+</section>
+<section class="proc" data-label="منصة الأعمال — الخدمات الإلكترونية" data-screen-label="BIZ-CR">
+  <div class="pad">
+    <div class="p-head">
+      <div class="p-head-l">
+        <div class="p-crumb"><span class="ent">منصة الأعمال</span><span class="sep">›</span><span>الخدمات الإلكترونية</span></div>
+        <h2>خدمات السجل التجاري</h2>
+      </div>
+      <div class="p-meta"><div class="ref">BIZ-CR</div><div class="ct">عدد الخطوات <b>5</b></div></div>
+    </div>
+    <div class="proc-grid">
+      <div class="p-steps anim">
+        <div class="p-step"><div class="sn">1</div><div class="st"><div class="t">الدخول لمنصة الأعمال</div><div class="d">تسجيل الدخول بحساب المنشأة</div></div></div>
+        <div class="p-step"><div class="sn">2</div><div class="st"><div class="t">اختيار خدمة السجل</div><div class="d">إصدار / تجديد / تعديل السجل التجاري</div></div></div>
+        <div class="p-step"><div class="sn">3</div><div class="st"><div class="t">تحديث بيانات الكيان</div><div class="d">تحديث بيانات النشاط والعنوان والملّاك</div></div></div>
+        <div class="p-step"><div class="sn">4</div><div class="st"><div class="t">سداد الرسوم</div><div class="d">إتمام الدفع واعتماد الطلب</div></div></div>
+        <div class="p-step"><div class="sn">5</div><div class="st"><div class="t">تحميل الوثيقة</div><div class="d">تنزيل السجل أو الوثيقة المحدّثة</div></div></div>
+      </div>
+      <div class="p-shot anim2">
+        <div class="shot-cap"><span class="lbl">لقطة شاشة — الخدمات الإلكترونية</span><span class="dots"></span><span class="rf">BIZ-CR</span></div>
+        <image-slot id="shot-biz-cr" placeholder="أفلت لقطة شاشة المنصة هنا" fit="cover"></image-slot>
+        <div class="note"><span class="x">!</span><span class="nt">حدّث بيانات <b>السجل التجاري</b> دوريًا لتجنّب إيقاف الخدمات الحكومية المرتبطة.</span></div>
+      </div>
+    </div>
+    <div class="foot"><span class="brand-mark">MSGA · إدارة الموارد البشرية</span><span class="lbl">منصة الأعمال · الخدمات الإلكترونية</span><span class="pagenum latin">دليل إجراءات المنصات الحكومية</span></div>
+  </div>
+</section>
+<section class="divider" data-label="هيئة الزكاة والضريبة والجمارك" data-screen-label="Divider 09">
+  <div class="wm"><span class="ghost latin">09</span></div>
+  <div class="pad">
+    <div class="dv-top"><span class="sec-tag">ZATCA</span><span class="rule"></span><span class="pages">SECTION 09 / 10</span></div>
+    <div class="dv-mid">
+      <div class="dnum latin anim">القسم 09</div>
+      <h1 class="anim">هيئة الزكاة والضريبة والجمارك</h1>
+      <div class="auth anim2">هيئة الزكاة والضريبة والجمارك</div>
+      <div class="desc anim2">بوابة الهيئة لتقديم الإقرارات الزكوية والضريبية والفوترة الإلكترونية وسداد المستحقات.</div>
+    </div>
+    <div class="dv-procs anim3">
+        <span class="dv-chip"><span class="cn">09.1</span>الخدمات الإلكترونية</span>
+    </div>
+  </div>
+</section>
+<section class="proc" data-label="هيئة الزكاة والضريبة والجمارك — الخدمات الإلكترونية" data-screen-label="ZATCA-ES">
+  <div class="pad">
+    <div class="p-head">
+      <div class="p-head-l">
+        <div class="p-crumb"><span class="ent">هيئة الزكاة والضريبة والجمارك</span><span class="sep">›</span><span>الخدمات الإلكترونية</span></div>
+        <h2>الإقرارات والخدمات الإلكترونية</h2>
+      </div>
+      <div class="p-meta"><div class="ref">ZATCA-ES</div><div class="ct">عدد الخطوات <b>5</b></div></div>
+    </div>
+    <div class="proc-grid">
+      <div class="p-steps anim">
+        <div class="p-step"><div class="sn">1</div><div class="st"><div class="t">الدخول لبوابة الهيئة</div><div class="d">تسجيل الدخول بحساب المنشأة</div></div></div>
+        <div class="p-step"><div class="sn">2</div><div class="st"><div class="t">اختيار الخدمة</div><div class="d">إقرار ضريبة القيمة المضافة أو الزكاة</div></div></div>
+        <div class="p-step"><div class="sn">3</div><div class="st"><div class="t">تعبئة الإقرار</div><div class="d">إدخال البيانات ومراجعة المبالغ المستحقة</div></div></div>
+        <div class="p-step"><div class="sn">4</div><div class="st"><div class="t">اعتماد الإقرار والسداد</div><div class="d">تأكيد الإقرار وسداد المستحقات</div></div></div>
+        <div class="p-step"><div class="sn">5</div><div class="st"><div class="t">حفظ الشهادة</div><div class="d">حفظ شهادة السداد أو الإقرار</div></div></div>
+      </div>
+      <div class="p-shot anim2">
+        <div class="shot-cap"><span class="lbl">لقطة شاشة — الخدمات الإلكترونية</span><span class="dots"></span><span class="rf">ZATCA-ES</span></div>
+        <image-slot id="shot-zatca-es" placeholder="أفلت لقطة شاشة المنصة هنا" fit="cover"></image-slot>
+        <div class="note"><span class="x">!</span><span class="nt">التزِم بـ<b>مواعيد تقديم الإقرارات</b> المعلنة لتفادي الغرامات والجزاءات.</span></div>
+      </div>
+    </div>
+    <div class="foot"><span class="brand-mark">MSGA · إدارة الموارد البشرية</span><span class="lbl">هيئة الزكاة والضريبة والجمارك · الخدمات الإلكترونية</span><span class="pagenum latin">دليل إجراءات المنصات الحكومية</span></div>
+  </div>
+</section>
+<section class="divider" data-label="مجلس الضمان الصحي" data-screen-label="Divider 10">
+  <div class="wm"><span class="ghost latin">10</span></div>
+  <div class="pad">
+    <div class="dv-top"><span class="sec-tag">CHI</span><span class="rule"></span><span class="pages">SECTION 10 / 10</span></div>
+    <div class="dv-mid">
+      <div class="dnum latin anim">القسم 10</div>
+      <h1 class="anim">مجلس الضمان الصحي</h1>
+      <div class="auth anim2">مجلس الضمان الصحي</div>
+      <div class="desc anim2">بوابة مجلس الضمان الصحي للتحقق من وثائق التأمين الصحي للموظفين والتابعين ومتابعة المطالبات.</div>
+    </div>
+    <div class="dv-procs anim3">
+        <span class="dv-chip"><span class="cn">10.1</span>الخدمات الإلكترونية</span>
+    </div>
+  </div>
+</section>
+<section class="proc" data-label="مجلس الضمان الصحي — الخدمات الإلكترونية" data-screen-label="CHI-ES">
+  <div class="pad">
+    <div class="p-head">
+      <div class="p-head-l">
+        <div class="p-crumb"><span class="ent">مجلس الضمان الصحي</span><span class="sep">›</span><span>الخدمات الإلكترونية</span></div>
+        <h2>خدمات التأمين الصحي الإلكترونية</h2>
+      </div>
+      <div class="p-meta"><div class="ref">CHI-ES</div><div class="ct">عدد الخطوات <b>5</b></div></div>
+    </div>
+    <div class="proc-grid">
+      <div class="p-steps anim">
+        <div class="p-step"><div class="sn">1</div><div class="st"><div class="t">الدخول لبوابة المجلس</div><div class="d">تسجيل الدخول بحساب المنشأة</div></div></div>
+        <div class="p-step"><div class="sn">2</div><div class="st"><div class="t">استعراض وثائق التأمين</div><div class="d">عرض وثائق التأمين الصحي للموظفين</div></div></div>
+        <div class="p-step"><div class="sn">3</div><div class="st"><div class="t">التحقق من التغطية</div><div class="d">التأكد من تغطية الموظفين والتابعين</div></div></div>
+        <div class="p-step"><div class="sn">4</div><div class="st"><div class="t">متابعة المطالبات</div><div class="d">تتبّع المطالبات أو الشكاوى المقدّمة</div></div></div>
+        <div class="p-step"><div class="sn">5</div><div class="st"><div class="t">تحديث البيانات</div><div class="d">تحديث بيانات الوثائق عند الحاجة</div></div></div>
+      </div>
+      <div class="p-shot anim2">
+        <div class="shot-cap"><span class="lbl">لقطة شاشة — الخدمات الإلكترونية</span><span class="dots"></span><span class="rf">CHI-ES</span></div>
+        <image-slot id="shot-chi-es" placeholder="أفلت لقطة شاشة المنصة هنا" fit="cover"></image-slot>
+        <div class="note"><span class="x">!</span><span class="nt">يجب أن يكون لكل موظف وافد <b>وثيقة تأمين صحي سارية</b> طوال فترة العمل.</span></div>
+      </div>
+    </div>
+    <div class="foot"><span class="brand-mark">MSGA · إدارة الموارد البشرية</span><span class="lbl">مجلس الضمان الصحي · الخدمات الإلكترونية</span><span class="pagenum latin">دليل إجراءات المنصات الحكومية</span></div>
+  </div>
+</section>
+<section class="closing" data-label="الاعتماد" data-screen-label="Closing">
+  <div class="pad">
+    <img class="logo-w" src="assets/msga-logo.png" alt="MSGA"/>
+    <h1 class="anim">دليل معتمد للاستخدام الداخلي</h1>
+    <p class="anim2">يخضع هذا الدليل للمراجعة الدورية بما يتوافق مع تحديثات المنصات الحكومية. تُدرج لقطات الشاشة الفعلية من قبل فريق الموارد البشرية في المساحات المخصّصة.</p>
+    <div class="signrow anim3">
+      <div class="signbox"><span class="role">Prepared by</span><span class="line"></span><span class="cap">إعداد · الموارد البشرية</span></div>
+      <div class="signbox"><span class="role">Reviewed by</span><span class="line"></span><span class="cap">مراجعة · مدير الإدارة</span></div>
+      <div class="signbox"><span class="role">Approved by</span><span class="line"></span><span class="cap">اعتماد · الإدارة العليا</span></div>
+    </div>
+    <div class="cfoot">MSGA · إصدار يونيو 2026 — <b>v1.0</b> · وثيقة داخلية معتمدة</div>
+  </div>
+</section>
+</deck-stage>
+<script src="image-slot.js"></script>
+<script src="deck-stage.js"></script>
+</body>
+</html>

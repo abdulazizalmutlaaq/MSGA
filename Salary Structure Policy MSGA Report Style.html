@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<script src="guard.js"></script>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSGA — هيكل المسميات وسلم الرواتب · بنمط التقرير</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* MSGA — Salary Structure Policy · "MSGA REPORT" HOUSE STYLE
+   Matches the April-2026 commercial-sector report exactly:
+   navy full-bleed cover + top orange hairline · white content pages ·
+   lavender rounded section bars with orange circle number + orange right accent ·
+   grey table header with orange underline · colored status pills · rounded cards.
+   Self-contained — does NOT depend on sample-base.css. */
+:root {
+  --navy:#1F3A57; --navy-2:#16304B; --navy-3:#102539; --navy-deep:#0D2034;
+  --navy-card:#27425E; --navy-line:#33506C;
+  --orange:#E5811F; --orange-2:#C96B12; --orange-soft:#FBEEDD;
+  --ink:#1E2B38; --ink-2:#41505F; --ink-3:#76828F; --ink-4:#A7B0BA;
+  --paper:#FFFFFF; --paper-2:#F7F8FB; --lav:#EEF0F7; --lav-2:#F4F5FA;
+  --line:#E5E8EE; --line-2:#EEF0F4;
+  --th:#F4F5F8;
+  --ok:#2F8559; --ok-bg:#E6F4EC; --ok-bd:#CBE8D6;
+  --prog:#2B5180; --prog-bg:#E9EFF7; --prog-bd:#D2DEEE;
+  --hold:#B0831F; --hold-bg:#FAF2DA; --hold-bd:#ECDBA9;
+  --red:#B0432C; --red-bg:#F8E9E4; --red-bd:#ECCDC2;
+  --l1:#BBC6D2; --l2:#9DACBC; --l3:#7E91A6; --l4:#5F7790; --l5:#46617C; --l6:#2F4D69; --l7:#E5811F;
+  --ar:"Tajawal", system-ui, sans-serif;
+  --ar-head:"Tajawal", system-ui, sans-serif;
+  --latin:"Saira", "Tajawal", system-ui, sans-serif;
+  --page-w:210mm; --page-h:297mm; --mx:15mm; --my:14mm;
+}
+* { box-sizing:border-box; }
+html, body { margin:0; padding:0; background:#DDE2E8; font-family:var(--ar); color:var(--ink); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+body { direction:rtl; }
+.stage { min-height:100vh; padding:30px 16px 90px; display:flex; flex-direction:column; align-items:center; gap:28px; }
+.page { width:var(--page-w); height:var(--page-h); background:var(--paper); position:relative; overflow:hidden; box-shadow:0 1px 2px rgba(20,30,45,.05), 0 16px 44px rgba(20,30,45,.14); page-break-after:always; break-after:page; display:flex; flex-direction:column; }
+.page:last-of-type { page-break-after:auto; }
+.watermark { position:absolute; inset:0; pointer-events:none; z-index:0; }
+.page-inner { position:relative; z-index:1; flex:1; display:flex; flex-direction:column; padding:var(--my) var(--mx) 0; }
+
+/* numbers latin font */
+.latin, .doc-meta, .foot, .lcode, .scale-num, .vchip, .kpi .val, .ti-num, .cnum, .nb, .sec-no, .head .eyebrow, .cap .ref, .prose .lead, .cover-top .brandline, .hero .kicker, .classline, .kpi .label, .toc-head, .cover-meta .k, .dept2-head .code, .dept2-head .cnt { font-family:var(--latin); }
+
+/* ─── Content header ─── */
+.head { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px; padding-bottom:11px; margin-bottom:6px; border-bottom:2px solid var(--orange); }
+.head .logo { height:34px; width:auto; display:block; }
+.head .titles { display:flex; flex-direction:column; gap:1px; }
+.head .eyebrow { font-size:8.5px; font-weight:600; letter-spacing:0.18em; color:var(--orange-2); text-transform:uppercase; direction:ltr; }
+.head .doctitle { font-family:var(--ar-head); font-size:13.5px; font-weight:700; color:var(--navy); }
+.head .doc-meta { text-align:left; direction:ltr; font-size:9px; font-weight:500; color:var(--ink-3); line-height:1.65; letter-spacing:0.03em; }
+.head .doc-meta div { white-space:nowrap; }
+.head .doc-meta b { color:var(--navy); font-weight:700; letter-spacing:0.08em; }
+
+/* ─── Footer ─── */
+.foot { position:absolute; bottom:8mm; inset-inline:var(--mx); display:flex; align-items:center; justify-content:space-between; font-size:8.5px; font-weight:500; color:var(--ink-3); letter-spacing:0.08em; text-transform:uppercase; border-top:1px solid var(--line); padding-top:7px; z-index:2; direction:ltr; }
+.foot .brand-mark { display:flex; align-items:center; gap:7px; }
+.foot .brand-mark::before { content:""; width:5px; height:5px; background:var(--orange); border-radius:50%; }
+.foot .pagenum b { color:var(--navy); font-weight:700; }
+
+/* ─── Section bar (signature element) ─── */
+.sec-head { position:relative; display:flex; align-items:center; gap:11px; flex-direction:row-reverse; justify-content:flex-start; background:var(--lav); border-radius:9px; padding:9px 16px 9px 14px; margin:16px 0 11px; overflow:hidden; }
+.sec-head.first { margin-top:4px; }
+.sec-head::after { content:""; position:absolute; top:0; bottom:0; right:0; width:5px; background:var(--orange); }
+.sec-head .sec-no { width:24px; height:24px; border-radius:50%; background:var(--orange); color:#fff; display:grid; place-items:center; font-size:11px; font-weight:700; flex-shrink:0; }
+.sec-head h2 { margin:0; font-family:var(--ar-head); font-size:16px; font-weight:700; color:var(--navy); flex:1; }
+.sec-head .en { font-size:9px; font-weight:600; color:var(--ink-3); letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap; direction:ltr; }
+
+/* caption */
+.cap { display:flex; align-items:center; gap:11px; margin:2px 2px 8px; }
+.cap .lbl { font-size:10px; font-weight:500; color:var(--ink-3); white-space:nowrap; }
+.cap .dots { flex:1; height:1px; background:var(--line); }
+.cap .ref { font-size:9px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange-2); white-space:nowrap; direction:ltr; }
+
+/* prose */
+.prose { padding:2px 14px 2px 0; margin-top:4px; border-inline-start:3px solid var(--orange); }
+.prose.alt { border-inline-start-color:var(--navy); }
+.prose .lead { font-size:9px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--orange-2); margin-bottom:5px; direction:ltr; text-align:start; }
+.prose.alt .lead { color:var(--navy); }
+.prose p { margin:0; font-size:11.5px; color:var(--ink-2); line-height:1.85; text-wrap:pretty; }
+.prose p + p { margin-top:7px; }
+
+/* numbered list */
+.nlist { display:grid; grid-template-columns:1fr; margin-top:6px; }
+.nlist.two { grid-template-columns:1fr 1fr; column-gap:22px; }
+.nitem { display:grid; grid-template-columns:24px 1fr; align-items:start; gap:10px; padding:7px 0; border-bottom:1px solid var(--line-2); }
+.nitem .nb { font-size:11px; font-weight:700; color:#fff; background:var(--navy); width:20px; height:20px; border-radius:6px; display:grid; place-items:center; line-height:1; }
+.nitem.alt .nb { background:var(--orange); }
+.nitem .nt { font-size:11px; line-height:1.6; color:var(--ink-2); padding-top:2px; text-wrap:pretty; }
+
+/* chips */
+.chips { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:4px; }
+.chip-tag { display:flex; align-items:center; gap:9px; border:1px solid var(--line); background:var(--paper-2); border-radius:8px; padding:9px 12px; font-size:10.5px; color:var(--ink-2); min-height:36px; }
+.chip-tag .cnum { font-size:10px; font-weight:700; color:#fff; background:var(--navy); width:18px; height:18px; border-radius:5px; display:grid; place-items:center; flex-shrink:0; }
+
+/* note */
+.note { margin-top:10px; padding:11px 14px; background:var(--orange-soft); border-radius:8px; border-inline-start:3px solid var(--orange); font-size:10.5px; color:#7A5417; line-height:1.7; display:flex; gap:10px; align-items:flex-start; text-wrap:pretty; }
+.note .x { font-weight:700; font-size:13px; color:var(--orange-2); line-height:1.3; }
+.note.alt { background:var(--lav); border-inline-start-color:var(--navy); color:var(--ink-2); }
+.note.alt .x { color:var(--navy); }
+
+/* ─── tables ─── */
+.ptable { margin-top:6px; border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.pt-head { display:grid; background:var(--th); border-bottom:2px solid var(--orange); font-family:var(--ar-head); font-size:10px; font-weight:700; color:var(--navy); }
+.pt-head > div { padding:8px 12px; }
+.pt-head > div.center { text-align:center; }
+.pt-row { display:grid; border-bottom:1px solid var(--line-2); font-size:11px; min-height:34px; align-items:stretch; background:var(--paper); }
+.pt-row:last-child { border-bottom:none; }
+.pt-row:nth-child(even) { background:var(--lav-2); }
+.pt-row > div { padding:8px 12px; display:flex; align-items:center; }
+.pt-row .center { justify-content:center; }
+.pt-row .strong { font-weight:700; color:var(--navy); }
+.pt-row .muted { color:var(--ink-3); font-size:10px; }
+.lcode { font-size:10px; color:var(--ink-3); direction:ltr; }
+.cols-level { grid-template-columns:120px 150px 1fr; }
+.cols-scale { grid-template-columns:128px 60px 1fr 1fr 1fr; }
+.cols-grade { grid-template-columns:170px 1fr; }
+.cols-rate  { grid-template-columns:1fr 190px; }
+.cols-auth  { grid-template-columns:220px 1fr; }
+
+/* level badge */
+.lvl-badge { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:500; color:var(--ink); }
+.lvl-badge .ln { font-size:9.5px; font-weight:700; color:#fff; width:19px; height:19px; border-radius:50%; display:grid; place-items:center; flex-shrink:0; }
+.lvl-mini { font-size:9px; font-weight:700; color:#fff; width:17px; height:17px; border-radius:50%; display:grid; place-items:center; flex-shrink:0; }
+.lvl-1{background:var(--l1)} .lvl-2{background:var(--l2)} .lvl-3{background:var(--l3)} .lvl-4{background:var(--l4)} .lvl-5{background:var(--l5)} .lvl-6{background:var(--l6)} .lvl-7{background:var(--l7)}
+
+/* salary numbers */
+.scale-num { font-size:12px; direction:ltr; font-weight:500; color:var(--ink-2); }
+.scale-num.mid { color:var(--orange-2); font-weight:700; }
+.scale-num.hi { color:var(--navy); font-weight:700; }
+
+/* status-style pill (for grades / values) */
+.pill { display:inline-flex; align-items:center; gap:7px; font-family:var(--ar-head); font-size:11px; font-weight:700; padding:4px 11px; border-radius:999px; border:1px solid transparent; white-space:nowrap; }
+.pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.pill.ok   { color:var(--ok);   background:var(--ok-bg);   border-color:var(--ok-bd); }
+.pill.prog { color:var(--prog); background:var(--prog-bg); border-color:var(--prog-bd); }
+.pill.hold { color:var(--hold); background:var(--hold-bg); border-color:var(--hold-bd); }
+.pill.red  { color:var(--red);  background:var(--red-bg);  border-color:var(--red-bd); }
+.pill.plain{ color:var(--ink-3); background:var(--paper-2); border-color:var(--line); }
+
+.vchip { font-size:13px; font-weight:700; direction:ltr; white-space:nowrap; }
+.vchip.pos{color:var(--ok)} .vchip.warn{color:var(--hold)} .vchip.none{color:var(--ink-4)} .vchip.nav{color:var(--navy)}
+.vchip.ar{direction:rtl; font-family:var(--ar-head); font-size:11.5px}
+
+/* rating -> use pill look */
+.rating { display:inline-flex; align-items:center; gap:7px; font-family:var(--ar-head); font-size:11px; font-weight:700; padding:4px 12px; border-radius:999px; border:1px solid; }
+.rating::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.rating.r-excep { color:var(--ok);   background:var(--ok-bg);   border-color:var(--ok-bd); }
+.rating.r-exc   { color:var(--prog); background:var(--prog-bg); border-color:var(--prog-bd); }
+.rating.r-vg    { color:var(--hold); background:var(--hold-bg); border-color:var(--hold-bd); }
+.rating.r-good  { color:var(--orange-2); background:var(--orange-soft); border-color:#EFD9B6; }
+.rating.r-below { color:var(--red);  background:var(--red-bg);  border-color:var(--red-bd); }
+.grade-desc { font-size:10.5px; color:var(--ink-3); line-height:1.6; text-wrap:pretty; }
+
+/* band chart */
+.bandchart { margin-top:8px; padding:11px 14px; border:1px solid var(--line); border-radius:9px; background:var(--paper-2); }
+.bc-head { display:flex; justify-content:space-between; align-items:baseline; font-size:9px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3); margin-bottom:11px; }
+.bc-head .axis { direction:ltr; color:var(--orange-2); font-family:var(--latin); }
+.bc-row { display:grid; grid-template-columns:92px 1fr; align-items:center; gap:13px; margin-bottom:7px; }
+.bc-row:last-child { margin-bottom:0; }
+.bc-row .bc-label { font-size:10px; font-weight:500; color:var(--ink-2); text-align:start; }
+.bc-track { position:relative; height:14px; direction:ltr; }
+.bc-track .grid-line { position:absolute; top:-4px; bottom:-4px; width:1px; background:var(--line); }
+.bc-bar { position:absolute; top:4px; height:7px; border-radius:4px; display:flex; align-items:center; }
+.bc-bar.lvl-1{background:var(--l1);color:var(--l1)} .bc-bar.lvl-2{background:var(--l2);color:var(--l2)} .bc-bar.lvl-3{background:var(--l3);color:var(--l3)} .bc-bar.lvl-4{background:var(--l4);color:var(--l4)} .bc-bar.lvl-5{background:var(--l5);color:var(--l5)} .bc-bar.lvl-6{background:var(--l6);color:var(--l6)} .bc-bar.lvl-7{background:var(--l7);color:var(--l7)}
+.bc-bar .mid-dot { position:absolute; width:9px; height:9px; border-radius:50%; background:var(--paper); box-shadow:0 0 0 2px currentColor; transform:translateX(-50%); }
+.bc-axis-labels { display:flex; justify-content:space-between; direction:ltr; font-family:var(--latin); font-size:9px; font-weight:600; color:var(--ink-4); margin:6px 0 0; padding-inline-start:105px; }
+
+/* department cards */
+.depttitles { display:grid; grid-template-columns:1fr 1fr; gap:13px; margin-top:6px; }
+.dept2 { border:1px solid var(--line); border-radius:9px; background:var(--paper); display:flex; flex-direction:column; break-inside:avoid; overflow:hidden; }
+.dept2-head { display:grid; grid-template-columns:1fr auto; align-items:center; gap:8px; padding:8px 13px; background:var(--th); border-bottom:2px solid var(--orange); }
+.dept2-head .dn { font-family:var(--ar-head); font-size:12px; font-weight:700; color:var(--navy); }
+.dept2-head .meta { display:flex; align-items:center; gap:8px; }
+.dept2-head .code { font-size:9px; font-weight:700; letter-spacing:0.08em; color:var(--orange-2); direction:ltr; }
+.dept2-head .cnt { font-size:9px; color:var(--ink-3); direction:ltr; }
+.dt-row { display:grid; grid-template-columns:20px 88px 1fr; align-items:center; gap:9px; padding:6px 13px; border-bottom:1px solid var(--line-2); font-size:10.5px; min-height:30px; }
+.dt-row:last-child { border-bottom:none; }
+.dt-row .dt-lvl { font-size:9px; color:var(--ink-3); }
+.dt-row .dt-title { font-weight:500; color:var(--ink); }
+
+/* steps */
+.steps { display:grid; margin-top:6px; border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.step { display:grid; grid-template-columns:42px 1fr; border-bottom:1px solid var(--line-2); align-items:stretch; }
+.step:last-child { border-bottom:none; }
+.step:nth-child(even) { background:var(--lav-2); }
+.step .snum { background:var(--navy); color:#fff; display:grid; place-items:center; font-size:13px; font-weight:700; }
+.step .stext { padding:10px 13px; font-size:11px; line-height:1.6; color:var(--ink-2); display:flex; align-items:center; text-wrap:pretty; }
+
+/* annual cycle */
+.cycle { margin-top:6px; padding:16px 10px 6px; }
+.cycle-track { display:grid; grid-template-columns:repeat(4,1fr); position:relative; direction:rtl; }
+.cycle-track::before { content:""; position:absolute; top:16px; inset-inline:12%; height:2px; background:var(--line); z-index:0; }
+.cycle-node { display:flex; flex-direction:column; align-items:center; gap:8px; position:relative; z-index:1; text-align:center; padding:0 8px; }
+.cycle-node .dot { width:32px; height:32px; border-radius:50%; background:var(--paper); color:var(--navy); display:grid; place-items:center; font-family:var(--latin); font-size:13px; font-weight:700; border:2px solid var(--navy); }
+.cycle-node.accent .dot { background:var(--orange); color:#fff; border-color:var(--orange); }
+.cycle-node .period { font-family:var(--ar-head); font-size:11.5px; font-weight:700; color:var(--orange-2); }
+.cycle-node .clabel { font-size:11px; font-weight:700; color:var(--navy); line-height:1.35; }
+.cycle-node .cdesc { font-size:9.5px; color:var(--ink-3); line-height:1.5; max-width:140px; }
+
+/* sign-off */
+.signoff-triple { margin-top:12px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.signoff-triple .sign { padding:13px; border:1px solid var(--line); border-radius:9px; background:var(--paper-2); display:flex; flex-direction:column; gap:5px; min-height:92px; }
+.signoff-triple .sign .label { font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange-2); direction:ltr; text-align:start; }
+.signoff-triple .sign .nm { font-size:11.5px; font-weight:700; color:var(--ink); min-height:16px; }
+.signoff-triple .sign .role { font-size:10px; color:var(--ink-3); }
+.signoff-triple .sign .sig-line { margin-top:auto; border-bottom:1px dashed var(--ink-4); height:24px; }
+.signoff-triple .sign .sig-cap { font-size:8.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-4); direction:ltr; text-align:start; }
+
+/* doc control */
+.docctrl { margin-top:14px; background:var(--navy); border-radius:9px; padding:14px 18px; display:grid; grid-template-columns:1fr auto; align-items:center; gap:16px; color:#fff; }
+.docctrl .eyebrow { font-size:9px; letter-spacing:0.16em; color:#F0B978; text-transform:uppercase; margin-bottom:4px; direction:ltr; text-align:start; }
+.docctrl .val { font-family:var(--ar-head); font-size:13px; font-weight:700; color:#fff; }
+.docctrl .right { font-size:9.5px; color:#AEBCCC; letter-spacing:0.1em; text-transform:uppercase; text-align:left; direction:ltr; }
+
+/* ═══════ COVER (navy full-bleed) ═══════ */
+.page.cover { background:var(--navy); }
+.page.cover::before { content:""; position:absolute; top:0; inset-inline:0; height:5px; background:var(--orange); z-index:3; }
+.page.cover .watermark::after { content:""; position:absolute; inset:0; background:url("assets/msga-logo.png") no-repeat center 60%; background-size:62% auto; opacity:.04; filter:brightness(0) invert(1); }
+.cover-inner { padding:0 !important; }
+.cover-top { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px; padding:13mm var(--mx) 0; }
+.cover-top .co { font-family:var(--ar-head); font-size:12px; font-weight:700; color:#fff; }
+.cover-top .brandline { font-size:9.5px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--orange); text-align:left; direction:ltr; }
+.cover-hero { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 var(--mx); text-align:center; }
+.cover-hero .logo-w { height:64px; width:auto; filter:brightness(0) invert(1); margin-bottom:30px; }
+.cover-hero h1 { margin:0; font-family:var(--ar-head); font-size:50px; font-weight:800; line-height:1.12; color:#fff; letter-spacing:-0.01em; }
+.cover-hero .subtitle { margin-top:14px; font-size:13px; font-weight:500; color:var(--orange); letter-spacing:0.02em; }
+.cover-hero .period-pill { margin-top:20px; border:1.5px solid rgba(255,255,255,.4); border-radius:999px; padding:8px 24px; font-size:12px; font-weight:600; color:#fff; direction:ltr; white-space:nowrap; letter-spacing:0.04em; }
+.cover-desc { margin:20px auto 0; max-width:74%; font-size:12px; color:#C5D0DC; line-height:1.85; text-wrap:pretty; }
+.cover-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:13px; margin:0 var(--mx) 8mm; }
+.cover-cards.four { grid-template-columns:repeat(4,1fr); }
+.ccard { background:var(--navy-card); border:1px solid var(--navy-line); border-radius:10px; padding:13px 15px; text-align:center; display:flex; flex-direction:column; gap:5px; }
+.ccard .k { font-size:9px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange); direction:ltr; }
+.ccard .v { font-family:var(--ar-head); font-size:14px; font-weight:700; color:#fff; }
+.ccard .v.num { font-family:var(--latin); font-size:26px; line-height:1; direction:ltr; }
+.ccard .s { font-size:9px; color:#9FB0C0; }
+
+/* cover TOC strip */
+.cover-toc { margin:0 var(--mx) 7mm; padding-top:14px; border-top:1px solid var(--navy-line); }
+.cover-toc .th { font-size:9px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#8FA2B4; margin-bottom:9px; direction:ltr; }
+.cover-toc .tg { display:grid; grid-template-columns:repeat(4,1fr); gap:5px 18px; }
+.cover-toc .ti { display:grid; grid-template-columns:20px 1fr; gap:8px; align-items:baseline; font-size:9.5px; color:#C5D0DC; padding:3px 0; }
+.cover-toc .ti .n { font-family:var(--latin); font-size:9.5px; font-weight:700; color:var(--orange); }
+
+/* toolbar */
+.toolbar { position:fixed; top:16px; inset-inline-start:16px; z-index:100; background:var(--navy); color:#fff; display:flex; align-items:center; gap:4px; padding:7px 8px; border-radius:8px; box-shadow:0 10px 30px rgba(20,30,45,.25); font-size:11px; direction:ltr; }
+.toolbar .brand { font-family:var(--ar-head); padding:4px 12px 4px 6px; display:flex; align-items:center; gap:9px; border-inline-end:1px solid rgba(255,255,255,.18); font-weight:700; letter-spacing:0.06em; text-transform:uppercase; }
+.toolbar .brand::before { content:""; width:7px; height:7px; background:var(--orange); border-radius:50%; }
+.toolbar button { background:transparent; color:#fff; border:none; font:inherit; padding:6px 12px; cursor:pointer; letter-spacing:0.04em; text-transform:uppercase; font-weight:600; border-radius:5px; }
+.toolbar button:hover { background:rgba(255,255,255,.12); }
+
+/* page 3 packs 14 table rows + band chart — tighten to clear footer */
+.stage .page:nth-of-type(3) .pt-row { min-height:31px; }
+.stage .page:nth-of-type(3) .pt-row > div { padding-top:6px; padding-bottom:6px; }
+.stage .page:nth-of-type(3) .bandchart { margin-top:6px; padding:10px 14px; }
+.stage .page:nth-of-type(3) .bc-row { margin-bottom:5px; }
+
+@page { size:A4 portrait; margin:0; }
+@media print { html,body{background:#fff} .stage{padding:0;gap:0} .page{box-shadow:none;margin:0} .toolbar{display:none!important} }
+
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel">
+/* MSGA — Job Structure & Salary Scale Policy · CONTENT DATA
+   Exposed as window.STRUCT (read by structure.jsx). Edit text here. */
+window.STRUCT = {
+  meta: {
+    docId: "POL-HR-GRD-2026-01",
+    title: "سياسة هيكل المسميات وسلم الرواتب",
+    subtitle: "إطار المستويات الوظيفية، نطاقات الرواتب، الزيادات، المكافآت والترقيات — قطاع التطوير والاستثمار العقاري",
+    version: "1.0",
+    effective: "2026/06/01",
+    review: "2027/06/01",
+    owner: "إدارة الموارد البشرية",
+    scope: "جميع موظفي الشركة",
+    approver: "الإدارة العليا / مجلس الإدارة",
+    classification: "داخلي — سري",
+  },
+
+  purpose: "تهدف هذه السياسة إلى تنظيم المسميات الوظيفية، وتصنيف المستويات الوظيفية، وتحديد نطاقات الرواتب، وربط الزيادات والترقيات بنتائج تقييم الأداء السنوي، بما يحقق العدالة الداخلية بين الموظفين، ويحافظ على القدرة التنافسية للشركة في سوق العمل السعودي، وبما يتناسب مع طبيعة عمل الشركة في مجال التطوير العقاري والاستثمار العقاري.",
+
+  scopeIntro: "تطبق هذه السياسة على جميع موظفي الشركة العاملين في الإدارات التالية:",
+  scopeDepts: [
+    "الإدارة التنفيذية", "الإدارة المالية والحسابات", "إدارة المبيعات",
+    "إدارة التسويق", "إدارة المشاريع والهندسة", "إدارة المشتريات",
+    "إدارة الموارد البشرية", "إدارة الشؤون القانونية", "إدارة المراجعة الداخلية",
+    "إدارة تقنية المعلومات", "إدارة التشغيل والمواقع",
+  ],
+  scopeExclude: "تُستثنى الوظائف التشغيلية البسيطة مثل الحراسات، عمال المواقع، وعامل البوفية من السلم الإداري الرئيسي، ويجوز وضع نطاق رواتب مستقل لها حسب طبيعة العمل والعقود المعتمدة.",
+
+  levels: [
+    { lvl: "المستوى الأول",  cls: "مساعد",      nature: "وظائف مساندة أو مبتدئة أو تنفيذية بسيطة" },
+    { lvl: "المستوى الثاني", cls: "أخصائي",     nature: "موظف مختص يؤدي مهامًا مستقلة ضمن إدارته" },
+    { lvl: "المستوى الثالث", cls: "أخصائي أول", nature: "موظف ذو خبرة أعلى ويتولى مهامًا أكثر تعقيدًا" },
+    { lvl: "المستوى الرابع", cls: "مشرف",       nature: "يشرف على أعمال فريق أو جزء من العمليات" },
+    { lvl: "المستوى الخامس", cls: "مدير",       nature: "يدير قسمًا أو وظيفة محددة داخل الإدارة" },
+    { lvl: "المستوى السادس", cls: "مدير إدارة", nature: "يدير إدارة كاملة أو نطاق عمل رئيسي" },
+    { lvl: "المستوى السابع", cls: "تنفيذي",     nature: "قيادة عليا مرتبطة بالاستراتيجية والقرارات التنفيذية" },
+  ],
+
+  scale: [
+    { cls: "مساعد",      min: 4000,  mid: 5000,  max: 6000 },
+    { cls: "أخصائي",     min: 6000,  mid: 8000,  max: 10000 },
+    { cls: "أخصائي أول", min: 9000,  mid: 11500, max: 14000 },
+    { cls: "مشرف",       min: 12000, mid: 15000, max: 18000 },
+    { cls: "مدير",       min: 16000, mid: 22000, max: 28000 },
+    { cls: "مدير إدارة", min: 28000, mid: 36500, max: 45000 },
+    { cls: "تنفيذي",     min: 45000, mid: 70000, max: 100000 },
+  ],
+  scaleNotes: [
+    "يجوز تجاوز الحد الأعلى للمستوى التنفيذي بقرار خاص من الإدارة العليا أو مجلس الإدارة.",
+    "لا يُعتمد أي راتب خارج النطاق إلا بمبرر واضح، مثل ندرة التخصص، الخبرة العالية، طبيعة المنصب، أو ارتباطه بمسؤوليات استراتيجية.",
+    "تتم مراجعة السلم سنويًا أو عند حدوث تغيرات جوهرية في سوق العمل أو في حجم الشركة.",
+    "وجود الموظف داخل مستوى معين لا يعني استحقاقه التلقائي للحد الأعلى، بل يعتمد على الخبرة، الأداء، المهارات، المسؤوليات، وميزانية الشركة.",
+    "الوظائف القيادية والتنفيذية ذات الطبيعة الخاصة قد تُعامَل كحالات استثنائية ولا تُستخدم كمرجع مباشر للتعيينات الجديدة.",
+  ],
+
+  depts: [
+    { name: "الإدارة التنفيذية", code: "EXE", titles: [
+      { lvl: "مدير إدارة", t: "مدير إدارة" },
+      { lvl: "تنفيذي", t: "رئيس تنفيذي" },
+      { lvl: "تنفيذي", t: "رئيس قطاع تجاري" },
+      { lvl: "تنفيذي", t: "رئيس قطاع المشاريع" },
+    ]},
+    { name: "الموارد البشرية", code: "HR", titles: [
+      { lvl: "مساعد", t: "مساعد موارد بشرية" },
+      { lvl: "أخصائي", t: "أخصائي موارد بشرية" },
+      { lvl: "أخصائي أول", t: "أخصائي أول موارد بشرية" },
+      { lvl: "مشرف", t: "مشرف موارد بشرية" },
+      { lvl: "مدير", t: "مدير الموارد البشرية" },
+      { lvl: "مدير إدارة", t: "مدير إدارة الموارد البشرية" },
+    ]},
+    { name: "الإدارة المالية والحسابات", code: "FIN", titles: [
+      { lvl: "مساعد", t: "مساعد محاسب" },
+      { lvl: "أخصائي", t: "محاسب" },
+      { lvl: "أخصائي أول", t: "محاسب أول" },
+      { lvl: "مشرف", t: "مشرف حسابات" },
+      { lvl: "مدير", t: "مدير حسابات" },
+      { lvl: "مدير إدارة", t: "مدير الإدارة المالية" },
+      { lvl: "تنفيذي", t: "المدير المالي التنفيذي" },
+    ]},
+    { name: "إدارة المبيعات", code: "SAL", titles: [
+      { lvl: "مساعد", t: "منسق مبيعات" },
+      { lvl: "أخصائي", t: "استشاري مبيعات" },
+      { lvl: "أخصائي أول", t: "استشاري مبيعات أول" },
+      { lvl: "مشرف", t: "مشرف مبيعات" },
+      { lvl: "مدير", t: "مدير مبيعات" },
+      { lvl: "مدير إدارة", t: "مدير إدارة المبيعات" },
+      { lvl: "تنفيذي", t: "رئيس القطاع التجاري" },
+    ]},
+    { name: "إدارة التسويق", code: "MKT", titles: [
+      { lvl: "مساعد", t: "مساعد تسويق" },
+      { lvl: "أخصائي", t: "أخصائي تسويق" },
+      { lvl: "أخصائي", t: "مصمم جرافيك" },
+      { lvl: "أخصائي أول", t: "أخصائي تسويق أول" },
+      { lvl: "مشرف", t: "مشرف تسويق" },
+      { lvl: "مدير", t: "مدير تسويق" },
+      { lvl: "مدير إدارة", t: "مدير إدارة التسويق" },
+    ]},
+    { name: "إدارة المشاريع والهندسة", code: "PRJ", titles: [
+      { lvl: "مساعد", t: "منسق مشاريع" },
+      { lvl: "مساعد", t: "مساعد مهندس موقع" },
+      { lvl: "أخصائي", t: "مهندس موقع" },
+      { lvl: "أخصائي", t: "أخصائي مشاريع" },
+      { lvl: "أخصائي أول", t: "مهندس موقع أول" },
+      { lvl: "مشرف", t: "مشرف مشاريع" },
+      { lvl: "مدير", t: "مدير مشاريع" },
+      { lvl: "مدير إدارة", t: "مدير إدارة المشاريع" },
+      { lvl: "تنفيذي", t: "رئيس قطاع المشاريع" },
+    ]},
+    { name: "إدارة المشتريات", code: "PRC", titles: [
+      { lvl: "مساعد", t: "مساعد مشتريات" },
+      { lvl: "أخصائي", t: "أخصائي مشتريات" },
+      { lvl: "أخصائي", t: "مهندس مشتريات" },
+      { lvl: "أخصائي أول", t: "أخصائي مشتريات أول" },
+      { lvl: "مشرف", t: "مشرف مشتريات" },
+      { lvl: "مدير", t: "مدير مشتريات" },
+      { lvl: "مدير إدارة", t: "مدير إدارة المشتريات" },
+    ]},
+    { name: "إدارة الشؤون القانونية", code: "LEG", titles: [
+      { lvl: "مساعد", t: "مساعد قانوني" },
+      { lvl: "أخصائي", t: "أخصائي قانوني" },
+      { lvl: "أخصائي أول", t: "أخصائي قانوني أول" },
+      { lvl: "مشرف", t: "مشرف الشؤون القانونية" },
+      { lvl: "مدير", t: "مدير الشؤون القانونية" },
+      { lvl: "مدير إدارة", t: "مدير إدارة الشؤون القانونية" },
+    ]},
+    { name: "إدارة المراجعة الداخلية", code: "AUD", titles: [
+      { lvl: "مساعد", t: "مساعد مراجع داخلي" },
+      { lvl: "أخصائي", t: "مراجع داخلي" },
+      { lvl: "أخصائي أول", t: "مراجع داخلي أول" },
+      { lvl: "مشرف", t: "مشرف مراجعة داخلية" },
+      { lvl: "مدير", t: "مدير مراجعة داخلية" },
+      { lvl: "مدير إدارة", t: "مدير إدارة المراجعة الداخلية" },
+    ]},
+    { name: "إدارة تقنية المعلومات", code: "IT", titles: [
+      { lvl: "مساعد", t: "فني تقنية معلومات" },
+      { lvl: "أخصائي", t: "أخصائي تقنية معلومات" },
+      { lvl: "أخصائي أول", t: "أخصائي أول تقنية معلومات" },
+      { lvl: "مشرف", t: "مشرف تقنية معلومات" },
+      { lvl: "مدير", t: "مدير تقنية المعلومات" },
+      { lvl: "مدير إدارة", t: "مدير إدارة تقنية المعلومات" },
+    ]},
+    { name: "إدارة التشغيل والمواقع", code: "OPS", titles: [
+      { lvl: "مساعد", t: "منسق تشغيل" },
+      { lvl: "أخصائي", t: "أخصائي تشغيل" },
+      { lvl: "أخصائي أول", t: "أخصائي تشغيل أول" },
+      { lvl: "مشرف", t: "مشرف تشغيل" },
+      { lvl: "مدير", t: "مدير تشغيل" },
+      { lvl: "مدير إدارة", t: "مدير إدارة التشغيل" },
+    ]},
+  ],
+
+  hiringCriteria: [
+    "المستوى الوظيفي المعتمد للوظيفة.",
+    "نطاق الراتب الخاص بالمستوى.",
+    "سنوات الخبرة العملية.",
+    "المؤهل العلمي والشهادات المهنية.",
+    "ندرة التخصص في السوق.",
+    "المهارات الفنية والسلوكية المطلوبة.",
+    "الراتب الحالي للوظائف المشابهة داخل الشركة.",
+    "ميزانية الإدارة المعتمدة.",
+    "حاجة الشركة للوظيفة.",
+    "مقارنة الراتب مع السوق متى ما توفرت بيانات موثوقة.",
+  ],
+  hiringNote: "يُفضَّل أن يبدأ راتب الموظف الجديد بين الحد الأدنى والمتوسط الإرشادي للمستوى، إلا إذا كانت لديه خبرة عالية أو تخصص نادر أو مسؤوليات مباشرة أكبر من المعتاد.",
+
+  evalIntro: "يتم تقييم أداء الموظفين مرة واحدة سنويًا، ويُعد تقييم الأداء السنوي الأساس في تحديد أحقية الموظف للزيادة السنوية أو المكافأة السنوية أو الترقية.",
+  evalCriteria: [
+    "تحقيق الأهداف ومؤشرات الأداء KPIs.",
+    "جودة العمل ودقة المخرجات.",
+    "الالتزام بالأنظمة والسياسات الداخلية.",
+    "الانضباط في الحضور والانصراف.",
+    "تحمّل المسؤولية.",
+    "التعاون والعمل الجماعي.",
+    "المبادرة وتطوير العمل.",
+    "الالتزام بالمواعيد النهائية.",
+    "القدرة على حل المشكلات.",
+    "السلوك المهني وتمثيل الشركة.",
+  ],
+  grades: [
+    { rating: "استثنائي", cls: "r-excep", desc: "أداء يتجاوز التوقعات بشكل واضح ومستمر، مع تحقيق نتائج عالية ومبادرات مؤثرة." },
+    { rating: "ممتاز", cls: "r-exc", desc: "أداء متميز ويفوق المطلوب في أغلب المهام والمسؤوليات." },
+    { rating: "جيد", cls: "r-vg", desc: "أداء يحقق المتطلبات الأساسية للوظيفة بشكل مقبول ومستقر." },
+    { rating: "ضعيف", cls: "r-good", desc: "أداء أقل من المستوى المطلوب ويحتاج إلى تحسين واضح." },
+    { rating: "أقل من المتوقع", cls: "r-below", desc: "أداء غير مرضٍ ولا يحقق الحد الأدنى من متطلبات الوظيفة." },
+  ],
+
+  increaseIntro: "تُمنح الزيادة السنوية بناءً على نتيجة تقييم الأداء السنوي، ولا تُعتبر الزيادة حقًا مكتسبًا للموظف، بل تخضع لنتيجة التقييم، والوضع المالي للشركة، واعتماد الإدارة العليا.",
+  increases: [
+    { rating: "استثنائي", cls: "r-excep", val: "8% – 10%", chip: "pos" },
+    { rating: "ممتاز", cls: "r-exc", val: "5% – 7%", chip: "" },
+    { rating: "جيد", cls: "r-vg", val: "3% – 4%", chip: "warn" },
+    { rating: "ضعيف", cls: "r-good", val: "لا توجد زيادة", chip: "none ar" },
+    { rating: "أقل من المتوقع", cls: "r-below", val: "لا توجد زيادة", chip: "none ar" },
+  ],
+  increaseRules: [
+    "تُحتسب الزيادة السنوية على الراتب الإجمالي أو حسب ما تعتمده الشركة في لائحة التعويضات والمزايا.",
+    "لا تُمنح أي زيادة سنوية للموظف الحاصل على تقييم ضعيف أو أقل من المتوقع.",
+    "إذا وصل الموظف إلى الحد الأعلى لنطاق راتب مستواه، فلا يُتجاوز السقف الأعلى إلا بقرار استثنائي من الإدارة العليا.",
+    "عند وصول الموظف إلى الحد الأعلى، يُدرَس مدى استحقاقه للانتقال إلى المستوى التالي بناءً على الأداء والمسؤوليات والاحتياج الفعلي.",
+    "لا ترتبط الزيادة السنوية بمدة الخدمة فقط، بل تعتمد بشكل رئيسي على الأداء والنتائج المحققة.",
+    "تخضع جميع الزيادات السنوية للميزانية المعتمدة ولصلاحيات الاعتماد الداخلية.",
+  ],
+
+  bonusIntro1: "يجوز للشركة صرف مكافأة سنوية للموظفين في حال تحقيق الشركة للأرباح المتوقعة والمعتمدة في الميزانية السنوية، وتكون المكافأة مرتبطة بنتيجة تقييم الأداء السنوي لكل موظف.",
+  bonusIntro2: "ولا تُعتبر المكافأة السنوية حقًا مكتسبًا أو التزامًا ثابتًا على الشركة، وإنما تخضع لتحقيق الأرباح المستهدفة، وتوفر السيولة، واعتماد الإدارة العليا أو مجلس الإدارة.",
+  bonuses: [
+    { rating: "استثنائي", cls: "r-excep", val: "راتب شهرين", chip: "pos ar" },
+    { rating: "ممتاز", cls: "r-exc", val: "راتب شهر ونصف", chip: "ar" },
+    { rating: "جيد", cls: "r-vg", val: "راتب شهر واحد", chip: "warn ar" },
+    { rating: "ضعيف", cls: "r-good", val: "لا توجد مكافأة", chip: "none ar" },
+    { rating: "أقل من المتوقع", cls: "r-below", val: "لا توجد مكافأة", chip: "none ar" },
+  ],
+  bonusRules: [
+    "تُصرف المكافأة السنوية فقط في حال تحقيق الشركة للأرباح المتوقعة والمعتمدة في الميزانية السنوية.",
+    "تخضع المكافأة السنوية لاعتماد الإدارة العليا أو مجلس الإدارة.",
+    "لا تُصرف المكافأة للموظف الحاصل على تقييم ضعيف أو أقل من المتوقع.",
+    "يُشترط أن يكون الموظف على رأس العمل وقت صرف المكافأة.",
+    "يجوز احتساب المكافأة بشكل نسبي لمن لم يُكمل سنة كاملة، حسب تاريخ المباشرة ومدة الخدمة الفعلية خلال سنة التقييم.",
+    "لا تدخل المكافأة ضمن الراتب الأساسي أو البدلات أو مستحقات نهاية الخدمة، وتُعد مبلغًا متغيرًا مرتبطًا بالأداء والنتائج.",
+    "يحق للشركة تعديل أو إيقاف أو تأجيل صرف المكافأة في حال عدم تحقق الأرباح أو وجود ظروف مالية أو تشغيلية تستدعي ذلك.",
+    "لا يترتب على صرف المكافأة في سنة معينة التزام بصرفها في السنوات اللاحقة.",
+  ],
+
+  promoIntro: "تتم الترقية من مستوى وظيفي إلى مستوى أعلى عند تحقق الشروط التالية:",
+  promoConds: [
+    "حصول الموظف على تقييم أداء لا يقل عن «ممتاز».",
+    "توفر احتياج فعلي للمستوى الأعلى.",
+    "قدرة الموظف على أداء مهام ومسؤوليات المستوى الأعلى.",
+    "عدم وجود مخالفات جوهرية أو ضعف في الانضباط.",
+    "إكمال مدة مناسبة في المستوى الحالي، ويُفضّل ألا تقل عن سنة.",
+    "توصية المدير المباشر.",
+    "مراجعة واعتماد إدارة الموارد البشرية.",
+    "اعتماد الإدارة العليا.",
+  ],
+  ceilingIntro: "إذا وصل الموظف إلى الحد الأعلى للراتب في مستواه الحالي، فلا يُمنح زيادة مباشرة تتجاوز الحد الأعلى، وإنما يُتعامل معه وفق الآتي:",
+  ceilingSteps: [
+    "يتم تقييم أدائه ومسؤولياته الحالية.",
+    "تُدرَس مدى استحقاقه للانتقال إلى المستوى الوظيفي التالي.",
+    "إذا كانت مهامه ومسؤولياته تؤهله للمستوى الأعلى، يُرقّى إلى المستوى التالي.",
+    "إذا لم يوجد احتياج وظيفي أو لم تتحقق المتطلبات، يُثبَّت راتبه مؤقتًا ويمكن منحه مكافأة مقطوعة بدلًا من زيادة أساسية، حسب اعتماد الإدارة.",
+    "لا تتم الترقية لمجرد الوصول إلى السقف الأعلى، بل يجب ربطها بالأداء والاحتياج والمسؤوليات.",
+  ],
+
+  modifyIntro: "لا يجوز تعديل راتب أي موظف إلا في الحالات التالية:",
+  modifyCases: [
+    "الزيادة السنوية بناءً على تقييم الأداء.",
+    "الترقية إلى مستوى وظيفي أعلى.",
+    "تعديل جوهري في مهام ومسؤوليات الموظف.",
+    "تصحيح وضع راتب غير متوافق مع السلم المعتمد.",
+    "استثناء معتمد من الإدارة العليا.",
+    "تغيرات كبيرة في سوق العمل تستدعي مراجعة الرواتب.",
+  ],
+  modifyNote: "يجب أن تكون جميع تعديلات الرواتب موثقة ومعتمدة رسميًا.",
+
+  currentIntro: "عند تطبيق هذه السياسة على الموظفين الحاليين، يُصنَّف كل موظف حسب المسمى الفعلي والمهام التي يؤديها، وليس بناءً على الراتب فقط. ويُتعامل مع الرواتب الحالية وفق الآتي:",
+  currentCases: [
+    "إذا كان راتب الموظف داخل نطاق المستوى، يستمر وضعه كما هو.",
+    "إذا كان الراتب أقل من الحد الأدنى، تُوضع خطة تصحيح تدريجية حسب الميزانية والأولوية.",
+    "إذا كان الراتب أعلى من الحد الأعلى، يُعتبر حالة استثنائية ولا يُستخدم كمرجع للتعيينات الجديدة.",
+    "لا يُخفَّض راتب أي موظف بسبب تطبيق السلم، وتُدار الفروقات عبر تجميد الزيادات أو إعادة تصنيف المسمى عند الحاجة.",
+    "الوظائف القيادية والتنفيذية تخضع لتقييم خاص نظرًا لاختلاف طبيعة مسؤولياتها.",
+  ],
+
+  authority: [
+    { action: "تعيين موظف جديد", who: "المدير المباشر + الموارد البشرية + الإدارة العليا" },
+    { action: "تحديد الراتب", who: "الموارد البشرية + الإدارة المالية + الإدارة العليا" },
+    { action: "الزيادة السنوية", who: "المدير المباشر + الموارد البشرية + الإدارة العليا" },
+    { action: "الترقية", who: "المدير المباشر + الموارد البشرية + الرئيس التنفيذي" },
+    { action: "المكافأة السنوية", who: "الإدارة المالية + الموارد البشرية + الإدارة العليا أو مجلس الإدارة" },
+    { action: "الاستثناء من السلم", who: "الرئيس التنفيذي أو مجلس الإدارة" },
+  ],
+
+  reviewText: "تُراجع إدارة الموارد البشرية سلم الرواتب والهيكل الوظيفي مرة واحدة سنويًا، أو عند حدوث تغيرات جوهرية في حجم الشركة أو السوق، وتُرفع التوصيات للإدارة العليا لاعتماد أي تعديلات مطلوبة.",
+  cycle: [
+    { period: "ديسمبر", label: "تقييم الأداء السنوي", desc: "إغلاق تقييمات الموظفين ومؤشرات الأداء" },
+    { period: "يناير", label: "رفع التوصيات", desc: "إعداد توصيات الزيادة والترقية من الإدارات" },
+    { period: "فبراير", label: "المراجعة والاعتماد", desc: "مراجعة الموارد البشرية والمالية واعتماد الإدارة العليا" },
+    { period: "مارس", label: "التطبيق", desc: "تفعيل الزيادات والمكافآت في كشف الرواتب" },
+  ],
+
+  implIntro: "يُوصى عند تطبيق هذه السياسة بالبدء بالخطوات التالية:",
+  implSteps: [
+    "اعتماد الإدارات والمسميات الوظيفية رسميًا.",
+    "تصنيف كل موظف حالي حسب المستوى الوظيفي المناسب.",
+    "مقارنة راتب كل موظف مع نطاق المستوى.",
+    "تحديد الحالات الأقل من النطاق والأعلى من النطاق.",
+    "إعداد خطة تصحيح تدريجية للرواتب المنخفضة.",
+    "عدم استخدام الرواتب الاستثنائية كمرجع للتعيينات الجديدة.",
+    "ربط أي زيادة أو ترقية بتقييم الأداء السنوي.",
+    "ربط المكافأة السنوية بتحقيق الشركة للأرباح المتوقعة في الميزانية.",
+    "تحديث عقود الموظفين أو خطابات تعديل المسمى عند الحاجة.",
+  ],
+
+  signatures: [
+    { label: "// إعداد ومراجعة", role: "إدارة الموارد البشرية", who: "" },
+    { label: "// اعتماد مالي", role: "الإدارة المالية", who: "" },
+    { label: "// الاعتماد النهائي", role: "الرئيس التنفيذي / مجلس الإدارة", who: "" },
+  ],
+
+  // Level → color + order map (1-based by classification name)
+  levelOrder: ["مساعد", "أخصائي", "أخصائي أول", "مشرف", "مدير", "مدير إدارة", "تنفيذي"],
+  levelColors: ["#9DB4CD", "#6E92B5", "#4A77A0", "#2E5C86", "#1B466E", "#10375C", "#FF7E2A"],
+};
+
+</script>
+<script type="text/babel">
+/* MSGA — Salary Structure Policy · MSGA REPORT HOUSE STYLE renderer
+   Reads SAME content from window.STRUCT. 12 pages. Navy/orange brand.
+   Level colors via lvl-N classes (defined in report.css). */
+const S = window.STRUCT;
+const TOTAL = 12;
+const fmt = (n) => n.toLocaleString("en-US");
+const lvlIdx = (cls) => S.levelOrder.indexOf(cls);
+const lvlCls = (cls) => "lvl-" + (lvlIdx(cls) + 1);
+
+function Header({ page }) {
+  const m = S.meta;
+  return (
+    <div className="head">
+      <img className="logo" src="assets/msga-logo.png" alt="MSGA"/>
+      <div className="titles">
+        <div className="eyebrow">MSGA Investment · HR Policy</div>
+        <div className="doctitle">{m.title}</div>
+      </div>
+      <div className="doc-meta">
+        <div><b>DOC</b> {m.docId}</div>
+        <div><b>EFF</b> {m.effective}</div>
+        <div><b>PAGE</b> {String(page).padStart(2, "0")} / {String(TOTAL).padStart(2, "0")}</div>
+      </div>
+    </div>
+  );
+}
+function Footer({ page }) {
+  return (
+    <div className="foot">
+      <div className="brand-mark">شركة مسقا للاستثمار · سري وخاص</div>
+      <div>{S.meta.docId} · v{S.meta.version}</div>
+      <div className="pagenum"><b>{String(page).padStart(2, "0")}</b> / {String(TOTAL).padStart(2, "0")}</div>
+    </div>
+  );
+}
+function Page({ label, page, children }) {
+  return (
+    <div className="page" data-screen-label={label}>
+      <div className="watermark"></div>
+      <div className="page-inner">
+        <Header page={page}/>
+        {children}
+        <Footer page={page}/>
+      </div>
+    </div>
+  );
+}
+function Sec({ no, label, en, first }) {
+  return (
+    <div className={`sec-head ${first ? "first" : ""}`}>
+      <div className="sec-no">{no}</div>
+      <h2>{label}</h2>
+      <div className="en">{en}</div>
+    </div>
+  );
+}
+function Cap({ lbl, tag }) {
+  return <div className="cap"><span className="lbl">{lbl}</span><div className="dots"></div><span className="ref">{tag}</span></div>;
+}
+function Prose({ lead, alt, children }) {
+  return <div className={`prose ${alt ? "alt" : ""}`}>{lead && <div className="lead">{lead}</div>}{children}</div>;
+}
+function NList({ items, two, alt, start = 1 }) {
+  return (
+    <div className={`nlist ${two ? "two" : ""}`}>
+      {items.map((t, i) => (
+        <div className={`nitem ${alt ? "alt" : ""}`} key={i}><div className="nb">{start + i}</div><div className="nt">{t}</div></div>
+      ))}
+    </div>
+  );
+}
+function LvlBadge({ cls }) {
+  return <span className="lvl-badge"><span className={`ln ${lvlCls(cls)}`}>{lvlIdx(cls) + 1}</span>{cls}</span>;
+}
+function DeptCard({ d }) {
+  return (
+    <div className="dept2">
+      <div className="dept2-head">
+        <span className="dn">{d.name}</span>
+        <span className="meta"><span className="code">{d.code}</span><span className="cnt">{String(d.titles.length).padStart(2, "0")}</span></span>
+      </div>
+      {d.titles.map((t, i) => (
+        <div className="dt-row" key={i}>
+          <span className={`lvl-mini ${lvlCls(t.lvl)}`}>{lvlIdx(t.lvl) + 1}</span>
+          <span className="dt-lvl">{t.lvl}</span>
+          <span className="dt-title">{t.t}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ── COVER ── */
+const TOC = [
+  ["01", "الهدف من السياسة"], ["02", "نطاق التطبيق"], ["03", "مبادئ الهيكل"],
+  ["04", "سلم الرواتب"], ["05", "المسميات حسب الإدارات"], ["06", "آلية التعيين"],
+  ["07", "تقييم الأداء"], ["08", "الزيادات السنوية"], ["09", "المكافأة السنوية"],
+  ["10", "سياسة الترقيات"], ["11", "تعديل الرواتب"], ["12", "الصلاحيات والمراجعة"],
+];
+function PageCover() {
+  const m = S.meta;
+  return (
+    <div className="page cover" data-screen-label="01 الغلاف">
+      <div className="watermark"></div>
+      <div className="page-inner cover-inner">
+        <div className="cover-top">
+          <span className="co">شركة مسقا للاستثمار</span>
+          <div></div>
+          <span className="brandline">HR Policy · 2026</span>
+        </div>
+
+        <div className="cover-hero">
+          <img className="logo-w" src="assets/msga-logo.png" alt="MSGA"/>
+          <h1>هيكل المسميات<br/>وسلم الرواتب</h1>
+          <div className="subtitle">سياسة الموارد البشرية — {m.effective}</div>
+          <div className="period-pill">{m.docId}</div>
+          <div className="cover-desc">{m.subtitle}</div>
+        </div>
+
+        <div className="cover-cards four">
+          <div className="ccard"><div className="k">Job Levels</div><div className="v num">07</div><div className="s">مستويات وظيفية</div></div>
+          <div className="ccard"><div className="k">Departments</div><div className="v num">11</div><div className="s">إدارة</div></div>
+          <div className="ccard"><div className="k">Pay Range</div><div className="v">4K–100K</div><div className="s">ر.س / شهري</div></div>
+          <div className="ccard"><div className="k">Effective</div><div className="v">{m.effective}</div><div className="s">تاريخ السريان</div></div>
+        </div>
+
+        <div className="cover-toc">
+          <div className="th">Contents — محتويات الوثيقة</div>
+          <div className="tg">
+            {TOC.map(([n, t]) => <div className="ti" key={n}><span className="n">{n}</span><span>{t}</span></div>)}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── P2 · Purpose + Scope ── */
+function Page2() {
+  return (
+    <Page label="02 الهدف والنطاق" page={2}>
+      <Sec no="01" label="الهدف من السياسة" en="Purpose" first/>
+      <Prose lead="Purpose"><p>{S.purpose}</p></Prose>
+      <Sec no="02" label="نطاق التطبيق" en="Scope"/>
+      <Cap lbl="تطبق على الإدارات التالية" tag="11 Departments"/>
+      <div className="chips">
+        {S.scopeDepts.map((d, i) => <div className="chip-tag" key={i}><span className="cnum">{String(i + 1).padStart(2, "0")}</span>{d}</div>)}
+      </div>
+      <div className="note"><span className="x">i</span><span>{S.scopeExclude}</span></div>
+    </Page>
+  );
+}
+
+/* ── P3 · Levels + Scale + Band ── */
+function Page3() {
+  const maxAxis = 100000, ticks = [0, 25000, 50000, 75000, 100000];
+  return (
+    <Page label="03 الهيكل وسلم الرواتب" page={3}>
+      <Sec no="03" label="المبادئ العامة للهيكل الوظيفي" en="Architecture" first/>
+      <Cap lbl="سبعة مستويات — من المساعد إلى التنفيذي" tag="07 Levels"/>
+      <div className="ptable">
+        <div className="pt-head cols-level"><div>المستوى</div><div>التصنيف الوظيفي</div><div>طبيعة المستوى</div></div>
+        {S.levels.map((l, i) => (
+          <div className="pt-row cols-level" key={i}>
+            <div className="strong">{l.lvl}</div><div><LvlBadge cls={l.cls}/></div><div className="muted">{l.nature}</div>
+          </div>
+        ))}
+      </div>
+
+      <Sec no="04" label="سلم الرواتب المقترح" en="Pay Scale"/>
+      <Cap lbl="الراتب الإجمالي الشهري (أساسي + بدلات) — بالريال السعودي" tag="SAR / Month"/>
+      <div className="ptable">
+        <div className="pt-head cols-scale"><div>التصنيف</div><div className="center">المستوى</div><div className="center">الحد الأدنى</div><div className="center">المتوسط</div><div className="center">الحد الأعلى</div></div>
+        {S.scale.map((r, i) => (
+          <div className="pt-row cols-scale" key={i}>
+            <div><span className={`lvl-mini ${lvlCls(r.cls)}`}>{i + 1}</span><span className="strong" style={{ marginInlineStart: 8 }}>{r.cls}</span></div>
+            <div className="center lcode">L{i + 1}</div>
+            <div className="center"><span className="scale-num">{fmt(r.min)}</span></div>
+            <div className="center"><span className="scale-num mid">{fmt(r.mid)}</span></div>
+            <div className="center"><span className="scale-num hi">{fmt(r.max)}</span></div>
+          </div>
+        ))}
+      </div>
+
+      <div className="bandchart">
+        <div className="bc-head"><span>توزيع نطاقات الرواتب — Salary Band Distribution</span><span className="axis">0 — 100,000 SAR</span></div>
+        {S.scale.map((r, i) => (
+          <div className="bc-row" key={i}>
+            <div className="bc-label">{r.cls}</div>
+            <div className="bc-track">
+              {ticks.map((t, ti) => <div className="grid-line" key={ti} style={{ left: (t / maxAxis * 100) + "%" }}></div>)}
+              <div className={`bc-bar ${lvlCls(r.cls)}`} style={{ left: (r.min / maxAxis * 100) + "%", width: ((r.max - r.min) / maxAxis * 100) + "%" }}>
+                <span className="mid-dot" style={{ left: ((r.mid - r.min) / (r.max - r.min) * 100) + "%" }}></span>
+              </div>
+            </div>
+          </div>
+        ))}
+        <div className="bc-axis-labels">{ticks.map((t, i) => <span key={i}>{t / 1000}k</span>)}</div>
+      </div>
+    </Page>
+  );
+}
+
+/* ── P4 · Scale notes + titles 1-3 ── */
+function Page4() {
+  return (
+    <Page label="04 ملاحظات السلم + المسميات" page={4}>
+      <Cap lbl="ملاحظات على سلم الرواتب" tag="Scale Notes"/>
+      <NList items={S.scaleNotes} two alt/>
+      <Sec no="05" label="المسميات الوظيفية حسب الإدارات" en="Job Titles"/>
+      <Cap lbl="مصفوفة المسميات المقترحة لكل مستوى" tag="11 Depts · 71 Titles"/>
+      <div className="depttitles">{S.depts.slice(0, 4).map((d, i) => <DeptCard key={i} d={d}/>)}</div>
+    </Page>
+  );
+}
+function Page5() {
+  return (
+    <Page label="05 المسميات (تابع)" page={5}>
+      <Sec no="05" label="المسميات الوظيفية حسب الإدارات" en="Job Titles · Cont." first/>
+      <Cap lbl="التسويق · المشاريع · المشتريات · الشؤون القانونية" tag="05 / 11"/>
+      <div className="depttitles">{S.depts.slice(4, 8).map((d, i) => <DeptCard key={i} d={d}/>)}</div>
+    </Page>
+  );
+}
+function Page6() {
+  return (
+    <Page label="06 المسميات (تابع)" page={6}>
+      <Sec no="05" label="المسميات الوظيفية حسب الإدارات" en="Job Titles · Cont." first/>
+      <Cap lbl="المراجعة الداخلية · تقنية المعلومات · التشغيل والمواقع" tag="09 / 11"/>
+      <div className="depttitles">{S.depts.slice(8, 11).map((d, i) => <DeptCard key={i} d={d}/>)}</div>
+    </Page>
+  );
+}
+
+/* ── P7 · Hiring + Eval ── */
+function Page7() {
+  return (
+    <Page label="07 التعيين والتقييم" page={7}>
+      <Sec no="06" label="آلية تحديد راتب الموظف عند التعيين" en="Starting Salary" first/>
+      <Cap lbl="تُحدَّد بناءً على المعايير التالية" tag="10 Criteria"/>
+      <NList items={S.hiringCriteria} two alt/>
+      <div className="note alt"><span className="x">i</span><span>{S.hiringNote}</span></div>
+      <Sec no="07" label="تقييم الأداء السنوي" en="Annual Appraisal"/>
+      <Prose lead="Basis"><p>{S.evalIntro}</p></Prose>
+      <Cap lbl="معايير تقييم الأداء" tag="10 Criteria"/>
+      <NList items={S.evalCriteria} two/>
+    </Page>
+  );
+}
+
+/* ── P8 · Grades + Increases ── */
+function Page8() {
+  return (
+    <Page label="08 الدرجات والزيادات" page={8}>
+      <Sec no="07" label="درجات التقييم السنوي" en="Appraisal Grades" first/>
+      <Cap lbl="خمس درجات تحدد الزيادة والمكافأة والترقية" tag="05 Grades"/>
+      <div className="ptable">
+        <div className="pt-head cols-grade"><div>درجة التقييم</div><div>الوصف العام</div></div>
+        {S.grades.map((g, i) => (
+          <div className="pt-row cols-grade" key={i}><div><span className={`rating ${g.cls}`}>{g.rating}</span></div><div className="grade-desc">{g.desc}</div></div>
+        ))}
+      </div>
+      <Sec no="08" label="سياسة الزيادات السنوية" en="Annual Increases"/>
+      <Prose lead="Principle"><p>{S.increaseIntro}</p></Prose>
+      <Cap lbl="نسب الزيادة المقترحة وفق التقدير" tag="% of Gross"/>
+      <div className="ptable">
+        <div className="pt-head cols-rate"><div>درجة التقييم</div><div className="center">نسبة الزيادة السنوية</div></div>
+        {S.increases.map((r, i) => (
+          <div className="pt-row cols-rate" key={i}><div><span className={`rating ${r.cls}`}>{r.rating}</span></div><div className="center"><span className={`vchip ${r.chip}`}>{r.val}</span></div></div>
+        ))}
+      </div>
+      <Cap lbl="ضوابط الزيادة السنوية" tag="06 Rules"/>
+      <NList items={S.increaseRules} two/>
+    </Page>
+  );
+}
+
+/* ── P9 · Bonus ── */
+function Page9() {
+  return (
+    <Page label="09 المكافأة السنوية" page={9}>
+      <Sec no="09" label="المكافأة السنوية" en="Annual Bonus" first/>
+      <Prose lead="Principle"><p>{S.bonusIntro1}</p><p>{S.bonusIntro2}</p></Prose>
+      <Cap lbl="آلية احتساب المكافأة وفق التقدير" tag="Months of Salary"/>
+      <div className="ptable">
+        <div className="pt-head cols-rate"><div>درجة التقييم</div><div className="center">المكافأة السنوية المقترحة</div></div>
+        {S.bonuses.map((r, i) => (
+          <div className="pt-row cols-rate" key={i}><div><span className={`rating ${r.cls}`}>{r.rating}</span></div><div className="center"><span className={`vchip ${r.chip}`}>{r.val}</span></div></div>
+        ))}
+      </div>
+      <Cap lbl="ضوابط صرف المكافأة السنوية" tag="08 Rules"/>
+      <NList items={S.bonusRules} two/>
+    </Page>
+  );
+}
+
+/* ── P10 · Promotions ── */
+function Page10() {
+  return (
+    <Page label="10 الترقيات" page={10}>
+      <Sec no="10" label="سياسة الترقيات" en="Promotions" first/>
+      <Prose lead="Conditions"><p>{S.promoIntro}</p></Prose>
+      <Cap lbl="يجب تحقق جميع الشروط" tag="08 Conditions"/>
+      <NList items={S.promoConds} two alt/>
+      <Sec no="10" label="الترقية عند الوصول للحد الأعلى للراتب" en="Salary Ceiling"/>
+      <Prose lead="Treatment" alt><p>{S.ceilingIntro}</p></Prose>
+      <div className="steps">
+        {S.ceilingSteps.map((s, i) => <div className="step" key={i}><div className="snum">{i + 1}</div><div className="stext">{s}</div></div>)}
+      </div>
+    </Page>
+  );
+}
+
+/* ── P11 · Modify + Current + Authority ── */
+function Page11() {
+  return (
+    <Page label="11 التعديل والصلاحيات" page={11}>
+      <Sec no="11" label="ضوابط تعديل الرواتب" en="Adjustments" first/>
+      <Cap lbl="لا يجوز التعديل إلا في الحالات التالية" tag="06 Cases"/>
+      <NList items={S.modifyCases} two alt/>
+      <div className="note alt"><span className="x">i</span><span>{S.modifyNote}</span></div>
+      <Sec no="12" label="معالجة الرواتب الحالية" en="Legacy Salaries"/>
+      <Prose lead="Classification"><p>{S.currentIntro}</p></Prose>
+      <NList items={S.currentCases}/>
+      <Sec no="13" label="الصلاحيات والاعتمادات" en="Authority"/>
+      <div className="ptable">
+        <div className="pt-head cols-auth"><div>الإجراء</div><div>الجهة المقترحة للاعتماد</div></div>
+        {S.authority.map((a, i) => (
+          <div className="pt-row cols-auth" key={i}><div className="strong">{a.action}</div><div className="muted" style={{ fontSize: 10.5 }}>{a.who}</div></div>
+        ))}
+      </div>
+    </Page>
+  );
+}
+
+/* ── P12 · Review + Impl + Sign-off ── */
+function Page12() {
+  const m = S.meta;
+  return (
+    <Page label="12 المراجعة والتوصيات" page={12}>
+      <Sec no="14" label="المراجعة الدورية" en="Periodic Review" first/>
+      <Prose lead="Cadence"><p>{S.reviewText}</p></Prose>
+      <Cap lbl="الجدول الزمني للدورة السنوية" tag="Annual · 4 Stages"/>
+      <div className="cycle">
+        <div className="cycle-track">
+          {S.cycle.map((c, i) => (
+            <div className={`cycle-node ${i === S.cycle.length - 1 ? "accent" : ""}`} key={i}>
+              <div className="dot">{String(i + 1).padStart(2, "0")}</div>
+              <div className="period">{c.period}</div>
+              <div className="clabel">{c.label}</div>
+              <div className="cdesc">{c.desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <Sec no="15" label="توصية تطبيقية" en="Implementation"/>
+      <Cap lbl="خطوات البدء بتطبيق السياسة" tag="09 Steps"/>
+      <NList items={S.implSteps} two/>
+      <Cap lbl="الاعتمادات والتوقيعات" tag={`Approvals · ${m.docId}`}/>
+      <div className="signoff-triple">
+        {S.signatures.map((s, i) => (
+          <div className="sign" key={i}>
+            <div className="label">{s.label.replace(/^\/\/\s*/, "")}</div>
+            <div className="nm">{s.who || "\u00A0"}</div>
+            <div className="role">{s.role}</div>
+            <div className="sig-line"></div>
+            <div className="sig-cap">Signature / Date</div>
+          </div>
+        ))}
+      </div>
+      <div className="docctrl">
+        <div><div className="eyebrow">Document Control · ضبط الوثيقة</div><div className="val">الإصدار v{m.version} · يسري من {m.effective}</div></div>
+        <div className="right">Next Review · {m.review}</div>
+      </div>
+    </Page>
+  );
+}
+
+function Toolbar() {
+  return <div className="toolbar"><div className="brand">MSGA · Report Style</div><button onClick={() => window.print()}>Print / PDF</button></div>;
+}
+function App() {
+  return (
+    <>
+      <Toolbar/>
+      <div className="stage">
+        <PageCover/><Page2/><Page3/><Page4/><Page5/><Page6/><Page7/><Page8/><Page9/><Page10/><Page11/><Page12/>
+      </div>
+    </>
+  );
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+
+</script>
+</body>
+</html>

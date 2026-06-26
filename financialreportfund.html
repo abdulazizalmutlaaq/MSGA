@@ -1,0 +1,1560 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<script src="guard.js"></script>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSGA — التقرير المالي للصندوق · بنمط التقرير</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* MSGA — Salary Structure Policy · "MSGA REPORT" HOUSE STYLE
+   Matches the April-2026 commercial-sector report exactly:
+   navy full-bleed cover + top orange hairline · white content pages ·
+   lavender rounded section bars with orange circle number + orange right accent ·
+   grey table header with orange underline · colored status pills · rounded cards.
+   Self-contained — does NOT depend on sample-base.css. */
+:root {
+  --navy:#1F3A57; --navy-2:#16304B; --navy-3:#102539; --navy-deep:#0D2034;
+  --navy-card:#27425E; --navy-line:#33506C;
+  --orange:#E5811F; --orange-2:#C96B12; --orange-soft:#FBEEDD;
+  --ink:#1E2B38; --ink-2:#41505F; --ink-3:#76828F; --ink-4:#A7B0BA;
+  --paper:#FFFFFF; --paper-2:#F7F8FB; --lav:#EEF0F7; --lav-2:#F4F5FA;
+  --line:#E5E8EE; --line-2:#EEF0F4;
+  --th:#F4F5F8;
+  --ok:#2F8559; --ok-bg:#E6F4EC; --ok-bd:#CBE8D6;
+  --prog:#2B5180; --prog-bg:#E9EFF7; --prog-bd:#D2DEEE;
+  --hold:#B0831F; --hold-bg:#FAF2DA; --hold-bd:#ECDBA9;
+  --red:#B0432C; --red-bg:#F8E9E4; --red-bd:#ECCDC2;
+  --l1:#BBC6D2; --l2:#9DACBC; --l3:#7E91A6; --l4:#5F7790; --l5:#46617C; --l6:#2F4D69; --l7:#E5811F;
+  --ar:"Tajawal", system-ui, sans-serif;
+  --ar-head:"Tajawal", system-ui, sans-serif;
+  --latin:"Saira", "Tajawal", system-ui, sans-serif;
+  --page-w:210mm; --page-h:297mm; --mx:15mm; --my:14mm;
+}
+* { box-sizing:border-box; }
+html, body { margin:0; padding:0; background:#DDE2E8; font-family:var(--ar); color:var(--ink); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+body { direction:rtl; }
+.stage { min-height:100vh; padding:30px 16px 90px; display:flex; flex-direction:column; align-items:center; gap:28px; }
+.page { width:var(--page-w); height:var(--page-h); background:var(--paper); position:relative; overflow:hidden; box-shadow:0 1px 2px rgba(20,30,45,.05), 0 16px 44px rgba(20,30,45,.14); page-break-after:always; break-after:page; display:flex; flex-direction:column; }
+.page:last-of-type { page-break-after:auto; }
+.watermark { position:absolute; inset:0; pointer-events:none; z-index:0; }
+.page-inner { position:relative; z-index:1; flex:1; display:flex; flex-direction:column; padding:var(--my) var(--mx) 0; }
+
+/* numbers latin font */
+.latin, .doc-meta, .foot, .lcode, .scale-num, .vchip, .kpi .val, .ti-num, .cnum, .nb, .sec-no, .head .eyebrow, .cap .ref, .prose .lead, .cover-top .brandline, .hero .kicker, .classline, .kpi .label, .toc-head, .cover-meta .k, .dept2-head .code, .dept2-head .cnt { font-family:var(--latin); }
+
+/* ─── Content header ─── */
+.head { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px; padding-bottom:11px; margin-bottom:6px; border-bottom:2px solid var(--orange); }
+.head .logo { height:34px; width:auto; display:block; }
+.head .titles { display:flex; flex-direction:column; gap:1px; }
+.head .eyebrow { font-size:8.5px; font-weight:600; letter-spacing:0.18em; color:var(--orange-2); text-transform:uppercase; direction:ltr; }
+.head .doctitle { font-family:var(--ar-head); font-size:13.5px; font-weight:700; color:var(--navy); }
+.head .doc-meta { text-align:left; direction:ltr; font-size:9px; font-weight:500; color:var(--ink-3); line-height:1.65; letter-spacing:0.03em; }
+.head .doc-meta div { white-space:nowrap; }
+.head .doc-meta b { color:var(--navy); font-weight:700; letter-spacing:0.08em; }
+
+/* ─── Footer ─── */
+.foot { position:absolute; bottom:8mm; inset-inline:var(--mx); display:flex; align-items:center; justify-content:space-between; font-size:8.5px; font-weight:500; color:var(--ink-3); letter-spacing:0.08em; text-transform:uppercase; border-top:1px solid var(--line); padding-top:7px; z-index:2; direction:ltr; }
+.foot .brand-mark { display:flex; align-items:center; gap:7px; }
+.foot .brand-mark::before { content:""; width:5px; height:5px; background:var(--orange); border-radius:50%; }
+.foot .pagenum b { color:var(--navy); font-weight:700; }
+
+/* ─── Section bar (signature element) ─── */
+.sec-head { position:relative; display:flex; align-items:center; gap:11px; flex-direction:row-reverse; justify-content:flex-start; background:var(--lav); border-radius:9px; padding:9px 16px 9px 14px; margin:16px 0 11px; overflow:hidden; }
+.sec-head.first { margin-top:4px; }
+.sec-head::after { content:""; position:absolute; top:0; bottom:0; right:0; width:5px; background:var(--orange); }
+.sec-head .sec-no { width:24px; height:24px; border-radius:50%; background:var(--orange); color:#fff; display:grid; place-items:center; font-size:11px; font-weight:700; flex-shrink:0; }
+.sec-head h2 { margin:0; font-family:var(--ar-head); font-size:16px; font-weight:700; color:var(--navy); flex:1; }
+.sec-head .en { font-size:9px; font-weight:600; color:var(--ink-3); letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap; direction:ltr; }
+
+/* caption */
+.cap { display:flex; align-items:center; gap:11px; margin:2px 2px 8px; }
+.cap .lbl { font-size:10px; font-weight:500; color:var(--ink-3); white-space:nowrap; }
+.cap .dots { flex:1; height:1px; background:var(--line); }
+.cap .ref { font-size:9px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange-2); white-space:nowrap; direction:ltr; }
+
+/* prose */
+.prose { padding:2px 14px 2px 0; margin-top:4px; border-inline-start:3px solid var(--orange); }
+.prose.alt { border-inline-start-color:var(--navy); }
+.prose .lead { font-size:9px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--orange-2); margin-bottom:5px; direction:ltr; text-align:start; }
+.prose.alt .lead { color:var(--navy); }
+.prose p { margin:0; font-size:11.5px; color:var(--ink-2); line-height:1.85; text-wrap:pretty; }
+.prose p + p { margin-top:7px; }
+
+/* numbered list */
+.nlist { display:grid; grid-template-columns:1fr; margin-top:6px; }
+.nlist.two { grid-template-columns:1fr 1fr; column-gap:22px; }
+.nitem { display:grid; grid-template-columns:24px 1fr; align-items:start; gap:10px; padding:7px 0; border-bottom:1px solid var(--line-2); }
+.nitem .nb { font-size:11px; font-weight:700; color:#fff; background:var(--navy); width:20px; height:20px; border-radius:6px; display:grid; place-items:center; line-height:1; }
+.nitem.alt .nb { background:var(--orange); }
+.nitem .nt { font-size:11px; line-height:1.6; color:var(--ink-2); padding-top:2px; text-wrap:pretty; }
+
+/* chips */
+.chips { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:4px; }
+.chip-tag { display:flex; align-items:center; gap:9px; border:1px solid var(--line); background:var(--paper-2); border-radius:8px; padding:9px 12px; font-size:10.5px; color:var(--ink-2); min-height:36px; }
+.chip-tag .cnum { font-size:10px; font-weight:700; color:#fff; background:var(--navy); width:18px; height:18px; border-radius:5px; display:grid; place-items:center; flex-shrink:0; }
+
+/* note */
+.note { margin-top:10px; padding:11px 14px; background:var(--orange-soft); border-radius:8px; border-inline-start:3px solid var(--orange); font-size:10.5px; color:#7A5417; line-height:1.7; display:flex; gap:10px; align-items:flex-start; text-wrap:pretty; }
+.note .x { font-weight:700; font-size:13px; color:var(--orange-2); line-height:1.3; }
+.note.alt { background:var(--lav); border-inline-start-color:var(--navy); color:var(--ink-2); }
+.note.alt .x { color:var(--navy); }
+
+/* ─── tables ─── */
+.ptable { margin-top:6px; border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.pt-head { display:grid; background:var(--th); border-bottom:2px solid var(--orange); font-family:var(--ar-head); font-size:10px; font-weight:700; color:var(--navy); }
+.pt-head > div { padding:8px 12px; }
+.pt-head > div.center { text-align:center; }
+.pt-row { display:grid; border-bottom:1px solid var(--line-2); font-size:11px; min-height:34px; align-items:stretch; background:var(--paper); }
+.pt-row:last-child { border-bottom:none; }
+.pt-row:nth-child(even) { background:var(--lav-2); }
+.pt-row > div { padding:8px 12px; display:flex; align-items:center; }
+.pt-row .center { justify-content:center; }
+.pt-row .strong { font-weight:700; color:var(--navy); }
+.pt-row .muted { color:var(--ink-3); font-size:10px; }
+.lcode { font-size:10px; color:var(--ink-3); direction:ltr; }
+.cols-level { grid-template-columns:120px 150px 1fr; }
+.cols-scale { grid-template-columns:128px 60px 1fr 1fr 1fr; }
+.cols-grade { grid-template-columns:170px 1fr; }
+.cols-rate  { grid-template-columns:1fr 190px; }
+.cols-auth  { grid-template-columns:220px 1fr; }
+
+/* level badge */
+.lvl-badge { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:500; color:var(--ink); }
+.lvl-badge .ln { font-size:9.5px; font-weight:700; color:#fff; width:19px; height:19px; border-radius:50%; display:grid; place-items:center; flex-shrink:0; }
+.lvl-mini { font-size:9px; font-weight:700; color:#fff; width:17px; height:17px; border-radius:50%; display:grid; place-items:center; flex-shrink:0; }
+.lvl-1{background:var(--l1)} .lvl-2{background:var(--l2)} .lvl-3{background:var(--l3)} .lvl-4{background:var(--l4)} .lvl-5{background:var(--l5)} .lvl-6{background:var(--l6)} .lvl-7{background:var(--l7)}
+
+/* salary numbers */
+.scale-num { font-size:12px; direction:ltr; font-weight:500; color:var(--ink-2); }
+.scale-num.mid { color:var(--orange-2); font-weight:700; }
+.scale-num.hi { color:var(--navy); font-weight:700; }
+
+/* status-style pill (for grades / values) */
+.pill { display:inline-flex; align-items:center; gap:7px; font-family:var(--ar-head); font-size:11px; font-weight:700; padding:4px 11px; border-radius:999px; border:1px solid transparent; white-space:nowrap; }
+.pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.pill.ok   { color:var(--ok);   background:var(--ok-bg);   border-color:var(--ok-bd); }
+.pill.prog { color:var(--prog); background:var(--prog-bg); border-color:var(--prog-bd); }
+.pill.hold { color:var(--hold); background:var(--hold-bg); border-color:var(--hold-bd); }
+.pill.red  { color:var(--red);  background:var(--red-bg);  border-color:var(--red-bd); }
+.pill.plain{ color:var(--ink-3); background:var(--paper-2); border-color:var(--line); }
+
+.vchip { font-size:13px; font-weight:700; direction:ltr; white-space:nowrap; }
+.vchip.pos{color:var(--ok)} .vchip.warn{color:var(--hold)} .vchip.none{color:var(--ink-4)} .vchip.nav{color:var(--navy)}
+.vchip.ar{direction:rtl; font-family:var(--ar-head); font-size:11.5px}
+
+/* rating -> use pill look */
+.rating { display:inline-flex; align-items:center; gap:7px; font-family:var(--ar-head); font-size:11px; font-weight:700; padding:4px 12px; border-radius:999px; border:1px solid; }
+.rating::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.rating.r-excep { color:var(--ok);   background:var(--ok-bg);   border-color:var(--ok-bd); }
+.rating.r-exc   { color:var(--prog); background:var(--prog-bg); border-color:var(--prog-bd); }
+.rating.r-vg    { color:var(--hold); background:var(--hold-bg); border-color:var(--hold-bd); }
+.rating.r-good  { color:var(--orange-2); background:var(--orange-soft); border-color:#EFD9B6; }
+.rating.r-below { color:var(--red);  background:var(--red-bg);  border-color:var(--red-bd); }
+.grade-desc { font-size:10.5px; color:var(--ink-3); line-height:1.6; text-wrap:pretty; }
+
+/* band chart */
+.bandchart { margin-top:8px; padding:11px 14px; border:1px solid var(--line); border-radius:9px; background:var(--paper-2); }
+.bc-head { display:flex; justify-content:space-between; align-items:baseline; font-size:9px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3); margin-bottom:11px; }
+.bc-head .axis { direction:ltr; color:var(--orange-2); font-family:var(--latin); }
+.bc-row { display:grid; grid-template-columns:92px 1fr; align-items:center; gap:13px; margin-bottom:7px; }
+.bc-row:last-child { margin-bottom:0; }
+.bc-row .bc-label { font-size:10px; font-weight:500; color:var(--ink-2); text-align:start; }
+.bc-track { position:relative; height:14px; direction:ltr; }
+.bc-track .grid-line { position:absolute; top:-4px; bottom:-4px; width:1px; background:var(--line); }
+.bc-bar { position:absolute; top:4px; height:7px; border-radius:4px; display:flex; align-items:center; }
+.bc-bar.lvl-1{background:var(--l1);color:var(--l1)} .bc-bar.lvl-2{background:var(--l2);color:var(--l2)} .bc-bar.lvl-3{background:var(--l3);color:var(--l3)} .bc-bar.lvl-4{background:var(--l4);color:var(--l4)} .bc-bar.lvl-5{background:var(--l5);color:var(--l5)} .bc-bar.lvl-6{background:var(--l6);color:var(--l6)} .bc-bar.lvl-7{background:var(--l7);color:var(--l7)}
+.bc-bar .mid-dot { position:absolute; width:9px; height:9px; border-radius:50%; background:var(--paper); box-shadow:0 0 0 2px currentColor; transform:translateX(-50%); }
+.bc-axis-labels { display:flex; justify-content:space-between; direction:ltr; font-family:var(--latin); font-size:9px; font-weight:600; color:var(--ink-4); margin:6px 0 0; padding-inline-start:105px; }
+
+/* department cards */
+.depttitles { display:grid; grid-template-columns:1fr 1fr; gap:13px; margin-top:6px; }
+.dept2 { border:1px solid var(--line); border-radius:9px; background:var(--paper); display:flex; flex-direction:column; break-inside:avoid; overflow:hidden; }
+.dept2-head { display:grid; grid-template-columns:1fr auto; align-items:center; gap:8px; padding:8px 13px; background:var(--th); border-bottom:2px solid var(--orange); }
+.dept2-head .dn { font-family:var(--ar-head); font-size:12px; font-weight:700; color:var(--navy); }
+.dept2-head .meta { display:flex; align-items:center; gap:8px; }
+.dept2-head .code { font-size:9px; font-weight:700; letter-spacing:0.08em; color:var(--orange-2); direction:ltr; }
+.dept2-head .cnt { font-size:9px; color:var(--ink-3); direction:ltr; }
+.dt-row { display:grid; grid-template-columns:20px 88px 1fr; align-items:center; gap:9px; padding:6px 13px; border-bottom:1px solid var(--line-2); font-size:10.5px; min-height:30px; }
+.dt-row:last-child { border-bottom:none; }
+.dt-row .dt-lvl { font-size:9px; color:var(--ink-3); }
+.dt-row .dt-title { font-weight:500; color:var(--ink); }
+
+/* steps */
+.steps { display:grid; margin-top:6px; border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.step { display:grid; grid-template-columns:42px 1fr; border-bottom:1px solid var(--line-2); align-items:stretch; }
+.step:last-child { border-bottom:none; }
+.step:nth-child(even) { background:var(--lav-2); }
+.step .snum { background:var(--navy); color:#fff; display:grid; place-items:center; font-size:13px; font-weight:700; }
+.step .stext { padding:10px 13px; font-size:11px; line-height:1.6; color:var(--ink-2); display:flex; align-items:center; text-wrap:pretty; }
+
+/* annual cycle */
+.cycle { margin-top:6px; padding:16px 10px 6px; }
+.cycle-track { display:grid; grid-template-columns:repeat(4,1fr); position:relative; direction:rtl; }
+.cycle-track::before { content:""; position:absolute; top:16px; inset-inline:12%; height:2px; background:var(--line); z-index:0; }
+.cycle-node { display:flex; flex-direction:column; align-items:center; gap:8px; position:relative; z-index:1; text-align:center; padding:0 8px; }
+.cycle-node .dot { width:32px; height:32px; border-radius:50%; background:var(--paper); color:var(--navy); display:grid; place-items:center; font-family:var(--latin); font-size:13px; font-weight:700; border:2px solid var(--navy); }
+.cycle-node.accent .dot { background:var(--orange); color:#fff; border-color:var(--orange); }
+.cycle-node .period { font-family:var(--ar-head); font-size:11.5px; font-weight:700; color:var(--orange-2); }
+.cycle-node .clabel { font-size:11px; font-weight:700; color:var(--navy); line-height:1.35; }
+.cycle-node .cdesc { font-size:9.5px; color:var(--ink-3); line-height:1.5; max-width:140px; }
+
+/* sign-off */
+.signoff-triple { margin-top:12px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.signoff-triple .sign { padding:13px; border:1px solid var(--line); border-radius:9px; background:var(--paper-2); display:flex; flex-direction:column; gap:5px; min-height:92px; }
+.signoff-triple .sign .label { font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange-2); direction:ltr; text-align:start; }
+.signoff-triple .sign .nm { font-size:11.5px; font-weight:700; color:var(--ink); min-height:16px; }
+.signoff-triple .sign .role { font-size:10px; color:var(--ink-3); }
+.signoff-triple .sign .sig-line { margin-top:auto; border-bottom:1px dashed var(--ink-4); height:24px; }
+.signoff-triple .sign .sig-cap { font-size:8.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-4); direction:ltr; text-align:start; }
+
+/* doc control */
+.docctrl { margin-top:14px; background:var(--navy); border-radius:9px; padding:14px 18px; display:grid; grid-template-columns:1fr auto; align-items:center; gap:16px; color:#fff; }
+.docctrl .eyebrow { font-size:9px; letter-spacing:0.16em; color:#F0B978; text-transform:uppercase; margin-bottom:4px; direction:ltr; text-align:start; }
+.docctrl .val { font-family:var(--ar-head); font-size:13px; font-weight:700; color:#fff; }
+.docctrl .right { font-size:9.5px; color:#AEBCCC; letter-spacing:0.1em; text-transform:uppercase; text-align:left; direction:ltr; }
+
+/* ═══════ COVER (navy full-bleed) ═══════ */
+.page.cover { background:var(--navy); }
+.page.cover::before { content:""; position:absolute; top:0; inset-inline:0; height:5px; background:var(--orange); z-index:3; }
+.page.cover .watermark::after { content:""; position:absolute; inset:0; background:url("assets/msga-logo.png") no-repeat center 60%; background-size:62% auto; opacity:.04; filter:brightness(0) invert(1); }
+.cover-inner { padding:0 !important; }
+.cover-top { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px; padding:13mm var(--mx) 0; }
+.cover-top .co { font-family:var(--ar-head); font-size:12px; font-weight:700; color:#fff; }
+.cover-top .brandline { font-size:9.5px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--orange); text-align:left; direction:ltr; }
+.cover-hero { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 var(--mx); text-align:center; }
+.cover-hero .logo-w { height:64px; width:auto; filter:brightness(0) invert(1); margin-bottom:30px; }
+.cover-hero h1 { margin:0; font-family:var(--ar-head); font-size:50px; font-weight:800; line-height:1.12; color:#fff; letter-spacing:-0.01em; }
+.cover-hero .subtitle { margin-top:14px; font-size:13px; font-weight:500; color:var(--orange); letter-spacing:0.02em; }
+.cover-hero .period-pill { margin-top:20px; border:1.5px solid rgba(255,255,255,.4); border-radius:999px; padding:8px 24px; font-size:12px; font-weight:600; color:#fff; direction:ltr; white-space:nowrap; letter-spacing:0.04em; }
+.cover-desc { margin:20px auto 0; max-width:74%; font-size:12px; color:#C5D0DC; line-height:1.85; text-wrap:pretty; }
+.cover-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:13px; margin:0 var(--mx) 8mm; }
+.cover-cards.four { grid-template-columns:repeat(4,1fr); }
+.ccard { background:var(--navy-card); border:1px solid var(--navy-line); border-radius:10px; padding:13px 15px; text-align:center; display:flex; flex-direction:column; gap:5px; }
+.ccard .k { font-size:9px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange); direction:ltr; }
+.ccard .v { font-family:var(--ar-head); font-size:14px; font-weight:700; color:#fff; }
+.ccard .v.num { font-family:var(--latin); font-size:26px; line-height:1; direction:ltr; }
+.ccard .s { font-size:9px; color:#9FB0C0; }
+
+/* cover TOC strip */
+.cover-toc { margin:0 var(--mx) 7mm; padding-top:14px; border-top:1px solid var(--navy-line); }
+.cover-toc .th { font-size:9px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#8FA2B4; margin-bottom:9px; direction:ltr; }
+.cover-toc .tg { display:grid; grid-template-columns:repeat(4,1fr); gap:5px 18px; }
+.cover-toc .ti { display:grid; grid-template-columns:20px 1fr; gap:8px; align-items:baseline; font-size:9.5px; color:#C5D0DC; padding:3px 0; }
+.cover-toc .ti .n { font-family:var(--latin); font-size:9.5px; font-weight:700; color:var(--orange); }
+
+/* toolbar */
+.toolbar { position:fixed; top:16px; inset-inline-start:16px; z-index:100; background:var(--navy); color:#fff; display:flex; align-items:center; gap:4px; padding:7px 8px; border-radius:8px; box-shadow:0 10px 30px rgba(20,30,45,.25); font-size:11px; direction:ltr; }
+.toolbar .brand { font-family:var(--ar-head); padding:4px 12px 4px 6px; display:flex; align-items:center; gap:9px; border-inline-end:1px solid rgba(255,255,255,.18); font-weight:700; letter-spacing:0.06em; text-transform:uppercase; }
+.toolbar .brand::before { content:""; width:7px; height:7px; background:var(--orange); border-radius:50%; }
+.toolbar button { background:transparent; color:#fff; border:none; font:inherit; padding:6px 12px; cursor:pointer; letter-spacing:0.04em; text-transform:uppercase; font-weight:600; border-radius:5px; }
+.toolbar button:hover { background:rgba(255,255,255,.12); }
+
+/* page 3 packs 14 table rows + band chart — tighten to clear footer */
+.stage .page:nth-of-type(3) .pt-row { min-height:31px; }
+.stage .page:nth-of-type(3) .pt-row > div { padding-top:6px; padding-bottom:6px; }
+.stage .page:nth-of-type(3) .bandchart { margin-top:6px; padding:10px 14px; }
+.stage .page:nth-of-type(3) .bc-row { margin-bottom:5px; }
+
+/* ═══════════════════════════════════════════════════════════
+   MEETING-MINUTES COMPONENTS (report house style)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Fillable inputs ── */
+.fill { border:none; outline:none; background:transparent; width:100%; font:inherit; color:inherit; padding:2px 0; border-bottom:1px dashed transparent; transition:border .15s, background .15s; }
+.fill:hover { border-bottom-color:var(--line); }
+.fill:focus { border-bottom-color:var(--orange); background:linear-gradient(to top, rgba(229,129,31,.07), transparent); }
+.fill::placeholder { color:var(--ink-4); font-weight:400; }
+.fill-latin { font-family:var(--latin); direction:ltr; text-align:start; }
+.fill-num { font-family:var(--latin); direction:ltr; text-align:start; font-weight:500; }
+.fill-multi { resize:none; overflow:hidden; display:block; font-family:inherit; line-height:1.6; min-height:18px; border-bottom:1px dashed transparent; }
+.fill-multi:hover { border-bottom-color:var(--line); }
+.fill-multi:focus { border-bottom-color:var(--orange); background:linear-gradient(to top, rgba(229,129,31,.07), transparent); }
+
+/* ── Cover hero subtitle as fill ── */
+.cover-hero .fill { text-align:center; color:#C5D0DC; }
+.cover-hero .fill::placeholder { color:rgba(197,208,220,.5); }
+.cover-hero .fill:focus { background:rgba(255,255,255,.06); border-bottom-color:var(--orange); }
+
+/* ── KPI strip (page-level, white) ── */
+.kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:11px; margin-top:4px; }
+.kpi { border:1px solid var(--line); border-radius:9px; background:var(--paper-2); padding:12px 14px; display:flex; flex-direction:column; gap:5px; position:relative; overflow:hidden; }
+.kpi::after { content:""; position:absolute; top:0; bottom:0; right:0; width:4px; background:var(--orange); }
+.kpi .label { font-family:var(--latin); font-size:8.5px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-3); direction:ltr; }
+.kpi .val { font-family:var(--latin); font-size:24px; font-weight:700; color:var(--navy); line-height:1; direction:ltr; }
+.kpi .sub { font-size:9.5px; color:var(--ink-3); }
+
+/* ── Meeting metadata grid ── */
+.info-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0; border:1px solid var(--line); border-radius:9px; overflow:hidden; margin-top:6px; }
+.info-row { display:grid; grid-template-columns:130px 1fr; border-bottom:1px solid var(--line-2); border-inline-end:1px solid var(--line-2); min-height:40px; }
+.info-row:nth-child(2n) { border-inline-end:none; }
+.info-row:nth-last-child(-n+2) { border-bottom:none; }
+.info-row .k { background:var(--th); padding:9px 12px; display:flex; align-items:center; gap:8px; font-size:10.5px; color:var(--navy); font-weight:600; border-inline-end:1px solid var(--line-2); }
+.info-row .k svg { width:13px; height:13px; color:var(--orange-2); stroke-width:1.7; }
+.info-row .v { padding:8px 12px; display:flex; align-items:center; font-size:11.5px; color:var(--ink); }
+
+/* ── Generic data tables (attendees / agenda) ── */
+.dtable { margin-top:6px; border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.dt-head { display:grid; background:var(--th); border-bottom:2px solid var(--orange); font-family:var(--ar-head); font-size:9.5px; font-weight:700; color:var(--navy); }
+.dt-head > div { padding:8px 11px; }
+.dt-head > div.center { text-align:center; }
+.drow { display:grid; border-bottom:1px solid var(--line-2); font-size:11px; min-height:36px; background:var(--paper); align-items:stretch; }
+.drow:last-child { border-bottom:none; }
+.drow:nth-child(even) { background:var(--lav-2); }
+.drow > div { padding:6px 11px; display:flex; align-items:center; }
+.drow .idx, .drow .num { font-family:var(--latin); font-size:10px; color:var(--ink-4); justify-content:center; }
+.drow .sig-cell { border-bottom:none; }
+
+.cols-att { grid-template-columns:34px 1fr 150px 96px 70px; }
+.cols-agenda { grid-template-columns:34px 64px 1fr 110px 96px 26px; }
+.drow .time { font-family:var(--latin); font-size:11px; color:var(--navy); direction:ltr; font-weight:500; }
+.drow .topic { flex-direction:column; align-items:stretch; gap:1px; padding-top:7px; padding-bottom:7px; }
+.drow .topic .desc { font-size:9.5px; color:var(--ink-3); }
+.drow .own { font-size:10.5px; color:var(--ink-2); }
+.drow .del { justify-content:center; color:var(--ink-4); cursor:pointer; opacity:0; font-family:var(--latin); transition:opacity .15s, color .15s; }
+.drow:hover .del { opacity:1; }
+.drow .del:hover { color:var(--orange); }
+.sig-dash { flex:1; border-bottom:1px dashed var(--ink-4); margin:0 4px 4px; min-height:16px; align-self:flex-end; }
+
+/* status / type pills (editable, cycle on click) */
+.mpill { display:inline-flex; align-items:center; gap:6px; font-family:var(--ar-head); font-size:9.5px; font-weight:700; padding:3px 10px; border-radius:999px; border:1px solid transparent; white-space:nowrap; cursor:pointer; user-select:none; }
+.mpill::before { content:""; width:5px; height:5px; border-radius:50%; background:currentColor; }
+.mpill.present { color:var(--prog); background:var(--prog-bg); border-color:var(--prog-bd); }
+.mpill.remote  { color:var(--hold); background:var(--hold-bg); border-color:var(--hold-bd); }
+.mpill.absent  { color:var(--red); background:var(--red-bg); border-color:var(--red-bd); }
+.mpill.done    { color:var(--ok); background:var(--ok-bg); border-color:var(--ok-bd); }
+.mpill.progress{ color:var(--prog); background:var(--prog-bg); border-color:var(--prog-bd); }
+.mpill.review  { color:var(--hold); background:var(--hold-bg); border-color:var(--hold-bd); }
+.mpill.deferred{ color:var(--ink-3); background:var(--paper-2); border-color:var(--line); }
+.mpill.t-proc  { color:var(--prog); background:var(--prog-bg); border-color:var(--prog-bd); }
+.mpill.t-show  { color:var(--orange-2); background:var(--orange-soft); border-color:#EFD9B6; }
+.mpill.t-disc  { color:var(--hold); background:var(--hold-bg); border-color:var(--hold-bd); }
+.mpill.t-dec   { color:var(--ok); background:var(--ok-bg); border-color:var(--ok-bd); }
+.mpill.compact { font-size:9px; padding:3px 9px; }
+
+/* ── Timeline visual ── */
+.timeline { margin-top:10px; border:1px solid var(--line); border-radius:9px; padding:11px 14px 13px; background:var(--paper-2); }
+.timeline .tl-head { display:flex; justify-content:space-between; font-family:var(--latin); font-size:9px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3); margin-bottom:9px; direction:ltr; }
+.timeline .tl-bar { height:22px; background:#fff; border:1px solid var(--line); border-radius:6px; position:relative; display:flex; direction:ltr; overflow:hidden; }
+.tl-seg { position:relative; border-inline-end:1.5px solid #fff; display:flex; align-items:center; justify-content:center; font-family:var(--latin); font-size:9px; color:#fff; font-weight:700; }
+.tl-seg:last-child { border-inline-end:none; }
+.tl-labels { display:flex; direction:ltr; font-family:var(--latin); font-size:8.5px; color:var(--ink-3); margin-top:7px; }
+.tl-label { flex:1; text-align:center; }
+
+/* ── Discussions / points ── */
+.points { display:flex; flex-direction:column; gap:9px; margin-top:6px; }
+.point { display:grid; grid-template-columns:38px 1fr; border:1px solid var(--line); border-radius:9px; overflow:hidden; background:#fff; position:relative; }
+.point::after { content:""; position:absolute; top:0; bottom:0; right:0; width:4px; background:var(--navy); }
+.point.accent-dec::after { background:var(--ok); }
+.point.accent-info::after { background:var(--orange); }
+.point .p-num { background:var(--th); font-family:var(--latin); font-size:14px; font-weight:700; color:var(--navy); display:flex; align-items:center; justify-content:center; border-inline-end:1px solid var(--line); }
+.point .p-body { padding:10px 14px 12px; }
+.point .p-top { display:flex; align-items:center; gap:9px; margin-bottom:5px; }
+.point .p-title { font-family:var(--ar-head); font-size:12px; font-weight:700; color:var(--navy); flex:1; }
+.point .p-tag { font-family:var(--ar-head); font-size:9px; font-weight:700; padding:2px 9px; border-radius:999px; cursor:pointer; user-select:none; white-space:nowrap; }
+.point .p-tag.dec { background:var(--ok-bg); color:var(--ok); border:1px solid var(--ok-bd); }
+.point .p-tag.info { background:var(--orange-soft); color:var(--orange-2); border:1px solid #EFD9B6; }
+.point .p-tag.disc { background:var(--prog-bg); color:var(--prog); border:1px solid var(--prog-bd); }
+.point .p-text { font-size:11px; color:var(--ink-2); line-height:1.8; width:100%; border:none; outline:none; background:transparent; resize:none; font-family:var(--ar); }
+.point .p-meta { margin-top:7px; display:flex; gap:16px; font-family:var(--latin); font-size:9px; color:var(--ink-3); letter-spacing:0.04em; align-items:center; }
+.point .p-meta b { color:var(--navy); font-weight:700; }
+.point .p-del { cursor:pointer; color:var(--ink-4); font-family:var(--latin); }
+.point .p-del:hover { color:var(--orange); }
+
+/* ── Department task cards ── */
+.depts { display:flex; flex-direction:column; gap:11px; margin-top:6px; }
+.dcard { border:1px solid var(--line); border-radius:9px; background:#fff; overflow:hidden; break-inside:avoid; }
+.dcard-head { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:10px; padding:8px 13px; background:var(--th); border-bottom:2px solid var(--orange); }
+.dcard-head .code { font-family:var(--latin); font-size:8.5px; font-weight:700; letter-spacing:0.08em; background:var(--orange); color:#fff; padding:3px 8px; border-radius:5px; direction:ltr; }
+.dcard-head .dname { display:flex; align-items:baseline; gap:9px; line-height:1.2; }
+.dcard-head .dname .n { font-family:var(--ar-head); font-size:12px; font-weight:700; color:var(--navy); }
+.dcard-head .dname .director { font-size:9.5px; font-weight:500; color:var(--ink-3); }
+.dcard-head .dname .director::before { content:"•"; margin-inline-end:6px; color:var(--ink-4); }
+.dcard-head .progress { font-family:var(--latin); font-size:11px; font-weight:700; color:var(--orange-2); direction:ltr; }
+.dtasks { display:flex; flex-direction:column; }
+.dtask { display:grid; grid-template-columns:28px 1fr 130px 18px; gap:10px; align-items:start; padding:8px 13px; border-bottom:1px solid var(--line-2); font-size:11px; min-height:34px; }
+.dtask:nth-child(even) { background:var(--lav-2); }
+.dtask:last-of-type { border-bottom:none; }
+.dtask .tnum { font-family:var(--latin); font-size:10px; color:var(--ink-4); padding-top:4px; text-align:center; }
+.dtask .tbody { min-width:0; padding-top:1px; }
+.dtask .tbody .fill { font-size:11px; line-height:1.65; padding:1px 0; }
+.dtask .tmeta { display:flex; align-items:center; justify-content:flex-end; gap:4px; padding-top:2px; }
+.dtask .tdel { cursor:pointer; color:var(--ink-4); font-family:var(--latin); font-size:13px; width:18px; text-align:center; padding-top:3px; opacity:0; transition:opacity .15s, color .15s; }
+.dtask:hover .tdel { opacity:1; }
+.dtask .tdel:hover { color:var(--orange); }
+.dtask.st-done .tbody .fill { color:var(--ink-3); text-decoration:line-through; }
+.dcard-add { display:flex; align-items:center; justify-content:center; gap:5px; background:var(--paper-2); border:none; border-top:1px dashed var(--line); color:var(--ink-3); font-family:var(--ar); font-size:10px; padding:6px 8px; cursor:pointer; width:100%; }
+.dcard-add:hover { color:var(--orange-2); background:var(--orange-soft); }
+
+/* ── Status legend ── */
+.status-legend { display:flex; align-items:center; gap:16px; margin:4px 0 10px; padding:9px 14px; background:var(--lav); border-radius:9px; font-family:var(--latin); font-size:9.5px; letter-spacing:0.04em; text-transform:uppercase; color:var(--ink-3); }
+.status-legend .leg { display:flex; align-items:center; gap:7px; }
+.status-legend .leg .dot { width:8px; height:8px; border-radius:50%; }
+.status-legend .leg b { color:var(--navy); font-weight:700; font-size:11px; margin:0 2px; }
+.status-legend .leg.done .dot { background:var(--ok); }
+.status-legend .leg.progress .dot { background:var(--prog); }
+.status-legend .leg.review .dot { background:var(--hold); }
+.status-legend .leg.deferred .dot { background:var(--ink-4); }
+.status-legend .total { margin-inline-end:auto; color:var(--navy); font-weight:700; }
+.status-legend .total b { font-size:13px; }
+
+/* ── Next-meeting bar ── */
+.next-bar { margin-top:12px; background:var(--navy); border-radius:9px; padding:13px 18px; display:grid; grid-template-columns:1fr auto; align-items:center; gap:16px; color:#fff; }
+.next-bar .eyebrow { font-family:var(--latin); font-size:9px; letter-spacing:0.16em; color:#F0B978; text-transform:uppercase; margin-bottom:4px; direction:ltr; text-align:start; }
+.next-bar .val { font-family:var(--ar-head); font-size:14px; font-weight:700; color:#fff; }
+.next-bar .right { font-family:var(--latin); font-size:9.5px; color:#AEBCCC; letter-spacing:0.1em; text-transform:uppercase; text-align:left; direction:ltr; }
+
+/* ── Notes block ── */
+.notes-block { margin-top:11px; border:1px solid var(--line); border-radius:9px; padding:12px 14px; background:var(--paper-2); }
+.notes-block .nb-head { display:flex; align-items:center; gap:8px; margin-bottom:7px; }
+.notes-block .nb-head .dot { width:6px; height:6px; border-radius:50%; background:var(--orange); }
+.notes-block .nb-head .lbl { font-family:var(--latin); font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-3); direction:ltr; }
+.notes-block textarea { width:100%; border:none; outline:none; background:transparent; resize:none; font-family:var(--ar); font-size:11px; color:var(--ink); line-height:1.8; min-height:46px; }
+
+/* ── Add-row button ── */
+.add-row { display:flex; align-items:center; justify-content:center; gap:6px; background:transparent; border:1px dashed var(--line); border-radius:8px; color:var(--ink-3); font-family:var(--ar); font-size:10.5px; padding:7px 10px; cursor:pointer; width:100%; margin-top:7px; transition:all .15s; }
+.add-row:hover { border-color:var(--orange); color:var(--orange-2); background:var(--orange-soft); }
+.add-row::before { content:"+"; font-family:var(--latin); font-weight:700; }
+
+/* ── meta strip ── */
+.meta-strip { display:flex; justify-content:space-between; align-items:center; margin-top:6px; font-family:var(--latin); font-size:9px; letter-spacing:0.1em; color:var(--ink-3); text-transform:uppercase; direction:ltr; }
+.meta-strip .dots { flex:1; border-bottom:1px dotted var(--line); margin:0 12px; }
+
+/* ── compact signoff ── */
+.signoff-mom { margin-top:10px; }
+.signoff-mom .sign { padding:13px; border:1px solid var(--line); border-radius:9px; background:var(--paper-2); display:flex; flex-direction:column; gap:5px; min-height:92px; }
+.signoff-mom .sign .label { font-family:var(--latin); font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange-2); direction:ltr; text-align:start; }
+.signoff-mom .sign .name { font-family:var(--ar-head); font-size:13px; font-weight:700; color:var(--navy); }
+.signoff-mom .sign .role { font-size:10px; color:var(--ink-3); }
+.signoff-mom .sign .sig-line { margin-top:auto; border-bottom:1px dashed var(--ink-4); height:26px; }
+
+@page { size:A4 portrait; margin:0; }
+@media print {
+  html,body{background:#fff} .stage{padding:0;gap:0} .page{box-shadow:none;margin:0}
+  .toolbar{display:none!important}
+  .add-row, .drow .del, .dtask .tdel, .point .p-del{display:none!important}
+  .fill:focus, .fill-multi:focus{background:transparent;border-bottom-color:transparent}
+}
+
+</style>
+<style>
+/* MSGA — Organizational Structure · REPORT HOUSE STYLE add-on
+   Depends on mom-report.css for page chrome, cover, colors.
+   Full org tree: assembly → board → (audit committee + CEO) → 4 managers → orange sub-units. */
+:root { --org-line:#B4BFCB; }
+
+/* landscape chart page */
+.page.land { width:297mm; height:210mm; }
+
+/* centered chart title (reference style) */
+.orgx-title { text-align:center; font-family:var(--ar-head); font-size:21px; font-weight:800; color:var(--navy); margin:2px 0 16px; }
+.orgx-title .ul { display:block; width:56px; height:3px; background:var(--orange); border-radius:2px; margin:9px auto 0; }
+
+/* ════════ tree ════════ */
+.orgx { display:flex; flex-direction:column; align-items:center; }
+
+/* node boxes */
+.onode { border-radius:8px; padding:9px 16px; text-align:center; box-shadow:0 1px 2px rgba(20,30,45,.06); }
+.onode .t { font-family:var(--ar-head); font-size:13px; font-weight:700; line-height:1.25; }
+.onode .s { font-size:9.5px; margin-top:3px; line-height:1.3; }
+.onode .s.vac { font-style:italic; opacity:.85; }
+.onode.nav { background:var(--navy); color:#fff; min-width:200px; }
+.onode.nav .t { color:#fff; }
+.onode.nav .s { color:#F0B978; }
+.onode.committee { background:var(--navy-card); border:1px solid var(--navy-line); }
+.onode.org { background:var(--orange); color:#fff; width:100%; }
+.onode.org .t { color:#fff; }
+.onode.org .s { color:var(--navy-3); font-weight:700; }
+
+/* connectors */
+.oconn { width:2px; background:var(--org-line); flex-shrink:0; }
+.oconn.h14 { height:14px; } .oconn.h18 { height:18px; } .oconn.h22 { height:22px; }
+
+/* exec level: audit committee (left side-branch) + CEO (centered) */
+.exec { position:relative; width:100%; height:96px; }
+.exec .ceo { position:absolute; left:calc(50% - 1px); transform:translateX(-50%); top:36px; }
+.exec .committee { position:absolute; left:calc(50% - 300px); top:36px; min-width:160px; }
+.exec .br-vc { position:absolute; left:calc(50% - 1px); top:0; width:2px; height:36px; background:var(--org-line); }
+.exec .br-h  { position:absolute; right:50%; top:0; width:220px; height:2px; background:var(--org-line); }
+.exec .br-vk { position:absolute; left:calc(50% - 220px); top:0; width:2px; height:36px; background:var(--org-line); }
+
+/* managers row (4 columns) */
+.mgrs { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; position:relative; width:100%; padding-top:22px; }
+.mgrs::before { content:""; position:absolute; top:0; left:12.5%; right:12.5%; height:2px; background:var(--org-line); }
+.mcol { position:relative; display:flex; flex-direction:column; align-items:center; }
+.mcol::before { content:""; position:absolute; top:-22px; left:50%; transform:translateX(-50%); width:2px; height:22px; background:var(--org-line); }
+.mcol .onode.nav { width:100%; min-width:0; }
+
+/* company stamp + CEO signature (approval block) */
+.org-approve { position:absolute; bottom:16mm; right:24mm; z-index:2; display:flex; align-items:flex-end; gap:22px; }
+.org-stamp { text-align:center; }
+.org-stamp img { width:90px; height:auto; display:block; opacity:.95; }
+.org-stamp .cap { margin-top:6px; font-family:var(--latin); font-size:8px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-4); direction:ltr; }
+.org-sign { width:176px; text-align:center; padding-bottom:4px; }
+.org-sign .lbl { font-family:var(--latin); font-size:8.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange-2); direction:ltr; }
+.org-sign .space { height:22px; }
+.org-sign .line { border-bottom:1px solid var(--ink-3); }
+.org-sign .nm { font-family:var(--ar-head); font-size:12.5px; font-weight:700; color:var(--navy); margin-top:6px; }
+.org-sign .role { font-size:9.5px; color:var(--ink-3); margin-top:1px; }
+
+@media print {
+  .onode, .oconn, .mgrs::before, .mcol::before, .exec .br-vc, .exec .br-h, .exec .br-vk { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+
+</style>
+<style>
+/* ════ landscape for ALL pages ════ */
+:root { --page-w:297mm; --page-h:210mm; }
+.page.land { width:297mm; height:210mm; }
+@page { size:A4 landscape; margin:0; }
+
+/* ════ logo watermark on every page ════ */
+.page .watermark::after { content:""; position:absolute; inset:0; background:url("assets/msga-logo.png") no-repeat center; background-size:44% auto; opacity:.04; }
+.page.cover .watermark::after { background-size:50% auto; opacity:.05; filter:brightness(0) invert(1); }
+
+/* ════ financial helpers ════ */
+.money { font-family:var(--latin); direction:ltr; font-weight:500; color:var(--ink-2); white-space:nowrap; }
+.money.strong { font-weight:700; color:var(--navy); font-size:12.5px; }
+.money.accent { font-weight:700; color:var(--orange-2); font-size:12.5px; }
+.money.muted { color:var(--ink-4); }
+.cols-fin3 { grid-template-columns:1fr 150px 180px; }
+.cols-dev  { grid-template-columns:1fr 90px 120px 120px 170px; }
+.cols-rev  { grid-template-columns:1fr 1fr 180px; }
+.pt-row.total { background:var(--lav)!important; }
+.pt-row.total > div { font-weight:700; }
+.unit { font-size:9.5px; color:var(--ink-3); margin-inline-start:6px; }
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:start; }
+.kpi .val.ar { font-family:var(--ar-head); font-size:17px; }
+
+/* returns strip */
+.returns { display:grid; grid-template-columns:repeat(5,1fr); gap:11px; margin-top:6px; }
+.ret { border:1px solid var(--line); border-radius:9px; background:var(--paper-2); padding:12px; display:flex; flex-direction:column; gap:5px; position:relative; overflow:hidden; text-align:center; }
+.ret::after { content:""; position:absolute; top:0; bottom:0; right:0; width:4px; background:var(--orange); }
+.ret.hi::after { background:var(--ok); }
+.ret .rl { font-family:var(--latin); font-size:8.5px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-3); }
+.ret .rv { font-family:var(--latin); font-size:22px; font-weight:700; color:var(--navy); line-height:1; direction:ltr; }
+.ret.hi .rv { color:var(--ok); }
+.ret .rs { font-size:9px; color:var(--ink-3); }
+
+/* ════ company profile ════ */
+.focus-chips { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:6px; }
+.fchip { display:flex; align-items:center; gap:10px; border:1px solid var(--line); background:var(--paper-2); border-radius:9px; padding:11px 13px; font-size:11.5px; color:var(--ink-2); min-height:42px; }
+.fchip .ic { width:26px; height:26px; border-radius:7px; background:var(--orange-soft); color:var(--orange-2); display:grid; place-items:center; font-family:var(--latin); font-size:11px; font-weight:700; flex-shrink:0; }
+.vm-grid { display:grid; grid-template-columns:1fr 1fr; gap:13px; margin-top:6px; }
+.facts2 { display:grid; grid-template-columns:1fr 1fr; gap:11px; }
+
+/* ════ investor visuals ════ */
+.viz-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px; }
+.viz { border:1px solid var(--line); border-radius:11px; background:var(--paper-2); padding:14px 16px; position:relative; overflow:hidden; }
+.viz::after { content:""; position:absolute; top:0; bottom:0; right:0; width:4px; background:var(--orange); }
+.viz .vh { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:13px; }
+.viz .vh .vt { font-family:var(--ar-head); font-size:13px; font-weight:700; color:var(--navy); }
+.viz .vh .vtot { font-family:var(--latin); font-size:12px; font-weight:700; color:var(--orange-2); direction:ltr; }
+
+/* stacked bar */
+.sbar { height:32px; border-radius:8px; overflow:hidden; display:flex; direction:ltr; box-shadow:inset 0 0 0 1px rgba(0,0,0,.04); }
+.sbar .seg { display:flex; align-items:center; justify-content:center; color:#fff; font-family:var(--latin); font-size:10px; font-weight:700; min-width:0; }
+.sleg { display:flex; flex-wrap:wrap; gap:9px 18px; margin-top:13px; }
+.sleg .it { display:flex; align-items:center; gap:7px; font-size:10.5px; color:var(--ink-2); }
+.sleg .it .dot { width:11px; height:11px; border-radius:3px; flex-shrink:0; }
+.sleg .it b { font-family:var(--latin); color:var(--navy); font-weight:700; margin-inline-start:3px; }
+.c-navy{background:#1F3A57} .c-org{background:#E5811F} .c-yel{background:#E0A21A} .c-slate{background:#7E91A6}
+
+/* horizontal bars (profit bridge) */
+.hbars { margin-top:2px; }
+.hrow { display:grid; grid-template-columns:96px 1fr 96px; align-items:center; gap:11px; margin-bottom:12px; }
+.hrow:last-child { margin-bottom:0; }
+.hrow .hl { font-size:11px; color:var(--ink-2); text-align:start; }
+.htrack { height:24px; background:#EDF0F5; border-radius:7px; direction:ltr; overflow:hidden; }
+.hfill { height:100%; border-radius:7px; }
+.hrow .hv { font-family:var(--latin); font-size:11.5px; font-weight:700; color:var(--navy); direction:ltr; text-align:left; }
+
+/* vertical bars (returns) */
+.vbars { display:flex; align-items:flex-end; gap:14px; height:158px; padding-top:8px; }
+.vbcol { flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end; gap:7px; }
+.vbcol .vval { font-family:var(--latin); font-size:12.5px; font-weight:700; color:var(--navy); }
+.vbcol.accent .vval { color:var(--ok); }
+.vbar2 { width:100%; max-width:48px; border-radius:6px 6px 0 0; background:linear-gradient(180deg,#34557A,#1F3A57); }
+.vbcol.accent .vbar2 { background:linear-gradient(180deg,#3FA873,#2F8559); }
+.vbcol .vlab { font-size:9.5px; color:var(--ink-3); text-align:center; line-height:1.3; }
+.vbase { border-top:2px solid var(--line); margin-bottom:7px; }
+
+/* ════ TIMELINE (مسيرتنا) ════ */
+.tl-wrap { margin-top:18px; padding:6px 4px 0; }
+.tl-row { position:relative; display:flex; align-items:stretch; height:200px; direction:ltr; }
+.tl-row::before { content:""; position:absolute; left:0; right:0; top:144px; border-top:2.5px dotted var(--navy); }
+.tl-cluster { position:relative; display:flex; flex-direction:column; align-items:center; }
+.tl-funds { display:flex; justify-content:space-evenly; align-items:flex-start; width:100%; padding-top:8px; gap:8px; }
+.tl-fund { display:flex; flex-direction:column; align-items:center; text-align:center; }
+.tl-fund .lab { font-family:var(--ar-head); font-weight:700; color:var(--navy); line-height:1.05; }
+.tl-fund .lab .ar { font-size:13px; }
+.tl-fund .lab .nn { font-family:var(--latin); font-size:16px; display:block; margin-top:1px; }
+.tl-fund .stem { width:0; border-left:2.5px dotted var(--navy); height:86px; margin-top:4px; }
+.tl-fund.fresh .lab { color:var(--orange-2); }
+.tl-fund.fresh .stem { border-left-color:var(--orange); }
+.tl-arc { position:absolute; top:118px; height:26px; left:18%; right:18%; border:2px solid var(--navy); border-top:none; border-bottom-left-radius:60%; border-bottom-right-radius:60%; }
+.tl-cluster.fresh .tl-arc { border-color:var(--orange); }
+.tl-play { position:absolute; top:136px; left:50%; transform:translateX(-50%); width:0; height:0; border-top:6px solid transparent; border-bottom:6px solid transparent; border-left:10px solid var(--orange); }
+.tl-year { position:absolute; top:152px; left:50%; transform:translateX(-50%); font-family:var(--latin); font-size:19px; font-weight:700; color:var(--orange-2); background:var(--paper); padding:0 8px; }
+.tl-flag { position:absolute; top:180px; left:50%; transform:translateX(-50%); width:0; height:0; border-left:9px solid transparent; border-right:9px solid transparent; border-top:13px solid var(--orange); }
+.tl-underbars { display:flex; gap:14px; margin-top:8px; direction:ltr; padding:0 2px; }
+.tl-underbars .bar { height:4px; background:var(--orange); border-radius:2px; }
+.tl-legend { display:flex; align-items:center; justify-content:center; gap:24px; margin-top:22px; font-family:var(--latin); font-size:10.5px; letter-spacing:0.04em; text-transform:uppercase; color:var(--ink-3); }
+.tl-legend .lg { display:flex; align-items:center; gap:8px; }
+.tl-legend .lg .sw { width:14px; height:14px; border-radius:4px; }
+.tl-legend .lg .sw.navy { background:var(--navy); }
+.tl-legend .lg .sw.org { background:var(--orange); }
+
+/* ════ landscape cover (split) ════ */
+.cover-inner { padding:0 !important; display:flex; flex-direction:column; height:100%; }
+.cover-main { flex:1; display:grid; grid-template-columns:1.12fr 0.88fr; align-items:center; gap:34px; padding:6px var(--mx) 0; }
+.cover-left { text-align:start; }
+.cover-left .logo-w { height:52px; width:auto; filter:brightness(0) invert(1); margin-bottom:22px; }
+.cover-left h1 { margin:0; font-family:var(--ar-head); font-size:46px; font-weight:800; line-height:1.1; color:#fff; }
+.cover-left .subtitle { margin-top:13px; font-size:15px; font-weight:500; color:var(--orange); }
+.cover-left .period-pill { display:inline-block; margin-top:18px; border:1.5px solid rgba(255,255,255,.4); border-radius:999px; padding:8px 22px; font-size:12px; font-weight:600; color:#fff; direction:ltr; letter-spacing:0.04em; }
+.cover-left .cover-desc { margin:18px 0 0; max-width:96%; font-size:12px; color:#C5D0DC; line-height:1.85; text-wrap:pretty; }
+.cover-right { display:grid; grid-template-columns:1fr 1fr; gap:13px; }
+
+/* feature KPI (floors / apartments) */
+.kpi.feat { background:var(--orange-soft); border-color:#EFD9B6; }
+.kpi.feat::after { background:var(--orange); width:5px; }
+.kpi.feat .label { color:var(--orange-2); }
+.kpi.feat .val { font-size:32px; color:var(--orange-2); }
+.kpi.feat .sub { color:#8A6322; font-weight:500; }
+
+/* prominent returns strip */
+.returns.big { grid-template-columns:repeat(5,1fr); gap:13px; margin-top:8px; }
+.returns.big .ret { padding:16px 12px; }
+.returns.big .rl { font-size:9.5px; }
+.returns.big .rv { font-size:30px; }
+.returns.big .rs { font-size:10.5px; }
+
+/* risks table */
+.risk-tbl { margin-top:10px; border:1px solid var(--line); border-radius:11px; overflow:hidden; }
+.risk-head { display:grid; grid-template-columns:320px 1fr; background:var(--th); border-bottom:2px solid var(--orange); }
+.risk-head > div { padding:12px 18px; font-family:var(--ar-head); font-size:13.5px; font-weight:700; color:var(--navy); text-align:center; }
+.risk-row { display:grid; grid-template-columns:320px 1fr; border-bottom:1px solid var(--line-2); }
+.risk-row:last-child { border-bottom:none; }
+.risk-row:nth-child(even) .rm { background:var(--lav-2); }
+.risk-row .rk { background:var(--lav); display:flex; align-items:center; justify-content:center; gap:12px; padding:16px 40px; text-align:center; border-inline-end:1px solid var(--line); position:relative; }
+.risk-row .rk .rn { width:26px; height:26px; border-radius:50%; background:var(--orange); color:#fff; display:grid; place-items:center; font-family:var(--latin); font-size:12px; font-weight:700; flex-shrink:0; position:absolute; right:14px; top:50%; transform:translateY(-50%); }
+.risk-row .rk .rt { font-family:var(--ar-head); font-size:13px; font-weight:700; color:var(--navy); text-align:center; }
+.risk-row .rm { padding:16px 20px; display:flex; align-items:center; font-size:12px; line-height:1.9; color:var(--ink-2); text-wrap:pretty; }
+
+/* fund financing structure */
+.ffs { margin-top:10px; border:1.5px solid var(--navy-line); border-radius:12px; padding:18px; display:grid; grid-template-columns:0.85fr 1.15fr; gap:22px; }
+.ffs-panel { display:flex; flex-direction:column; }
+.ffs-ph { background:var(--lav); border-radius:9px; padding:11px; text-align:center; font-family:var(--ar-head); font-size:14px; font-weight:700; color:var(--navy); margin-bottom:18px; }
+.ffs-ph .en2 { font-family:var(--latin); font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3); margin-inline-start:8px; }
+.pie-wrap { display:flex; flex-direction:column; align-items:center; gap:18px; justify-content:center; flex:1; }
+.pie { width:208px; height:208px; border-radius:50%; box-shadow:0 6px 18px rgba(20,30,45,.16); }
+.pie-leg { display:flex; flex-direction:column; gap:11px; width:100%; max-width:300px; }
+.pie-leg .it { display:flex; align-items:center; gap:11px; font-size:12px; color:var(--ink-2); }
+.pie-leg .it .dot { width:14px; height:14px; border-radius:4px; flex-shrink:0; }
+.pie-leg .it .nm { flex:1; }
+.pie-leg .it .pc { font-family:var(--latin); font-weight:700; color:var(--navy); font-size:13px; }
+.ftree { display:flex; flex-direction:column; align-items:center; flex:1; justify-content:center; }
+.fbox { border-radius:8px; padding:9px 12px; text-align:center; font-family:var(--ar-head); font-size:11.5px; font-weight:700; width:100%; min-width:0; box-sizing:border-box; box-shadow:0 1px 2px rgba(20,30,45,.06); line-height:1.25; }
+.fbox.nav { background:var(--navy); color:#fff; }
+.fbox.val { background:#fff; border:1.5px solid var(--navy); color:var(--navy); font-family:var(--latin); direction:ltr; font-size:12px; margin-top:6px; }
+.fstack { display:flex; flex-direction:column; align-items:center; }
+.vline { width:2px; height:15px; background:var(--navy-line); }
+.frow { display:grid; grid-template-columns:repeat(3,1fr); gap:13px; position:relative; padding-top:15px; width:100%; }
+.frow::before { content:""; position:absolute; top:0; left:16.66%; right:16.66%; height:2px; background:var(--navy-line); }
+.fcol { position:relative; display:flex; flex-direction:column; align-items:center; min-width:0; }
+.fcol::before { content:""; position:absolute; top:-15px; left:50%; transform:translateX(-50%); width:2px; height:15px; background:var(--navy-line); }
+.frow.two { grid-template-columns:repeat(2,1fr); margin-top:6px; padding-top:14px; }
+.frow.two::before { left:25%; right:25%; }
+
+/* page 5 (costs/returns) — tighten to fit landscape height */
+.stage .page:nth-of-type(6) .returns.big { margin-top:5px; }
+.stage .page:nth-of-type(6) .returns.big .ret { padding:8px 12px; }
+.stage .page:nth-of-type(6) .returns.big .rv { font-size:24px; }
+.stage .page:nth-of-type(6) .sec-head { margin:8px 0 6px; }
+.stage .page:nth-of-type(6) .pt-row { min-height:28px; }
+.stage .page:nth-of-type(6) .pt-row > div { padding-top:5px; padding-bottom:5px; }
+.stage .page:nth-of-type(6) .viz { padding:10px 14px; }
+.stage .page:nth-of-type(6) .sbar { height:24px; }
+.stage .page:nth-of-type(6) .sleg { margin-top:9px; }
+
+/* location page */
+.loc-grid { margin-top:10px; display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:start; }
+.loc-map { border:1px solid var(--line); border-radius:12px; overflow:hidden; box-shadow:0 4px 16px rgba(20,30,45,.12); line-height:0; }
+.loc-map img { display:block; height:500px; width:auto; }
+.loc-side { display:flex; flex-direction:column; gap:13px; }
+.loc-card { border:1px solid var(--line); border-radius:11px; background:var(--paper-2); padding:14px 17px; position:relative; overflow:hidden; }
+.loc-card::after { content:""; position:absolute; top:0; bottom:0; right:0; width:5px; background:var(--orange); }
+.loc-card .lc-lead { font-family:var(--latin); font-size:9px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--orange-2); direction:ltr; }
+.loc-card .lc-city { font-family:var(--ar-head); font-size:24px; font-weight:800; color:var(--navy); margin-top:4px; }
+.loc-card .lc-desc { font-size:11px; color:var(--ink-2); line-height:1.8; margin-top:5px; text-wrap:pretty; }
+.loc-qr { display:flex; gap:16px; align-items:center; border:1px solid var(--line); border-radius:11px; padding:14px 16px; background:#fff; }
+.loc-qr img { width:124px; height:124px; border:1px solid var(--line); border-radius:8px; flex-shrink:0; }
+.loc-qr .qx { display:flex; flex-direction:column; gap:5px; }
+.loc-qr .qx .qt { font-family:var(--ar-head); font-size:13px; font-weight:700; color:var(--navy); }
+.loc-qr .qx .qs { font-size:10.5px; color:var(--ink-3); line-height:1.6; }
+.loc-qr .qx .qbtn { margin-top:3px; align-self:flex-start; font-family:var(--latin); font-size:9.5px; font-weight:600; letter-spacing:0.04em; color:#fff; background:var(--navy); border-radius:6px; padding:6px 12px; direction:ltr; }
+.lmk-head { font-family:var(--ar-head); font-size:13px; font-weight:700; color:var(--navy); margin:4px 2px 0; display:flex; align-items:center; gap:8px; }
+.lmk-head .en3 { font-family:var(--latin); font-size:9px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-3); }
+.lmk-list { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.lmk { display:flex; align-items:center; gap:10px; border:1px solid var(--line); border-radius:9px; padding:9px 12px; background:var(--paper-2); }
+.lmk .n { width:24px; height:24px; border-radius:7px; background:var(--orange-soft); color:var(--orange-2); display:grid; place-items:center; font-family:var(--latin); font-size:10px; font-weight:700; flex-shrink:0; }
+.lmk .lt { display:flex; flex-direction:column; min-width:0; }
+.lmk .lt .nm { font-size:11px; font-weight:600; color:var(--navy); line-height:1.3; }
+.lmk .lt .cat { font-size:9px; color:var(--ink-3); }
+
+/* bilingual helpers */
+.en-sub { display:block; font-family:var(--latin); font-size:8px; font-weight:500; letter-spacing:0.02em; color:var(--ink-4); direction:ltr; margin-top:1px; line-height:1.25; text-align:inherit; }
+.en-i { font-family:var(--latin); direction:ltr; font-size:8.5px; font-weight:500; color:var(--ink-4); display:block; margin:1px 0 0; white-space:normal; line-height:1.2; text-align:inherit; }
+.pt-head > div .en-sub { color:var(--ink-3); font-weight:600; }
+.fbox.nav .en-sub { color:#9FB0C0; font-weight:600; }
+.risk-row .rk .en-sub { font-size:8.5px; }
+.en-p { font-family:var(--latin); direction:ltr; text-align:left; font-size:9.5px; line-height:1.7; color:var(--ink-3); margin:6px 0 0; text-wrap:pretty; }
+.prose.alt .en-p, .prose .en-p { border-top:none; padding-top:0; }
+.fchip .ft { display:flex; flex-direction:column; line-height:1.2; }
+.cover-left .subtitle-en { font-family:var(--latin); direction:ltr; font-size:11px; color:#9FB0C0; margin-top:4px; letter-spacing:0.02em; }
+.cover-desc-en { font-family:var(--latin); direction:ltr; text-align:left; font-size:10px; color:#9FB0C0; line-height:1.7; margin-top:8px; text-wrap:pretty; }
+.disclaimer { border-radius:9px; padding:10px 15px; }
+.disclaimer .dar { font-family:var(--ar); font-size:9.5px; line-height:1.6; font-weight:500; text-wrap:pretty; }
+.disclaimer .den { font-family:var(--latin); direction:ltr; text-align:left; font-size:8.5px; line-height:1.55; margin-top:5px; text-wrap:pretty; }
+.page.cover .disclaimer { margin:0 var(--mx) 8mm; background:rgba(214,67,44,.16); border:1px solid rgba(255,120,95,.6); }
+.page.cover .disclaimer .dar { color:#FF8A72; font-weight:700; }
+.page.cover .disclaimer .den { color:#F2A797; }
+.disclaimer.light { margin-top:11px; background:var(--red-bg); border:1px solid var(--red-bd); }
+.disclaimer.light .dar { color:var(--red); font-weight:700; }
+.disclaimer.light .den { color:#9A4634; }
+
+/* per-page footer disclaimer (red, all pages) */
+.foot { flex-wrap:wrap; row-gap:6px; }
+.fdisc { flex-basis:100%; width:100%; order:-1; background:var(--red-bg); border:1px solid var(--red-bd); border-radius:7px; padding:4px 12px; margin-bottom:4px; text-wrap:pretty; }
+.fdisc .far { display:block; font-family:var(--ar); color:var(--red); font-weight:700; font-size:7.5px; line-height:1.4; text-align:right; letter-spacing:0; text-transform:none; }
+.fdisc .fen { display:block; font-family:var(--latin); color:#9A4634; font-weight:600; font-size:6.5px; line-height:1.4; direction:ltr; text-align:left; letter-spacing:0.01em; text-transform:none; }
+/* ===== bilingual layout fit ===== */
+.prose p { font-size:10.5px; line-height:1.68; }
+.prose p + p { margin-top:5px; }
+.en-p { font-size:8.5px; line-height:1.55; margin-top:6px; }
+.vm-grid .prose p { font-size:10px; line-height:1.6; }
+.sec-head { margin:9px 0 6px; }
+.sec-head.first { margin-top:2px; }
+.fdisc { padding:4px 12px; margin-bottom:4px; }
+.fdisc .far { font-size:7px; line-height:1.3; }
+.fdisc .fen { font-size:6px; line-height:1.3; }
+
+/* page 1 — about */
+.stage .page:nth-of-type(2) .fchip { padding:6px 10px; min-height:30px; }
+.stage .page:nth-of-type(2) .fchip .ic { width:22px; height:22px; }
+.stage .page:nth-of-type(2) .facts2 .kpi { padding:9px 12px; }
+.stage .page:nth-of-type(2) .facts2 .kpi .val { font-size:20px; }
+.stage .page:nth-of-type(2) .note.alt { margin-top:7px; padding:8px 12px; }
+.stage .page:nth-of-type(2) .focus-chips { gap:7px; }
+
+/* page 4 — land */
+.stage .page:nth-of-type(5) .pt-row { min-height:28px; }
+.stage .page:nth-of-type(5) .pt-row > div { padding-top:5px; padding-bottom:5px; }
+.stage .page:nth-of-type(5) .kpi { padding:9px 12px; }
+.stage .page:nth-of-type(5) .kpi .val { font-size:22px; }
+.stage .page:nth-of-type(5) .kpi.feat .val { font-size:26px; }
+
+/* page 5 — costs (strengthen) */
+.stage .page:nth-of-type(6) .returns.big .ret { padding:6px 10px; }
+.stage .page:nth-of-type(6) .returns.big .rv { font-size:22px; }
+.stage .page:nth-of-type(6) .pt-row { min-height:26px; }
+.stage .page:nth-of-type(6) .pt-row > div { padding-top:4px; padding-bottom:4px; }
+.stage .page:nth-of-type(6) .viz { padding:9px 13px; }
+.stage .page:nth-of-type(6) .sbar { height:22px; }
+.stage .page:nth-of-type(6) .note { margin-top:7px; padding:8px 12px; font-size:9.5px; }
+.stage .page:nth-of-type(6) .docctrl { margin-top:8px; padding:10px 14px; }
+
+/* page 6 — risks */
+.stage .page:nth-of-type(7) .risk-row .rk { padding:11px 40px; }
+.stage .page:nth-of-type(7) .risk-row .rm { padding:11px 18px; line-height:1.7; }
+.stage .page:nth-of-type(7) .risk-head > div { padding:9px 16px; }
+
+/* page 7 — financing */
+.stage .page:nth-of-type(8) .ffs { padding:14px; margin-top:7px; }
+.stage .page:nth-of-type(8) .note { margin-top:8px; }
+
+/* page 5 — costs (final compression) */
+.stage .page:nth-of-type(6) .returns.big { margin-top:3px; }
+.stage .page:nth-of-type(6) .returns.big .ret { padding:5px 10px; }
+.stage .page:nth-of-type(6) .returns.big .rv { font-size:20px; }
+.stage .page:nth-of-type(6) .returns.big .rl { font-size:9px; }
+.stage .page:nth-of-type(6) .returns.big .rs { font-size:9.5px; }
+.stage .page:nth-of-type(6) .sec-head { margin:6px 0 4px; }
+.stage .page:nth-of-type(6) .pt-row { min-height:23px; }
+.stage .page:nth-of-type(6) .pt-row > div { padding-top:3px; padding-bottom:3px; }
+.stage .page:nth-of-type(6) .ptable { margin-top:4px; }
+.stage .page:nth-of-type(6) .note { margin-top:6px; padding:7px 11px; font-size:8.5px; line-height:1.45; }
+.stage .page:nth-of-type(6) .note .en-sub { font-size:7.5px; margin-top:3px; }
+.stage .page:nth-of-type(6) .note .x { font-size:11px; }
+.stage .page:nth-of-type(6) .docctrl { margin-top:6px; padding:8px 13px; }
+.stage .page:nth-of-type(6) .docctrl .val { font-size:11.5px; }
+.stage .page:nth-of-type(6) .viz { padding:8px 12px; }
+.stage .page:nth-of-type(6) .vh { margin-bottom:8px; }
+.stage .page:nth-of-type(6) .pt-row { min-height:21px; }
+.stage .page:nth-of-type(6) .docctrl { margin-top:4px; padding:6px 12px; }
+.stage .page:nth-of-type(6) .note { margin-top:4px; }
+.stage .page:nth-of-type(6) .returns.big .rv { font-size:19px; }
+.stage .page:nth-of-type(6) .sbar { height:20px; }
+.stage .page:nth-of-type(6) .returns.big .ret { padding:4px 10px; }
+.stage .page:nth-of-type(6) .returns.big .rs { font-size:9px; }
+.stage .page:nth-of-type(6) .pt-row { min-height:20px; }
+.stage .page:nth-of-type(6) .ptable { margin-top:3px; }
+.stage .page:nth-of-type(6) .returns.big .rv { font-size:18px; }
+.stage .page:nth-of-type(6) .docctrl { margin-top:3px; padding:5px 12px; }
+.stage .page:nth-of-type(6) .docctrl .eyebrow { margin-bottom:2px; }
+.stage .page:nth-of-type(6) .note { padding:6px 11px; }
+.stage .page:nth-of-type(6) .returns.big .rv { font-size:17px; }
+.stage .page:nth-of-type(6) .returns.big .ret { padding:3px 10px; }
+.stage .page:nth-of-type(6) .pt-row { min-height:19px; }
+.stage .page:nth-of-type(6) .docctrl { margin-top:3px; padding:5px 11px; }
+.stage .page:nth-of-type(6) .returns.big .rv { font-size:16px; }
+.stage .page:nth-of-type(6) .sbar { height:18px; }
+.stage .page:nth-of-type(6) .viz { padding:7px 11px; }
+.stage .page:nth-of-type(6) .vh { margin-bottom:6px; }
+.stage .page:nth-of-type(6) .note { padding:5px 10px; font-size:8px; line-height:1.4; }
+.stage .page:nth-of-type(6) .note .en-sub { font-size:7px; margin-top:2px; }
+.stage .page:nth-of-type(6) .docctrl { margin-top:3px; padding:4px 11px; }
+.stage .page:nth-of-type(6) .docctrl .val { font-size:10.5px; }
+.stage .page:nth-of-type(6) [class="ptable"] .pt-row { min-height:18px; }
+/* bilingual cell stacking (fix overlap) */
+.pt-row > div:has(.en-i) { flex-direction:column; gap:1px; justify-content:center; }
+.pt-row > div.center:has(.en-i) { align-items:center; text-align:center; }
+.pt-row > div:not(.center):has(.en-i) { align-items:flex-start; text-align:start; }
+.pie-leg .nm .en-i { margin-top:2px; }
+
+/* page 5 — restore readable sizing (area-split removed) */
+.stage .page:nth-of-type(6) .returns.big .ret { padding:13px 12px; }
+.stage .page:nth-of-type(6) .returns.big .rv { font-size:27px; }
+.stage .page:nth-of-type(6) .returns.big .rl { font-size:9.5px; }
+.stage .page:nth-of-type(6) .returns.big .rs { font-size:10.5px; }
+.stage .page:nth-of-type(6) .sec-head { margin:11px 0 8px; }
+.stage .page:nth-of-type(6) .pt-row { min-height:0; }
+.stage .page:nth-of-type(6) .pt-row > div { padding-top:7px; padding-bottom:7px; }
+.stage .page:nth-of-type(6) .ptable { margin-top:6px; }
+.stage .page:nth-of-type(6) .note { margin-top:10px; padding:11px 14px; font-size:10.5px; line-height:1.7; }
+.stage .page:nth-of-type(6) .note .en-sub { font-size:9px; margin-top:4px; }
+.stage .page:nth-of-type(6) .docctrl { margin-top:10px; padding:13px 18px; }
+.stage .page:nth-of-type(6) .docctrl .val { font-size:13px; }
+
+/* page 5 fit (moderate) */
+.stage .page:nth-of-type(6) .returns.big .ret { padding:9px 12px; }
+.stage .page:nth-of-type(6) .returns.big .rv { font-size:22px; }
+.stage .page:nth-of-type(6) .sec-head { margin:8px 0 6px; }
+.stage .page:nth-of-type(6) .pt-row > div { padding-top:5px; padding-bottom:5px; }
+.stage .page:nth-of-type(6) .note { margin-top:8px; padding:9px 13px; font-size:9.5px; line-height:1.6; }
+.stage .page:nth-of-type(6) .note .en-sub { font-size:8.5px; }
+.stage .page:nth-of-type(6) .docctrl { margin-top:8px; padding:10px 15px; }
+.stage .page:nth-of-type(6) .docctrl .val { font-size:12px; }
+
+/* location fit */
+.loc-map img { height:470px; }
+
+/* section-header number on the right (RTL) */
+.sec-head { flex-direction:row; }
+
+/* page 5 readable (return metrics removed → room restored) */
+.stage .page:nth-of-type(6) .pt-row { min-height:30px; }
+.stage .page:nth-of-type(6) .pt-row > div { padding-top:7px; padding-bottom:7px; }
+.stage .page:nth-of-type(6) .sec-head { margin:12px 0 8px; }
+.stage .page:nth-of-type(6) .sec-head.first { margin-top:2px; }
+.stage .page:nth-of-type(6) .ptable { margin-top:6px; }
+.stage .page:nth-of-type(6) .note { margin-top:12px; padding:12px 15px; font-size:10.5px; line-height:1.7; }
+.stage .page:nth-of-type(6) .note .en-sub { font-size:9px; margin-top:4px; }
+.stage .page:nth-of-type(6) .docctrl { margin-top:13px; padding:14px 18px; }
+.stage .page:nth-of-type(6) .docctrl .val { font-size:13px; }
+.stage .page:nth-of-type(9) .lmk { padding:7px 11px; }
+.stage .page:nth-of-type(9) .lmk-list { gap:7px; }
+
+/* page 5 + location final fit */
+.stage .page:nth-of-type(6) .returns.big .ret { padding:6px 12px; }
+.stage .page:nth-of-type(6) .returns.big .rv { font-size:19px; }
+.stage .page:nth-of-type(6) .pt-row > div { padding-top:3px; padding-bottom:3px; }
+.stage .page:nth-of-type(6) .note { margin-top:6px; padding:8px 12px; font-size:9px; }
+.stage .page:nth-of-type(6) .docctrl { margin-top:6px; padding:9px 14px; }
+.loc-map img { height:450px; }
+.stage .page:nth-of-type(9) .lmk { padding:6px 10px; }
+.stage .page:nth-of-type(9) .lmk-list { gap:6px; }
+.stage .page:nth-of-type(6) .returns.big .ret { padding:4px 12px; }
+.stage .page:nth-of-type(6) .returns.big .rv { font-size:17px; }
+.stage .page:nth-of-type(6) .returns.big { margin-top:2px; }
+.loc-map img { height:432px; }
+.stage .page:nth-of-type(6) .docctrl { margin-top:5px; padding:7px 13px; }
+.stage .page:nth-of-type(6) .note { margin-top:5px; padding:7px 12px; }
+.stage .page:nth-of-type(6) .pt-row > div { padding-top:2px; padding-bottom:2px; }
+.loc-map img { height:470px; }
+.stage .page:nth-of-type(9) .loc-side { gap:10px; }
+.stage .page:nth-of-type(9) .loc-card { padding:11px 15px; }
+.stage .page:nth-of-type(9) .loc-qr { padding:11px 14px; }
+.stage .page:nth-of-type(9) .lmk { padding:5px 10px; }
+.stage .page:nth-of-type(9) .lmk-list { gap:5px; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="brand">MSGA · FUND</div>
+  <button onclick="window.print()">Print / PDF</button>
+</div>
+
+<div class="stage">
+
+  <!-- ════════ COVER ════════ -->
+  <div class="page cover" data-screen-label="01 الغلاف">
+    <div class="watermark"></div>
+    <div class="page-inner cover-inner">
+      <div class="cover-top">
+        <span class="co">شركة مسقا للاستثمار</span>
+        <div></div>
+        <span class="brandline">Fund Financial Report · 2026</span>
+      </div>
+
+      <div class="cover-main">
+        <div class="cover-left">
+          <img class="logo-w" src="assets/msga-logo.png" alt="MSGA"/>
+          <h1>التقرير المالي للصندوق</h1>
+          <div class="subtitle">دراسة الجدوى المالية — مشروع الفاخرية، الرياض</div>
+          <div class="subtitle-en">Financial Feasibility Study — Al-Fakhria Project, Riyadh</div>
+          <div class="period-pill">FS-MSGA-2026-FAKHRIA</div>
+          <div class="cover-desc">يعرض هذا المستند الملخص المالي لصندوق التطوير العقاري لمشروع الفاخرية بمدينة الرياض، شاملًا قيمة الأراضي وهيكل الصندوق وتكاليف التطوير والإيرادات المتوقعة ومؤشرات العائد، إضافةً إلى مسيرة شركة مسقا للاستثمار.</div>
+          <div class="cover-desc-en">This document presents the financial summary of the real-estate development fund for the Al-Fakhria project in Riyadh — covering land value, fund structure, development costs, projected revenues and return metrics, alongside MSGA's track record.</div>
+        </div>
+        <div class="cover-right">
+          <div class="ccard"><div class="k">Total Revenue</div><div class="v num">365.7M</div><div class="s">إجمالي إيرادات المشروع · ريال</div></div>
+          <div class="ccard"><div class="k">Net Profit</div><div class="v num">39.4M</div><div class="s">صافي الربح · ريال</div></div>
+          <div class="ccard"><div class="k">IRR</div><div class="v num">26.96%</div><div class="s">معدل العائد الداخلي</div></div>
+          <div class="ccard"><div class="k">ROE</div><div class="v num">29.18%</div><div class="s">العائد على حقوق الملكية</div></div>
+        </div>
+      </div>
+
+      <div class="cover-toc">
+        <div class="th">Contents — محتويات المستند</div>
+        <div class="tg">
+          <div class="ti"><span class="n">01</span><span>نبذة عن شركة مسقا للاستثمار</span></div>
+          <div class="ti"><span class="n">02</span><span>مسيرة شركة مسقا للاستثمار</span></div>
+          <div class="ti"><span class="n">03</span><span>أبرز المؤشرات الاستثمارية</span></div>
+          <div class="ti"><span class="n">04</span><span>قيمة الأراضي وهيكل الصندوق</span></div>
+          <div class="ti"><span class="n">05</span><span>تكاليف التطوير والإيرادات والعوائد</span></div>
+          <div class="ti"><span class="n">06</span><span>المخاطر وإجراءات المعالجة</span></div>
+          <div class="ti"><span class="n">07</span><span>هيكل تمويل الصندوق</span></div>
+          <div class="ti"><span class="n">08</span><span>موقع المشروع والمعالم القريبة</span></div>
+        </div>
+      </div>
+
+      <div class="disclaimer">
+        <div class="dar"><b>تنويه:</b> الأرقام والمؤشرات الواردة في هذا الملف أولية وتقديرية، وقد تخضع للتغيير أو التحديث بناءً على الدراسات النهائية ومتغيرات السوق ومراحل تنفيذ المشروع.</div>
+        <div class="den"><b>Disclaimer:</b> The figures and indicators presented in this document are preliminary estimates and may be subject to change or update based on final studies, market conditions, and project implementation phases.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ 01 · ABOUT ════════ -->
+  <div class="page" data-screen-label="02 نبذة عن الشركة">
+    <div class="watermark"></div>
+    <div class="page-inner">
+      <div class="head">
+        <img class="logo" src="assets/msga-logo.png" alt="MSGA"/>
+        <div class="titles">
+          <div class="eyebrow">MSGA Investment · Company Profile</div>
+          <div class="doctitle">نبذة عن شركة مسقا للاستثمار</div>
+        </div>
+        <div class="doc-meta">
+          <div><b>DOC</b> FS-MSGA-2026</div>
+          <div><b>DATE</b> 2026/06</div>
+          <div><b>PAGE</b> 01 / 08</div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <div class="sec-head first">
+            <span class="sec-no">1</span>
+            <h2>نبذة عن الشركة</h2>
+            <span class="en">About the Company</span>
+          </div>
+          <div class="prose">
+            <div class="lead">Overview · تعريف</div>
+            <p>تنطلق «مسقا للاستثمار» من رؤية المملكة 2030 التي تهدف إلى تمليك أكثر من 70% من المواطنين وحداتهم السكنية، ومن هذا المنطلق تبتكر الشركة مشاريع سكنية بمعايير عالية الجودة وتصاميم عصرية تتلاءم مع متطلبات السوق العقارية.</p>
+            <p>وفي ظل تطوّر المملكة ونموّ مدينة الرياض وتوسّعها، اختارت «مسقا» الأحياء الواعدة في المدينة لتقدّم وحدات سكنية تتناسب مع ميزانية الأفراد، تتيح لهم التملّك بكل يُسر أو تمنحهم فرصة استثمارية تنمو مع مرور الوقت.</p>
+            <p class="en-p">MSGA Investment is driven by Saudi Vision 2030, which aims to enable more than 70% of citizens to own their homes. Accordingly, the company develops high-quality residential projects with modern designs aligned with real-estate market demand.</p>
+            <p class="en-p">Amid the Kingdom's growth and the expansion of Riyadh, MSGA selects the city's most promising districts to deliver residential units suited to individuals' budgets — enabling easy ownership or a long-term investment opportunity.</p>
+          </div>
+          <div class="sec-head">
+            <span class="sec-no">3</span>
+            <h2>الرؤية والرسالة</h2>
+            <span class="en">Vision &amp; Mission</span>
+          </div>
+          <div class="vm-grid">
+            <div class="prose"><div class="lead">Vision · الرؤية</div><p>أن نصبح الوجهة العقارية الرائدة في تقديم مشاريع سكنية بمعايير عالية تنمو بعوائدها مع مرور الوقت، لتحقيق أهداف الأفراد للتملّك أو للاستثمار.</p><p class="en-p">To become the leading real-estate destination for high-standard residential projects whose returns grow over time — serving individuals' goals of ownership or investment.</p></div>
+            <div class="prose alt"><div class="lead">Mission · الرسالة</div><p>تطوير منتجات سكنية عالية الجودة ومتكاملة المرافق تُلبّي احتياجات الأفراد المعيشية والاستثمارية، لتمكينهم من التملّك بما يتناسب مع ميزانيتهم.</p><p class="en-p">Developing high-quality, fully-serviced residential products that meet individuals' living and investment needs, enabling ownership in line with their budgets.</p></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="sec-head first">
+            <span class="sec-no">2</span>
+            <h2>المؤشرات التعريفية</h2>
+            <span class="en">At a Glance</span>
+          </div>
+          <div class="facts2">
+            <div class="kpi"><div class="label">Headquarters</div><div class="val ar">الرياض</div><div class="sub">المقر الرئيسي</div></div>
+            <div class="kpi"><div class="label">Business</div><div class="val ar">تطوير عقاري</div><div class="sub">مجال العمل</div></div>
+            <div class="kpi"><div class="label">Since</div><div class="val">2021</div><div class="sub">بداية المسيرة</div></div>
+            <div class="kpi"><div class="label">Projects</div><div class="val">12–38</div><div class="sub">سلسلة مشاريع مسقا</div></div>
+          </div>
+          <div class="sec-head">
+            <span class="sec-no">4</span>
+            <h2>قيمنا ومزايانا</h2>
+            <span class="en">Our Values</span>
+          </div>
+          <div class="focus-chips">
+            <div class="fchip"><span class="ic">01</span><span class="ft"><span>نمو مالي مستدام</span><span class="en-sub">Sustainable Growth</span></span></div>
+            <div class="fchip"><span class="ic">02</span><span class="ft"><span>الريادة في المبيعات</span><span class="en-sub">Sales Leadership</span></span></div>
+            <div class="fchip"><span class="ic">03</span><span class="ft"><span>تطوير عالي الجودة</span><span class="en-sub">High-Quality Development</span></span></div>
+            <div class="fchip"><span class="ic">04</span><span class="ft"><span>تصاميم حديثة</span><span class="en-sub">Modern Designs</span></span></div>
+            <div class="fchip"><span class="ic">05</span><span class="ft"><span>مواكبة السوق</span><span class="en-sub">Market Responsiveness</span></span></div>
+            <div class="fchip"><span class="ic">06</span><span class="ft"><span>صيانة مجانية</span><span class="en-sub">Free Maintenance</span></span></div>
+          </div>
+          <div class="note alt"><div class="x">★</div><div><b>جَعله يسقا</b> — خيارات سكنية بالخير، وعوائد تنمو بالبركة، وخيارك العقاري الأمثل بالتوفيق.<span class="en-sub">“Jaalahu Yasqa” — homes with goodness, returns that grow with blessing, your ideal real-estate choice.</span></div></div>
+        </div>
+      </div>
+
+      <div class="foot">
+        <div class="fdisc"><span class="far">تنويه: الأرقام والمؤشرات الواردة في هذا الملف أولية وتقديرية، وقد تخضع للتغيير أو التحديث بناءً على الدراسات النهائية ومتغيرات السوق ومراحل تنفيذ المشروع.</span><span class="fen">Disclaimer: The figures and indicators presented in this document are preliminary estimates and may be subject to change or update based on final studies, market conditions, and project implementation phases.</span></div>
+        <div class="brand-mark">شركة مسقا للاستثمار · مستند داخلي</div>
+        <div>FS-MSGA-2026</div>
+        <div class="pagenum"><b>01</b> / 08</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ 02 · مسيرتنا ════════ -->
+  <div class="page land" data-screen-label="03 مسيرتنا">
+    <div class="watermark"></div>
+    <div class="page-inner">
+      <div class="head">
+        <img class="logo" src="assets/msga-logo.png" alt="MSGA"/>
+        <div class="titles">
+          <div class="eyebrow">MSGA Investment · Our Journey</div>
+          <div class="doctitle">مسيرتنا — مشاريع مسقا للاستثمار</div>
+        </div>
+        <div class="doc-meta">
+          <div><b>DOC</b> FS-MSGA-2026</div>
+          <div><b>DATE</b> 2026/06</div>
+          <div><b>PAGE</b> 02 / 08</div>
+        </div>
+      </div>
+
+      <div class="orgx-title">مسيرة شركة مسقا للاستثمار<span class="ul"></span></div>
+
+      <div class="tl-wrap">
+        <div class="tl-row">
+          <!-- 2021 -->
+          <div class="tl-cluster" style="flex:1">
+            <div class="tl-funds">
+              <div class="tl-fund"><div class="lab"><span class="ar">مسقا</span><span class="nn">12</span></div><div class="stem"></div></div>
+            </div>
+            <div class="tl-play"></div>
+            <div class="tl-year">2021</div>
+          </div>
+          <!-- 2022 -->
+          <div class="tl-cluster" style="flex:3">
+            <div class="tl-funds">
+              <div class="tl-fund"><div class="lab"><span class="ar">مسقا</span><span class="nn">13</span></div><div class="stem"></div></div>
+              <div class="tl-fund"><div class="lab"><span class="ar">مسقا</span><span class="nn">17</span></div><div class="stem"></div></div>
+              <div class="tl-fund"><div class="lab"><span class="ar">مسقا</span><span class="nn">24</span></div><div class="stem"></div></div>
+            </div>
+            <div class="tl-arc"></div>
+            <div class="tl-play"></div>
+            <div class="tl-year">2022</div>
+            <div class="tl-flag"></div>
+          </div>
+          <!-- 2023 -->
+          <div class="tl-cluster" style="flex:3">
+            <div class="tl-funds">
+              <div class="tl-fund"><div class="lab"><span class="ar">مسقا</span><span class="nn">25</span></div><div class="stem"></div></div>
+              <div class="tl-fund"><div class="lab"><span class="ar">مسقا</span><span class="nn">26</span></div><div class="stem"></div></div>
+              <div class="tl-fund"><div class="lab"><span class="ar">مسقا</span><span class="nn">27</span></div><div class="stem"></div></div>
+            </div>
+            <div class="tl-arc"></div>
+            <div class="tl-play"></div>
+            <div class="tl-year">2023</div>
+          </div>
+          <!-- 2024 -->
+          <div class="tl-cluster" style="flex:3">
+            <div class="tl-funds">
+              <div class="tl-fund"><div class="lab"><span class="ar">مسقا</span><span class="nn">28</span></div><div class="stem"></div></div>
+              <div class="tl-fund"><div class="lab"><span class="ar">مسقا</span><span class="nn">29</span></div><div class="stem"></div></div>
+              <div class="tl-fund"><div class="lab"><span class="ar">مسقا</span><span class="nn">30</span></div><div class="stem"></div></div>
+            </div>
+            <div class="tl-arc"></div>
+            <div class="tl-play"></div>
+            <div class="tl-year">2024</div>
+          </div>
+          <!-- 2025 -->
+          <div class="tl-cluster" style="flex:3">
+            <div class="tl-funds">
+              <div class="tl-fund"><div class="lab"><span class="ar">مسقا</span><span class="nn">31</span></div><div class="stem"></div></div>
+              <div class="tl-fund"><div class="lab"><span class="ar">مسقا</span><span class="nn">32</span></div><div class="stem"></div></div>
+              <div class="tl-fund"><div class="lab"><span class="ar">مسقا</span><span class="nn">33</span></div><div class="stem"></div></div>
+            </div>
+            <div class="tl-arc"></div>
+            <div class="tl-play"></div>
+            <div class="tl-year">2025</div>
+            <div class="tl-flag"></div>
+          </div>
+          <!-- 2026 (new) -->
+          <div class="tl-cluster fresh" style="flex:5">
+            <div class="tl-funds">
+              <div class="tl-fund fresh"><div class="lab"><span class="ar">مسقا</span><span class="nn">34</span></div><div class="stem"></div></div>
+              <div class="tl-fund fresh"><div class="lab"><span class="ar">مسقا</span><span class="nn">35</span></div><div class="stem"></div></div>
+              <div class="tl-fund fresh"><div class="lab"><span class="ar">مسقا</span><span class="nn">36</span></div><div class="stem"></div></div>
+              <div class="tl-fund fresh"><div class="lab"><span class="ar">مسقا</span><span class="nn">37</span></div><div class="stem"></div></div>
+              <div class="tl-fund fresh"><div class="lab"><span class="ar">مسقا</span><span class="nn">38</span></div><div class="stem"></div></div>
+            </div>
+            <div class="tl-arc"></div>
+            <div class="tl-play"></div>
+            <div class="tl-year">2026</div>
+            <div class="tl-flag"></div>
+          </div>
+        </div>
+
+        <div class="tl-underbars">
+          <div class="bar" style="flex:4"></div>
+          <div class="bar" style="flex:9"></div>
+          <div class="bar" style="flex:5"></div>
+        </div>
+
+        <div class="tl-legend">
+          <div class="lg"><span class="sw navy"></span> مشاريع سابقة · 2021–2025</div>
+          <div class="lg"><span class="sw org"></span> مشاريع عام 2026</div>
+        </div>
+      </div>
+
+      <div class="foot">
+        <div class="fdisc"><span class="far">تنويه: الأرقام والمؤشرات الواردة في هذا الملف أولية وتقديرية، وقد تخضع للتغيير أو التحديث بناءً على الدراسات النهائية ومتغيرات السوق ومراحل تنفيذ المشروع.</span><span class="fen">Disclaimer: The figures and indicators presented in this document are preliminary estimates and may be subject to change or update based on final studies, market conditions, and project implementation phases.</span></div>
+        <div class="brand-mark">شركة مسقا للاستثمار · مستند داخلي</div>
+        <div>FS-MSGA-2026</div>
+        <div class="pagenum"><b>02</b> / 08</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ 03 · INVESTOR HIGHLIGHTS (visuals) ════════ -->
+  <div class="page" data-screen-label="04 أبرز المؤشرات">
+    <div class="watermark"></div>
+    <div class="page-inner">
+      <div class="head">
+        <img class="logo" src="assets/msga-logo.png" alt="MSGA"/>
+        <div class="titles">
+          <div class="eyebrow">MSGA Investment · Investment Highlights</div>
+          <div class="doctitle">أبرز المؤشرات الاستثمارية</div>
+        </div>
+        <div class="doc-meta">
+          <div><b>DOC</b> FS-MSGA-2026</div>
+          <div><b>DATE</b> 2026/06</div>
+          <div><b>PAGE</b> 03 / 08</div>
+        </div>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi"><div class="label">Total Revenue</div><div class="val">365.7M</div><div class="sub">إجمالي الإيرادات · ريال</div></div>
+        <div class="kpi"><div class="label">Net Profit</div><div class="val">39.4M</div><div class="sub">صافي الربح · ريال</div></div>
+        <div class="kpi"><div class="label">IRR</div><div class="val">26.96%</div><div class="sub">معدل العائد الداخلي</div></div>
+        <div class="kpi"><div class="label">ROE</div><div class="val">29.18%</div><div class="sub">العائد على حقوق الملكية</div></div>
+      </div>
+
+      <div class="viz-grid">
+        <!-- profit bridge -->
+        <div class="viz">
+          <div class="vh"><div class="vt">من الإيراد إلى صافي الربح<span class="en-sub">Revenue to Net Profit</span></div><div class="vtot">SAR</div></div>
+          <div class="hbars">
+            <div class="hrow"><div class="hl">إجمالي الإيرادات</div><div class="htrack"><div class="hfill c-navy" style="width:100%"></div></div><div class="hv">365.69M</div></div>
+            <div class="hrow"><div class="hl">التكلفة الإجمالية</div><div class="htrack"><div class="hfill c-slate" style="width:89.2%"></div></div><div class="hv">326.29M</div></div>
+            <div class="hrow"><div class="hl">صافي الربح</div><div class="htrack"><div class="hfill c-org" style="width:10.8%"></div></div><div class="hv">39.40M</div></div>
+          </div>
+        </div>
+
+        <!-- returns vbars -->
+        <div class="viz">
+          <div class="vh"><div class="vt">مؤشرات العائد<span class="en-sub">Return Metrics</span></div><div class="vtot">%</div></div>
+          <div class="vbars">
+            <div class="vbcol"><div class="vval">10.77%</div><div class="vbar2" style="height:34%"></div></div>
+            <div class="vbcol"><div class="vval">12.07%</div><div class="vbar2" style="height:38%"></div></div>
+            <div class="vbcol"><div class="vval">11.67%</div><div class="vbar2" style="height:37%"></div></div>
+            <div class="vbcol accent"><div class="vval">26.96%</div><div class="vbar2" style="height:84%"></div></div>
+            <div class="vbcol accent"><div class="vval">29.18%</div><div class="vbar2" style="height:91%"></div></div>
+          </div>
+          <div class="vbase"></div>
+          <div class="vbars" style="height:auto;padding:0">
+            <div class="vbcol" style="height:auto"><div class="vlab">هامش الربح</div></div>
+            <div class="vbcol" style="height:auto"><div class="vlab">ROI</div></div>
+            <div class="vbcol" style="height:auto"><div class="vlab">العائد السنوي</div></div>
+            <div class="vbcol" style="height:auto"><div class="vlab">IRR</div></div>
+            <div class="vbcol" style="height:auto"><div class="vlab">ROE</div></div>
+          </div>
+        </div>
+
+        <!-- revenue composition -->
+        <div class="viz">
+          <div class="vh"><div class="vt">تركيبة الإيرادات<span class="en-sub">Revenue Mix</span></div><div class="vtot">365.69M</div></div>
+          <div class="sbar">
+            <div class="seg c-navy" style="width:82.8%">82.8%</div>
+            <div class="seg c-org" style="width:17.2%">17.2%</div>
+          </div>
+          <div class="sleg">
+            <div class="it"><span class="dot c-navy"></span> مبيعات وحدات جاهزة <b>302.64M</b></div>
+            <div class="it"><span class="dot c-org"></span> مبيعات على الخارطة <b>63.05M</b></div>
+          </div>
+        </div>
+
+        <!-- cost composition -->
+        <div class="viz">
+          <div class="vh"><div class="vt">تركيبة التكاليف<span class="en-sub">Cost Mix</span></div><div class="vtot">326.29M</div></div>
+          <div class="sbar">
+            <div class="seg c-navy" style="width:41.4%">41.4%</div>
+            <div class="seg c-org" style="width:52.6%">52.6%</div>
+            <div class="seg c-yel" style="width:1.9%"></div>
+            <div class="seg c-slate" style="width:4.1%"></div>
+          </div>
+          <div class="sleg">
+            <div class="it"><span class="dot c-navy"></span> قيمة الأرض <b>135.00M</b></div>
+            <div class="it"><span class="dot c-org"></span> تكاليف التطوير <b>171.69M</b></div>
+            <div class="it"><span class="dot c-yel"></span> تكلفة الصندوق <b>6.19M</b></div>
+            <div class="it"><span class="dot c-slate"></span> تكاليف أخرى وتمويل <b>13.41M</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="foot">
+        <div class="fdisc"><span class="far">تنويه: الأرقام والمؤشرات الواردة في هذا الملف أولية وتقديرية، وقد تخضع للتغيير أو التحديث بناءً على الدراسات النهائية ومتغيرات السوق ومراحل تنفيذ المشروع.</span><span class="fen">Disclaimer: The figures and indicators presented in this document are preliminary estimates and may be subject to change or update based on final studies, market conditions, and project implementation phases.</span></div>
+        <div class="brand-mark">شركة مسقا للاستثمار · مستند داخلي</div>
+        <div>FS-MSGA-2026</div>
+        <div class="pagenum"><b>03</b> / 08</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ 04 · LAND + FUND STRUCTURE ════════ -->
+  <div class="page" data-screen-label="05 الأراضي وهيكل الصندوق">
+    <div class="watermark"></div>
+    <div class="page-inner">
+      <div class="head">
+        <img class="logo" src="assets/msga-logo.png" alt="MSGA"/>
+        <div class="titles">
+          <div class="eyebrow">MSGA Investment · Fund Financial Report</div>
+          <div class="doctitle">قيمة الأراضي وهيكل الصندوق</div>
+        </div>
+        <div class="doc-meta">
+          <div><b>DOC</b> FS-MSGA-2026</div>
+          <div><b>DATE</b> 2026/06</div>
+          <div><b>PAGE</b> 04 / 08</div>
+        </div>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi"><div class="label">Land Area</div><div class="val">45,000</div><div class="sub">مساحة الأرض · م²</div></div>
+        <div class="kpi"><div class="label">Use Type</div><div class="val ar">سكني · تجاري</div><div class="sub">نوع الاستخدام</div></div>
+        <div class="kpi feat"><div class="label">Residential Floors</div><div class="val">240</div><div class="sub">أدوار سكنية · دور</div></div>
+        <div class="kpi feat"><div class="label">Apartments</div><div class="val">305</div><div class="sub">شقق سكنية · شقة</div></div>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <div class="sec-head first">
+            <span class="sec-no">1</span>
+            <h2>قيمة الأراضي</h2>
+            <span class="en">Total Lands Value</span>
+          </div>
+          <div class="ptable">
+            <div class="pt-head cols-fin3"><div>البند<span class="en-sub">Item</span></div><div class="center">القيمة / النسبة<span class="en-sub">Value / Rate</span></div><div class="center">المبلغ (ريال)<span class="en-sub">Amount (SAR)</span></div></div>
+            <div class="pt-row cols-fin3"><div>نوع المشروع<span class="en-i">Project Type</span></div><div class="center">تطوير عقاري<span class="en-i">Development</span></div><div class="center"><span class="money muted">—</span></div></div>
+            <div class="pt-row cols-fin3"><div>نوع الأرض<span class="en-i">Land Type</span></div><div class="center">سكني · تجاري<span class="en-i">Residential · Commercial</span></div><div class="center"><span class="money muted">—</span></div></div>
+            <div class="pt-row cols-fin3"><div>المدينة<span class="en-i">City</span></div><div class="center">الرياض — الفاخرية<span class="en-i">Riyadh — Al-Fakhria</span></div><div class="center"><span class="money muted">—</span></div></div>
+            <div class="pt-row cols-fin3"><div>مساحة الأرض<span class="en-i">Land Area</span></div><div class="center"><span class="money">45,000.00</span><span class="unit">م²</span></div><div class="center"><span class="money muted">—</span></div></div>
+            <div class="pt-row cols-fin3"><div>سعر المتر للأرض<span class="en-i">Land Price / m²</span></div><div class="center"><span class="money">3,000.00</span></div><div class="center"><span class="money">135,000,000</span></div></div>
+            <div class="pt-row cols-fin3"><div>رسوم الوساطة<span class="en-i">Brokerage Fee</span></div><div class="center"><span class="money">0.00%</span></div><div class="center"><span class="money muted">—</span></div></div>
+            <div class="pt-row cols-fin3"><div>الضريبة<span class="en-i">Tax</span></div><div class="center"><span class="money">5.00%</span></div><div class="center"><span class="money muted">—</span></div></div>
+            <div class="pt-row cols-fin3 total"><div class="strong">إجمالي قيمة الأرض<span class="en-i">Total Land Value</span></div><div class="center"><span class="money muted">—</span></div><div class="center"><span class="money strong">135,000,000</span></div></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="sec-head first">
+            <span class="sec-no">2</span>
+            <h2>هيكل الصندوق</h2>
+            <span class="en">Fund Structure</span>
+          </div>
+          <div class="ptable">
+            <div class="pt-head cols-fin3"><div>البند<span class="en-sub">Item</span></div><div class="center">الوحدة / النسبة<span class="en-sub">Unit / Rate</span></div><div class="center">المبلغ (ريال)<span class="en-sub">Amount (SAR)</span></div></div>
+            <div class="pt-row cols-fin3"><div>مدة الصندوق<span class="en-i">Fund Term</span></div><div class="center"><span class="money">2.5</span><span class="unit">سنوات</span></div><div class="center"><span class="money muted">—</span></div></div>
+            <div class="pt-row cols-fin3"><div>رسوم مدير الصندوق<span class="en-i">Manager Fee</span></div><div class="center"><span class="money">1.50%</span></div><div class="center"><span class="money muted">—</span></div></div>
+            <div class="pt-row cols-fin3"><div>رسوم الصندوق الأخرى<span class="en-i">Other Fund Fees</span></div><div class="center"><span class="money">0.15%</span></div><div class="center"><span class="money muted">—</span></div></div>
+            <div class="pt-row cols-fin3"><div>إجمالي تكلفة الصندوق<span class="en-i">Total Fund Cost</span></div><div class="center"><span class="money muted">—</span></div><div class="center"><span class="money">6,187,572</span></div></div>
+            <div class="pt-row cols-fin3"><div class="strong">التكلفة الإجمالية<span class="en-i">Total Cost</span></div><div class="center"><span class="money muted">—</span></div><div class="center"><span class="money strong">326,291,491</span></div></div>
+            <div class="pt-row cols-fin3"><div>دين الصندوق<span class="en-i">Fund Debt</span></div><div class="center"><span class="money muted">—</span></div><div class="center"><span class="money">97,625,000</span></div></div>
+            <div class="pt-row cols-fin3"><div>حقوق الملكية النقدية<span class="en-i">Cash Equity</span></div><div class="center"><span class="money muted">—</span></div><div class="center"><span class="money">7,275,000</span></div></div>
+            <div class="pt-row cols-fin3"><div>إجمالي الأراضي العينية<span class="en-i">Total In-Kind Land</span></div><div class="center"><span class="money">100%</span></div><div class="center"><span class="money">135,000,000</span></div></div>
+            <div class="pt-row cols-fin3"><div>رسوم الهيكلة<span class="en-i">Structuring Fees</span></div><div class="center"><span class="money">1%</span></div><div class="center"><span class="money">1,495,500</span></div></div>
+            <div class="pt-row cols-fin3 total"><div class="strong">إجمالي حقوق الملكية<span class="en-i">Total Equity</span></div><div class="center"><span class="money muted">—</span></div><div class="center"><span class="money strong">135,000,000</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="foot">
+        <div class="fdisc"><span class="far">تنويه: الأرقام والمؤشرات الواردة في هذا الملف أولية وتقديرية، وقد تخضع للتغيير أو التحديث بناءً على الدراسات النهائية ومتغيرات السوق ومراحل تنفيذ المشروع.</span><span class="fen">Disclaimer: The figures and indicators presented in this document are preliminary estimates and may be subject to change or update based on final studies, market conditions, and project implementation phases.</span></div>
+        <div class="brand-mark">شركة مسقا للاستثمار · مستند داخلي</div>
+        <div>FS-MSGA-2026</div>
+        <div class="pagenum"><b>04</b> / 08</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ 05 · DEV COSTS + REVENUE + RETURNS ════════ -->
+  <div class="page" data-screen-label="06 التكاليف والعوائد">
+    <div class="watermark"></div>
+    <div class="page-inner">
+      <div class="head">
+        <img class="logo" src="assets/msga-logo.png" alt="MSGA"/>
+        <div class="titles">
+          <div class="eyebrow">MSGA Investment · Fund Financial Report</div>
+          <div class="doctitle">تكاليف التطوير والإيرادات والعوائد</div>
+        </div>
+        <div class="doc-meta">
+          <div><b>DOC</b> FS-MSGA-2026</div>
+          <div><b>DATE</b> 2026/06</div>
+          <div><b>PAGE</b> 05 / 08</div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <div class="sec-head first">
+            <span class="sec-no">3</span>
+            <h2>إجمالي تكاليف التطوير</h2>
+            <span class="en">Development Costs</span>
+          </div>
+          <div class="ptable">
+            <div class="pt-head cols-dev"><div>البند<span class="en-sub">Item</span></div><div class="center">النسبة<span class="en-sub">Rate</span></div><div class="center">المساحة (م²)<span class="en-sub">Area (m²)</span></div><div class="center">تكلفة المتر<span class="en-sub">Cost / m²</span></div><div class="center">الإجمالي (ريال)<span class="en-sub">Total (SAR)</span></div></div>
+            <div class="pt-row cols-dev"><div>إنشائية (فوق الأرض)<span class="en-i">Construction (Above Ground)</span></div><div class="center"><span class="money">100%</span></div><div class="center"><span class="money">97,000</span></div><div class="center"><span class="money">1,500</span></div><div class="center"><span class="money">145,500,000</span></div></div>
+            <div class="pt-row cols-dev"><div>التكاليف الناعمة<span class="en-i">Soft Costs</span></div><div class="center"><span class="money">100%</span></div><div class="center"><span class="money">97,000</span></div><div class="center"><span class="money">45</span></div><div class="center"><span class="money">4,365,000</span></div></div>
+            <div class="pt-row cols-dev"><div>أتعاب المطور<span class="en-i">Developer Fees</span></div><div class="center"><span class="money">15%</span></div><div class="center"><span class="money muted">—</span></div><div class="center"><span class="money muted">—</span></div><div class="center"><span class="money">21,825,000</span></div></div>
+            <div class="pt-row cols-dev total"><div class="strong">إجمالي تكاليف التطوير<span class="en-i">Total Development Costs</span></div><div class="center"><span class="money muted">—</span></div><div class="center"><span class="money muted">—</span></div><div class="center"><span class="money muted">—</span></div><div class="center"><span class="money strong">171,690,000</span></div></div>
+          </div>
+
+          <div class="note alt"><div class="x">i</div><div>الأرقام مبنية على معطيات دراسة الجدوى لمشروع الفاخرية بالرياض، مدة الصندوق ٢٫٥ سنة. تُعدّ مؤشرات العائد تقديرية وقابلة للمراجعة وفق التطورات السوقية ومراحل التطوير والبيع.<span class="en-sub" style="font-size:9px;margin-top:4px;line-height:1.55">Figures are based on the Al-Fakhria feasibility study (fund term 2.5 years). Return metrics are estimates, subject to review per market developments and the development and sales phases.</span></div></div>
+        </div>
+
+        <div>
+          <div class="sec-head first">
+            <span class="sec-no">4</span>
+            <h2>الإيرادات</h2>
+            <span class="en">Fund Revenues</span>
+          </div>
+          <div class="ptable">
+            <div class="pt-head cols-rev"><div>البند<span class="en-sub">Item</span></div><div class="center">السعر · المساحة<span class="en-sub">Price · Area</span></div><div class="center">المبلغ (ريال)<span class="en-sub">Amount (SAR)</span></div></div>
+            <div class="pt-row cols-rev"><div>المساحة القابلة للبيع<span class="en-i">Saleable Area</span></div><div class="center"><span class="money">63,050</span><span class="unit">م²</span></div><div class="center"><span class="money muted">—</span></div></div>
+            <div class="pt-row cols-rev"><div>مبيعات (جاهزة)<span class="en-i">Ready-Unit Sales</span></div><div class="center"><span class="money">6,000</span><span class="unit">· 50,440 م²</span></div><div class="center"><span class="money">302,640,000</span></div></div>
+            <div class="pt-row cols-rev"><div>مبيعات على الخارطة<span class="en-i">Off-Plan Sales</span></div><div class="center"><span class="money">5,000</span><span class="unit">· 12,610 م²</span></div><div class="center"><span class="money">63,050,000</span></div></div>
+            <div class="pt-row cols-rev total"><div class="strong">إجمالي إيرادات المشروع<span class="en-i">Total Project Revenue</span></div><div class="center"><span class="money muted">—</span></div><div class="center"><span class="money strong">365,690,000</span></div></div>
+            <div class="pt-row cols-rev"><div class="strong">صافي الربح<span class="en-i">Net Profit</span></div><div class="center"><span class="money muted">—</span></div><div class="center"><span class="money accent">39,398,509</span></div></div>
+          </div>
+
+          <div class="docctrl">
+            <div>
+              <div class="eyebrow">Document Control · ضبط المستند</div>
+              <div class="val">دراسة الجدوى المالية — مشروع الفاخرية</div>
+            </div>
+            <div class="right">FS-MSGA-2026<br>Riyadh · 2026/06</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="foot">
+        <div class="fdisc"><span class="far">تنويه: الأرقام والمؤشرات الواردة في هذا الملف أولية وتقديرية، وقد تخضع للتغيير أو التحديث بناءً على الدراسات النهائية ومتغيرات السوق ومراحل تنفيذ المشروع.</span><span class="fen">Disclaimer: The figures and indicators presented in this document are preliminary estimates and may be subject to change or update based on final studies, market conditions, and project implementation phases.</span></div>
+        <div class="brand-mark">شركة مسقا للاستثمار · مستند داخلي</div>
+        <div>FS-MSGA-2026</div>
+        <div class="pagenum"><b>05</b> / 08</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ 06 · RISKS ════════ -->
+  <div class="page" data-screen-label="07 المخاطر والمعالجات">
+    <div class="watermark"></div>
+    <div class="page-inner">
+      <div class="head">
+        <img class="logo" src="assets/msga-logo.png" alt="MSGA"/>
+        <div class="titles">
+          <div class="eyebrow">MSGA Investment · Risks &amp; Mitigations</div>
+          <div class="doctitle">المخاطر وإجراءات المعالجة</div>
+        </div>
+        <div class="doc-meta">
+          <div><b>DOC</b> FS-MSGA-2026</div>
+          <div><b>DATE</b> 2026/06</div>
+          <div><b>PAGE</b> 06 / 08</div>
+        </div>
+      </div>
+
+      <div class="sec-head first">
+        <span class="sec-no">6</span>
+        <h2>المخاطر وإجراءات المعالجة</h2>
+        <span class="en">Risks &amp; Mitigations</span>
+      </div>
+
+      <div class="risk-tbl">
+        <div class="risk-head"><div>المخاطرة<span class="en-sub">Risk</span></div><div>إجراء المعالجة<span class="en-sub">Mitigation</span></div></div>
+        <div class="risk-row"><div class="rk"><span class="rn">1</span><span class="rt">مخاطر التطوير والبيع على الخارطة<span class="en-sub">Development &amp; Off-Plan Sales Risk</span></span></div><div class="rm">يمتلك المطوّر خبرة واسعة وسجلًّا قويًّا في مجال التطوير العقاري، بما يعزّز جاذبية المشروع ويدعم نجاح المبيعات على الخارطة.<span class="en-sub">The developer has extensive experience and a strong track record in real-estate development, enhancing the project’s appeal and supporting successful off-plan sales.</span></div></div>
+        <div class="risk-row"><div class="rk"><span class="rn">2</span><span class="rt">رسوم الأراضي البيضاء<span class="en-sub">White Land Fees</span></span></div><div class="rm">بما يتوافق مع لوائح رسوم الأراضي البيضاء المعمول بها، يمكن للمشروع الاستفادة من المهل النظامية المسموح بها بعد اعتماد المخطط، مما يتيح استمرار وإكمال أعمال التطوير مع تأجيل سداد الرسوم خلال مرحلة التطوير وفق الأنظمة الحاكمة.<span class="en-sub">In line with applicable white-land-fee regulations, the project can use the permitted grace periods after plan approval, allowing development to continue while deferring fee payments during the development phase per governing rules.</span></div></div>
+        <div class="risk-row"><div class="rk"><span class="rn">3</span><span class="rt">المنافسة<span class="en-sub">Competition</span></span></div><div class="rm">اعتماد تصميم معماري حديث ومتكامل يرفع جاذبية المشروع ويمنحه ميزة تنافسية واضحة على المشاريع الأخرى في السوق.<span class="en-sub">Adopting a modern, integrated architectural design raises the project’s appeal and gives it a clear competitive advantage over other projects in the market.</span></div></div>
+        <div class="risk-row"><div class="rk"><span class="rn">4</span><span class="rt">السوق<span class="en-sub">Market</span></span></div><div class="rm">المتابعة المستمرة لتقلبات السوق والمتغيرات الاقتصادية والتنظيمية، مع تعزيز جاهزية المشروع للاستجابة لأي مستجدات محتملة.<span class="en-sub">Continuous monitoring of market fluctuations and economic and regulatory changes, with strengthened readiness to respond to any potential developments.</span></div></div>
+        <div class="risk-row"><div class="rk"><span class="rn">5</span><span class="rt">اضطرابات سلسلة الإمداد<span class="en-sub">Supply Chain Disruptions</span></span></div><div class="rm">رفع كفاءة سلسلة الإمداد عبر تنويع المورّدين وتنفيذ خطط بديلة لضمان استمرارية المشروع.<span class="en-sub">Improving supply-chain efficiency by diversifying suppliers and implementing alternative plans to ensure project continuity.</span></div></div>
+      </div>
+
+      <div class="foot">
+        <div class="fdisc"><span class="far">تنويه: الأرقام والمؤشرات الواردة في هذا الملف أولية وتقديرية، وقد تخضع للتغيير أو التحديث بناءً على الدراسات النهائية ومتغيرات السوق ومراحل تنفيذ المشروع.</span><span class="fen">Disclaimer: The figures and indicators presented in this document are preliminary estimates and may be subject to change or update based on final studies, market conditions, and project implementation phases.</span></div>
+        <div class="brand-mark">شركة مسقا للاستثمار · مستند داخلي</div>
+        <div>FS-MSGA-2026</div>
+        <div class="pagenum"><b>06</b> / 08</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ 07 · FUND FINANCING STRUCTURE ════════ -->
+  <div class="page" data-screen-label="08 هيكل التمويل">
+    <div class="watermark"></div>
+    <div class="page-inner">
+      <div class="head">
+        <img class="logo" src="assets/msga-logo.png" alt="MSGA"/>
+        <div class="titles">
+          <div class="eyebrow">MSGA Investment · Fund Financing Structure</div>
+          <div class="doctitle">هيكل تمويل الصندوق</div>
+        </div>
+        <div class="doc-meta">
+          <div><b>DOC</b> FS-MSGA-2026</div>
+          <div><b>DATE</b> 2026/06</div>
+          <div><b>PAGE</b> 07 / 08</div>
+        </div>
+      </div>
+
+      <div class="sec-head first">
+        <span class="sec-no">7</span>
+        <h2>هيكل تمويل الصندوق</h2>
+        <span class="en">Fund Financing Structure</span>
+      </div>
+
+      <div class="ffs">
+        <div class="ffs-panel">
+          <div class="ffs-ph">استخدامات الصندوق · 326.29M<span class="en2">Fund Uses</span></div>
+          <div class="pie-wrap">
+            <div class="pie" style="background:conic-gradient(#1F3A57 0 52.6%, #E5811F 52.6% 94%, #E0A21A 94% 100%)"></div>
+            <div class="pie-leg">
+              <div class="it"><span class="dot c-navy"></span><span class="nm">تكلفة التطوير · 171.69M <span class="en-i">Development</span></span><span class="pc">52.6%</span></div>
+              <div class="it"><span class="dot c-org"></span><span class="nm">شراء الأرض · 135.00M <span class="en-i">Land Acquisition</span></span><span class="pc">41.4%</span></div>
+              <div class="it"><span class="dot c-yel"></span><span class="nm">مصاريف الصندوق والتمويل · 19.60M <span class="en-i">Fund &amp; Financing</span></span><span class="pc">6.0%</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="ffs-panel">
+          <div class="ffs-ph">مصادر التمويل · 302.95M<span class="en2">Fund Sources</span></div>
+          <div class="ftree">
+            <div class="fstack" style="width:80%">
+              <div class="fbox nav">حجم الصندوق المستهدف<span class="en-sub">Target Fund Size</span></div>
+              <div class="fbox val">SAR 302.95M</div>
+            </div>
+            <div class="vline"></div>
+            <div class="frow">
+              <div class="fcol"><div class="fbox nav">تمويل بنكي<span class="en-sub">Bank Financing</span></div><div class="fbox val">SAR 97.63M</div></div>
+              <div class="fcol"><div class="fbox nav">مبيعات على الخارطة<span class="en-sub">Off-Plan Sales</span></div><div class="fbox val">SAR 63.05M</div></div>
+              <div class="fcol">
+                <div class="fbox nav">حقوق الملكية<span class="en-sub">Equity</span></div>
+                <div class="fbox val">SAR 142.28M</div>
+                <div class="vline"></div>
+                <div class="frow two">
+                  <div class="fcol"><div class="fbox nav">مساهمة نقدية<span class="en-sub">Cash Contribution</span></div><div class="fbox val">SAR 7.28M</div></div>
+                  <div class="fcol"><div class="fbox nav">مساهمة عينية (أرض)<span class="en-sub">In-Kind (Land)</span></div><div class="fbox val">SAR 135.00M</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="foot">
+        <div class="fdisc"><span class="far">تنويه: الأرقام والمؤشرات الواردة في هذا الملف أولية وتقديرية، وقد تخضع للتغيير أو التحديث بناءً على الدراسات النهائية ومتغيرات السوق ومراحل تنفيذ المشروع.</span><span class="fen">Disclaimer: The figures and indicators presented in this document are preliminary estimates and may be subject to change or update based on final studies, market conditions, and project implementation phases.</span></div>
+        <div class="brand-mark">شركة مسقا للاستثمار · مستند داخلي</div>
+        <div>FS-MSGA-2026</div>
+        <div class="pagenum"><b>07</b> / 08</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ 08 · LOCATION ════════ -->
+  <div class="page" data-screen-label="09 موقع المشروع">
+    <div class="watermark"></div>
+    <div class="page-inner">
+      <div class="head">
+        <img class="logo" src="assets/msga-logo.png" alt="MSGA"/>
+        <div class="titles">
+          <div class="eyebrow">MSGA Investment · Location &amp; Nearby Landmarks</div>
+          <div class="doctitle">موقع المشروع والمعالم القريبة</div>
+        </div>
+        <div class="doc-meta">
+          <div><b>DOC</b> FS-MSGA-2026</div>
+          <div><b>DATE</b> 2026/06</div>
+          <div><b>PAGE</b> 08 / 08</div>
+        </div>
+      </div>
+
+      <div class="sec-head first">
+        <span class="sec-no">8</span>
+        <h2>موقع المشروع والمعالم القريبة</h2>
+        <span class="en">Location &amp; Landmarks</span>
+      </div>
+
+      <div class="loc-grid">
+        <div class="loc-map">
+          <img src="assets/project-map.png" alt="موقع المشروع والمعالم القريبة"/>
+        </div>
+
+        <div class="loc-side">
+          <div class="loc-card">
+            <div class="lc-lead">Location · الموقع</div>
+            <div class="lc-city">مدينة الرياض<span class="en-sub">Riyadh</span></div>
+            <div class="lc-desc">يقع المشروع في موقع استراتيجي بمدينة الرياض، محاطٌ بأبرز الجهات التعليمية والحكومية والخدمية، مع سهولة الوصول عبر الطرق الرئيسية المحيطة.<span class="en-sub" style="font-size:9px;margin-top:5px;line-height:1.6">The project enjoys a strategic location in Riyadh, surrounded by leading educational, government and service destinations, with easy access via the main surrounding roads.</span></div>
+          </div>
+
+          <div class="loc-qr">
+            <img src="assets/project-qr.png" alt="QR موقع المشروع على خرائط Google"/>
+            <div class="qx">
+              <div class="qt">الموقع على الخريطة<span class="en-sub">View on Map</span></div>
+              <div class="qs">امسح رمز الاستجابة السريعة لعرض موقع المشروع مباشرةً على خرائط Google.<span class="en-sub">Scan the QR code to open the project location on Google Maps.</span></div>
+              <a class="qbtn" href="https://maps.app.goo.gl/q5DTtgCTHW1nn6T27" target="_blank">Open in Google Maps</a>
+            </div>
+          </div>
+
+          <div class="lmk-head">المعالم القريبة <span class="en3">Nearby Landmarks</span></div>
+          <div class="lmk-list">
+            <div class="lmk"><span class="n">1</span><div class="lt"><span class="nm">جامعة الفيصل<span class="en-i">Alfaisal University</span></span><span class="cat">تعليمي</span></div></div>
+            <div class="lmk"><span class="n">2</span><div class="lt"><span class="nm">وزارة الخارجية<span class="en-i">Ministry of Foreign Affairs</span></span><span class="cat">حكومي</span></div></div>
+            <div class="lmk"><span class="n">3</span><div class="lt"><span class="nm">الصالات الرياضية الخضراء<span class="en-i">Green Sports Halls</span></span><span class="cat">رياضي</span></div></div>
+            <div class="lmk"><span class="n">4</span><div class="lt"><span class="nm">جامعة الملك سعود للبنات · عليشة<span class="en-i">KSU (Girls) – Olaysha</span></span><span class="cat">تعليمي</span></div></div>
+            <div class="lmk"><span class="n">5</span><div class="lt"><span class="nm">مدينة الملك سعود الطبية<span class="en-i">King Saud Medical City</span></span><span class="cat">صحي</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="foot">
+        <div class="fdisc"><span class="far">تنويه: الأرقام والمؤشرات الواردة في هذا الملف أولية وتقديرية، وقد تخضع للتغيير أو التحديث بناءً على الدراسات النهائية ومتغيرات السوق ومراحل تنفيذ المشروع.</span><span class="fen">Disclaimer: The figures and indicators presented in this document are preliminary estimates and may be subject to change or update based on final studies, market conditions, and project implementation phases.</span></div>
+        <div class="brand-mark">شركة مسقا للاستثمار · مستند داخلي</div>
+        <div>FS-MSGA-2026</div>
+        <div class="pagenum"><b>08</b> / 08</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<script src="guard.js"></script>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MSGA — سياسة الحضور والانصراف</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* MSGA — Salary Structure Policy · "MSGA REPORT" HOUSE STYLE
+   Matches the April-2026 commercial-sector report exactly:
+   navy full-bleed cover + top orange hairline · white content pages ·
+   lavender rounded section bars with orange circle number + orange right accent ·
+   grey table header with orange underline · colored status pills · rounded cards.
+   Self-contained — does NOT depend on sample-base.css. */
+:root {
+  --navy:#1F3A57; --navy-2:#16304B; --navy-3:#102539; --navy-deep:#0D2034;
+  --navy-card:#27425E; --navy-line:#33506C;
+  --orange:#E5811F; --orange-2:#C96B12; --orange-soft:#FBEEDD;
+  --ink:#1E2B38; --ink-2:#41505F; --ink-3:#76828F; --ink-4:#A7B0BA;
+  --paper:#FFFFFF; --paper-2:#F7F8FB; --lav:#EEF0F7; --lav-2:#F4F5FA;
+  --line:#E5E8EE; --line-2:#EEF0F4;
+  --th:#F4F5F8;
+  --ok:#2F8559; --ok-bg:#E6F4EC; --ok-bd:#CBE8D6;
+  --prog:#2B5180; --prog-bg:#E9EFF7; --prog-bd:#D2DEEE;
+  --hold:#B0831F; --hold-bg:#FAF2DA; --hold-bd:#ECDBA9;
+  --red:#B0432C; --red-bg:#F8E9E4; --red-bd:#ECCDC2;
+  --l1:#BBC6D2; --l2:#9DACBC; --l3:#7E91A6; --l4:#5F7790; --l5:#46617C; --l6:#2F4D69; --l7:#E5811F;
+  --ar:"Tajawal", system-ui, sans-serif;
+  --ar-head:"Tajawal", system-ui, sans-serif;
+  --latin:"Saira", "Tajawal", system-ui, sans-serif;
+  --page-w:210mm; --page-h:297mm; --mx:15mm; --my:14mm;
+}
+* { box-sizing:border-box; }
+html, body { margin:0; padding:0; background:#DDE2E8; font-family:var(--ar); color:var(--ink); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+body { direction:rtl; }
+.stage { min-height:100vh; padding:30px 16px 90px; display:flex; flex-direction:column; align-items:center; gap:28px; }
+.page { width:var(--page-w); height:var(--page-h); background:var(--paper); position:relative; overflow:hidden; box-shadow:0 1px 2px rgba(20,30,45,.05), 0 16px 44px rgba(20,30,45,.14); page-break-after:always; break-after:page; display:flex; flex-direction:column; }
+.page:last-of-type { page-break-after:auto; }
+.watermark { position:absolute; inset:0; pointer-events:none; z-index:0; }
+.page-inner { position:relative; z-index:1; flex:1; display:flex; flex-direction:column; padding:var(--my) var(--mx) 0; }
+
+/* numbers latin font */
+.latin, .doc-meta, .foot, .lcode, .scale-num, .vchip, .kpi .val, .ti-num, .cnum, .nb, .sec-no, .head .eyebrow, .cap .ref, .prose .lead, .cover-top .brandline, .hero .kicker, .classline, .kpi .label, .toc-head, .cover-meta .k, .dept2-head .code, .dept2-head .cnt { font-family:var(--latin); }
+
+/* ─── Content header ─── */
+.head { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px; padding-bottom:11px; margin-bottom:6px; border-bottom:2px solid var(--orange); }
+.head .logo { height:34px; width:auto; display:block; }
+.head .titles { display:flex; flex-direction:column; gap:1px; }
+.head .eyebrow { font-size:8.5px; font-weight:600; letter-spacing:0.18em; color:var(--orange-2); text-transform:uppercase; direction:ltr; }
+.head .doctitle { font-family:var(--ar-head); font-size:13.5px; font-weight:700; color:var(--navy); }
+.head .doc-meta { text-align:left; direction:ltr; font-size:9px; font-weight:500; color:var(--ink-3); line-height:1.65; letter-spacing:0.03em; }
+.head .doc-meta div { white-space:nowrap; }
+.head .doc-meta b { color:var(--navy); font-weight:700; letter-spacing:0.08em; }
+
+/* ─── Footer ─── */
+.foot { position:absolute; bottom:8mm; inset-inline:var(--mx); display:flex; align-items:center; justify-content:space-between; font-size:8.5px; font-weight:500; color:var(--ink-3); letter-spacing:0.08em; text-transform:uppercase; border-top:1px solid var(--line); padding-top:7px; z-index:2; direction:ltr; }
+.foot .brand-mark { display:flex; align-items:center; gap:7px; }
+.foot .brand-mark::before { content:""; width:5px; height:5px; background:var(--orange); border-radius:50%; }
+.foot .pagenum b { color:var(--navy); font-weight:700; }
+
+/* ─── Section bar (signature element) ─── */
+.sec-head { position:relative; display:flex; align-items:center; gap:11px; flex-direction:row-reverse; justify-content:flex-start; background:var(--lav); border-radius:9px; padding:9px 16px 9px 14px; margin:16px 0 11px; overflow:hidden; }
+.sec-head.first { margin-top:4px; }
+.sec-head::after { content:""; position:absolute; top:0; bottom:0; right:0; width:5px; background:var(--orange); }
+.sec-head .sec-no { width:24px; height:24px; border-radius:50%; background:var(--orange); color:#fff; display:grid; place-items:center; font-size:11px; font-weight:700; flex-shrink:0; }
+.sec-head h2 { margin:0; font-family:var(--ar-head); font-size:16px; font-weight:700; color:var(--navy); flex:1; }
+.sec-head .en { font-size:9px; font-weight:600; color:var(--ink-3); letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap; direction:ltr; }
+
+/* caption */
+.cap { display:flex; align-items:center; gap:11px; margin:2px 2px 8px; }
+.cap .lbl { font-size:10px; font-weight:500; color:var(--ink-3); white-space:nowrap; }
+.cap .dots { flex:1; height:1px; background:var(--line); }
+.cap .ref { font-size:9px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange-2); white-space:nowrap; direction:ltr; }
+
+/* prose */
+.prose { padding:2px 14px 2px 0; margin-top:4px; border-inline-start:3px solid var(--orange); }
+.prose.alt { border-inline-start-color:var(--navy); }
+.prose .lead { font-size:9px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--orange-2); margin-bottom:5px; direction:ltr; text-align:start; }
+.prose.alt .lead { color:var(--navy); }
+.prose p { margin:0; font-size:11.5px; color:var(--ink-2); line-height:1.85; text-wrap:pretty; }
+.prose p + p { margin-top:7px; }
+
+/* numbered list */
+.nlist { display:grid; grid-template-columns:1fr; margin-top:6px; }
+.nlist.two { grid-template-columns:1fr 1fr; column-gap:22px; }
+.nitem { display:grid; grid-template-columns:24px 1fr; align-items:start; gap:10px; padding:7px 0; border-bottom:1px solid var(--line-2); }
+.nitem .nb { font-size:11px; font-weight:700; color:#fff; background:var(--navy); width:20px; height:20px; border-radius:6px; display:grid; place-items:center; line-height:1; }
+.nitem.alt .nb { background:var(--orange); }
+.nitem .nt { font-size:11px; line-height:1.6; color:var(--ink-2); padding-top:2px; text-wrap:pretty; }
+
+/* chips */
+.chips { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:4px; }
+.chip-tag { display:flex; align-items:center; gap:9px; border:1px solid var(--line); background:var(--paper-2); border-radius:8px; padding:9px 12px; font-size:10.5px; color:var(--ink-2); min-height:36px; }
+.chip-tag .cnum { font-size:10px; font-weight:700; color:#fff; background:var(--navy); width:18px; height:18px; border-radius:5px; display:grid; place-items:center; flex-shrink:0; }
+
+/* note */
+.note { margin-top:10px; padding:11px 14px; background:var(--orange-soft); border-radius:8px; border-inline-start:3px solid var(--orange); font-size:10.5px; color:#7A5417; line-height:1.7; display:flex; gap:10px; align-items:flex-start; text-wrap:pretty; }
+.note .x { font-weight:700; font-size:13px; color:var(--orange-2); line-height:1.3; }
+.note.alt { background:var(--lav); border-inline-start-color:var(--navy); color:var(--ink-2); }
+.note.alt .x { color:var(--navy); }
+
+/* ─── tables ─── */
+.ptable { margin-top:6px; border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.pt-head { display:grid; background:var(--th); border-bottom:2px solid var(--orange); font-family:var(--ar-head); font-size:10px; font-weight:700; color:var(--navy); }
+.pt-head > div { padding:8px 12px; }
+.pt-head > div.center { text-align:center; }
+.pt-row { display:grid; border-bottom:1px solid var(--line-2); font-size:11px; min-height:34px; align-items:stretch; background:var(--paper); }
+.pt-row:last-child { border-bottom:none; }
+.pt-row:nth-child(even) { background:var(--lav-2); }
+.pt-row > div { padding:8px 12px; display:flex; align-items:center; }
+.pt-row .center { justify-content:center; }
+.pt-row .strong { font-weight:700; color:var(--navy); }
+.pt-row .muted { color:var(--ink-3); font-size:10px; }
+.lcode { font-size:10px; color:var(--ink-3); direction:ltr; }
+.cols-level { grid-template-columns:120px 150px 1fr; }
+.cols-scale { grid-template-columns:128px 60px 1fr 1fr 1fr; }
+.cols-grade { grid-template-columns:170px 1fr; }
+.cols-rate  { grid-template-columns:1fr 190px; }
+.cols-auth  { grid-template-columns:220px 1fr; }
+
+/* level badge */
+.lvl-badge { display:inline-flex; align-items:center; gap:8px; font-size:11px; font-weight:500; color:var(--ink); }
+.lvl-badge .ln { font-size:9.5px; font-weight:700; color:#fff; width:19px; height:19px; border-radius:50%; display:grid; place-items:center; flex-shrink:0; }
+.lvl-mini { font-size:9px; font-weight:700; color:#fff; width:17px; height:17px; border-radius:50%; display:grid; place-items:center; flex-shrink:0; }
+.lvl-1{background:var(--l1)} .lvl-2{background:var(--l2)} .lvl-3{background:var(--l3)} .lvl-4{background:var(--l4)} .lvl-5{background:var(--l5)} .lvl-6{background:var(--l6)} .lvl-7{background:var(--l7)}
+
+/* salary numbers */
+.scale-num { font-size:12px; direction:ltr; font-weight:500; color:var(--ink-2); }
+.scale-num.mid { color:var(--orange-2); font-weight:700; }
+.scale-num.hi { color:var(--navy); font-weight:700; }
+
+/* status-style pill (for grades / values) */
+.pill { display:inline-flex; align-items:center; gap:7px; font-family:var(--ar-head); font-size:11px; font-weight:700; padding:4px 11px; border-radius:999px; border:1px solid transparent; white-space:nowrap; }
+.pill::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.pill.ok   { color:var(--ok);   background:var(--ok-bg);   border-color:var(--ok-bd); }
+.pill.prog { color:var(--prog); background:var(--prog-bg); border-color:var(--prog-bd); }
+.pill.hold { color:var(--hold); background:var(--hold-bg); border-color:var(--hold-bd); }
+.pill.red  { color:var(--red);  background:var(--red-bg);  border-color:var(--red-bd); }
+.pill.plain{ color:var(--ink-3); background:var(--paper-2); border-color:var(--line); }
+
+.vchip { font-size:13px; font-weight:700; direction:ltr; white-space:nowrap; }
+.vchip.pos{color:var(--ok)} .vchip.warn{color:var(--hold)} .vchip.none{color:var(--ink-4)} .vchip.nav{color:var(--navy)}
+.vchip.ar{direction:rtl; font-family:var(--ar-head); font-size:11.5px}
+
+/* rating -> use pill look */
+.rating { display:inline-flex; align-items:center; gap:7px; font-family:var(--ar-head); font-size:11px; font-weight:700; padding:4px 12px; border-radius:999px; border:1px solid; }
+.rating::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.rating.r-excep { color:var(--ok);   background:var(--ok-bg);   border-color:var(--ok-bd); }
+.rating.r-exc   { color:var(--prog); background:var(--prog-bg); border-color:var(--prog-bd); }
+.rating.r-vg    { color:var(--hold); background:var(--hold-bg); border-color:var(--hold-bd); }
+.rating.r-good  { color:var(--orange-2); background:var(--orange-soft); border-color:#EFD9B6; }
+.rating.r-below { color:var(--red);  background:var(--red-bg);  border-color:var(--red-bd); }
+.grade-desc { font-size:10.5px; color:var(--ink-3); line-height:1.6; text-wrap:pretty; }
+
+/* band chart */
+.bandchart { margin-top:8px; padding:11px 14px; border:1px solid var(--line); border-radius:9px; background:var(--paper-2); }
+.bc-head { display:flex; justify-content:space-between; align-items:baseline; font-size:9px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3); margin-bottom:11px; }
+.bc-head .axis { direction:ltr; color:var(--orange-2); font-family:var(--latin); }
+.bc-row { display:grid; grid-template-columns:92px 1fr; align-items:center; gap:13px; margin-bottom:7px; }
+.bc-row:last-child { margin-bottom:0; }
+.bc-row .bc-label { font-size:10px; font-weight:500; color:var(--ink-2); text-align:start; }
+.bc-track { position:relative; height:14px; direction:ltr; }
+.bc-track .grid-line { position:absolute; top:-4px; bottom:-4px; width:1px; background:var(--line); }
+.bc-bar { position:absolute; top:4px; height:7px; border-radius:4px; display:flex; align-items:center; }
+.bc-bar.lvl-1{background:var(--l1);color:var(--l1)} .bc-bar.lvl-2{background:var(--l2);color:var(--l2)} .bc-bar.lvl-3{background:var(--l3);color:var(--l3)} .bc-bar.lvl-4{background:var(--l4);color:var(--l4)} .bc-bar.lvl-5{background:var(--l5);color:var(--l5)} .bc-bar.lvl-6{background:var(--l6);color:var(--l6)} .bc-bar.lvl-7{background:var(--l7);color:var(--l7)}
+.bc-bar .mid-dot { position:absolute; width:9px; height:9px; border-radius:50%; background:var(--paper); box-shadow:0 0 0 2px currentColor; transform:translateX(-50%); }
+.bc-axis-labels { display:flex; justify-content:space-between; direction:ltr; font-family:var(--latin); font-size:9px; font-weight:600; color:var(--ink-4); margin:6px 0 0; padding-inline-start:105px; }
+
+/* department cards */
+.depttitles { display:grid; grid-template-columns:1fr 1fr; gap:13px; margin-top:6px; }
+.dept2 { border:1px solid var(--line); border-radius:9px; background:var(--paper); display:flex; flex-direction:column; break-inside:avoid; overflow:hidden; }
+.dept2-head { display:grid; grid-template-columns:1fr auto; align-items:center; gap:8px; padding:8px 13px; background:var(--th); border-bottom:2px solid var(--orange); }
+.dept2-head .dn { font-family:var(--ar-head); font-size:12px; font-weight:700; color:var(--navy); }
+.dept2-head .meta { display:flex; align-items:center; gap:8px; }
+.dept2-head .code { font-size:9px; font-weight:700; letter-spacing:0.08em; color:var(--orange-2); direction:ltr; }
+.dept2-head .cnt { font-size:9px; color:var(--ink-3); direction:ltr; }
+.dt-row { display:grid; grid-template-columns:20px 88px 1fr; align-items:center; gap:9px; padding:6px 13px; border-bottom:1px solid var(--line-2); font-size:10.5px; min-height:30px; }
+.dt-row:last-child { border-bottom:none; }
+.dt-row .dt-lvl { font-size:9px; color:var(--ink-3); }
+.dt-row .dt-title { font-weight:500; color:var(--ink); }
+
+/* steps */
+.steps { display:grid; margin-top:6px; border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.step { display:grid; grid-template-columns:42px 1fr; border-bottom:1px solid var(--line-2); align-items:stretch; }
+.step:last-child { border-bottom:none; }
+.step:nth-child(even) { background:var(--lav-2); }
+.step .snum { background:var(--navy); color:#fff; display:grid; place-items:center; font-size:13px; font-weight:700; }
+.step .stext { padding:10px 13px; font-size:11px; line-height:1.6; color:var(--ink-2); display:flex; align-items:center; text-wrap:pretty; }
+
+/* annual cycle */
+.cycle { margin-top:6px; padding:16px 10px 6px; }
+.cycle-track { display:grid; grid-template-columns:repeat(4,1fr); position:relative; direction:rtl; }
+.cycle-track::before { content:""; position:absolute; top:16px; inset-inline:12%; height:2px; background:var(--line); z-index:0; }
+.cycle-node { display:flex; flex-direction:column; align-items:center; gap:8px; position:relative; z-index:1; text-align:center; padding:0 8px; }
+.cycle-node .dot { width:32px; height:32px; border-radius:50%; background:var(--paper); color:var(--navy); display:grid; place-items:center; font-family:var(--latin); font-size:13px; font-weight:700; border:2px solid var(--navy); }
+.cycle-node.accent .dot { background:var(--orange); color:#fff; border-color:var(--orange); }
+.cycle-node .period { font-family:var(--ar-head); font-size:11.5px; font-weight:700; color:var(--orange-2); }
+.cycle-node .clabel { font-size:11px; font-weight:700; color:var(--navy); line-height:1.35; }
+.cycle-node .cdesc { font-size:9.5px; color:var(--ink-3); line-height:1.5; max-width:140px; }
+
+/* sign-off */
+.signoff-triple { margin-top:12px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.signoff-triple .sign { padding:13px; border:1px solid var(--line); border-radius:9px; background:var(--paper-2); display:flex; flex-direction:column; gap:5px; min-height:92px; }
+.signoff-triple .sign .label { font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange-2); direction:ltr; text-align:start; }
+.signoff-triple .sign .nm { font-size:11.5px; font-weight:700; color:var(--ink); min-height:16px; }
+.signoff-triple .sign .role { font-size:10px; color:var(--ink-3); }
+.signoff-triple .sign .sig-line { margin-top:auto; border-bottom:1px dashed var(--ink-4); height:24px; }
+.signoff-triple .sign .sig-cap { font-size:8.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-4); direction:ltr; text-align:start; }
+
+/* doc control */
+.docctrl { margin-top:14px; background:var(--navy); border-radius:9px; padding:14px 18px; display:grid; grid-template-columns:1fr auto; align-items:center; gap:16px; color:#fff; }
+.docctrl .eyebrow { font-size:9px; letter-spacing:0.16em; color:#F0B978; text-transform:uppercase; margin-bottom:4px; direction:ltr; text-align:start; }
+.docctrl .val { font-family:var(--ar-head); font-size:13px; font-weight:700; color:#fff; }
+.docctrl .right { font-size:9.5px; color:#AEBCCC; letter-spacing:0.1em; text-transform:uppercase; text-align:left; direction:ltr; }
+
+/* ═══════ COVER (navy full-bleed) ═══════ */
+.page.cover { background:var(--navy); }
+.page.cover::before { content:""; position:absolute; top:0; inset-inline:0; height:5px; background:var(--orange); z-index:3; }
+.page.cover .watermark::after { content:""; position:absolute; inset:0; background:url("assets/msga-logo.png") no-repeat center 60%; background-size:62% auto; opacity:.04; filter:brightness(0) invert(1); }
+.cover-inner { padding:0 !important; }
+.cover-top { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px; padding:13mm var(--mx) 0; }
+.cover-top .co { font-family:var(--ar-head); font-size:12px; font-weight:700; color:#fff; }
+.cover-top .brandline { font-size:9.5px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--orange); text-align:left; direction:ltr; }
+.cover-hero { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 var(--mx); text-align:center; }
+.cover-hero .logo-w { height:64px; width:auto; filter:brightness(0) invert(1); margin-bottom:30px; }
+.cover-hero h1 { margin:0; font-family:var(--ar-head); font-size:50px; font-weight:800; line-height:1.12; color:#fff; letter-spacing:-0.01em; }
+.cover-hero .subtitle { margin-top:14px; font-size:13px; font-weight:500; color:var(--orange); letter-spacing:0.02em; }
+.cover-hero .period-pill { margin-top:20px; border:1.5px solid rgba(255,255,255,.4); border-radius:999px; padding:8px 24px; font-size:12px; font-weight:600; color:#fff; direction:ltr; white-space:nowrap; letter-spacing:0.04em; }
+.cover-desc { margin:20px auto 0; max-width:74%; font-size:12px; color:#C5D0DC; line-height:1.85; text-wrap:pretty; }
+.cover-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:13px; margin:0 var(--mx) 8mm; }
+.cover-cards.four { grid-template-columns:repeat(4,1fr); }
+.ccard { background:var(--navy-card); border:1px solid var(--navy-line); border-radius:10px; padding:13px 15px; text-align:center; display:flex; flex-direction:column; gap:5px; }
+.ccard .k { font-size:9px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--orange); direction:ltr; }
+.ccard .v { font-family:var(--ar-head); font-size:14px; font-weight:700; color:#fff; }
+.ccard .v.num { font-family:var(--latin); font-size:26px; line-height:1; direction:ltr; }
+.ccard .s { font-size:9px; color:#9FB0C0; }
+
+/* cover TOC strip */
+.cover-toc { margin:0 var(--mx) 7mm; padding-top:14px; border-top:1px solid var(--navy-line); }
+.cover-toc .th { font-size:9px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:#8FA2B4; margin-bottom:9px; direction:ltr; }
+.cover-toc .tg { display:grid; grid-template-columns:repeat(4,1fr); gap:5px 18px; }
+.cover-toc .ti { display:grid; grid-template-columns:20px 1fr; gap:8px; align-items:baseline; font-size:9.5px; color:#C5D0DC; padding:3px 0; }
+.cover-toc .ti .n { font-family:var(--latin); font-size:9.5px; font-weight:700; color:var(--orange); }
+
+/* toolbar */
+.toolbar { position:fixed; top:16px; inset-inline-start:16px; z-index:100; background:var(--navy); color:#fff; display:flex; align-items:center; gap:4px; padding:7px 8px; border-radius:8px; box-shadow:0 10px 30px rgba(20,30,45,.25); font-size:11px; direction:ltr; }
+.toolbar .brand { font-family:var(--ar-head); padding:4px 12px 4px 6px; display:flex; align-items:center; gap:9px; border-inline-end:1px solid rgba(255,255,255,.18); font-weight:700; letter-spacing:0.06em; text-transform:uppercase; }
+.toolbar .brand::before { content:""; width:7px; height:7px; background:var(--orange); border-radius:50%; }
+.toolbar button { background:transparent; color:#fff; border:none; font:inherit; padding:6px 12px; cursor:pointer; letter-spacing:0.04em; text-transform:uppercase; font-weight:600; border-radius:5px; }
+.toolbar button:hover { background:rgba(255,255,255,.12); }
+
+/* page 3 packs 14 table rows + band chart — tighten to clear footer */
+.stage .page:nth-of-type(3) .pt-row { min-height:31px; }
+.stage .page:nth-of-type(3) .pt-row > div { padding-top:6px; padding-bottom:6px; }
+.stage .page:nth-of-type(3) .bandchart { margin-top:6px; padding:10px 14px; }
+.stage .page:nth-of-type(3) .bc-row { margin-bottom:5px; }
+
+@page { size:A4 portrait; margin:0; }
+@media print { html,body{background:#fff} .stage{padding:0;gap:0} .page{box-shadow:none;margin:0} .toolbar{display:none!important} }
+
+</style>
+<style>
+/* MSGA — Attendance & Departure Policy · extra components
+   Loaded AFTER report.css. Adds: schedule table cols, daily check-in gauge,
+   overtime highlight box, responsibilities matrix. Reuses report.css tokens. */
+
+/* schedule table column template */
+.cols-sched { grid-template-columns: 1.3fr 1fr 92px 92px 90px; }
+.cols-sched .tm { font-family: var(--latin); direction: ltr; font-weight: 600; color: var(--ink-2); }
+.cols-sched .hr { font-family: var(--ar-head); font-weight: 700; color: var(--orange-2); }
+
+/* ─── Daily check-in gauge (المادة 5 + 6) ─── */
+.daygauge {
+  margin-top: 6px;
+  padding: 14px 16px 15px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--paper-2);
+}
+.dg-cap {
+  display: flex; align-items: baseline; justify-content: space-between;
+  font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-3); margin-bottom: 12px;
+}
+.dg-cap .axis { direction: ltr; color: var(--orange-2); font-family: var(--latin); }
+.dg-row { display: grid; grid-template-columns: 1.25fr 0.95fr 1.45fr; gap: 9px; }
+.dg-cell {
+  border-radius: 8px; padding: 12px 12px 11px; text-align: center;
+  border: 1px solid var(--line); background: var(--paper);
+  display: flex; flex-direction: column; gap: 4px; position: relative;
+}
+.dg-cell .t {
+  font-family: var(--latin); direction: ltr; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.dg-cell .l { font-family: var(--ar-head); font-size: 12.5px; font-weight: 700; }
+.dg-cell .d { font-size: 9.5px; line-height: 1.5; color: var(--ink-3); }
+.dg-cell.pre   { background: var(--lav); border-color: #DDE2EE; }
+.dg-cell.pre .t   { color: var(--ink-3); }
+.dg-cell.pre .l   { color: var(--navy); }
+.dg-cell.grace { background: var(--hold-bg); border-color: var(--hold-bd); }
+.dg-cell.grace .t { color: var(--hold); }
+.dg-cell.grace .l { color: var(--hold); }
+.dg-cell.late  { background: var(--red-bg); border-color: var(--red-bd); }
+.dg-cell.late .t  { color: var(--red); }
+.dg-cell.late .l  { color: var(--red); }
+/* arrow connectors between zones (LTR time flow) */
+.dg-row { direction: ltr; }
+.dg-cell:not(:last-child)::after {
+  content: "›"; position: absolute; top: 50%; right: -8px; transform: translateY(-50%);
+  z-index: 2; color: var(--ink-4); font-size: 14px; font-weight: 700;
+}
+
+/* ─── Overtime highlight (المادة 12) ─── */
+.otbox {
+  margin-top: 8px; display: grid; grid-template-columns: 132px 1fr; gap: 18px;
+  align-items: center; background: var(--navy); border-radius: 9px; padding: 16px 20px; color: #fff;
+}
+.otbox .big {
+  text-align: center; border-inline-end: 1px solid var(--navy-line); padding-inline-end: 18px;
+}
+.otbox .big .n { font-family: var(--latin); direction: ltr; font-size: 44px; font-weight: 800; line-height: 1; color: var(--orange); }
+.otbox .big .c { font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #AEBCCC; margin-top: 7px; direction: ltr; }
+.otbox .txt { font-size: 11px; line-height: 1.8; color: #D4DDE7; text-wrap: pretty; }
+
+/* ─── Responsibilities matrix (المادة 14) ─── */
+.respgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin-top: 6px; align-items: start; }
+.respcard { border: 1px solid var(--line); border-radius: 9px; overflow: hidden; background: var(--paper); }
+.resp-head {
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px;
+  padding: 9px 13px; background: var(--th); border-bottom: 2px solid var(--orange);
+}
+.resp-head .rn { font-family: var(--ar-head); font-size: 12.5px; font-weight: 700; color: var(--navy); }
+.resp-head .code { font-family: var(--latin); font-size: 8.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--orange-2); direction: ltr; }
+.resp-item {
+  display: grid; grid-template-columns: 14px 1fr; gap: 9px; align-items: start;
+  padding: 8px 13px; border-bottom: 1px solid var(--line-2); font-size: 10.5px;
+  line-height: 1.55; color: var(--ink-2); text-wrap: pretty;
+}
+.resp-item:last-child { border-bottom: none; }
+.resp-item .rb { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); margin-top: 6px; }
+
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel">
+/* MSGA — Attendance & Departure Policy · CONTENT DATA
+   Exposed as window.ATT (read by attendance-report.jsx). Edit text here. */
+window.ATT = {
+  meta: {
+    docId: "POL-HR-ATT-2026-01",
+    title: "سياسة الحضور والانصراف",
+    subtitle: "تنظيم حضور وانصراف الموظفين، وضبط الانضباط الوظيفي، وتوحيد آلية التعامل مع التأخير والغياب والعمل الإضافي.",
+    version: "1.0",
+    versionLabel: "V01",
+    effective: "2026/06/01",
+    review: "2027/06/01",
+    owner: "إدارة الموارد البشرية",
+    scope: "جميع موظفي الشركة",
+    approver: "الرئيس التنفيذي",
+    classification: "نسخة أولية — داخلي · سري",
+  },
+
+  /* فهرس المحتويات (الغلاف) */
+  toc: [
+    ["01", "الهدف من السياسة"],
+    ["02", "نطاق التطبيق"],
+    ["03", "أوقات الدوام الرسمي"],
+    ["04", "إثبات الحضور والانصراف"],
+    ["05", "وقت الحضور وفترة السماح"],
+    ["06", "التأخير"],
+    ["07", "الانصراف المبكر"],
+    ["08", "الخروج أثناء الدوام"],
+    ["09", "الغياب"],
+    ["10", "نسيان البصمة"],
+    ["11", "العمل الإضافي"],
+    ["12", "الدوام خارج المكتب"],
+    ["13", "المسؤوليات"],
+    ["14", "الجزاءات"],
+    ["15", "الاعتماد والنفاذ"],
+  ],
+
+  /* المادة 1 */
+  purpose: "تهدف هذه السياسة إلى تنظيم حضور وانصراف الموظفين، وضمان الانضباط الوظيفي، وتوحيد آلية التعامل مع التأخير، والغياب، والخروج أثناء الدوام، والعمل الإضافي، بما يحقق العدالة والوضوح في بيئة العمل لدى شركة مسقا للاستثمار.",
+
+  /* المادة 2 */
+  scope: "تطبق هذه السياسة على جميع موظفي شركة مسقا للاستثمار على اختلاف إداراتهم ومستوياتهم الوظيفية.",
+  scopeExclude: "يُستثنى من ذلك من تحدد لهم الإدارة ترتيبات عمل خاصة بموجب قرار معتمد.",
+
+  /* المادة 3 */
+  schedule: [
+    { period: "الدوام الاعتيادي", days: "الأحد – الخميس", from: "08:00 ص", to: "04:00 م", hours: "8 ساعات" },
+    { period: "دوام شهر رمضان", days: "الأحد – الخميس", from: "09:30 ص", to: "03:30 م", hours: "6 ساعات" },
+  ],
+  scheduleNote: "يومَا الجمعة والسبت إجازة نهاية الأسبوع. وتُعتمد فترة دوام شهر رمضان وفق ما يصدر بتعميم رسمي من الإدارة.",
+
+  /* المادة 4 */
+  proofIntro: "يُعتمد إثبات الحضور والانصراف من خلال جهاز البصمة أو النظام الإلكتروني المعتمد لدى الشركة، ويلتزم الموظف بتسجيل حضوره عند بداية الدوام وانصرافه عند نهايته.",
+  proofItems: [
+    "يلتزم الموظف بتسجيل الحضور عند بداية الدوام والانصراف عند نهايته عبر الوسيلة المعتمدة.",
+    "عند وجود عطل في جهاز البصمة أو النظام، يُثبَت الحضور والانصراف عبر نموذج معتمد من إدارة الموارد البشرية.",
+  ],
+
+  /* المادة 5 + 6 */
+  checkinIntro: "يبدأ الدوام الرسمي الساعة 08:00 صباحًا، وأي بصمة قبل هذا الوقت لا يترتب عليها احتساب وقت إضافي، ويُعدّ وقت الحضور الرسمي ابتداءً من الساعة 08:00 صباحًا.",
+  daygauge: [
+    { tone: "pre", t: "قبل 08:00 ص", l: "حضور مبكر", d: "لا يترتب عليه احتساب وقت إضافي" },
+    { tone: "grace", t: "08:00 – 08:15 ص", l: "فترة سماح", d: "لمعالجة الحالات الطارئة غير المتكررة" },
+    { tone: "late", t: "بعد 08:15 ص", l: "يُحتسب تأخيرًا", d: "يُعامَل وفق الإجراءات المعتمدة" },
+  ],
+  graceNote: "فترة السماح لا تعني تعديل وقت بداية الدوام، وإنما هي لمعالجة الحالات الطارئة وغير المتكررة فقط.",
+
+  /* المادة 7 */
+  lateIntro: "يُعدّ الموظف متأخرًا في أيٍّ من الحالات التالية:",
+  lateCases: [
+    "تسجيل الحضور بعد الساعة 08:15 صباحًا.",
+    "عدم تسجيل الحضور مع وجوده في مقر العمل دون مبرر مقبول.",
+    "تكرار الوصول بعد بداية الدوام الرسمي حتى لو كان ضمن فترة السماح، متى ظهر أنه سلوك متكرر.",
+  ],
+  lateNote: "يحق لإدارة الموارد البشرية متابعة حالات التأخير ورفعها للمدير المباشر لاتخاذ الإجراء المناسب.",
+
+  /* المادة 8 */
+  earlyDeparture: "لا يجوز للموظف الانصراف قبل الساعة 04:00 مساءً إلا بعد الحصول على موافقة مسبقة من المدير المباشر وإدارة الموارد البشرية. وأي انصراف قبل نهاية الدوام دون موافقة يُعدّ مخالفة تُعامَل حسب لائحة الجزاءات المعتمدة.",
+
+  /* المادة 9 */
+  leaveDuringWork: "يجوز للموظف الخروج أثناء الدوام لأمر ضروري بعد موافقة المدير المباشر، على أن يتم إشعار إدارة الموارد البشرية وتسجيل وقت الخروج والعودة. ولا يجوز تكرار الخروج أثناء الدوام بما يؤثر على أداء العمل أو إنجاز المهام.",
+
+  /* المادة 10 */
+  absence: "يُعدّ الموظف غائبًا إذا لم يحضر للعمل خلال يوم العمل الرسمي دون إجازة أو إذن أو عذر مقبول. ويجب على الموظف إشعار المدير المباشر وإدارة الموارد البشرية عند وجود ظرف يمنعه من الحضور، مع تقديم ما يثبت ذلك عند الطلب.",
+
+  /* المادة 11 */
+  forgetFingerprint: "في حال نسيان الموظف تسجيل الحضور أو الانصراف، يجب عليه تعبئة نموذج تعديل بصمة واعتماده من المدير المباشر، ثم إرساله إلى إدارة الموارد البشرية.",
+  forgetNote: "لا يُقبل تكرار نسيان البصمة بشكل مستمر، ويحق للشركة اعتبار ذلك مخالفة عند التكرار.",
+
+  /* المادة 12 */
+  overtimeIntro: "لا يُحتسب أي وقت بعد الساعة 04:00 مساءً كعمل إضافي إلا إذا كان بناءً على تكليف رسمي مسبق من صاحب الصلاحية، ويجب أن يكون العمل الإضافي مرتبطًا بحاجة عمل فعلية ومعتمدًا قبل تنفيذه.",
+  overtimeRate: "50%",
+  overtimeHighlight: "تُعدّ ساعات العمل في أيام العطل والأعياد ساعات إضافية، ويكون أجر العمل الإضافي وفق نظام العمل: يُدفع للعامل أجر الساعة مضافًا إليه 50% من أجره الأساسي، أو ما يجيزه النظام من تعويض بديل بموافقة العامل.",
+
+  /* المادة 13 */
+  externalWork: "إذا تطلبت طبيعة العمل وجود الموظف في موقع مشروع أو اجتماع خارجي أو جهة حكومية، فيجب عليه إشعار المدير المباشر وتوثيق المهمة حسب الإجراء المعتمد. ويجوز للمدير المباشر طلب ما يثبت تنفيذ المهمة الخارجية.",
+
+  /* المادة 14 */
+  responsibilities: [
+    { who: "الموظف", code: "EMP", items: [
+      "الالتزام بمواعيد الحضور والانصراف.",
+      "تسجيل البصمة بشكل صحيح.",
+      "طلب الإذن أو الإجازة قبل الغياب أو الخروج.",
+      "إبلاغ المدير المباشر بأي ظرف طارئ.",
+    ]},
+    { who: "المدير المباشر", code: "MGR", items: [
+      "متابعة التزام موظفيه.",
+      "اعتماد أو رفض طلبات الإذن.",
+      "إبلاغ الموارد البشرية بالمخالفات المتكررة.",
+    ]},
+    { who: "الموارد البشرية", code: "HR", items: [
+      "متابعة سجلات الحضور والانصراف.",
+      "إعداد تقارير التأخير والغياب.",
+      "تطبيق الإجراءات النظامية حسب اللائحة.",
+      "حفظ السجلات والمستندات ذات العلاقة.",
+    ]},
+  ],
+
+  /* المادة 15 */
+  penalties: "يتم التعامل مع مخالفات الحضور والانصراف حسب لائحة الجزاءات المعتمدة لدى الشركة، وبعد دراسة الحالة والمبررات المقدمة من الموظف.",
+
+  /* المادة 16 */
+  adoption: "تُطبَّق هذه السياسة من تاريخ اعتمادها، وتُلغى أي تعليمات سابقة تتعارض معها.",
+
+  signatures: [
+    { label: "// Prepared", role: "إدارة الموارد البشرية", who: "" },
+    { label: "// Reviewed", role: "مدير الموارد البشرية", who: "" },
+    { label: "// Approved", role: "الرئيس التنفيذي", who: "" },
+  ],
+};
+
+</script>
+<script type="text/babel">
+/* MSGA — Attendance & Departure Policy · MSGA REPORT HOUSE STYLE renderer
+   Reads window.ATT. Navy full-bleed cover + 6 white content pages. */
+const A = window.ATT;
+const TOTAL = 7;
+
+function Header({ page }) {
+  const m = A.meta;
+  return (
+    <div className="head">
+      <img className="logo" src="assets/msga-logo.png" alt="MSGA"/>
+      <div className="titles">
+        <div className="eyebrow">MSGA Investment · HR Policy</div>
+        <div className="doctitle">{m.title}</div>
+      </div>
+      <div className="doc-meta">
+        <div><b>DOC</b> {m.docId}</div>
+        <div><b>EFF</b> {m.effective}</div>
+        <div><b>PAGE</b> {String(page).padStart(2, "0")} / {String(TOTAL).padStart(2, "0")}</div>
+      </div>
+    </div>
+  );
+}
+function Footer({ page }) {
+  return (
+    <div className="foot">
+      <div className="brand-mark">شركة مسقا للاستثمار · سري وخاص</div>
+      <div>{A.meta.docId} · {A.meta.versionLabel}</div>
+      <div className="pagenum"><b>{String(page).padStart(2, "0")}</b> / {String(TOTAL).padStart(2, "0")}</div>
+    </div>
+  );
+}
+function Page({ label, page, children }) {
+  return (
+    <div className="page" data-screen-label={label}>
+      <div className="watermark"></div>
+      <div className="page-inner">
+        <Header page={page}/>
+        {children}
+        <Footer page={page}/>
+      </div>
+    </div>
+  );
+}
+function Sec({ no, label, en, first }) {
+  return (
+    <div className={`sec-head ${first ? "first" : ""}`}>
+      <div className="sec-no">{no}</div>
+      <h2>{label}</h2>
+      <div className="en">{en}</div>
+    </div>
+  );
+}
+function Cap({ lbl, tag }) {
+  return <div className="cap"><span className="lbl">{lbl}</span><div className="dots"></div><span className="ref">{tag}</span></div>;
+}
+function Prose({ lead, alt, children }) {
+  return <div className={`prose ${alt ? "alt" : ""}`}>{lead && <div className="lead">{lead}</div>}{children}</div>;
+}
+function NList({ items, alt, start = 1 }) {
+  return (
+    <div className="nlist">
+      {items.map((t, i) => (
+        <div className={`nitem ${alt ? "alt" : ""}`} key={i}><div className="nb">{start + i}</div><div className="nt">{t}</div></div>
+      ))}
+    </div>
+  );
+}
+function Note({ children, alt }) {
+  return <div className={`note ${alt ? "alt" : ""}`}><span className="x">i</span><span>{children}</span></div>;
+}
+
+/* ── COVER ── */
+function PageCover() {
+  const m = A.meta;
+  return (
+    <div className="page cover" data-screen-label="01 الغلاف">
+      <div className="watermark"></div>
+      <div className="page-inner cover-inner">
+        <div className="cover-top">
+          <span className="co">شركة مسقا للاستثمار</span>
+          <div></div>
+          <span className="brandline">HR Policy · 2026</span>
+        </div>
+
+        <div className="cover-hero">
+          <img className="logo-w" src="assets/msga-logo.png" alt="MSGA"/>
+          <h1>سياسة الحضور<br/>والانصراف</h1>
+          <div className="subtitle">سياسة الموارد البشرية — {m.effective}</div>
+          <div className="period-pill">{m.docId} · {m.versionLabel}</div>
+          <div className="cover-desc">{m.subtitle}</div>
+        </div>
+
+        <div className="cover-cards four">
+          <div className="ccard"><div className="k">Work Week</div><div className="v">الأحد – الخميس</div><div className="s">أيام الدوام الرسمي</div></div>
+          <div className="ccard"><div className="k">Hours</div><div className="v num">08–16</div><div className="s">من 08:00 ص إلى 04:00 م</div></div>
+          <div className="ccard"><div className="k">Grace</div><div className="v num">15<span style={{fontSize:"13px"}}> د</span></div><div className="s">فترة سماح حتى 08:15</div></div>
+          <div className="ccard"><div className="k">Version</div><div className="v">{m.versionLabel}</div><div className="s">نسخة أولية</div></div>
+        </div>
+
+        <div className="cover-toc">
+          <div className="th">Contents — محتويات الوثيقة</div>
+          <div className="tg">
+            {A.toc.map(([n, t]) => <div className="ti" key={n}><span className="n">{n}</span><span>{t}</span></div>)}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── P2 · Purpose + Scope + Working hours ── */
+function Page2() {
+  return (
+    <Page label="02 الهدف والنطاق وأوقات الدوام" page={2}>
+      <Sec no="01" label="الهدف من السياسة" en="Purpose" first/>
+      <Prose lead="Purpose"><p>{A.purpose}</p></Prose>
+
+      <Sec no="02" label="نطاق التطبيق" en="Scope"/>
+      <Prose lead="Scope" alt><p>{A.scope}</p></Prose>
+      <Note>{A.scopeExclude}</Note>
+
+      <Sec no="03" label="أوقات الدوام الرسمي" en="Working Hours"/>
+      <Cap lbl="الدوام من الأحد إلى الخميس" tag="Sun – Thu"/>
+      <div className="ptable">
+        <div className="pt-head cols-sched"><div>الفترة</div><div>الأيام</div><div className="center">من</div><div className="center">إلى</div><div className="center">الإجمالي</div></div>
+        {A.schedule.map((r, i) => (
+          <div className="pt-row cols-sched" key={i}>
+            <div className="strong">{r.period}</div>
+            <div>{r.days}</div>
+            <div className="center tm">{r.from}</div>
+            <div className="center tm">{r.to}</div>
+            <div className="center hr">{r.hours}</div>
+          </div>
+        ))}
+      </div>
+      <Note alt>{A.scheduleNote}</Note>
+    </Page>
+  );
+}
+
+/* ── P3 · Time recording + Check-in window ── */
+function Page3() {
+  return (
+    <Page label="03 إثبات الحضور وفترة السماح" page={3}>
+      <Sec no="04" label="إثبات الحضور والانصراف" en="Time Recording" first/>
+      <Prose lead="Recording"><p>{A.proofIntro}</p></Prose>
+      <Cap lbl="ضوابط التسجيل" tag="02 Rules"/>
+      <NList items={A.proofItems}/>
+
+      <Sec no="05" label="وقت الحضور وفترة السماح" en="Check-in & Grace"/>
+      <Prose lead="Official Start" alt><p>{A.checkinIntro}</p></Prose>
+      <div className="daygauge">
+        <div className="dg-cap"><span>نافذة الحضور الصباحي</span><span className="axis">08:00 → 08:15 AM</span></div>
+        <div className="dg-row">
+          {A.daygauge.map((z, i) => (
+            <div className={`dg-cell ${z.tone}`} key={i}>
+              <div className="t">{z.t}</div>
+              <div className="l">{z.l}</div>
+              <div className="d">{z.d}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <Note>{A.graceNote}</Note>
+    </Page>
+  );
+}
+
+/* ── P4 · Late + Early departure + Leave during work ── */
+function Page4() {
+  return (
+    <Page label="04 التأخير والانصراف والخروج" page={4}>
+      <Sec no="06" label="التأخير" en="Late Arrival" first/>
+      <Prose lead="Definition"><p>{A.lateIntro}</p></Prose>
+      <Cap lbl="حالات التأخير" tag="03 Cases"/>
+      <NList items={A.lateCases} alt/>
+      <Note>{A.lateNote}</Note>
+
+      <Sec no="07" label="الانصراف المبكر" en="Early Departure"/>
+      <Prose lead="Rule" alt><p>{A.earlyDeparture}</p></Prose>
+
+      <Sec no="08" label="الخروج أثناء الدوام" en="Leaving During Hours"/>
+      <Prose lead="Rule"><p>{A.leaveDuringWork}</p></Prose>
+    </Page>
+  );
+}
+
+/* ── P5 · Absence + Forgotten fingerprint + Overtime ── */
+function Page5() {
+  return (
+    <Page label="05 الغياب والبصمة والعمل الإضافي" page={5}>
+      <Sec no="09" label="الغياب" en="Absence" first/>
+      <Prose lead="Rule"><p>{A.absence}</p></Prose>
+
+      <Sec no="10" label="نسيان البصمة" en="Missed Punch"/>
+      <Prose lead="Procedure" alt><p>{A.forgetFingerprint}</p></Prose>
+      <Note>{A.forgetNote}</Note>
+
+      <Sec no="11" label="العمل الإضافي" en="Overtime"/>
+      <Prose lead="Authorization"><p>{A.overtimeIntro}</p></Prose>
+      <div className="otbox">
+        <div className="big"><div className="n">+{A.overtimeRate}</div><div className="c">Holiday / Eid Rate</div></div>
+        <div className="txt">{A.overtimeHighlight}</div>
+      </div>
+    </Page>
+  );
+}
+
+/* ── P6 · External work + Responsibilities ── */
+function Page6() {
+  return (
+    <Page label="06 الدوام الخارجي والمسؤوليات" page={6}>
+      <Sec no="12" label="الدوام في المواقع وخارج المكتب" en="Field & Off-site Work" first/>
+      <Prose lead="Rule"><p>{A.externalWork}</p></Prose>
+
+      <Sec no="13" label="المسؤوليات" en="Responsibilities"/>
+      <Cap lbl="توزيع المسؤوليات على أطراف العملية" tag="03 Parties"/>
+      <div className="respgrid">
+        {A.responsibilities.map((r, i) => (
+          <div className="respcard" key={i}>
+            <div className="resp-head"><span className="rn">{r.who}</span><span className="code">{r.code}</span></div>
+            {r.items.map((it, j) => (
+              <div className="resp-item" key={j}><span className="rb"></span><span>{it}</span></div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </Page>
+  );
+}
+
+/* ── P7 · Penalties + Adoption + Sign-off ── */
+function Page7() {
+  const m = A.meta;
+  return (
+    <Page label="07 الجزاءات والاعتماد" page={7}>
+      <Sec no="14" label="الجزاءات" en="Penalties" first/>
+      <Prose lead="Reference"><p>{A.penalties}</p></Prose>
+
+      <Sec no="15" label="الاعتماد والنفاذ" en="Adoption & Effect"/>
+      <Prose lead="Effect" alt><p>{A.adoption}</p></Prose>
+
+      <Cap lbl="الاعتمادات والتوقيعات" tag={`Approvals · ${m.docId}`}/>
+      <div className="signoff-triple">
+        {A.signatures.map((s, i) => (
+          <div className="sign" key={i}>
+            <div className="label">{s.label.replace(/^\/\/\s*/, "")}</div>
+            <div className="nm">{s.who || "\u00A0"}</div>
+            <div className="role">{s.role}</div>
+            <div className="sig-line"></div>
+            <div className="sig-cap">Signature / Date</div>
+          </div>
+        ))}
+      </div>
+
+      <div className="docctrl">
+        <div><div className="eyebrow">Document Control · ضبط الوثيقة</div><div className="val">الإصدار {m.versionLabel} · يسري من {m.effective}</div></div>
+        <div className="right">Next Review · {m.review}</div>
+      </div>
+    </Page>
+  );
+}
+
+function Toolbar() {
+  return <div className="toolbar"><div className="brand">MSGA · Attendance</div><button onClick={() => window.print()}>Print / PDF</button></div>;
+}
+function App() {
+  return (
+    <>
+      <Toolbar/>
+      <div className="stage">
+        <PageCover/><Page2/><Page3/><Page4/><Page5/><Page6/><Page7/>
+      </div>
+    </>
+  );
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+
+</script>
+</body>
+</html>
